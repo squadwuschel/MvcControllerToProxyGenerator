@@ -1,0 +1,29 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<# // Standard Assemblies werden im GAC gesucht #> 
+<#@ assembly name="System.Core" #>
+<# // Eigene Assemblies müssen z.B. als Referenz hinzugefügt werden und dann direkt über das Bin Dir refrenzerit werden #> 
+<#@ assembly name="$(TargetDir)ProxyGenerator.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+
+//Achtung diese Datei wurde automatisch erstellt,
+//bitte nehmen Sie keine Änderungen daran vor, diese werden
+//beim nächsten Erstellen wieder überschrieben.
+//Erstellt am <#= DateTime.Now.Date.ToShortDateString() #> um <#= DateTime.Now.ToShortTimeString()  #> von <#= Environment.UserName #>.
+
+
+
+<#
+    //List<TemplateEntry> templates = new List<TemplateEntry>();
+
+
+
+
+ #>
+
+
+
+
