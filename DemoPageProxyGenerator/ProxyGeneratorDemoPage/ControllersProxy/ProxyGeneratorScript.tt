@@ -1,22 +1,16 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
 <# // Standard Assemblies werden im GAC gesucht #> 
 <#@ assembly name="System.Core" #>
-<# // Eigene Assemblies müssen z.B. als Referenz hinzugefügt werden und dann direkt über das Bin Dir refrenzerit werden #> 
+<# // Eigene Assemblies müssen z.B. als Referenz hinzugefügt werden und dann direkt über das Bin dir referenziert werden #> 
 <#@ assembly name="$(TargetDir)ProxyGenerator.dll" #>
-<#@ assembly name="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" #>
-<# // assembly name="C:\TFS\GitHub\MvcControllerToProxyGenerator\MvcControllerToProxyGenerator\DemoPageProxyGenerator\ProxyGenerator\bin\Debug\ProxyGenerator.dll" #>
+
 <#@ import namespace="ProxyGenerator.T4Helper" #>
 <#@ import namespace="ProxyGenerator" #>
 <#@ import namespace="ProxyGenerator.Manager" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.Reflection" #>
-<#@ import namespace="System.Web.Mvc" #>
-
 <#@ assembly name="EnvDTE" #>
-<#@ import namespace="EnvDTE" #>
-<#@ import namespace="ProxyGenerator.Manager" #>
 
 <#@ output extension=".txt" #>
 
