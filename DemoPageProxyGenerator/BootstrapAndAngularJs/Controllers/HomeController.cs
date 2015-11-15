@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Ninject;
+using ProxyGenerator.ProxyTypeAttributes;
 using ProxyGeneratorDemoPage.Models.Person.Interfaces;
 using ProxyGeneratorDemoPage.Models.Person.Models;
 
@@ -21,16 +23,19 @@ namespace ProxyGeneratorDemoPage.Controllers
             return Json(PersonModelBuilder.GetPerson(id), JsonRequestBehavior.AllowGet);
         }
 
+        [CreateAngularJsProxy(ReturnType = typeof(int))]
         public ActionResult AddOrUpdatePerson(Person person)
         {
             return Json(PersonModelBuilder.AddOrUpdatePerson(person), JsonRequestBehavior.AllowGet);
         }
 
+        [CreateAngularJsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
         public ActionResult GetAllPersons()
         {
             return Json(PersonModelBuilder.GetAllPersons(), JsonRequestBehavior.AllowGet);
         }
 
+        [CreateAngularJsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
         public ActionResult SearchPerson(string name)
         {
             return Json(PersonModelBuilder.SearchPerson(name), JsonRequestBehavior.AllowGet);

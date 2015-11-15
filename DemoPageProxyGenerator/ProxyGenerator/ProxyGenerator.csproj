@@ -41,13 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProxyTypeAttributes\CreateAngularJsProxyAttribute.cs" />
+    <Compile Include="ProxyTypeAttributes\CreateAngularTsProxyAttribute.cs" />
+    <Compile Include="ProxyTypeAttributes\CreateJQueryTsProxyAttribute.cs" />
+    <Compile Include="ProxyTypeAttributes\CreateProxyAttribute.cs" />
+    <Compile Include="ProxyTypeAttributes\DataTypeEnum.cs" />
     <Compile Include="TemplateTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateEntry.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ProxyTypeAttributes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

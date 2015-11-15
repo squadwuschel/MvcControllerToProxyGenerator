@@ -3,6 +3,7 @@
 <#@ assembly name="System.Core" #>
 <# // Eigene Assemblies müssen z.B. als Referenz hinzugefügt werden und dann direkt über das Bin Dir refrenzerit werden #> 
 <#@ assembly name="$(TargetDir)ProxyGenerator.dll" #>
+<#@ import namespace="ProxyGenerator" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -14,16 +15,28 @@
 //beim nächsten Erstellen wieder überschrieben.
 //Erstellt am <#= DateTime.Now.Date.ToShortDateString() #> um <#= DateTime.Now.ToShortTimeString()  #> von <#= Environment.UserName #>.
 
-
-
 <#
-    //List<TemplateEntry> templates = new List<TemplateEntry>();
+//#############################################################--AngularJs JavaScript Definitions--#############################################################
+//##############################################################################################################################################################
+    List<TemplateEntry> templates = new List<TemplateEntry>();
 
+//Variablen die ersetzt werden im Modul Template: 
+// 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt und ergibt dann controllerNameSrv
+// 2. #PrototypeServiceCalls# => Hier werden alle Service Calls eingefügt die für den Controller mit dem passenden Attribut "AngularJs" Markiert wurden.
+    var angularJsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularJsModule };
+	angularJsModule.Template = "function #ServiceName#($http) {{ this.http = $http; }} \r\n\r\n\r\n";
+    angularJsModule.Template += "#PrototypeServiceCalls#\r\n\r\n\r\n";
+    angularJsModule.Template += "angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#]);";
+	templates.Add(angularJsModule);
 
-
-
+//Variablen die ersetzt werden im Prototype Template: 
+// 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt damit die richtige Prototype Funktion auferufen wird.
+// 2. #serviceParamters# => Die Parameterliste für den jeweiligen Ajax Call z.B. name, id, person
+// 3. #controllerFunctionName# => Der Name des Ajax Calls entspricht der Funktion im Controller die aufgerufen wird.
+// 4. #ServiceCallAndParameters# => Hier wird der passende Aufruf ersetzt durch z.B.: get("GetAutosByHerstellerId/" + value) oder post("GetAutosByHerstellerId/" + value, message)
+    var angularJsPrototype = new TemplateEntry() {TemplateType = TemplateTypes.AngularJsPrototype};
+    angularJsPrototype.Template = "#ServiceName#.prototype.#controllerFunctionName# = function (#serviceParamters#) {{ \r\n";
+    angularJsPrototype.Template = "return this.http.#ServiceCallAndParameters#.then(function (result) {{\r\n";
+    angularJsPrototype.Template = "return result.data;\r\n}});\r\n}}\r\n\r\n";
+	templates.Add(angularJsPrototype);
  #>
-
-
-
-
