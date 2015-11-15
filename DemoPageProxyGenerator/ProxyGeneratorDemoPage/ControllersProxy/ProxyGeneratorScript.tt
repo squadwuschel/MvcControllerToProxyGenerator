@@ -54,4 +54,9 @@
     generator.GenerateProxy(webProjectName, this.Host);
 	
 
- #>
+#>
+
+<# //Wenn man sein T4 Template debuggt, dann blieb bisher meist eine T4VSHostProcess.exe als Prozess offen und musste manuell über den TaskManager wieder geschlossen werden
+   //Denn wenn dieser Prozess noch lief wurden Resourcen blockiert, die es verhinderten das Referenzierte DLLs ersetzt werden konnten.
+#>
+<#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
