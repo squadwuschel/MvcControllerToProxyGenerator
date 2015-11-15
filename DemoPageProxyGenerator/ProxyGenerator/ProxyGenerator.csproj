@@ -94,8 +94,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\ControllerManager.cs" />
-    <Compile Include="ProxyGenerator.cs" />
+    <Compile Include="Manager\AssemblyManager.cs" />
+    <Compile Include="Manager\ControllerManager.cs" />
+    <Compile Include="Interfaces\IControllerManager.cs" />
+    <Compile Include="Interfaces\IAssemblyManager.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularJsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularTsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateJQueryTsProxyAttribute.cs" />
@@ -106,7 +109,7 @@
     <Compile Include="T4Helper\TemplateEntry.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="Builder\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

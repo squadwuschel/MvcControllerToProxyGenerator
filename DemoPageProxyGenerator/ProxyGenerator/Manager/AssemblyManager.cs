@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Web.Mvc;
+using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
-using ProxyGenerator.ProxyTypeAttributes;
+using ProxyGenerator.Interfaces;
 
-namespace ProxyGenerator.Builder
+namespace ProxyGenerator.Manager
 {
-    public class ControllerManager
+    public class AssemblyManager : IAssemblyManager
     {
-
         /// <summary>
-        /// Alle Controller ermitteln die für das Projekt befunden werden können.
+        /// Laden der Assemblies die überprüft werden müssen, ob diese das Attribut zum Erstellen eines Proxies enthalten.
         /// </summary>
-        public List<Type> GetAllController(string webprojectName, ITextTemplatingEngineHost host)
+        /// <param name="webprojectName">Der Name des WebProjektes in dem wir die Assemblies laden</param>
+        /// <param name="host">Der T4 Host, über den der Aktuelle Pfad ermittelt wird</param>
+        public List<Assembly> LoadAssemblies(string webprojectName, ITextTemplatingEngineHost host)
         {
             //Den Pfad zum T4 Template ermitteln
             var fullPathToT4Template = System.IO.Path.GetFullPath(host.TemplateFile);
@@ -29,31 +29,7 @@ namespace ProxyGenerator.Builder
                 allAssemblies.Add(Assembly.LoadFile(dll));
             }
 
-
-            List<Type> allController = new List<Type>();
-            foreach (Assembly assembly in allAssemblies)
-            {
-                try
-                {
-                    //Nur die Assemblies heraussuchen in denen unser BasisAttribut für die Proxy Erstellung gesetzt wurde.
-                    var types = assembly.GetTypes().Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(typeof (CreateProxyBaseAttribute), true).Any())).ToList();
-
-                    foreach (Type type in types)
-                    {
-                        //Prüfen das jede Klasse (Controller) nur einmal unserer Liste hinzugefügt wird.
-                        if (allController.All(p => p.AssemblyQualifiedName != type.AssemblyQualifiedName))
-                        {
-                            allController.Add(type);
-                        }
-                    }
-                }
-                catch(Exception exception)
-                {
-                    Trace.WriteLine("Fehler beim Auslesen der Assemblies: " + exception.Message);
-                }
-            }
-
-            return allController;
+            return allAssemblies;
         }
 
         /// <summary>

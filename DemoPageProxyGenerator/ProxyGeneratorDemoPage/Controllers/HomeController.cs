@@ -23,19 +23,19 @@ namespace ProxyGeneratorDemoPage.Controllers
             return Json(PersonModelBuilder.GetPerson(id), JsonRequestBehavior.AllowGet);
         }
 
-        [CreateAngularJsProxyBase(ReturnType = typeof(int))]
+        [CreateAngularJsProxy(ReturnType = typeof(int))]
         public ActionResult AddOrUpdatePerson(Person person)
         {
             return Json(PersonModelBuilder.AddOrUpdatePerson(person), JsonRequestBehavior.AllowGet);
         }
 
-        [CreateAngularJsProxyBase(ReturnType = typeof(List<Models.Person.Models.Person>))]
+        [CreateAngularJsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
         public ActionResult GetAllPersons()
         {
             return Json(PersonModelBuilder.GetAllPersons(), JsonRequestBehavior.AllowGet);
         }
 
-        [CreateAngularJsProxyBase(ReturnType = typeof(List<Models.Person.Models.Person>))]
+        [CreateAngularJsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
         public ActionResult SearchPerson(string name)
         {
             return Json(PersonModelBuilder.SearchPerson(name), JsonRequestBehavior.AllowGet);

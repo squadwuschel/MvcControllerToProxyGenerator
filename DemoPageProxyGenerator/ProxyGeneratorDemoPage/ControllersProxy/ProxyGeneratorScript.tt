@@ -6,7 +6,8 @@
 <#@ assembly name="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" #>
 <# // assembly name="C:\TFS\GitHub\MvcControllerToProxyGenerator\MvcControllerToProxyGenerator\DemoPageProxyGenerator\ProxyGenerator\bin\Debug\ProxyGenerator.dll" #>
 <#@ import namespace="ProxyGenerator.T4Helper" #>
-<#@ import namespace="ProxyGenerator.Builder" #>
+<#@ import namespace="ProxyGenerator" #>
+<#@ import namespace="ProxyGenerator.Manager" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -15,6 +16,7 @@
 
 <#@ assembly name="EnvDTE" #>
 <#@ import namespace="EnvDTE" #>
+<#@ import namespace="ProxyGenerator.Manager" #>
 
 <#@ output extension=".txt" #>
 
@@ -54,11 +56,8 @@
     angularJsPrototype.Template = "return result.data;\r\n}});\r\n}}\r\n\r\n";
 	templates.Add(angularJsPrototype);
 
-	ControllerManager manager = new ControllerManager();
-    manager.GetAllController(webProjectName, this.Host);
-
-
-
+	Generator generator = new Generator();
+    generator.GenerateProxy(webProjectName, this.Host);
 	
 
  #>
