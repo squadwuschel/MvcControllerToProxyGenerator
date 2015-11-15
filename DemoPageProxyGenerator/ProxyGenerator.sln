@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyGenerator", "ProxyGene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E25B9094-40DC-4828-818E-C6EA45739DFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyGeneratorDemoPage", "BootstrapAndAngularJs\ProxyGeneratorDemoPage.csproj", "{3B134D5E-39C2-4B0A-8212-C2DC1FFDD3BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyGeneratorDemoPage", "ProxyGeneratorDemoPage\ProxyGeneratorDemoPage.csproj", "{3B134D5E-39C2-4B0A-8212-C2DC1FFDD3BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

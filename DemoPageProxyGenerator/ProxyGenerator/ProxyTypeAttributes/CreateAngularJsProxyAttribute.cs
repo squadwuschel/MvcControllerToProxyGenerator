@@ -7,7 +7,7 @@ namespace ProxyGenerator.ProxyTypeAttributes
     /// eine JavaScript Proxy Funktion umgewandelt werden sollen für AngularJs
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class CreateAngularJsProxyAttribute : CreateProxyAttribute
+    public class CreateAngularJsProxyAttribute : CreateProxyBaseAttribute
     {
     }
 }

@@ -9,7 +9,7 @@ namespace ProxyGeneratorDemoPage.Controllers
 {
     public class ProxyController : Controller
     {
-        [CreateAngularJsProxy(ReturnType = typeof(int))]
+       // [CreateAngularJsProxy(ReturnType = typeof(int))]
         public JsonResult AddAuto(string name, int age)
         {
             return Json(66, JsonRequestBehavior.AllowGet);

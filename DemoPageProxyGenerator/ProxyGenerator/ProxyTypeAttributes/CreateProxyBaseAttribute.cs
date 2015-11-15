@@ -7,29 +7,29 @@ namespace ProxyGenerator.ProxyTypeAttributes
     /// eine JavaScript Proxy Funktion umgewandelt werden sollen.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public abstract class CreateProxyAttribute : Attribute
+    public abstract class CreateProxyBaseAttribute : Attribute
     {
         public Type ReturnType { get; set; }
 
         public DataTypeEnum DataType { get; set; }
 
-        public CreateProxyAttribute()
+        public CreateProxyBaseAttribute()
         {
             ReturnType = null;
         }
 
-        public CreateProxyAttribute(Type returnType)
+        public CreateProxyBaseAttribute(Type returnType)
         {
             this.ReturnType = returnType;
         }
 
-        public CreateProxyAttribute(Type returnType, DataTypeEnum dataType)
+        public CreateProxyBaseAttribute(Type returnType, DataTypeEnum dataType)
         {
             this.ReturnType = returnType;
             this.DataType = dataType;
         }
 
-        public CreateProxyAttribute(DataTypeEnum dataType)
+        public CreateProxyBaseAttribute(DataTypeEnum dataType)
         {
             this.DataType = dataType;
         }

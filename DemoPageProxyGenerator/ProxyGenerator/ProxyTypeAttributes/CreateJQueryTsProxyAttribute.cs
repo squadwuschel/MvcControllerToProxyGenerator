@@ -7,7 +7,7 @@ namespace ProxyGenerator.ProxyTypeAttributes
     /// eine TypeScript Proxy Funktion umgewandelt werden sollen für AngularJs
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class CreateJQueryTsProxyAttribute : CreateProxyAttribute
+    public class CreateJQueryTsProxyAttribute : CreateProxyBaseAttribute
     {
     }
 }
