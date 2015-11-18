@@ -4,19 +4,26 @@
 <# // Eigene Assemblies müssen z.B. als Referenz hinzugefügt werden und dann direkt über das Bin dir referenziert werden #> 
 <#@ assembly name="$(TargetDir)ProxyGenerator.dll" #>
 
-<#@ import namespace="ProxyGenerator.T4Helper" #>
+<#@ import namespace="ProxyGenerator.Container" #>
 <#@ import namespace="ProxyGenerator" #>
 <#@ import namespace="ProxyGenerator.Manager" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="ProxyGenerator.Container" #>
 <#@ assembly name="EnvDTE" #>
 
-<#@ output extension=".txt" #>
+<#@ output extension=".js" #>
 
-<# //Variablen die gesetzt werden müssen: 
-    string webProjectName = "ProxyGeneratorDemoPage";
-
+<# //Settings for the Proxy: 
+  ProxySettings settings = new ProxySettings();
+    //The Name of the WebProject where the T4 ProxyGenerator Template was inserted:
+    settings.WebProjectName = "ProxyGeneratorDemoPage";
+	//The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
+	//We are search the path above for the WebProjectName to get the root Directory of the Website.
+	settings.FullPathToTheWebProject = System.IO.Path.GetFullPath(this.Host.TemplateFile);
+	//Tells the Proxy Generator if the AJAX functionnames start not with a Capital Letter:
+    settings.LowerFirstCharInFunctionName = true;
 #>
 
 
@@ -28,8 +35,6 @@
 <#
 //#############################################################--AngularJs JavaScript Definitions--#############################################################
 //##############################################################################################################################################################
-    List<TemplateEntry> templates = new List<TemplateEntry>();
-
 //Variablen die ersetzt werden im Modul Template: 
 // 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt und ergibt dann controllerNameSrv
 // 2. #PrototypeServiceCalls# => Hier werden alle Service Calls eingefgt die für den Controller mit dem passenden Attribut "AngularJs" Markiert wurden.
@@ -37,7 +42,7 @@
 	angularJsModule.Template = "function #ServiceName#($http) {{ this.http = $http; }} \r\n\r\n\r\n";
     angularJsModule.Template += "#PrototypeServiceCalls#\r\n\r\n\r\n";
     angularJsModule.Template += "angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#]);";
-	templates.Add(angularJsModule);
+	settings.Templates.Add(angularJsModule);
 
 //Variablen die ersetzt werden im Prototype Template: 
 // 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt damit die richtige Prototype Funktion auferufen wird.
@@ -48,13 +53,12 @@
     angularJsPrototype.Template = "#ServiceName#.prototype.#controllerFunctionName# = function (#serviceParamters#) {{ \r\n";
     angularJsPrototype.Template = "return this.http.#ServiceCallAndParameters#.then(function (result) {{\r\n";
     angularJsPrototype.Template = "return result.data;\r\n}});\r\n}}\r\n\r\n";
-	templates.Add(angularJsPrototype);
+	settings.Templates.Add(angularJsPrototype);
 
-	Generator generator = new Generator();
-    generator.GenerateProxy(webProjectName, this.Host);
-	
-
+	Generator generator = new Generator(settings);
 #>
+
+<#= generator.AddAngularJsProxyGenerator() #>
 
 <# //Wenn man sein T4 Template debuggt, dann blieb bisher meist eine T4VSHostProcess.exe als Prozess offen und musste manuell über den TaskManager wieder geschlossen werden
    //Denn wenn dieser Prozess noch lief wurden Resourcen blockiert, die es verhinderten das Referenzierte DLLs ersetzt werden konnten.

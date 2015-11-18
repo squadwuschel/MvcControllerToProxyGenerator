@@ -94,23 +94,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\AngularJsProxyBuilder.cs" />
+    <Compile Include="Interfaces\IAngularJsProxyBuilder.cs" />
+    <Compile Include="Container\ProxyMethodParameterInfo.cs" />
+    <Compile Include="Container\ProxySettings.cs" />
     <Compile Include="Manager\AssemblyManager.cs" />
     <Compile Include="Manager\ControllerManager.cs" />
     <Compile Include="Interfaces\IControllerManager.cs" />
     <Compile Include="Interfaces\IAssemblyManager.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="Manager\MethodManager.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularJsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularTsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateJQueryTsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateProxyBaseAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\DataTypeEnum.cs" />
-    <Compile Include="T4Helper\TemplateTypes.cs" />
+    <Compile Include="Container\ProxyMethodInfo.cs" />
+    <Compile Include="Container\TemplateTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="T4Helper\TemplateEntry.cs" />
+    <Compile Include="Container\TemplateEntry.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Builder\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -8,6 +8,9 @@ using ProxyGenerator.ProxyTypeAttributes;
 
 namespace ProxyGenerator.Manager
 {
+    /// <summary>
+    /// Ermittelt alle Klassen die das Custom Attribut zum Erstellen eines Proxies enthalten.
+    /// </summary>
     public class ControllerManager : IControllerManager
     {
         /// <summary>

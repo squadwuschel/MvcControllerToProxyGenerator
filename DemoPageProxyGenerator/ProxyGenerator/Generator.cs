@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
+using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.Manager;
 
@@ -10,20 +11,25 @@ namespace ProxyGenerator
 {
     public class Generator
     {
-        private IAssemblyManager AssemblyManager { get; set; }
-        private IControllerManager ControllerManager { get; set; }
+        #region Member
+        private ProxySettings ProxySettings { get; set; }
+        #endregion
 
-        public Generator()
+        public Generator(ProxySettings proxySettings)
         {
-            AssemblyManager = new AssemblyManager();
-            ControllerManager = new ControllerManager();
+            ProxySettings = proxySettings;
         }
 
-        public void GenerateProxy(string webprojectName, ITextTemplatingEngineHost host)
+        public string AddAngularJsProxyGenerator()
         {
-            var assemblies = AssemblyManager.LoadAssemblies(webprojectName, host);
-            var controller = ControllerManager.GetAllProxyController(assemblies);
+            
 
+
+
+            return string.Empty;
         }
+
+
+
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ProxyGenerator.T4Helper
+﻿namespace ProxyGenerator.Container
 {
     public class TemplateEntry
     {

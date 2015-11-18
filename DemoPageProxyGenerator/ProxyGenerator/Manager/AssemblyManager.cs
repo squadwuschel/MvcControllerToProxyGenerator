@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using Microsoft.VisualStudio.TextTemplating;
 using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Manager
 {
+    /// <summary>
+    /// Ermittelt alle Assemblies für das aktuelle Projekt
+    /// </summary>
     public class AssemblyManager : IAssemblyManager
     {
         /// <summary>
         /// Laden der Assemblies die überprüft werden müssen, ob diese das Attribut zum Erstellen eines Proxies enthalten.
         /// </summary>
         /// <param name="webprojectName">Der Name des WebProjektes in dem wir die Assemblies laden</param>
-        /// <param name="host">Der T4 Host, über den der Aktuelle Pfad ermittelt wird</param>
-        public List<Assembly> LoadAssemblies(string webprojectName, ITextTemplatingEngineHost host)
+        /// <param name="fullPathToTheWebProject">Der Komplette Pfad zum WebProjekt, wenn es sich um ein Subverzeichnis handelt, wird der Weg bis zum Projekt genommen</param>
+        public List<Assembly> LoadAssemblies(string webprojectName, string fullPathToTheWebProject)
         {
             //Den Pfad zum T4 Template ermitteln
-            var fullPathToT4Template = System.IO.Path.GetFullPath(host.TemplateFile);
-            var webProjectPath = GetParentDirectory(fullPathToT4Template, webprojectName);
+            var webProjectPath = GetParentDirectory(fullPathToTheWebProject, webprojectName);
 
             List<Assembly> allAssemblies = new List<Assembly>();
 
