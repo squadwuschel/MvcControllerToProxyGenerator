@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TextTemplating;
+﻿using ProxyGenerator.Builder;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
-using ProxyGenerator.Manager;
 
 namespace ProxyGenerator
 {
@@ -13,23 +8,22 @@ namespace ProxyGenerator
     {
         #region Member
         private ProxySettings ProxySettings { get; set; }
+
+        public IAngularJsProxyBuilder AngularJsProxyBuilder { get; set; }
         #endregion
 
         public Generator(ProxySettings proxySettings)
         {
             ProxySettings = proxySettings;
+            AngularJsProxyBuilder = new AngularJsProxyBuilder(ProxySettings);
         }
 
         public string AddAngularJsProxyGenerator()
         {
-            
+           var proxies = AngularJsProxyBuilder.BuildProxy();
 
 
-
-            return string.Empty;
+           return string.Empty;
         }
-
-
-
     }
 }

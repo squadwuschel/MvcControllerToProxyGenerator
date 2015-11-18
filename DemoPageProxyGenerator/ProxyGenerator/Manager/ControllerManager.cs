@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.ProxyTypeAttributes;
 
@@ -13,6 +14,40 @@ namespace ProxyGenerator.Manager
     /// </summary>
     public class ControllerManager : IControllerManager
     {
+        #region Member
+        public IMethodManager MethodManager { get; set; }
+        #endregion
+
+        #region Konstruktor
+        public ControllerManager()
+        {
+            MethodManager = new MethodManager();
+        }
+        #endregion
+
+        #region Public Functions
+        /// <summary>
+        /// Laden aller Methoden und Parameterinformationen in allen Controllerm in denen das übergebene ProxyType Attribut verwendet wird.
+        /// </summary>
+        public List<ProxyControllerInfo> LoadProxyControllerInfos(Type proxyTypeAttribute, List<Type> allController)
+        {
+            List<ProxyControllerInfo> proxyControllerInfos = new List<ProxyControllerInfo>();
+            //Nur die Controller laden in denen auch unser Attribut verwendet wird für das wir die Informationen ermitteln sollen.
+            var typedController = GetProxyControllerByProxyTypeAttribute(proxyTypeAttribute, allController);
+
+            typedController.ForEach(p =>
+            {
+                ProxyControllerInfo proxyControllerInfo = new ProxyControllerInfo();
+                //Laden der MethodenInformationen zu unserem Controller
+                proxyControllerInfo.ProxyMethodInfos = MethodManager.LoadMethodInfos(p, proxyTypeAttribute);
+                proxyControllerInfo.Controller = p;
+                proxyControllerInfo.ControllerNameWithoutSuffix = p.Name.TrimEnd(ConstValues.ControllerNameSuffix.ToCharArray());
+                proxyControllerInfos.Add(proxyControllerInfo);
+            });
+
+            return proxyControllerInfos;
+        }
+
         /// <summary>
         /// Alle Controller ermitteln die für das Projekt befunden werden können.
         /// </summary>
@@ -43,5 +78,14 @@ namespace ProxyGenerator.Manager
 
             return allController;
         }
+
+        /// <summary>
+        /// Die Liste an Controllern ermitteln in denen das übergebene ProxyTypeAttribute gesetzt wurde.
+        /// </summary>
+        public List<Type> GetProxyControllerByProxyTypeAttribute(Type proxyTypeAttribute, List<Type> allController)
+        {
+            return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(proxyTypeAttribute.GetElementType(), true).Any())).ToList();
+        }
+        #endregion
     }
 }

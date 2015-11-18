@@ -15,8 +15,8 @@
 
 <#@ output extension=".js" #>
 
-<# //Settings for the Proxy: 
-  ProxySettings settings = new ProxySettings();
+<#  //Settings for the Proxy: 
+    ProxySettings settings = new ProxySettings();
     //The Name of the WebProject where the T4 ProxyGenerator Template was inserted:
     settings.WebProjectName = "ProxyGeneratorDemoPage";
 	//The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
@@ -24,6 +24,9 @@
 	settings.FullPathToTheWebProject = System.IO.Path.GetFullPath(this.Host.TemplateFile);
 	//Tells the Proxy Generator if the AJAX functionnames start not with a Capital Letter:
     settings.LowerFirstCharInFunctionName = true;
+
+	//Create Generator and set the Settings.
+	Generator generator = new Generator(settings);
 #>
 
 
@@ -55,7 +58,6 @@
     angularJsPrototype.Template = "return result.data;\r\n}});\r\n}}\r\n\r\n";
 	settings.Templates.Add(angularJsPrototype);
 
-	Generator generator = new Generator(settings);
 #>
 
 <#= generator.AddAngularJsProxyGenerator() #>

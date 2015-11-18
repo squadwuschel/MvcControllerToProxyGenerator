@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -95,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\AngularJsProxyBuilder.cs" />
+    <Compile Include="ConstValues.cs" />
+    <Compile Include="Container\GeneratedProxyEntry.cs" />
+    <Compile Include="Container\ProxyControllerInfo.cs" />
     <Compile Include="Interfaces\IAngularJsProxyBuilder.cs" />
     <Compile Include="Container\ProxyMethodParameterInfo.cs" />
     <Compile Include="Container\ProxySettings.cs" />
@@ -103,7 +105,10 @@
     <Compile Include="Interfaces\IControllerManager.cs" />
     <Compile Include="Interfaces\IAssemblyManager.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="Interfaces\IMethodParameterManager.cs" />
+    <Compile Include="Interfaces\IMethodManager.cs" />
     <Compile Include="Manager\MethodManager.cs" />
+    <Compile Include="Manager\MethodParameterManager.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularJsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularTsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateJQueryTsProxyAttribute.cs" />
