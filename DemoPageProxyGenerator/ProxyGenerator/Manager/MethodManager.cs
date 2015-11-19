@@ -22,6 +22,9 @@ namespace ProxyGenerator.Manager
         #endregion
 
         #region Public Functions
+        /// <summary>
+        /// Laden der Methodeninformationen für die übergebene Klasse (Controller)
+        /// </summary>
         public List<ProxyMethodInfos> LoadMethodInfos(Type controller, Type proxyTypeAttribute)
         {
             List<ProxyMethodInfos> proxyMethodInfos = new List<ProxyMethodInfos>();

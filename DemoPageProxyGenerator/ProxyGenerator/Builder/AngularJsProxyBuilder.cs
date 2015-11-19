@@ -5,20 +5,17 @@ using System.Text;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.Manager;
+using ProxyGenerator.ProxyTypeAttributes;
 
 namespace ProxyGenerator.Builder
 {
     public class AngularJsProxyBuilder : IAngularJsProxyBuilder
     {
         public ProxySettings ProxySettings { get; set; }
-        public IAssemblyManager AssemblyManager { get; set; }
-        public IControllerManager ControllerManager { get; set; }
-
+       
         public AngularJsProxyBuilder(ProxySettings proxySettings)
         {
             ProxySettings = proxySettings;
-            AssemblyManager = new AssemblyManager();
-            ControllerManager = new ControllerManager();
 
             if (proxySettings.Templates.All(p => p.TemplateType != TemplateTypes.AngularJsModule))
             {
@@ -34,16 +31,12 @@ namespace ProxyGenerator.Builder
         /// <summary>
         /// Den Proxy für AngularJs bauen. Hier wird eine Liste aus den Dateinamen (Controllern) und den enthaltenen Proxyfunktionen erstellt.
         /// </summary>
-        public List<GeneratedProxyEntry> BuildProxy()
+        public List<GeneratedProxyEntry> BuildProxy(List<ProxyControllerInfo> proxyControllerInfos)
         {
             List<GeneratedProxyEntry> proxyEntries = new List<GeneratedProxyEntry>();
 
-            var assemblies = AssemblyManager.LoadAssemblies(ProxySettings.WebProjectName, ProxySettings.FullPathToTheWebProject);
-            var controller = ControllerManager.GetAllProxyController(assemblies);
 
-
-
-
+                
             return proxyEntries;
         }
     }

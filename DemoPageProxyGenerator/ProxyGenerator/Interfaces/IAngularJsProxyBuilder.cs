@@ -6,8 +6,6 @@ namespace ProxyGenerator.Interfaces
     public interface IAngularJsProxyBuilder
     {
         ProxySettings ProxySettings { get; set; }
-        IAssemblyManager AssemblyManager { get; set; }
-        IControllerManager ControllerManager { get; set; }
-        List<GeneratedProxyEntry> BuildProxy();
+        List<GeneratedProxyEntry> BuildProxy(List<ProxyControllerInfo> proxyControllerInfos);
     }
 }

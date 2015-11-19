@@ -16,18 +16,21 @@ namespace ProxyGenerator.Manager
     {
         #region Member
         public IMethodManager MethodManager { get; set; }
+
+        public IAssemblyManager AssemblyManager { get; set; }
         #endregion
 
         #region Konstruktor
         public ControllerManager()
         {
             MethodManager = new MethodManager();
+            AssemblyManager = new AssemblyManager();
         }
         #endregion
 
         #region Public Functions
         /// <summary>
-        /// Laden aller Methoden und Parameterinformationen in allen Controllerm in denen das übergebene ProxyType Attribut verwendet wird.
+        /// Laden aller Methoden und Parameterinformationen in allen Klassen (Controllern) in denen das übergebene ProxyType Attribut verwendet wird.
         /// </summary>
         public List<ProxyControllerInfo> LoadProxyControllerInfos(Type proxyTypeAttribute, List<Type> allController)
         {
@@ -51,15 +54,19 @@ namespace ProxyGenerator.Manager
         /// <summary>
         /// Alle Controller ermitteln die für das Projekt befunden werden können.
         /// </summary>
-        public List<Type> GetAllProxyController(List<Assembly> assemblies)
+        public List<Type> GetAllProjectProxyController(ProxySettings proxySettings)
         {
             List<Type> allController = new List<Type>();
+
+            //Alle Assemblies im aktuellen Projekt laden.
+            var assemblies = AssemblyManager.LoadAssemblies(proxySettings.WebProjectName, proxySettings.FullPathToTheWebProject);
+
             foreach (Assembly assembly in assemblies)
             {
                 try
                 {
                     //Nur die Assemblies heraussuchen in denen unser BasisAttribut für die Proxy Erstellung gesetzt wurde.
-                    var types = assembly.GetTypes().Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(typeof (CreateProxyBaseAttribute), true).Any())).ToList();
+                    var types = assembly.GetTypes().Where(type  => type.GetMethods().Any(p => p.GetCustomAttributes(typeof (CreateProxyBaseAttribute), true).Any())).ToList();
 
                     foreach (Type type in types)
                     {

@@ -11,6 +11,8 @@ namespace ProxyGenerator.Manager
     /// </summary>
     public class AssemblyManager : IAssemblyManager
     {
+        private List<Assembly> _allAssemblies = null;
+
         /// <summary>
         /// Laden der Assemblies die überprüft werden müssen, ob diese das Attribut zum Erstellen eines Proxies enthalten.
         /// </summary>
@@ -18,17 +20,19 @@ namespace ProxyGenerator.Manager
         /// <param name="fullPathToTheWebProject">Der Komplette Pfad zum WebProjekt, wenn es sich um ein Subverzeichnis handelt, wird der Weg bis zum Projekt genommen</param>
         public List<Assembly> LoadAssemblies(string webprojectName, string fullPathToTheWebProject)
         {
-            //Den Pfad zum T4 Template ermitteln
-            var webProjectPath = GetParentDirectory(fullPathToTheWebProject, webprojectName);
-
-            List<Assembly> allAssemblies = new List<Assembly>();
-
-            foreach (string dll in Directory.GetFiles(webProjectPath, "*.dll", SearchOption.AllDirectories))
+            if (_allAssemblies == null)
             {
-                allAssemblies.Add(Assembly.LoadFile(dll));
+                _allAssemblies = new List<Assembly>();
+
+                //Den Pfad zum T4 Template ermitteln
+                var webProjectPath = GetParentDirectory(fullPathToTheWebProject, webprojectName);
+                foreach (string dll in Directory.GetFiles(webProjectPath, "*.dll", SearchOption.AllDirectories))
+                {
+                    _allAssemblies.Add(Assembly.LoadFile(dll));
+                }
             }
 
-            return allAssemblies;
+            return _allAssemblies;
         }
 
         /// <summary>
