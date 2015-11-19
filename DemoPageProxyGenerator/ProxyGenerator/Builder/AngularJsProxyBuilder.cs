@@ -33,11 +33,27 @@ namespace ProxyGenerator.Builder
         /// </summary>
         public List<GeneratedProxyEntry> BuildProxy(List<ProxyControllerInfo> proxyControllerInfos)
         {
-            List<GeneratedProxyEntry> proxyEntries = new List<GeneratedProxyEntry>();
+            List<GeneratedProxyEntry> generatedProxyEntries = new List<GeneratedProxyEntry>();
+
+            //Template für "TemplateTypes.AngularJsModule":
+            // function #ServiceName#($http) {{ this.http = $http; }}";
+            // #PrototypeServiceCalls#";
+            // angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#]);";
+
+            //Template für "TemplateTypes.AngularJsPrototype"
+            // #ServiceName#.prototype.#controllerFunctionName# = function (#serviceParamters#) {{ ";
+            // return this.http.#ServiceCallAndParameters#.then(function (result) {{ return result.data; }});}}";
 
 
+            foreach (GeneratedProxyEntry proxyEntry in generatedProxyEntries)
+            {
+               
                 
-            return proxyEntries;
+                 
+            }
+
+
+            return generatedProxyEntries;
         }
     }
 }
