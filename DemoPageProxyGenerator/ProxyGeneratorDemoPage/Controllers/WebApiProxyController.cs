@@ -19,7 +19,7 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         // GET: api/WebApiProxy2/5
         [CreateAngularJsProxy(ReturnType = typeof(string))]
-        public string Get(int id)
+        public string GetItem(int id)
         {
             return "value";
         }

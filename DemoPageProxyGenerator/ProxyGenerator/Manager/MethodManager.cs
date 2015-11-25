@@ -29,6 +29,7 @@ namespace ProxyGenerator.Manager
         {
             List<ProxyMethodInfos> proxyMethodInfos = new List<ProxyMethodInfos>();
 
+            //Alle Methoden des Controllers durchgehen und nur die Methoden ermitteln in denen auch das übergebene ProxyAttribut enthalten ist.
             foreach (MethodInfo methodInfo in controller.GetMethods().Where(p => p.GetCustomAttributes(true).Any(attr => attr.GetType() == proxyTypeAttribute)))
             {
                 if (proxyMethodInfos.Any(p => p.MethodInfo.Name == methodInfo.Name))

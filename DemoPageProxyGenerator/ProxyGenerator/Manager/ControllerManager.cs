@@ -41,7 +41,7 @@ namespace ProxyGenerator.Manager
             typedController.ForEach(p =>
             {
                 ProxyControllerInfo proxyControllerInfo = new ProxyControllerInfo();
-                //Laden der MethodenInformationen zu unserem Controller
+                //Laden der MethodenInformationen zu unserem Controller und nur die Methoden laden bei denen auch das passende Attribut darüber steht.
                 proxyControllerInfo.ProxyMethodInfos = MethodManager.LoadMethodInfos(p, proxyTypeAttribute);
                 proxyControllerInfo.Controller = p;
                 proxyControllerInfo.ControllerNameWithoutSuffix = p.Name.TrimEnd(ConstValues.ControllerNameSuffix.ToCharArray());
@@ -91,7 +91,8 @@ namespace ProxyGenerator.Manager
         /// </summary>
         public List<Type> GetProxyControllerByProxyTypeAttribute(Type proxyTypeAttribute, List<Type> allController)
         {
-            return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(proxyTypeAttribute.GetElementType(), true).Any())).ToList();
+            return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(true).Any(attr=> attr.GetType() == proxyTypeAttribute))).ToList();
+            //return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(proxyTypeAttribute.GetElementType(), true).Any())).ToList();
         }
         #endregion
     }

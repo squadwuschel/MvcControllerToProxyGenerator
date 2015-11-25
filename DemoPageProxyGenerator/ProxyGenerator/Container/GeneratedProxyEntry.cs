@@ -5,6 +5,9 @@ using System.Text;
 
 namespace ProxyGenerator.Container
 {
+    /// <summary>
+    /// Die generierten Proxyeigenschaften für einen Controller
+    /// </summary>
     public class GeneratedProxyEntry
     {
         public string FileName { get; set; }

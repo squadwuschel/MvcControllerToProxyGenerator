@@ -1,4 +1,5 @@
-﻿using ProxyGenerator.Builder;
+﻿using System.Collections.Generic;
+using ProxyGenerator.Builder;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.Manager;
@@ -18,16 +19,16 @@ namespace ProxyGenerator
         {
             ControllerManager = new ControllerManager();
             ProxySettings = proxySettings;
-            AngularJsProxyBuilder = new AngularJsProxyBuilder(ProxySettings);
         }
 
-        public string AddAngularJsProxyGenerator()
+        public List<GeneratedProxyEntry> AddAngularJsProxyGenerator()
         {
             //Alle Controller ermitteln
+            AngularJsProxyBuilder = new AngularJsProxyBuilder(ProxySettings);
             var proxyControllerInfos = ControllerManager.LoadProxyControllerInfos(typeof(CreateAngularJsProxyAttribute), ControllerManager.GetAllProjectProxyController(ProxySettings));
             var proxies = AngularJsProxyBuilder.BuildProxy(proxyControllerInfos);
 
-            return string.Empty;
+            return proxies;
         }
     }
 }
