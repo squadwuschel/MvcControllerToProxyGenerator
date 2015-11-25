@@ -58,6 +58,8 @@
 <#  var manager = Manager.Create(Host, GenerationEnvironment); 
 	var generation = generator.AddAngularJsProxyGenerator();
 
+	//TODO ProxySettings Static machen
+
     foreach (GeneratedProxyEntry entry in generation)
     {
        manager.StartNewFile(entry.FileName); 
