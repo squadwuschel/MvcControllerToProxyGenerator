@@ -267,6 +267,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ProxyGeneratorScript.cs</LastGenOutput>
     </Content>
+    <Content Include="ControllersProxy\webApiProxyPSrv.js">
+      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -54,20 +54,23 @@ namespace ProxyGenerator.Builder
             {
                 //Immer das passende Template ermitteln, da dieses bei jedem Durchgang ersetzt wird.
                 var angularJsModuleTemplate = ProxySettings.Templates.First(p => p.TemplateType == TemplateTypes.AngularJsModule).Template;
-                var angularJsPrototypeTemplate = ProxySettings.Templates.First(p => p.TemplateType == TemplateTypes.AngularJsPrototype).Template;
-                string prototypeFunctions = String.Empty;
+                var prototypeFunctions = String.Empty;
 
                 //Alle Metohden im Controller durchgehen hier sind auch nur die Methoden enthalten die das Attribut für den aktuellen ProxyTyp gesetzt wurde.
                 foreach (ProxyMethodInfos methodInfos in controllerInfo.ProxyMethodInfos)
                 {
+                    var angularJsPrototypeTemplate = ProxySettings.Templates.First(p => p.TemplateType == TemplateTypes.AngularJsPrototype).Template;
+                    string prototypeFunction = String.Empty;
                     //Den Servicenamen vor dem Prototype ersetzen.
-                    prototypeFunctions = angularJsPrototypeTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix));
+                    prototypeFunction = angularJsPrototypeTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix));
                     //Den Methodennamen ersetzen.
-                    prototypeFunctions = prototypeFunctions.Replace(ConstValuesTemplates.ControllerFunctionName, ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name));
+                    prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.ControllerFunctionName, ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name));
                     //Parameter des Funktionsaufrufs ersetzen.
-                    prototypeFunctions = prototypeFunctions.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderHelper.GetFunctionParameters(methodInfos.MethodInfo));
+                    prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderHelper.GetFunctionParameters(methodInfos.MethodInfo));
                     //Service Call und Parameter ersetzen
-                    prototypeFunctions = prototypeFunctions.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos));
+                    prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos));
+
+                    prototypeFunctions += prototypeFunction;
                 }
 
                 string moduleTemplate = angularJsModuleTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix));
