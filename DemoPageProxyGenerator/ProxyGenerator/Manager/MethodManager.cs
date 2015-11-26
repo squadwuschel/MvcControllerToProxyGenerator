@@ -11,13 +11,13 @@ namespace ProxyGenerator.Manager
     public class MethodManager : IMethodManager
     {
         #region Member
-        public IMethodParameterManager MethodParameterManager { get; set; }
+        public IProxyGeneratorFactory Factory { get; set; }
         #endregion
 
         #region Konstruktor
-        public MethodManager()
+        public MethodManager(IProxyGeneratorFactory proxyGeneratorFactory)
         {
-              MethodParameterManager = new MethodParameterManager();
+            Factory = proxyGeneratorFactory;
         }
         #endregion
 
@@ -39,7 +39,7 @@ namespace ProxyGenerator.Manager
 
                 ProxyMethodInfos proxyMethodInfo = new ProxyMethodInfos();
                 //Laden der Paramterinformationen zu unserer Methode.
-                proxyMethodInfo.ProxyMethodParameterInfos = MethodParameterManager.LoadParameterInfos(methodInfo);
+                proxyMethodInfo.ProxyMethodParameterInfos = Factory.CreateMethodParameterManager().LoadParameterInfos(methodInfo);
                 proxyMethodInfo.MethodInfo = methodInfo;
                 proxyMethodInfo.Controller = controller;
                 proxyMethodInfo.ReturnType = GetProxyReturnType(methodInfo);

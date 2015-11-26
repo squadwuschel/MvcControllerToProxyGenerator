@@ -234,11 +234,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FileManager.ttinclude</DependentUpon>
     </Compile>
-    <Compile Include="ControllersProxy\ProxyGeneratorScript.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProxyController.cs" />
     <Compile Include="Controllers\WebApiProxyController.cs" />
@@ -260,12 +255,11 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>FileManager.cs</LastGenOutput>
     </None>
-    <Content Include="ControllersProxy\homPSrv.js">
+    <Content Include="ControllersProxy\homePSrv.js">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </Content>
     <Content Include="ControllersProxy\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ProxyGeneratorScript.cs</LastGenOutput>
     </Content>
     <Content Include="ControllersProxy\webApiProxyPSrv.js">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>

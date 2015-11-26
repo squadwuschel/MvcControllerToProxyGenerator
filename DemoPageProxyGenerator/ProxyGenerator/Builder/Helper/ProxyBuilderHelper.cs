@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Web.Mvc;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 
-namespace ProxyGenerator.Builder
+namespace ProxyGenerator.Builder.Helper
 {
     public class ProxyBuilderHelper : IProxyBuilderHelper
     {

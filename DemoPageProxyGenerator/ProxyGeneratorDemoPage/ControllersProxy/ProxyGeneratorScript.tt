@@ -17,6 +17,9 @@
 <#@ assembly name="EnvDTE" #>
 <#@ include file="FileManager.ttinclude"#>
 
+<# // "Hack" to prevent Default Template outputfile "ProxyGenerator.cs" - creates a warning #> 
+<#@ output extension="\\" #>
+
 <#  //Settings for the Proxy: 
     ProxySettings settings = new ProxySettings();
     //The Name of the WebProject where the T4 ProxyGenerator Template was inserted:
@@ -28,7 +31,8 @@
     settings.LowerFirstCharInFunctionName = true;
 
 	//Create Generator and set the Settings.
-	Generator generator = new Generator(settings);
+	IProxyGeneratorFactory genratorFactory = new ProxyGeneratorFactory(settings);
+	Generator generator = new Generator(genratorFactory);
 #>
 
 <#
@@ -58,7 +62,7 @@
 <#  var manager = Manager.Create(Host, GenerationEnvironment); 
 	var generation = generator.AddAngularJsProxyGenerator();
 
-	//TODO ProxySettings Static machen
+	//TODO ProxySettings Factory machen
 
     foreach (GeneratedProxyEntry entry in generation)
     {

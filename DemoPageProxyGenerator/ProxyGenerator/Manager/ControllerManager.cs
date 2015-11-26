@@ -15,16 +15,13 @@ namespace ProxyGenerator.Manager
     public class ControllerManager : IControllerManager
     {
         #region Member
-        public IMethodManager MethodManager { get; set; }
-
-        public IAssemblyManager AssemblyManager { get; set; }
+        IProxyGeneratorFactory Factory { get; set; }
         #endregion
 
         #region Konstruktor
-        public ControllerManager()
+        public ControllerManager(IProxyGeneratorFactory proxyGeneratorFactory)
         {
-            MethodManager = new MethodManager();
-            AssemblyManager = new AssemblyManager();
+            Factory = proxyGeneratorFactory;
         }
         #endregion
 
@@ -42,9 +39,9 @@ namespace ProxyGenerator.Manager
             {
                 ProxyControllerInfo proxyControllerInfo = new ProxyControllerInfo();
                 //Laden der MethodenInformationen zu unserem Controller und nur die Methoden laden bei denen auch das passende Attribut darüber steht.
-                proxyControllerInfo.ProxyMethodInfos = MethodManager.LoadMethodInfos(p, proxyTypeAttribute);
+                proxyControllerInfo.ProxyMethodInfos = Factory.CreateMethodManager().LoadMethodInfos(p, proxyTypeAttribute);
                 proxyControllerInfo.Controller = p;
-                proxyControllerInfo.ControllerNameWithoutSuffix = p.Name.TrimEnd(ConstValues.ControllerNameSuffix.ToCharArray());
+                proxyControllerInfo.ControllerNameWithoutSuffix = Factory.CreateProxyBuilderHelper().GetClearControllerName(p);
                 proxyControllerInfos.Add(proxyControllerInfo);
             });
 
@@ -59,7 +56,7 @@ namespace ProxyGenerator.Manager
             List<Type> allController = new List<Type>();
 
             //Alle Assemblies im aktuellen Projekt laden.
-            var assemblies = AssemblyManager.LoadAssemblies(proxySettings.WebProjectName, proxySettings.FullPathToTheWebProject);
+            var assemblies = Factory.CreateAssemblyManager().LoadAssemblies(proxySettings.WebProjectName, proxySettings.FullPathToTheWebProject);
 
             foreach (Assembly assembly in assemblies)
             {
@@ -92,7 +89,6 @@ namespace ProxyGenerator.Manager
         public List<Type> GetProxyControllerByProxyTypeAttribute(Type proxyTypeAttribute, List<Type> allController)
         {
             return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(true).Any(attr=> attr.GetType() == proxyTypeAttribute))).ToList();
-            //return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(proxyTypeAttribute.GetElementType(), true).Any())).ToList();
         }
         #endregion
     }
