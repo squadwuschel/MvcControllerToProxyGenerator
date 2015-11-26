@@ -22,12 +22,14 @@
 
 <#  //Settings for the Proxy: 
     ProxySettings settings = new ProxySettings();
-    //The Name of the WebProject where the T4 ProxyGenerator Template was inserted:
-    settings.WebProjectName = "ProxyGeneratorDemoPage";
-	//The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
+    //The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
 	//We are search the path above for the WebProjectName to get the root Directory of the Website.
 	settings.FullPathToTheWebProject = System.IO.Path.GetFullPath(this.Host.TemplateFile);
-	//Tells the Proxy Generator if the AJAX functionnames start not with a Capital Letter:
+
+	//SETTINGS for manual adjustments:
+	//You NEED to Replace it with the Name of the WebProject where the T4 ProxyGenerator Template was inserted:
+    settings.WebProjectName = "ProxyGeneratorDemoPage";
+	//Tells the proxy generator if the AJAX functionnames start not with a Capital letter or not:
     settings.LowerFirstCharInFunctionName = true;
 
 	//Create Generator and set the Settings.

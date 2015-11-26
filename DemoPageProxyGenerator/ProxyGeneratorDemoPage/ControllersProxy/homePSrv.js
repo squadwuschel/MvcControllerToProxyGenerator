@@ -1,7 +1,7 @@
 
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten.
-//Created on 26.11.2015 time 20:25 from SquadWuschel.
+//Created on 26.11.2015 time 20:32 from SquadWuschel.
 
  function homePSrv($http) { this.http = $http; } 
 
