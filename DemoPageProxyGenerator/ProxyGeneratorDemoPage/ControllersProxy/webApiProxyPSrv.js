@@ -1,9 +1,8 @@
-
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten.
-//Created on 26.11.2015 time 20:32 from SquadWuschel.
+//Created on 26.11.2015 time 22:48 from SquadWuschel.
 
- function webApiProxyPSrv($http) { this.http = $http; } 
+  function webApiProxyPSrv($http) { this.http = $http; } 
 
 
 webApiProxyPSrv.prototype.get = function () { 
@@ -29,8 +28,6 @@ webApiProxyPSrv.prototype.delete = function (id) {
         return result.data;
    });
 }
-
-
 
 
 angular.module('webApiProxyPSrv', []) .service('webApiProxyPSrv', ['$http', webApiProxyPSrv]);

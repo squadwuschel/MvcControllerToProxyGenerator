@@ -1,9 +1,8 @@
-
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten.
-//Created on 26.11.2015 time 20:32 from SquadWuschel.
+//Created on 26.11.2015 time 22:48 from SquadWuschel.
 
- function homePSrv($http) { this.http = $http; } 
+  function homePSrv($http) { this.http = $http; } 
 
 
 homePSrv.prototype.addOrUpdatePerson = function (person) { 
@@ -23,8 +22,6 @@ homePSrv.prototype.searchPerson = function (name) {
         return result.data;
    });
 }
-
-
 
 
 angular.module('homePSrv', []) .service('homePSrv', ['$http', homePSrv]);
