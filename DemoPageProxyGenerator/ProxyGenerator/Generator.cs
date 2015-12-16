@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using ProxyGenerator.Builder;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
-using ProxyGenerator.Manager;
 using ProxyGenerator.ProxyTypeAttributes;
 
 namespace ProxyGenerator
@@ -10,14 +8,14 @@ namespace ProxyGenerator
     public class Generator
     {
         #region Member
-        public IProxyGeneratorFactory Factory { get; set; }
+        public IProxyGeneratorFactoryManager Factory { get; set; }
 
         public IControllerManager ControllerManager { get; set; }
 
         private List<GeneratedProxyEntry> GeneratedProxyEntries { get; }
         #endregion
 
-        public Generator(IProxyGeneratorFactory proxyGeneratorFactory)
+        public Generator(IProxyGeneratorFactoryManager proxyGeneratorFactory)
         {
             Factory = proxyGeneratorFactory;
             ControllerManager = Factory.CreateControllerManager();
@@ -35,9 +33,22 @@ namespace ProxyGenerator
 
         public void AddAngularJsProxyGenerator()
         {
-            //Alle Controller und die zugehörigen Methoden zum übergebenen ProxyAttribut ermitteln
+            //Alle Controller und die zugehörigen Methoden zum übergebenen ProxyAttribut ermitteln für einen AngularJs Proxy
             var proxyControllerInfos = ControllerManager.LoadProxyControllerInfos(typeof(CreateAngularJsProxyAttribute), ControllerManager.GetAllProjectProxyController(Factory.GetProxySettings()));
+            //Für alle gefundenen Controller und zugehörigen Funktionen die unser PxyAttribut enthalten, die passenden Proxies erstellen.
             var proxies = Factory.CreateAngularJsProxyBuilder().BuildProxy(proxyControllerInfos);
+            //Für alle gefundenen Controller die Proxies zu unserer globalen Proxyliste hinzufügen.
+            GeneratedProxyEntries.AddRange(proxies);
+        }
+
+        /// <summary>
+        /// Proxy Generator für 
+        /// </summary>
+        public void AddAngularTsProxyGenerator()
+        {
+            //Alle Controller und die zugehörigen Methoden zum übergebenen ProxyAttribut ermitteln für einen Angular TypeScript Proxy
+            var proxyControllerInfos = ControllerManager.LoadProxyControllerInfos(typeof(CreateAngularTsProxyAttribute), ControllerManager.GetAllProjectProxyController(Factory.GetProxySettings()));
+            var proxies = Factory.CreateAngularTsProxyBuilder().BuildProxy(proxyControllerInfos);
             GeneratedProxyEntries.AddRange(proxies);
         }
     }

@@ -36,18 +36,24 @@ namespace ProxyGenerator.Builder.Helper
         /// <summary>
         /// Den Namen des Services ermitteln anhand des Namens des Controllers
         /// </summary>
-        /// <param name="controllerSuffix">Der Suffix der an den namen des Controllers angehängt wird, z.b.: PSrv</param>
         /// <param name="controllerName">Der Name des Controllers beginnt mit kleinem Buchstaben</param>
-        public string GetServiceName(string controllerName, string controllerSuffix)
+        /// <param name="controllerSuffix">Der Suffix der an den namen des Controllers angehängt wird, z.b.: PSrv</param>
+        /// <param name="lowerFirstChar"></param>
+        public string GetServiceName(string controllerName, string controllerSuffix, bool lowerFirstChar)
         {
-            return string.Format("{0}{1}", Char.ToLowerInvariant(controllerName[0]) + controllerName.Substring(1), controllerSuffix);
+            if (lowerFirstChar)
+            {
+                return string.Format("{0}{1}", Char.ToLowerInvariant(controllerName[0]) + controllerName.Substring(1), controllerSuffix);
+            }
+
+            return string.Format("{0}{1}", controllerName[0] + controllerName.Substring(1), controllerSuffix);
         }
 
-        /// <summary>
-        /// Den Namen der Methode ermitteln der gesetzt werden soll für den Funktionsaufruf.
-        /// </summary>
-        /// <param name="methodname">Der Name der Methode z.B. GetAllPersons</param>
-        public string GetProxyFunctionName(string methodname)
+    /// <summary>
+    /// Den Namen der Methode ermitteln der gesetzt werden soll für den Funktionsaufruf.
+    /// </summary>
+    /// <param name="methodname">Der Name der Methode z.B. GetAllPersons</param>
+    public string GetProxyFunctionName(string methodname)
         {
             if (ProxySettings.LowerFirstCharInFunctionName)
             {

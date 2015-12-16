@@ -9,18 +9,20 @@ namespace ProxyGenerator.Builder
 {
     public class AngularJsProxyBuilder : IAngularJsProxyBuilder
     {
+        #region Member
         public IProxyBuilderHelper ProxyBuilderHelper { get; set; }
-
         public IProxyBuilderHttpCall ProxyBuilderHttpCall { get; set; }
-       
-        public IProxyGeneratorFactory Factory { get; set; }
+        public IProxyGeneratorFactoryManager Factory { get; set; }
+        #endregion
 
-        public AngularJsProxyBuilder(IProxyGeneratorFactory factory)
+        #region Konstruktor
+        public AngularJsProxyBuilder(IProxyGeneratorFactoryManager factory)
         {
             Factory = factory;
             ProxyBuilderHelper = Factory.CreateProxyBuilderHelper();
             ProxyBuilderHttpCall = Factory.CreateProxyBuilderHttpCall();
         }
+        #endregion
 
         /// <summary>
         /// Den Proxy für AngularJs bauen. Hier wird eine Liste aus den Dateinamen (Controllern) und den enthaltenen Proxyfunktionen erstellt.
@@ -32,6 +34,7 @@ namespace ProxyGenerator.Builder
             List<GeneratedProxyEntry> generatedProxyEntries = new List<GeneratedProxyEntry>();
             var suffix = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularJsModule).TemplateSuffix;
 
+            #region Template Example
             //TEMPLATE FÜR: "TemplateTypes.AngularJsModule":
             // function #ServiceName#($http) {{ this.http = $http; }}";
             // #PrototypeServiceCalls#";
@@ -40,6 +43,7 @@ namespace ProxyGenerator.Builder
             //TEMPLATE FÜR: "TemplateTypes.AngularJsPrototype"
             // #ServiceName#.prototype.#controllerFunctionName# = function (#serviceParamters#) {{ ";
             // return this.http.#ServiceCallAndParameters#.then(function (result) {{ return result.data; }});}}";
+            #endregion
 
             //Alle controller durchgehen die übergeben wurden und für jeden dann die entsprechenden Proxy Methoden erstellen
             foreach (ProxyControllerInfo controllerInfo in proxyControllerInfos)
@@ -53,7 +57,7 @@ namespace ProxyGenerator.Builder
                 {
                     var angularJsPrototypeTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularJsPrototype).Template;
                     //Den Servicenamen vor dem Prototype ersetzen.
-                    string prototypeFunction = angularJsPrototypeTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix));
+                    string prototypeFunction = angularJsPrototypeTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix, Factory.GetProxySettings().LowerFirstCharInFunctionName));
                     //Den Methodennamen ersetzen.
                     prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.ControllerFunctionName, ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name));
                     //Parameter des Funktionsaufrufs ersetzen.
@@ -64,10 +68,10 @@ namespace ProxyGenerator.Builder
                     prototypeFunctions += prototypeFunction;
                 }
 
-                string moduleTemplate = angularJsModuleTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix));
+                string moduleTemplate = angularJsModuleTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix, true));
                 moduleTemplate = moduleTemplate.Replace(ConstValuesTemplates.PrototypeServiceCalls, prototypeFunctions);
 
-                
+
                 GeneratedProxyEntry proxyEntry = new GeneratedProxyEntry();
                 proxyEntry.FileContent = moduleTemplate;
                 proxyEntry.FileName = ProxyBuilderHelper.GetProxyFileName(controllerInfo.ControllerNameWithoutSuffix, suffix, "js");

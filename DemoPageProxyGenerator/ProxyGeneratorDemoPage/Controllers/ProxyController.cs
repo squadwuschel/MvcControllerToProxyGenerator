@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProxyGenerator.ProxyTypeAttributes;
+using ProxyGeneratorDemoPage.Models.Person.Models;
 
 namespace ProxyGeneratorDemoPage.Controllers
 {
@@ -18,6 +19,18 @@ namespace ProxyGeneratorDemoPage.Controllers
         public JsonResult AddAnhaenger(string name)
         {
             return Json(name + " ist Anhänger", JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngularTsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
+        public ActionResult GetAllPersons(string name)
+        {
+            return Json(new List<Person>(), JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngularTsProxy(ReturnType = typeof(Person))]
+        public ActionResult AddOrUpdatePerson(Person person, string test)
+        {
+            return Json(new Person(), JsonRequestBehavior.AllowGet);
         }
     }
 }

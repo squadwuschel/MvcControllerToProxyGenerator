@@ -1,7 +1,9 @@
 ﻿using System;
+using TypeLite;
 
 namespace ProxyGeneratorDemoPage.Models.Person.Models
 {
+    [TsClass]
     public class Person
     {
         public int Id { get; set; }

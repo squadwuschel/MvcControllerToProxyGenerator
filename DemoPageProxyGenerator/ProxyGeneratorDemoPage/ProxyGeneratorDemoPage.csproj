@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -164,6 +164,14 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="TypeLite, Version=1.5.2.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.5.2\lib\net4\TypeLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TypeLite.Net4, Version=1.5.2.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.5.2\lib\net4\TypeLite.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
@@ -243,13 +251,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="ControllersProxy\homePSrv.js">
+    <Content Include="ControllersProxies\homePJsSrv.js">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </Content>
-    <Content Include="ControllersProxy\ProxyGeneratorScript.tt">
+    <Content Include="ControllersProxies\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
-    <Content Include="ControllersProxy\webApiProxyPSrv.js">
+    <Content Include="ControllersProxies\webApiProxyPJsSrv.js">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
@@ -271,6 +279,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\TypeLite.Net4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypeLite.Net4.d.ts</LastGenOutput>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -286,6 +298,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\Manager.ttinclude" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,10 +317,24 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ControllersProxies\homePSrv.ts">
+      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ControllersProxies\proxyPSrv.ts">
+      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ScriptsApp\Interfaces\Person.ts" />
     <TypeScriptCompile Include="ScriptsApp\Services\homeSrv.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\Home\personCtrl.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
+    <TypeScriptCompile Include="Scripts\Enums.ts">
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\TypeLite.Net4.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />

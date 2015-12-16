@@ -5,14 +5,14 @@ using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Manager
 {
-    public class ProxyGeneratorFactory : IProxyGeneratorFactory
+    public class ProxyGeneratorFactoryManager : IProxyGeneratorFactoryManager
     {
         #region Member
         private ProxySettings ProxySettings { get; set; }
         #endregion
 
         #region Konstruktor
-        public ProxyGeneratorFactory(ProxySettings proxySettings)
+        public ProxyGeneratorFactoryManager(ProxySettings proxySettings)
         {
             ProxySettings = proxySettings;
         }
@@ -47,6 +47,16 @@ namespace ProxyGenerator.Manager
         public IProxyBuilderHttpCall CreateProxyBuilderHttpCall()
         {
             return new ProxyBuilderHttpCall(this);
+        }
+
+        public IAngularTsProxyBuilder CreateAngularTsProxyBuilder()
+        {
+            return  new AngularTsProxyBuilder(this);
+        }
+
+        public IProxyBuilderTypeHelper CreateBuilderTypeHelper()
+        {
+            return new ProxyBuilderTypeHelper(ProxySettings);
         }
         #endregion
 

@@ -18,9 +18,10 @@ namespace ProxyGenerator.Interfaces
         /// <summary>
         /// Den Namen des Services ermitteln anhand des Namens des Controllers
         /// </summary>
-        /// <param name="controllerSuffix">Der Suffix der an den namen des Controllers angehängt wird, z.b.: PSrv</param>
         /// <param name="controllerName">Der Name des Controllers beginnt mit kleinem Buchstaben</param>
-        string GetServiceName(string controllerName, string controllerSuffix);
+        /// <param name="controllerSuffix">Der Suffix der an den namen des Controllers angehängt wird, z.b.: PSrv</param>
+        /// <param name="lowerFirstChar"></param>
+        string GetServiceName(string controllerName, string controllerSuffix, bool lowerFirstChar);
 
         /// <summary>
         /// Den Namen der Methode ermitteln der gesetzt werden soll für den Funktionsaufruf.

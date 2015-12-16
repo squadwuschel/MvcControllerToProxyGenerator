@@ -16,7 +16,7 @@
 <#@ assembly name="EnvDTE" #>
 
 <# // "Hack" to prevent Default Template outputfile "ProxyGenerator.cs" - creates a warning #> 
-<#@ output extension="//" #>
+<#@ output extension="\\" #>
 
 <# //Wenn man sein T4 Template debuggt, dann blieb bisher meist eine T4VSHostProcess.exe als Prozess offen und musste manuell über den TaskManager wieder geschlossen werden
    //Denn wenn dieser Prozess noch lief wurden Resourcen blockiert, die es verhinderten das Referenzierte DLLs ersetzt werden konnten. #>
@@ -24,11 +24,11 @@
 
 <#  ProxySettings settings = new ProxySettings();
 	//The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
-	//We are search the path above for the WebProjectName to get the root Directory of the Website.
+	//We are search the path above for the WebProjectName to get the root Directory of the Website. like: C:\MyProject\WebSite\
 	settings.FullPathToTheWebProject = System.IO.Path.GetFullPath(this.Host.TemplateFile);
 
 //##############################################################################################################################################################
-//########################################################-- SETTINGS for manual adjustments --#################################################################
+//########################################################-- SETTINGS for MANUAL adjustments --#################################################################
 //##############################################################################################################################################################
 	//You NEED to Replace it with the Name of the WebProject where the T4 ProxyGenerator Template was inserted:
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
@@ -42,10 +42,10 @@
 //##############################################################################################################################################################
 //#############################################################--AngularJs JavaScript Definitions--#############################################################
 //##############################################################################################################################################################
-//Variablen die ersetzt werden im Modul Template: 
-// 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt und ergibt dann controllerNameSrv
+//The following template strings are replaced with the explained content: 
+// 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamePSrv  -> accountPSrv for AccountController
 // 2. #PrototypeServiceCalls# => Hier werden alle Service Calls eingefügt die für den Controller mit dem passenden Attribut "AngularJs" Markiert wurden.
-    var angularJsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularJsModule, TemplateSuffix = "PSrv"};
+    var angularJsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularJsModule, TemplateSuffix = "PJsSrv"};
 	angularJsModule.Template = "function #ServiceName#($http) { this.http = $http; } \r\n\r\n\r\n";
     angularJsModule.Template += "#PrototypeServiceCalls#\r\n";
     angularJsModule.Template += "angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#]);";
@@ -53,22 +53,68 @@
 
 //Variablen die ersetzt werden im Prototype Template: 
 // 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt damit die richtige Prototype Funktion auferufen wird.
-// 2. #serviceParamters# => Die Parameterliste für den jeweiligen Ajax Call z.B. name, id, person
-// 3. #controllerFunctionName# => Der Name des Ajax Calls entspricht der Funktion im Controller die aufgerufen wird.
+// 2. #ServiceParamters# => Die Parameterliste für den jeweiligen Ajax Call z.B. name, id, person
+// 3. #ControllerFunctionName# => Der Name des Ajax Calls entspricht der Funktion im Controller die aufgerufen wird.
 // 4. #ServiceCallAndParameters# => Hier wird der passende Aufruf ersetzt durch z.B.: get("GetAutosByHerstellerId/" + value) oder post("GetAutosByHerstellerId/" + value, message)
     var angularJsPrototype = new TemplateEntry() {TemplateType = TemplateTypes.AngularJsPrototype};
-    angularJsPrototype.Template = "#ServiceName#.prototype.#controllerFunctionName# = function (#serviceParamters#) { \r\n";
+    angularJsPrototype.Template = "#ServiceName#.prototype.#ControllerFunctionName# = function (#ServiceParamters#) { \r\n";
     angularJsPrototype.Template += "   return this.http.#ServiceCallAndParameters#.then(function (result) {\r\n";
     angularJsPrototype.Template += "        return result.data;\r\n   });\r\n}\r\n\r\n";
 	settings.Templates.Add(angularJsPrototype);
+
 //##############################################################################################################################################################
+//#############################################################--AngularJs TypeScript Definitions--#############################################################
+//##############################################################################################################################################################
+//The following template strings are replaced with the explained content for "Angular TypeScript Module Definition for a Angular Service": 
+// 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamePSrv  -> accountPSrv for AccountController
+// 2. #InterfaceDefinitions# => TypeScript Interface Definition for all Service Calls for the current ServiceName
+// 3. #ServiceFunctions# => Programmed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "AngularTsAjaxCallNoReturnType" or "AngularTsAjaxCallWithReturnType")
+    var angularTsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularTsModule, TemplateSuffix = "PSrv"};
+	angularTsModule.Template = "module App.Services { \r\n\r\n";
+    angularTsModule.Template += "export interface I#ServiceName# { #InterfaceDefinitions# }\r\n\r\n";
+    angularTsModule.Template += "export class #ServiceName# implements I#ServiceName# {\r\n";
+    angularTsModule.Template += "    static $inject = ['$http']; \r\n   constructor(private $http: ng.IHttpService) { } \r\n\r\n";
+    angularTsModule.Template += "#ServiceFunctions#";
+    angularTsModule.Template += "//#region Angular Module Definition \r\n" +
+								"  private static _module: ng.IModule; \r\n" +
+   								"  public static get module(): ng.IModule {\r\n " +
+   	                            "     if (this._module) { return this._module; }\r\n" +
+   	                            "      this._module = angular.module('#ServiceName#', []);\r\n " +
+   	                            "     this._module.service('#ServiceName#', #ServiceName#);\r\n" +
+   	                            "      return this._module; \r\n   }\r\n " +
+   	                            "//#endregion \r\n\r\n   } \r\n }";
+	settings.Templates.Add(angularTsModule);
+
+//The following template strings are replaced with the explained content for "Angular TypeScript Ajax Call Function with ReturnType": 
+// 1. #ControllerFunctionName# => controller function name
+// 2. #ServiceParamters# => parameters for the service call
+// 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
+// 4. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+    var angularTsAjaxCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallWithReturnType};
+    angularTsAjaxCallWithReturnType.Template = "#ControllerFunctionName#(#ServiceParamters#) : ng.IPromise<{#ControllerFunctionReturnType#}> { \r\n" +
+											   "    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; } );\r\n} \r\n\r\n";
+	settings.Templates.Add(angularTsAjaxCallWithReturnType);
+
+//The following template strings are replaced with the explained content for "Angular TypeScript Ajax Call Function with NO ReturnType": 
+// 1. #ControllerFunctionName# => controller function name
+// 2. #ServiceParamters# => parameters for the service call
+// 3. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+    var angularTsAjaxCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallNoReturnType};
+    angularTsAjaxCallWithNoReturnType.Template = "#ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
+	settings.Templates.Add(angularTsAjaxCallWithNoReturnType);
+	//##############################################################################################################################################################
 //#############################################################-- Tempalte Definition END --####################################################################
 //##############################################################################################################################################################
 
 	//Create the proxy generator and set the settings in the factory.
-	Generator generator = new Generator(new ProxyGeneratorFactory(settings));
+	Generator generator = new Generator(new ProxyGeneratorFactoryManager(settings));
 	//Add the AngularJs proxy creation to the Outputlist. => get all proxy outputs with "generator.GetGeneratedProxyEntries()"
+	//You can have multiple different generated Proxies in one project, it depends on the Used ProxyAttributes
+	
+	//Add AngularJS ProxyGenerator
 	generator.AddAngularJsProxyGenerator();
+	//Add AngularTs ProxyGenerator
+	generator.AddAngularTsProxyGenerator();
 
 
 //##############################################################################################################################################################
@@ -91,6 +137,7 @@
 	//foreach Closed
     }
 
+	//Start complete filecreation.
 	manager.Process(true);
 //##############################################################################################################################################################
 //#############################################################-- Outputfile Generation END --##################################################################
@@ -98,7 +145,7 @@
 #>
 
 <#+
-// Source:
+// Addional Sources:
 // https://raw.github.com/damieng/DamienGKit
 // http://damieng.com/blog/2009/11/06/multiple-outputs-from-t4-made-easy-revisited
 // File Manager class to save multiple Files with Checkout for source control, ....

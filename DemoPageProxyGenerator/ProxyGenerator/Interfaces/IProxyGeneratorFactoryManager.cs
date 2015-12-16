@@ -1,10 +1,9 @@
 using ProxyGenerator.Builder;
 using ProxyGenerator.Container;
-using ProxyGenerator.Interfaces;
 
-namespace ProxyGenerator.Manager
+namespace ProxyGenerator.Interfaces
 {
-    public interface IProxyGeneratorFactory
+    public interface IProxyGeneratorFactoryManager
     {
         IAssemblyManager CreateAssemblyManager();
         IControllerManager CreateControllerManager();
@@ -12,8 +11,9 @@ namespace ProxyGenerator.Manager
         IMethodParameterManager CreateMethodParameterManager();
         IProxyBuilderHelper CreateProxyBuilderHelper();
         IProxyBuilderHttpCall CreateProxyBuilderHttpCall();
-        //IAngularJsProxyBuilder CreateAngularJsProxyBuilder();
         ProxySettings GetProxySettings();
         IAngularJsProxyBuilder CreateAngularJsProxyBuilder();
+        IAngularTsProxyBuilder CreateAngularTsProxyBuilder();
+        IProxyBuilderTypeHelper CreateBuilderTypeHelper();
     }
 }

@@ -1,6 +1,6 @@
 using ProxyGenerator.Container;
 
-namespace ProxyGenerator.Builder
+namespace ProxyGenerator.Interfaces
 {
     public interface IProxyBuilderHttpCall
     {

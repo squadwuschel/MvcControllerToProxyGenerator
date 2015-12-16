@@ -18,24 +18,31 @@ namespace ProxyGeneratorDemoPage.Controllers
             return View();
         }
 
+        [CreateAngularTsProxy(ReturnType = typeof(void))]
         public ActionResult GetPerson(int id)
         {
             return Json(PersonModelBuilder.GetPerson(id), JsonRequestBehavior.AllowGet);
         }
 
-        [CreateAngularJsProxy(ReturnType = typeof(int))]
+        [CreateAngularJsProxy()]
         public ActionResult AddOrUpdatePerson(Person person)
         {
             return Json(PersonModelBuilder.AddOrUpdatePerson(person), JsonRequestBehavior.AllowGet);
         }
 
-        [CreateAngularJsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
+        [CreateAngularJsProxy()]
         public ActionResult GetAllPersons()
         {
             return Json(PersonModelBuilder.GetAllPersons(), JsonRequestBehavior.AllowGet);
         }
 
-        [CreateAngularJsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
+        [CreateAngularTsProxy(ReturnType = typeof(List<Models.Person.Models.Person>))]
+        public JsonResult GetAllAutos()
+        {
+            return Json(PersonModelBuilder.GetAllPersons(), JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngularJsProxy()]
         public ActionResult SearchPerson(string name)
         {
             return Json(PersonModelBuilder.SearchPerson(name), JsonRequestBehavior.AllowGet);

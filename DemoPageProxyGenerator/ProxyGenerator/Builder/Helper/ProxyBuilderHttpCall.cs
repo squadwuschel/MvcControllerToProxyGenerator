@@ -10,13 +10,13 @@ namespace ProxyGenerator.Builder.Helper
     public class ProxyBuilderHttpCall : IProxyBuilderHttpCall
     {
         #region Member
-        public IProxyGeneratorFactory Factory { get; set; }
+        public IProxyGeneratorFactoryManager Factory { get; set; }
         public IProxyBuilderHelper ProxyBuilderHelper { get; set; }
         #endregion
 
         #region Konstruktor
 
-        public ProxyBuilderHttpCall(IProxyGeneratorFactory proxyGeneratorFactory)
+        public ProxyBuilderHttpCall(IProxyGeneratorFactoryManager proxyGeneratorFactory)
         {
             Factory = proxyGeneratorFactory;
             ProxyBuilderHelper = Factory.CreateProxyBuilderHelper();

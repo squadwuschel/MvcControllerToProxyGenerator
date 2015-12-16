@@ -9,10 +9,16 @@
 
         public const string PrototypeServiceCalls = "#PrototypeServiceCalls#";
 
-        public const string ServiceParamters = "#serviceParamters#";
+        public const string ServiceParamters = "#ServiceParamters#";
 
-        public const string ControllerFunctionName = "#controllerFunctionName#";
+        public const string ControllerFunctionName = "#ControllerFunctionName#";
 
         public const string ServiceCallAndParameters = "#ServiceCallAndParameters#";
+
+        public const string InterfaceDefinitions = "#InterfaceDefinitions#";
+
+        public const string ServiceFunctions = "#ServiceFunctions#";
+
+        public const string ControllerFunctionReturnType = "{#ControllerFunctionReturnType#}";
     }
 }

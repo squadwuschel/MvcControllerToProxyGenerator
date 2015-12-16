@@ -15,11 +15,11 @@ namespace ProxyGenerator.Manager
     public class ControllerManager : IControllerManager
     {
         #region Member
-        IProxyGeneratorFactory Factory { get; set; }
+        IProxyGeneratorFactoryManager Factory { get; set; }
         #endregion
 
         #region Konstruktor
-        public ControllerManager(IProxyGeneratorFactory proxyGeneratorFactory)
+        public ControllerManager(IProxyGeneratorFactoryManager proxyGeneratorFactory)
         {
             Factory = proxyGeneratorFactory;
         }

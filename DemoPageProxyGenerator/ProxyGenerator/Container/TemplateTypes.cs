@@ -6,6 +6,8 @@
         jQueryJs,
         AngularJsModule,
         AngularJsPrototype,
-        AngularTs
+        AngularTsModule,
+        AngularTsAjaxCallWithReturnType,
+        AngularTsAjaxCallNoReturnType,
     }
 }

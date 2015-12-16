@@ -11,11 +11,11 @@ namespace ProxyGenerator.Manager
     public class MethodManager : IMethodManager
     {
         #region Member
-        public IProxyGeneratorFactory Factory { get; set; }
+        public IProxyGeneratorFactoryManager Factory { get; set; }
         #endregion
 
         #region Konstruktor
-        public MethodManager(IProxyGeneratorFactory proxyGeneratorFactory)
+        public MethodManager(IProxyGeneratorFactoryManager proxyGeneratorFactory)
         {
             Factory = proxyGeneratorFactory;
         }
