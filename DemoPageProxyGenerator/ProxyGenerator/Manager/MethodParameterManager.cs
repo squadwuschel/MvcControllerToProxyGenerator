@@ -22,7 +22,7 @@ namespace ProxyGenerator.Manager
                     t == typeof(DateTime) || t == typeof(Int16) || t == typeof(Int32) ||
                     t == typeof(Int64) || t == typeof(Boolean) || t == typeof(Decimal?) ||
                     t == typeof(DateTime?) || t == typeof(Int16?) || t == typeof(Int32?) ||
-                    t == typeof(Int64?) || t == typeof(Boolean?))
+                    t == typeof(Int64?) || t == typeof(Boolean?) || t.IsEnum)
                 {
                     methodParameterInfos.Add(new ProxyMethodParameterInfo()
                     {

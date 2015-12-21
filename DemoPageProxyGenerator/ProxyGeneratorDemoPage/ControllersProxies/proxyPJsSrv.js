@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten.
-//Created on 21.12.2015 time 13:34 from SquadWuschel.
+//Created on 21.12.2015 time 13:47 from SquadWuschel.
 
   function proxyPJsSrv($http) { this.http = $http; } 
 
@@ -48,7 +48,7 @@ proxyPJsSrv.prototype.loadJsCallByParamsAndId = function (name,vorname,alter,id)
 }
 
 proxyPJsSrv.prototype.loadJsCallByParamsWithEnum = function (name,vorname,alter,access) { 
-   return this.http.post('Proxy/LoadJsCallByParamsWithEnum'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter,access).then(function (result) {
+   return this.http.get('Proxy/LoadJsCallByParamsWithEnum'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter+'&access='+access).then(function (result) {
         return result.data;
    });
 }
