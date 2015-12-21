@@ -236,12 +236,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProxyController.cs" />
-    <Compile Include="Controllers\WebApiProxyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ClientAccess.cs" />
     <Compile Include="Models\Person\Interfaces\IPersonModelBuilder.cs" />
     <Compile Include="Models\Person\Builder\PersonModelBuilder.cs" />
+    <Compile Include="Models\Person\Models\Auto.cs" />
     <Compile Include="Models\Person\Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -257,7 +258,7 @@
     <Content Include="ControllersProxies\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
-    <Content Include="ControllersProxies\webApiProxyPJsSrv.js">
+    <Content Include="ControllersProxies\proxyPJsSrv.js">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
@@ -302,7 +303,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helper\" />
     <Folder Include="Views\Proxy\" />
   </ItemGroup>
   <ItemGroup>

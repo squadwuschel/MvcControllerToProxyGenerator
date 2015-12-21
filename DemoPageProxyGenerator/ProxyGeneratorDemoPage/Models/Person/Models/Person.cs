@@ -10,10 +10,16 @@ namespace ProxyGeneratorDemoPage.Models.Person.Models
 
         public string Name { get; set; }
 
-        public DateTime Erstellt { get; set; }   
-
         public string Passwort { get; set; }
 
-        public bool IsAktiv { get; set; }   
+        public bool IsAktiv { get; set; }
+
+        public Person()
+        {
+            Id = 0;
+            Name = "TEST Name";
+            Passwort = "P@ssw0rd";
+            IsAktiv = true;
+        }
     }
 }

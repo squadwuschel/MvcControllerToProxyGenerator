@@ -8,14 +8,14 @@ using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Builder.Helper
 {
-    public class ProxyBuilderTypeHelper : IProxyBuilderTypeHelper
+    public class ProxyBuilderDataTypeHelper : IProxyBuilderDataTypeHelper
     {
         #region Member
         public ProxySettings ProxySettings { get; set; }
         #endregion
 
         #region Konstruktor
-        public ProxyBuilderTypeHelper(ProxySettings proxySettings)
+        public ProxyBuilderDataTypeHelper(ProxySettings proxySettings)
         {
             ProxySettings = proxySettings;
         }
@@ -115,7 +115,7 @@ namespace ProxyGenerator.Builder.Helper
             {
                 var entries = fullNameWithNamespace.Split('.');
                 var oldStr = entries[entries.Length - 1];
-                var newStr = isEnum ? entries[entries.Length - 1] : "I" + entries[entries.Length - 1];
+                var newStr = isEnum ? entries[entries.Length - 1] : ProxySettings.TypeLiteInterfacePrefix + entries[entries.Length - 1];
                 return fullNameWithNamespace.Remove(fullNameWithNamespace.LastIndexOf(oldStr), oldStr.Length) + newStr;
             }
 

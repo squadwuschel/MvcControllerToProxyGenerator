@@ -28,6 +28,12 @@ namespace ProxyGenerator.Container
         /// Der komplette Pfad bis zum WebProjekt bzw. auch Subpfade erlaubt z.B. bis zum T4 Template
         /// </summary>
         public string FullPathToTheWebProject { get; set; }
+
+        /// <summary>
+        /// Der Prefix der for den Klassennamen bei TypeLite gesetzt werden soll, wenn hier die TypeScript Interfaces zu den Klassen erstellt werden sollen
+        /// Normalerweise wird hier direkt der Klassenname verwendet, ich habe aber gern ein "I" davor.
+        /// </summary>
+        public string TypeLiteInterfacePrefix { get; set; }
         #endregion
 
         #region Konstruktor

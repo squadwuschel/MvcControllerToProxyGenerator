@@ -13,7 +13,7 @@ namespace ProxyGenerator.Builder
         #region Member
         public IProxyBuilderHelper ProxyBuilderHelper { get; set; }
         public IProxyBuilderHttpCall ProxyBuilderHttpCall { get; set; }
-        public IProxyBuilderTypeHelper ProxyBuilderTypeHelper { get; set; }
+        public IProxyBuilderDataTypeHelper ProxyBuilderTypeHelper { get; set; }
         public IProxyGeneratorFactoryManager Factory { get; set; }
         #endregion
 

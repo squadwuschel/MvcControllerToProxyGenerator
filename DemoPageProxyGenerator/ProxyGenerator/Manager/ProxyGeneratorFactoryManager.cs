@@ -54,9 +54,9 @@ namespace ProxyGenerator.Manager
             return  new AngularTsProxyBuilder(this);
         }
 
-        public IProxyBuilderTypeHelper CreateBuilderTypeHelper()
+        public IProxyBuilderDataTypeHelper CreateBuilderTypeHelper()
         {
-            return new ProxyBuilderTypeHelper(ProxySettings);
+            return new ProxyBuilderDataTypeHelper(ProxySettings);
         }
         #endregion
 

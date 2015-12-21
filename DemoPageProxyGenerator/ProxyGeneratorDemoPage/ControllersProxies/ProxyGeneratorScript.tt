@@ -30,10 +30,13 @@
 //##############################################################################################################################################################
 //########################################################-- SETTINGS for MANUAL adjustments --#################################################################
 //##############################################################################################################################################################
-	//You NEED to Replace it with the Name of the WebProject where the T4 ProxyGenerator Template was inserted:
+	//You NEED to Replace the name with the name of the WebProject where the T4 ProxyGenerator Template was inserted:
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
 	//Tells the proxy generator if the AJAX functionnames start not with a Capital letter or not:
 	settings.LowerFirstCharInFunctionName = true;
+	//Default TypeLiteSetting is Interfacename == Classname, but I use a modifier that adds the "I" before the Classname
+	//In TypeLite: .WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)
+    settings.TypeLiteInterfacePrefix = "I";
 
 
 //##############################################################################################################################################################
@@ -102,10 +105,13 @@
     var angularTsAjaxCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallNoReturnType};
     angularTsAjaxCallWithNoReturnType.Template = "#ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
 	settings.Templates.Add(angularTsAjaxCallWithNoReturnType);
-	//##############################################################################################################################################################
+//##############################################################################################################################################################
 //#############################################################-- Tempalte Definition END --####################################################################
 //##############################################################################################################################################################
 
+//##############################################################################################################################################################
+//#############################################################-- Proxy Generator - Initialization --###########################################################
+//##############################################################################################################################################################
 	//Create the proxy generator and set the settings in the factory.
 	Generator generator = new Generator(new ProxyGeneratorFactoryManager(settings));
 	//Add the AngularJs proxy creation to the Outputlist. => get all proxy outputs with "generator.GetGeneratedProxyEntries()"
@@ -113,7 +119,8 @@
 	
 	//Add AngularJS ProxyGenerator
 	generator.AddAngularJsProxyGenerator();
-	//Add AngularTs ProxyGenerator
+	//Add AngularTs ProxyGenerator. You need to install the TypeScript TypeDefinitions for your current Angular version
+	//and TypeLite to create the Interfaces for your .NET Types in TypeScript.
 	generator.AddAngularTsProxyGenerator();
 
 

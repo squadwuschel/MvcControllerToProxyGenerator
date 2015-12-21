@@ -95,8 +95,8 @@
   <ItemGroup>
     <Compile Include="Builder\AngularJsProxyBuilder.cs" />
     <Compile Include="Builder\AngularTsProxyBuilder.cs" />
-    <Compile Include="Interfaces\IProxyBuilderTypeHelper.cs" />
-    <Compile Include="Builder\Helper\ProxyBuilderTypeHelper.cs" />
+    <Compile Include="Interfaces\IProxyBuilderDataTypeHelper.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelper.cs" />
     <Compile Include="Interfaces\IAngularTsProxyBuilder.cs" />
     <Compile Include="Interfaces\IProxyBuilderHttpCall.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHttpCall.cs" />

@@ -7,10 +7,14 @@
 /// <reference path="Enums.ts" />
 
 declare module ProxyGeneratorDemoPage.Models.Person.Models {
+	interface IAuto {
+		Marke: string;
+		Alter: number;
+		Eigentuemer: ProxyGeneratorDemoPage.Models.Person.Models.IPerson;
+	}
 	interface IPerson {
 		Id: number;
 		Name: string;
-		Erstellt: Date;
 		Passwort: string;
 		IsAktiv: boolean;
 	}

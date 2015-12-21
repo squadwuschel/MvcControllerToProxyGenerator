@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace ProxyGenerator.Interfaces
 {
-    public interface IProxyBuilderTypeHelper
+    public interface IProxyBuilderDataTypeHelper
     {
         /// <summary>
         /// Für den übergebenen ParameterInfoWert den passenden "TypeScript" Typen ermitteln.

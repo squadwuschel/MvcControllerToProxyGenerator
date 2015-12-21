@@ -14,6 +14,6 @@ namespace ProxyGenerator.Interfaces
         ProxySettings GetProxySettings();
         IAngularJsProxyBuilder CreateAngularJsProxyBuilder();
         IAngularTsProxyBuilder CreateAngularTsProxyBuilder();
-        IProxyBuilderTypeHelper CreateBuilderTypeHelper();
+        IProxyBuilderDataTypeHelper CreateBuilderTypeHelper();
     }
 }
