@@ -4,8 +4,6 @@ using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
 using ProxyGeneratorDemoPage;
-using ProxyGeneratorDemoPage.Models.Person.Builder;
-using ProxyGeneratorDemoPage.Models.Person.Interfaces;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
@@ -62,7 +60,7 @@ namespace ProxyGeneratorDemoPage
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IPersonModelBuilder>().To<PersonModelBuilder>().InSingletonScope();
+            //kernel.Bind<IPersonModelBuilder>().To<PersonModelBuilder>().InSingletonScope();
         }        
     }
 }

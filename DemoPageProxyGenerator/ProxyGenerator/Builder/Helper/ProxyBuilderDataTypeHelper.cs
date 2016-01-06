@@ -92,7 +92,7 @@ namespace ProxyGenerator.Builder.Helper
 
             if (type == typeof(DateTime) || type == typeof(DateTime?))
             {
-                return "date";
+                return "Date";
             }
 
             if (type == typeof(Boolean) || type == typeof(Boolean?))

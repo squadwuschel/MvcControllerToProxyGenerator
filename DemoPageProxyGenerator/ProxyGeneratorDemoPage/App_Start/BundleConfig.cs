@@ -13,12 +13,13 @@ namespace ProxyGeneratorDemoPage
                         "~/Scripts/angular.js"
                         ));
 
-            bundles.Add(new ScriptBundle("~/bundles/angularApp").Include(
+            bundles.Add(new ScriptBundle("~/bundles/angularApp")
+                .IncludeDirectory("~/ControllersProxies/", "*.js", false)
+                .IncludeDirectory("~/ScriptsApp/Classes/", "*.js", false)
+                .Include(
+                    "~/ScriptsApp/Views/Proxy/proxyCtrl.js",
                     "~/ScriptsApp/Views/mainApp.js",
-                    "~/ScriptsApp/Interfaces/Person.js",
-                    "~/ScriptsApp/Views/Home/personCtrl.js",
-                    "~/ScriptsApp/Services/homeSrv.js",
-                    "~/ScriptsApp/Views/Home/personCtrl.js"
+                    "~/Scripts/Enums.js" //Generated Enums from TypeLite
                     ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten.
-//Created on 21.12.2015 time 13:47 from SquadWuschel.
+//Created on 06.01.2016 time 22:10 from SquadWuschel.
 
   module App.Services { 
 
@@ -16,9 +16,9 @@ export interface IProxyPSrv {     addTsEntryOnly(person: ProxyGeneratorDemoPage.
     clearTsCall() : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     voidTsReturnType(name: string): void;
     stringTsReturnType(name: string) : ng.IPromise<string>;
-    integerTsReturnType(name: string) : ng.IPromise<number>;
-    dateTsReturnType(name: string) : ng.IPromise<number>;
-    boolTsReturnType(name: string) : ng.IPromise<boolean>;
+    integerTsReturnType(age: number) : ng.IPromise<number>;
+    dateTsReturnType(name: string) : ng.IPromise<Date>;
+    boolTsReturnType(boolValue: boolean) : ng.IPromise<boolean>;
  }
 
 export class ProxyPSrv implements IProxyPSrv {
@@ -73,16 +73,16 @@ stringTsReturnType(name: string) : ng.IPromise<string> {
     return this.$http.get('Proxy/StringTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<string>) : string => { return response.data; } );
 } 
 
-integerTsReturnType(name: string) : ng.IPromise<number> { 
-    return this.$http.get('Proxy/IntegerTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<number>) : number => { return response.data; } );
+integerTsReturnType(age: number) : ng.IPromise<number> { 
+    return this.$http.get('Proxy/IntegerTsReturnType'+ '?age='+age).then((response: ng.IHttpPromiseCallbackArg<number>) : number => { return response.data; } );
 } 
 
-dateTsReturnType(name: string) : ng.IPromise<number> { 
-    return this.$http.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<number>) : number => { return response.data; } );
+dateTsReturnType(name: string) : ng.IPromise<Date> { 
+    return this.$http.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<Date>) : Date => { return response.data; } );
 } 
 
-boolTsReturnType(name: string) : ng.IPromise<boolean> { 
-    return this.$http.get('Proxy/BoolTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<boolean>) : boolean => { return response.data; } );
+boolTsReturnType(boolValue: boolean) : ng.IPromise<boolean> { 
+    return this.$http.get('Proxy/BoolTsReturnType'+ '?boolValue='+boolValue).then((response: ng.IHttpPromiseCallbackArg<boolean>) : boolean => { return response.data; } );
 } 
 
 //#region Angular Module Definition 

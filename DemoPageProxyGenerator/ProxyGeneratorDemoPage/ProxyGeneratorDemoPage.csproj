@@ -240,10 +240,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\ClientAccess.cs" />
-    <Compile Include="Models\Person\Interfaces\IPersonModelBuilder.cs" />
-    <Compile Include="Models\Person\Builder\PersonModelBuilder.cs" />
-    <Compile Include="Models\Person\Models\Auto.cs" />
-    <Compile Include="Models\Person\Models\Person.cs" />
+    <Compile Include="Helper\Auto.cs" />
+    <Compile Include="Helper\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -298,12 +296,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\Manager.ttinclude" />
+    <Content Include="Views\Proxy\AngularCalls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Proxy\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -323,10 +321,10 @@
     <TypeScriptCompile Include="ControllersProxies\proxyPSrv.ts">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="ScriptsApp\Interfaces\Person.ts" />
-    <TypeScriptCompile Include="ScriptsApp\Services\homeSrv.ts" />
-    <TypeScriptCompile Include="ScriptsApp\Views\Home\personCtrl.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Views\Proxy\proxyCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Enums.ts">
       <DependentUpon>TypeLite.Net4.tt</DependentUpon>
     </TypeScriptCompile>

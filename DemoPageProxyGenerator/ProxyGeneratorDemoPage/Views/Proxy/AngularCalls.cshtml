@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "AngularJsCalls";
+}
+
+<div ng-controller="proxyCtrl as ctrl">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                AngularJs Proxy Calls
+            </h3>
+        </div>
+        <div class="col-md-12">
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <a ng-click="ctrl.startTypeScriptServiceCalls()" class="btn btn-default btn-block">Test TypeScript Service Calls</a>
+        </div>
+        <div class="col-md-3 col-md-offset-6">
+            <a ng-click="ctrl.startJavaScriptServiceCalls()" class="btn btn-default btn-block">Test JavaScript Service Calls</a>
+        </div>
+        <div class="col-md-12">
+            <br/>
+            <p class="text-center"><strong>Please open the Chrome developer Console to see the service Calls and returned Objects.</strong>
+            </p>
+        </div>
+    </div>
+</div>
