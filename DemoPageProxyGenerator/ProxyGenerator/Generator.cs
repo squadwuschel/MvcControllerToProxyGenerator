@@ -31,6 +31,9 @@ namespace ProxyGenerator
             return GeneratedProxyEntries;
         }
 
+        /// <summary>
+        /// Proxy Generator für AngularJs JavaScript
+        /// </summary>
         public void AddAngularJsProxyGenerator()
         {
             //Alle Controller und die zugehörigen Methoden zum übergebenen ProxyAttribut ermitteln für einen AngularJs Proxy
@@ -42,7 +45,7 @@ namespace ProxyGenerator
         }
 
         /// <summary>
-        /// Proxy Generator für 
+        /// Proxy Generator für AngularJs TypeScript
         /// </summary>
         public void AddAngularTsProxyGenerator()
         {
@@ -50,6 +53,17 @@ namespace ProxyGenerator
             var proxyControllerInfos = ControllerManager.LoadProxyControllerInfos(typeof(CreateAngularTsProxyAttribute), ControllerManager.GetAllProjectProxyController(Factory.GetProxySettings()));
             var proxies = Factory.CreateAngularTsProxyBuilder().BuildProxy(proxyControllerInfos);
             GeneratedProxyEntries.AddRange(proxies);
+        }
+
+        /// <summary>
+        /// Proxy Generator für jQuery TypeScript
+        /// </summary>
+        public void AddjQueryTsProxyGenerator()
+        {
+            //Alle Controller und die zugehörigen Methoden zum übergebenen ProxyAttribut ermitteln für einen Angular TypeScript Proxy
+            var proxyControllerInfos = ControllerManager.LoadProxyControllerInfos(typeof(CreateJQueryTsProxyAttribute), ControllerManager.GetAllProjectProxyController(Factory.GetProxySettings()));
+            var proxies = Factory.CreateJQueryTsProxyBuilder().BuildProxy(proxyControllerInfos);
+            GetGeneratedProxyEntries().AddRange(proxies);
         }
     }
 }

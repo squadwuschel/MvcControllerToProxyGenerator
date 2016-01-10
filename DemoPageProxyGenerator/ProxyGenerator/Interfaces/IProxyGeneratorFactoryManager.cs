@@ -11,9 +11,10 @@ namespace ProxyGenerator.Interfaces
         IMethodParameterManager CreateMethodParameterManager();
         IProxyBuilderHelper CreateProxyBuilderHelper();
         IProxyBuilderHttpCall CreateProxyBuilderHttpCall();
-        ProxySettings GetProxySettings();
-        IAngularJsProxyBuilder CreateAngularJsProxyBuilder();
-        IAngularTsProxyBuilder CreateAngularTsProxyBuilder();
         IProxyBuilderDataTypeHelper CreateBuilderTypeHelper();
+        ProxySettings GetProxySettings();
+        IProxyBuilder CreateAngularJsProxyBuilder();
+        IProxyBuilder CreateAngularTsProxyBuilder();
+        IProxyBuilder CreateJQueryTsProxyBuilder();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProxyGenerator.ProxyTypeAttributes;
@@ -13,6 +14,11 @@ namespace ProxyGeneratorDemoPage.Controllers
     {
         #region Views
         public ActionResult AngularCalls()
+        {
+            return View();
+        }
+
+        public ActionResult JQueryCalls()
         {
             return View();
         }
@@ -69,94 +75,118 @@ namespace ProxyGeneratorDemoPage.Controllers
         #endregion
 
         #region AngularTs Proxy Methods Examples
+        //You can create multiple Proxies for the same function
+        [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
         public JsonResult AddTsEntryOnly(Person person)
         {
             return Json(person, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
         public JsonResult AddTsEntryAndName(Person person, string name)
         {
             return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
         public JsonResult AddTsEntryAndParams(Person person, string name, string vorname)
         {
             return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
         public JsonResult LoadTsCallById(int id)
         {
             return Json(new Person() { Id = id}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
         public JsonResult LoadTsCallByParams(string name, string vorname, int alter)
         {
             return Json(new Person() { Name = name, Id = alter}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
         public JsonResult LoadTsCallByParamsAndId(string name, string vorname, int alter, int id)
         {
             return Json(new Auto() { Alter = alter, Marke = name}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
         public JsonResult LoadTsCallByParamsWithEnum(string name, string vorname, int alter, ClientAccess access)
         {
             return Json(new Auto() { Marke = name, Alter = alter}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(List<Auto>))]
         [CreateAngularTsProxy(ReturnType = typeof(List<Auto>))]
         public JsonResult LoadAllAutosListe(string name)
         {
             return Json(new List<Auto>() { new Auto() { Marke = name}, new Auto() }, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Auto[]))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto[]))]
         public JsonResult LoadAllAutosArray(string name)
         {
             return Json(new List<Auto>() { new Auto() { Marke = name}, new Auto() }.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
         public JsonResult ClearTsCall()
         {
             return Json(new Person(), JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(void))]
         [CreateAngularTsProxy(ReturnType = typeof(void))]
         public JsonResult VoidTsReturnType(string name)
         {
             return Json(string.Empty, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(string))]
         [CreateAngularTsProxy(ReturnType = typeof(string))]
         public JsonResult StringTsReturnType(string name)
         {
             return Json(name, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(int))]
         [CreateAngularTsProxy(ReturnType = typeof(int))]
         public JsonResult IntegerTsReturnType(int age)
         {
             return Json(age, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(DateTime))]
         [CreateAngularTsProxy(ReturnType = typeof(DateTime))]
         public JsonResult DateTsReturnType(string name)
         {
             return Json(DateTime.Now, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryTsProxy(ReturnType = typeof(Boolean))]
         [CreateAngularTsProxy(ReturnType = typeof(Boolean))]
         public JsonResult BoolTsReturnType(bool boolValue)
         {
             return Json(boolValue, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateJQueryTsProxy(ReturnType = typeof(string))]
+        [CreateAngularTsProxy(ReturnType = typeof(string))]
+        public ActionResult ErrorStringReturnType(bool boolValue)
+        {
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json("Error 1", JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

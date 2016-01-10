@@ -7,7 +7,7 @@
     <base href="@Url.Content("~")" />
     @Styles.Render("~/Content/css")
 </head>
-<body ng-app="app.main">
+<body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -21,6 +21,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Angular Proxy Calls", "AngularCalls", "Proxy")</li>
+                    <li>@Html.ActionLink("JQuery Proxy Calls", "JQueryCalls", "Proxy")</li>
                 </ul>
             </div>
         </div>

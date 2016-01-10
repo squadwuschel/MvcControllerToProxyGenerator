@@ -4,8 +4,8 @@
             //Alle Module definieren die wir verwenden.
             angular.module("app.main", [
                 //Eigene Module einbinden
-                "homePJsSrv",
-                "proxyPJsSrv",
+                "homeAngularJsSrv",
+                "proxyAngularJsSrv",
                 //Module die mit TypeScript geschrieben wurden einbinden
                 App.Views.Proxy.ProxyCtrl.module.name,
                 App.Services.ProxyPSrv.module.name,

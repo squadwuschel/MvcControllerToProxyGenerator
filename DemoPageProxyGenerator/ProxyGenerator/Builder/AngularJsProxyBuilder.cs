@@ -7,7 +7,7 @@ using ProxyGenerator.Manager;
 
 namespace ProxyGenerator.Builder
 {
-    public class AngularJsProxyBuilder : IAngularJsProxyBuilder
+    public class AngularJsProxyBuilder : IProxyBuilder
     {
         #region Member
         public IProxyBuilderHelper ProxyBuilderHelper { get; set; }

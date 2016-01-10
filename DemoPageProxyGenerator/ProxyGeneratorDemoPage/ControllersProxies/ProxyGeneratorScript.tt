@@ -45,16 +45,16 @@
 //###########################################################################################################################################################################################
 //#############################################################--AngularJs JavaScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
-//The following template strings are replaced with the explained content: 
+//TEMPLATE STRINGS FOR: "AngularJs JavaScript Service Definition":
 // 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamePSrv  -> accountPSrv for AccountController
 // 2. #PrototypeServiceCalls# => Hier werden alle Service Calls eingefügt die für den Controller mit dem passenden Attribut "AngularJs" Markiert wurden.
-    var angularJsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularJsModule, TemplateSuffix = "PJsSrv"};
+    var angularJsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularJsModule, TemplateSuffix = "AngularJsSrv"};
 	angularJsModule.Template = "function #ServiceName#($http) { this.http = $http; } \r\n\r\n\r\n";
     angularJsModule.Template += "#PrototypeServiceCalls#\r\n";
     angularJsModule.Template += "angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#]);";
 	settings.Templates.Add(angularJsModule);
 
-//Variablen die ersetzt werden im Prototype Template: 
+//TEMPLATE STRINGS FOR: "AngularJs JavaScript prototype Service Calls":
 // 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt damit die richtige Prototype Funktion auferufen wird.
 // 2. #ServiceParamters# => Die Parameterliste für den jeweiligen Ajax Call z.B. name, id, person
 // 3. #ControllerFunctionName# => Der Name des Ajax Calls entspricht der Funktion im Controller die aufgerufen wird.
@@ -68,13 +68,13 @@
 //###########################################################################################################################################################################################
 //#############################################################--AngularJs TypeScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
-//The following template strings are replaced with the explained content for "Angular TypeScript Module Definition for a Angular Service": 
+//TEMPLATE STRINGS FOR: "Angular TypeScript Module Definition for a Angular Service": 
 // 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamePSrv  -> accountPSrv for AccountController
 // 2. #InterfaceDefinitions# => TypeScript Interface Definition for all Service Calls for the current ServiceName
-// 3. #ServiceFunctions# => Programmed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "AngularTsAjaxCallNoReturnType" or "AngularTsAjaxCallWithReturnType")
+// 3. #ServiceFunctions# => Programed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "AngularTsAjaxCallNoReturnType" or "AngularTsAjaxCallWithReturnType")
     var angularTsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularTsModule, TemplateSuffix = "PSrv"};
 	angularTsModule.Template = "module App.Services { \r\n\r\n";
-    angularTsModule.Template += "export interface I#ServiceName# { #InterfaceDefinitions# }\r\n\r\n";
+    angularTsModule.Template += "export interface I#ServiceName# { \r\n #InterfaceDefinitions# }\r\n\r\n";
     angularTsModule.Template += "export class #ServiceName# implements I#ServiceName# {\r\n";
     angularTsModule.Template += "    static $inject = ['$http']; \r\n   constructor(private $http: ng.IHttpService) { } \r\n\r\n";
     angularTsModule.Template += "#ServiceFunctions#";
@@ -88,23 +88,55 @@
    	                            "//#endregion \r\n\r\n   } \r\n }";
 	settings.Templates.Add(angularTsModule);
 
-//The following template strings are replaced with the explained content for "Angular TypeScript Ajax Call Function with ReturnType": 
+//TEMPLATE STRINGS FOR: "Angular TypeScript Ajax Call Function with ReturnType": 
 // 1. #ControllerFunctionName# => controller function name
 // 2. #ServiceParamters# => parameters for the service call
 // 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
 // 4. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
     var angularTsAjaxCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallWithReturnType};
-    angularTsAjaxCallWithReturnType.Template = "#ControllerFunctionName#(#ServiceParamters#) : ng.IPromise<{#ControllerFunctionReturnType#}> { \r\n" +
-											   "    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; } );\r\n} \r\n\r\n";
+    angularTsAjaxCallWithReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : ng.IPromise<{#ControllerFunctionReturnType#}> { \r\n" +
+											   "    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; });\r\n} \r\n\r\n";
+											   //Alternative Response with Error CallBack, which only returns complete errorResponse and not only the "response.data"
+											   //"    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; }, (errorResponse : ng.IHttpPromiseCallbackArg<any>) => { return errorResponse });\r\n} \r\n\r\n";
 	settings.Templates.Add(angularTsAjaxCallWithReturnType);
 
-//The following template strings are replaced with the explained content for "Angular TypeScript Ajax Call Function with NO ReturnType": 
+//TEMPLATE STRINGS FOR: "Angular TypeScript Ajax Call Function with NO ReturnType": 
 // 1. #ControllerFunctionName# => controller function name
 // 2. #ServiceParamters# => parameters for the service call
 // 3. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
     var angularTsAjaxCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallNoReturnType};
-    angularTsAjaxCallWithNoReturnType.Template = "#ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
+    angularTsAjaxCallWithNoReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
 	settings.Templates.Add(angularTsAjaxCallWithNoReturnType);
+//###########################################################################################################################################################################################
+//#############################################################--jQuery TypeScript Definitions--##########################################################################################
+//###########################################################################################################################################################################################
+//The following template strings are replaced with the explained content for "jQuery TypeScript Definition for a 'Service' Class": 
+// 1. #ServiceName# => the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamejQueryTs  -> accountjQueryTs for AccountController
+// 2. #InterfaceDefinitions# => TypeScript Interface Definition for all Service Calls for the current ServiceName
+// 3. #ServiceFunctions# => Programed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "jQueryTsAjaxCallWithReturnType" or "jQueryTsAjaxCallNoReturnType")
+    var jQueryTsModule = new TemplateEntry() { TemplateType = TemplateTypes.jQueryTsModule, TemplateSuffix = "jQueryTs"};
+	jQueryTsModule.Template = "module App.JqueryServices { \r\n\r\n";
+    jQueryTsModule.Template += "export interface I#ServiceName# { \r\n #InterfaceDefinitions# }\r\n\r\n";
+    jQueryTsModule.Template += "export class #ServiceName# implements I#ServiceName# {\r\n\r\n";
+    jQueryTsModule.Template += "#ServiceFunctions# \r\n  }\r\n}";
+	settings.Templates.Add(jQueryTsModule);
+
+//TEMPLATE STRINGS FOR: "jQuery TypeScript Ajax Call Function with ReturnType"
+// 1. #ControllerFunctionName# => controller function name
+// 2. #ServiceParamters# => parameters for the service call
+// 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
+// 4. #ServiceCallAndParameters# => service call like: jQuery.get("GetAutosByHerstellerId/" + value)
+    var jQueryTsAjaxCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsAjaxCallWithReturnType};
+    jQueryTsAjaxCallWithReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : JQueryPromise<{#ControllerFunctionReturnType#}> { \r\n" +
+											   "      return jQuery.#ServiceCallAndParameters#.then((result: {#ControllerFunctionReturnType#}) : {#ControllerFunctionReturnType#} => { return result; });\r\n    } \r\n\r\n";
+	settings.Templates.Add(jQueryTsAjaxCallWithReturnType);
+
+//TEMPLATE STRINGS FOR: "jQuery TypeScript Ajax Call Function NO ReturnType"
+	var jQueryTsAjaxCallNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsAjaxCallNoReturnType};
+    jQueryTsAjaxCallNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void { jQuery.#ServiceCallAndParameters# \r\n} \r\n\r\n";
+	settings.Templates.Add(jQueryTsAjaxCallNoReturnType);
+
+
 //###########################################################################################################################################################################################
 //#############################################################-- Tempalte Definition END --#################################################################################################
 //###########################################################################################################################################################################################
@@ -122,6 +154,8 @@
 	//Add AngularTs ProxyGenerator. You need to install the TypeScript TypeDefinitions for your current Angular version
 	//and TypeLite to create the Interfaces for your .NET Types in TypeScript.
 	generator.AddAngularTsProxyGenerator();
+	//Add jQueryTs ProxyGenerator
+	generator.AddjQueryTsProxyGenerator();
 
 
 //###########################################################################################################################################################################################
@@ -155,7 +189,7 @@
 // Addional Sources, extra classes must be placed at the end of the t4 Template:
 // https://raw.github.com/damieng/DamienGKit
 // http://damieng.com/blog/2009/11/06/multiple-outputs-from-t4-made-easy-revisited
-// File Manager class to save multiple Files with Checkout for source control, ....
+// File Manager class to save multiple Files with Checkout for source control like TFS, ....
 class Manager {
     private class Block {
         public String Name;

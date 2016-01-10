@@ -49,11 +49,6 @@ namespace ProxyGenerator.Manager
             return new ProxyBuilderHttpCall(this);
         }
 
-        public IAngularTsProxyBuilder CreateAngularTsProxyBuilder()
-        {
-            return  new AngularTsProxyBuilder(this);
-        }
-
         public IProxyBuilderDataTypeHelper CreateBuilderTypeHelper()
         {
             return new ProxyBuilderDataTypeHelper(ProxySettings);
@@ -68,9 +63,19 @@ namespace ProxyGenerator.Manager
         #endregion
 
         #region ProxyBuilder Creator
-        public IAngularJsProxyBuilder CreateAngularJsProxyBuilder()
+        public IProxyBuilder CreateAngularJsProxyBuilder()
         {
             return new AngularJsProxyBuilder(this);
+        }
+
+        public IProxyBuilder CreateAngularTsProxyBuilder()
+        {
+            return new AngularTsProxyBuilder(this);
+        }
+
+        public IProxyBuilder CreateJQueryTsProxyBuilder()
+        {
+            return new JQueryTsProxyBuilder(this);
         }
         #endregion
     }

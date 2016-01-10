@@ -1,28 +1,28 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten.
-//Created on 06.01.2016 time 22:44 from SquadWuschel.
+//Created on 10.01.2016 time 20:51 from SquadWuschel.
 
-  function homePJsSrv($http) { this.http = $http; } 
+  function homeAngularJsSrv($http) { this.http = $http; } 
 
 
-homePJsSrv.prototype.addOrUpdatePerson = function (person) { 
+homeAngularJsSrv.prototype.addOrUpdatePerson = function (person) { 
    return this.http.post('Home/AddOrUpdatePerson',person).then(function (result) {
         return result.data;
    });
 }
 
-homePJsSrv.prototype.getAllPersons = function () { 
+homeAngularJsSrv.prototype.getAllPersons = function () { 
    return this.http.get('Home/GetAllPersons').then(function (result) {
         return result.data;
    });
 }
 
-homePJsSrv.prototype.searchPerson = function (name) { 
+homeAngularJsSrv.prototype.searchPerson = function (name) { 
    return this.http.get('Home/SearchPerson'+ '?name='+encodeURIComponent(name)).then(function (result) {
         return result.data;
    });
 }
 
 
-angular.module('homePJsSrv', []) .service('homePJsSrv', ['$http', homePJsSrv]);
+angular.module('homeAngularJsSrv', []) .service('homeAngularJsSrv', ['$http', homeAngularJsSrv]);
 

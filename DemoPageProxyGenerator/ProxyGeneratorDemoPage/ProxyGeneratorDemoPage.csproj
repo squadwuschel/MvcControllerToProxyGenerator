@@ -250,14 +250,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="ControllersProxies\homePJsSrv.js">
+    <Content Include="ControllersProxies\homeAngularJsSrv.js">
+      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
+    </Content>
+    <Content Include="ControllersProxies\proxyAngularJsSrv.js">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </Content>
     <Content Include="ControllersProxies\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-    </Content>
-    <Content Include="ControllersProxies\proxyPJsSrv.js">
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -298,6 +298,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\Manager.ttinclude" />
     <Content Include="Views\Proxy\AngularCalls.cshtml" />
+    <Content Include="Views\Proxy\JQueryCalls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -318,11 +319,15 @@
     <TypeScriptCompile Include="ControllersProxies\homePSrv.ts">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ControllersProxies\proxyjQueryTs.ts">
+      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ControllersProxies\proxyPSrv.ts">
       <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />
+    <TypeScriptCompile Include="ScriptsApp\jQueryCalls.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\Proxy\proxyCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Enums.ts">

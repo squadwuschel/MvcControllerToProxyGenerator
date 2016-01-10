@@ -2,7 +2,9 @@
 {
     public enum TemplateTypes
     {
-        jQueryTs,
+        jQueryTsModule,
+        jQueryTsAjaxCallWithReturnType,
+        jQueryTsAjaxCallNoReturnType,
         jQueryJs,
         AngularJsModule,
         AngularJsPrototype,

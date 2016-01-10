@@ -17,6 +17,7 @@ namespace ProxyGeneratorDemoPage
                 .IncludeDirectory("~/ControllersProxies/", "*.js", false)
                 .IncludeDirectory("~/ScriptsApp/Classes/", "*.js", false)
                 .Include(
+                    "~/ScriptsApp/jQueryCalls.js",
                     "~/ScriptsApp/Views/Proxy/proxyCtrl.js",
                     "~/ScriptsApp/Views/mainApp.js",
                     "~/Scripts/Enums.js" //Generated Enums from TypeLite

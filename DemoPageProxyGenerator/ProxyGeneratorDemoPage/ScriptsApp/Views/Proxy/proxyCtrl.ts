@@ -4,8 +4,8 @@
         static $inject = [
             App.Services.ProxyPSrv.module.name, //Ts Service
             App.Services.HomePSrv.module.name, //Ts Service
-            "homePJsSrv", //Js Service
-            "proxyPJsSrv" //Js Service
+            "homeAngularJsSrv", //Js Service
+            "proxyAngularJsSrv",//Js Service
         ];
 
         constructor(private proxyTsSrv: App.Services.IProxyPSrv,
@@ -129,7 +129,16 @@
                  console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
                  console.log(result);
              });
-         }
+
+            this.proxyTsSrv.errorStringReturnType(true).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'errorStringReturnType' Result: ");
+                console.log(result);
+            }, errorResult => {
+                //Only gets Called if the ErrorResponse is active and returns only the errorResult and not only the Data.
+                console.log("\r\nError TypeScript Service Call 'errorStringReturnType' Result: ");
+                console.log(errorResult);
+            });
+        }
 
         //#region Angular Module Definition
         private static _module: ng.IModule;

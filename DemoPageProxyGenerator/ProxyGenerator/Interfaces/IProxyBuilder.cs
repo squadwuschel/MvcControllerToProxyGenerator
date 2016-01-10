@@ -1,11 +1,10 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ProxyGenerator.Container;
 
 namespace ProxyGenerator.Interfaces
 {
-    public interface IAngularTsProxyBuilder
+    public interface IProxyBuilder
     {
         List<GeneratedProxyEntry> BuildProxy(List<ProxyControllerInfo> proxyControllerInfos);
-        IProxyGeneratorFactoryManager Factory { get; set; }
     }
 }
