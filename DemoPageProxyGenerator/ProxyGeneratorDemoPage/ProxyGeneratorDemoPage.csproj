@@ -259,6 +259,9 @@
     <Content Include="ControllersProxies\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
+    <Content Include="ControllersProxies\proxyjQueryJs.js">
+      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

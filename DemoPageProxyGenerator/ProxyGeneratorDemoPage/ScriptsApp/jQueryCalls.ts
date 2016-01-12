@@ -1,5 +1,5 @@
 ﻿module App.JQueryApp {
-
+    
     export class jQueryApp {
         private jQuerySrv: App.JqueryServices.IProxyjQueryTs;
 
@@ -14,10 +14,9 @@
            var srv = new App.JqueryServices.ProxyjQueryTs();
 
            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true);
-           var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW", 5, person);
 
            console.clear();
-           console.log("Some TypeScript Angular Service Calls: \r\n");
+           console.log("Some TypeScript jQuery Service Calls: \r\n");
 
            srv.addTsEntryAndName(person, "Johannes").then(result => {
                console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndName' Result: ");
@@ -97,8 +96,51 @@
 
        public callJqueryJavaScriptFunctions(event : Event): void {
            event.preventDefault();
-        }
+           var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true);
+
+           //Init Proxy Function
+           var calls = new window.proxyjQueryJs();
+
+           console.clear();
+           console.log("Some JavaScript jQuery Service Calls: \r\n");
+
+           calls.addJsEntryOnly(person).then(result => {
+               console.log("\r\nSuccess JavaScript Service Call 'addJsEntryOnly' Result: ");
+               console.log(result);
+           });
+
+           calls.addJsEntryAndName(person, "Wuschel").then(result => {
+               console.log("\r\nSuccess JavaScript Service Call 'addJsEntryAndName' Result: ");
+               console.log(result);
+           });
+
+           calls.addJsEntryAndParams(person, "Squad", "Wuschel").then(result => {
+               console.log("\r\nSuccess JavaScript Service Call 'addJsEntryAndParams' Result: ");
+               console.log(result);
+           });
+
+           calls.clearJsCall().then(result => {
+               console.log("\r\nSuccess JavaScript Service Call 'clearJsCall' Result: ");
+               console.log(result);
+           });
+
+           calls.loadJsCallById(1337).then(result => {
+               console.log("\r\nSuccess JavaScript Service Call 'loadJsCallById' Result: ");
+               console.log(result);
+           });
+
+           calls.loadJsCallByParamsAndId("Squad", "Wuschel", 34, 1337).then(result => {
+               console.log("\r\nSuccess JavaScript Service Call 'loadJsCallByParamsAndId' Result: ");
+               console.log(result);
+           });
+       }
     }
 }
+
+/*Window Interface erweitern, damit wir auch hier auf z.b. eigene Properties zugreifen können die wir z.B: in alten JS dateien definiert haben */
+interface Window {
+    proxyjQueryJs: any;
+}
+
 
 var app = new App.JQueryApp.jQueryApp();

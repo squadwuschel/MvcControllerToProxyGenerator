@@ -110,7 +110,7 @@
 //###########################################################################################################################################################################################
 //#############################################################--jQuery TypeScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
-//The following template strings are replaced with the explained content for "jQuery TypeScript Definition for a 'Service' Class": 
+//TEMPLATE STRINGS FOR: "jQuery TypeScript Definition": 
 // 1. #ServiceName# => the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamejQueryTs  -> accountjQueryTs for AccountController
 // 2. #InterfaceDefinitions# => TypeScript Interface Definition for all Service Calls for the current ServiceName
 // 3. #ServiceFunctions# => Programed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "jQueryTsAjaxCallWithReturnType" or "jQueryTsAjaxCallNoReturnType")
@@ -124,7 +124,7 @@
 //TEMPLATE STRINGS FOR: "jQuery TypeScript Ajax Call Function with ReturnType"
 // 1. #ControllerFunctionName# => controller function name
 // 2. #ServiceParamters# => parameters for the service call
-// 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
+// 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute "CreateJQueryTsProxyAttribute" for the Ajax Call
 // 4. #ServiceCallAndParameters# => service call like: jQuery.get("GetAutosByHerstellerId/" + value)
     var jQueryTsAjaxCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsAjaxCallWithReturnType};
     jQueryTsAjaxCallWithReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : JQueryPromise<{#ControllerFunctionReturnType#}> { \r\n" +
@@ -135,8 +135,27 @@
 	var jQueryTsAjaxCallNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsAjaxCallNoReturnType};
     jQueryTsAjaxCallNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void { jQuery.#ServiceCallAndParameters# \r\n} \r\n\r\n";
 	settings.Templates.Add(jQueryTsAjaxCallNoReturnType);
+//###########################################################################################################################################################################################
+//#############################################################--jQuery JavaScript Definitions--##########################################################################################
+//###########################################################################################################################################################################################
+//TEMPLATE STRINGS FOR: "jQuery JavaScript Service Definition":
+// 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamejQueryJs  -> accountjQueryJs for AccountController
+// 2. #PrototypeServiceCalls# => Hier werden alle Service Calls eingefügt die für den Controller mit dem passenden Attribut "CreateJQueryJsProxyAttribute" Markiert wurden.
+    var jQueryJsModule = new TemplateEntry() { TemplateType = TemplateTypes.jQueryJsModule, TemplateSuffix = "jQueryJs"};
+	jQueryJsModule.Template = "window.#ServiceName# = function() { } \r\n\r\n\r\n";
+    jQueryJsModule.Template += "#PrototypeServiceCalls#\r\n";
+	settings.Templates.Add(jQueryJsModule);
 
-
+//TEMPLATE STRINGS FOR: "AngularJs JavaScript prototype Service Calls":
+// 1. #ServiceName# => Hier wird der Name des Controllers eingesetzt damit die richtige Prototype Funktion auferufen wird.
+// 2. #ServiceParamters# => Die Parameterliste für den jeweiligen Ajax Call z.B. name, id, person
+// 3. #ControllerFunctionName# => Der Name des Ajax Calls entspricht der Funktion im Controller die aufgerufen wird.
+// 4. #ServiceCallAndParameters# => Hier wird der passende Aufruf ersetzt durch z.B.: get("GetAutosByHerstellerId/" + value) oder post("GetAutosByHerstellerId/" + value, message)
+    var jQueryJsPrototype = new TemplateEntry() {TemplateType = TemplateTypes.jQueryJsPrototype};
+    jQueryJsPrototype.Template = "#ServiceName#.prototype.#ControllerFunctionName# = function (#ServiceParamters#) { \r\n";
+    jQueryJsPrototype.Template += "   return jQuery.#ServiceCallAndParameters#.then(function (result) {\r\n";
+    jQueryJsPrototype.Template += "        return result;\r\n   });\r\n}\r\n\r\n";
+	settings.Templates.Add(jQueryJsPrototype);
 //###########################################################################################################################################################################################
 //#############################################################-- Tempalte Definition END --#################################################################################################
 //###########################################################################################################################################################################################
@@ -156,7 +175,8 @@
 	generator.AddAngularTsProxyGenerator();
 	//Add jQueryTs ProxyGenerator
 	generator.AddjQueryTsProxyGenerator();
-
+	//Add jQueryJs ProxyGenerator
+	generator.AddjQueryJsProxyGenerator();
 
 //###########################################################################################################################################################################################
 //#############################################################-- Outputfile Generation START --#############################################################################################

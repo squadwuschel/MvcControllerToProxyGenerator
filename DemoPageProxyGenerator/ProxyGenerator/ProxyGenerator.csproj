@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Builder\AngularJsProxyBuilder.cs" />
     <Compile Include="Builder\AngularTsProxyBuilder.cs" />
+    <Compile Include="Builder\JQueryJsProxyBuilder.cs" />
     <Compile Include="Builder\JQueryTsProxyBuilder.cs" />
     <Compile Include="Interfaces\IProxyBuilder.cs" />
     <Compile Include="Interfaces\IProxyBuilderDataTypeHelper.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Manager\ProxyGeneratorFactoryManager.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularJsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularTsProxyAttribute.cs" />
+    <Compile Include="ProxyTypeAttributes\CreateJQueryJsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateJQueryTsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateProxyBaseAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\DataTypeEnum.cs" />

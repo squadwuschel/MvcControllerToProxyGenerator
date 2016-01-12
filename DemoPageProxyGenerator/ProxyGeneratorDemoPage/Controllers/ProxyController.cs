@@ -25,48 +25,56 @@ namespace ProxyGeneratorDemoPage.Controllers
         #endregion
 
         #region AngularJs Proxy Methods Examples
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult AddJsEntryOnly(Person person)
         {
             return Json(person, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult AddJsEntryAndName(Person person, string name)
         {
             return Json(new Auto() { Marke =  name}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult AddJsEntryAndParams(Person person, string name, string vorname)
         {
             return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult ClearJsCall()
         {
             return Json("ClearJsCall was Called", JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult LoadJsCallById(int id)
         {
             return Json(id, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult LoadJsCallByParams(string name, string vorname, int alter)
         {
             return Json(vorname, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult LoadJsCallByParamsAndId(string name, string vorname, int alter, int id)
         {
             return Json(new Person() { Name = name, Id = id}, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult LoadJsCallByParamsWithEnum(string name, string vorname, int alter, ClientAccess access)
         {

@@ -65,5 +65,16 @@ namespace ProxyGenerator
             var proxies = Factory.CreateJQueryTsProxyBuilder().BuildProxy(proxyControllerInfos);
             GetGeneratedProxyEntries().AddRange(proxies);
         }
+
+        /// <summary>
+        /// Proxy Generator für jQuery JavaScript
+        /// </summary>
+        public void AddjQueryJsProxyGenerator()
+        {
+            //Alle Controller und die zugehörigen Methoden zum übergebenen ProxyAttribut ermitteln für einen Angular TypeScript Proxy
+            var proxyControllerInfos = ControllerManager.LoadProxyControllerInfos(typeof(CreateJQueryJsProxyAttribute), ControllerManager.GetAllProjectProxyController(Factory.GetProxySettings()));
+            var proxies = Factory.CreateJQueryJsProxyBuilder().BuildProxy(proxyControllerInfos);
+            GetGeneratedProxyEntries().AddRange(proxies);
+        }
     }
 }

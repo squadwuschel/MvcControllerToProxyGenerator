@@ -17,6 +17,7 @@ namespace ProxyGeneratorDemoPage
                 .IncludeDirectory("~/ControllersProxies/", "*.js", false)
                 .IncludeDirectory("~/ScriptsApp/Classes/", "*.js", false)
                 .Include(
+                    "~/ScriptsApp/jQueryJsCalls.js",
                     "~/ScriptsApp/jQueryCalls.js",
                     "~/ScriptsApp/Views/Proxy/proxyCtrl.js",
                     "~/ScriptsApp/Views/mainApp.js",

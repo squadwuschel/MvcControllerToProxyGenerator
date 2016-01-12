@@ -77,6 +77,11 @@ namespace ProxyGenerator.Manager
         {
             return new JQueryTsProxyBuilder(this);
         }
+
+        public IProxyBuilder CreateJQueryJsProxyBuilder()
+        {
+            return new JQueryJsProxyBuilder(this);
+        }
         #endregion
     }
 }   
