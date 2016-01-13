@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyGeneratorDemoPage", "ProxyGeneratorDemoPage\ProxyGeneratorDemoPage.csproj", "{3B134D5E-39C2-4B0A-8212-C2DC1FFDD3BD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E77ADB04-9B0B-4D3E-9D59-814F48AE4567}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{E77ADB04-9B0B-4D3E-9D59-814F48AE4567}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 	EndProjectSection

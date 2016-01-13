@@ -1,7 +1,11 @@
 # MvcControllerToProxyGenerator
 Creates JavaScript or TypeScript AJAX proxies in jQuery or AngularJs for .NET Controller or WebApi functions.
 
-You can download and install the [NuGet package for "TypeScriptAngularJsProxyGenerator"](https://www.nuget.org/packages/TypeScriptAngularJsProxyGenerator/).
+Download and install the [NuGet package for "TypeScriptAngularJsProxyGenerator"](https://www.nuget.org/packages/TypeScriptAngularJsProxyGenerator/) into your WebProject.
+
+Or install the NuGet package with the package manager console:
+
+    PM > Install-Package TypeScriptAngularJsProxyGenerator
 
 ---------
 ## The NuGet Package "TypeScriptAngularJsProxyGenerator"
@@ -27,7 +31,7 @@ Here you have to set the name of your current WebPoject.
 
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
 
-If you want to create a TypeScript Proxy, don't forget to install TypeLite and you need to edit the TypeLite T4 Template with the following line:
+If you want to create a TypeScript Proxy, don't forget to install [TypeLite](https://www.nuget.org/packages/TypeLite/) and you need to add to the TypeLite T4 template the following line:
 
     .WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)
 
