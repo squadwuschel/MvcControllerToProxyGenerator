@@ -14,6 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{E77ADB
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGetPackage", "NuGetPackage", "{9722EE42-4F8A-4A98-BECE-A91D1E4C1866}"
+	ProjectSection(SolutionItems) = preProject
+		NuGetPackages\TypeScriptAngularJsProxyGenerator.1.0.1.nupkg = NuGetPackages\TypeScriptAngularJsProxyGenerator.1.0.1.nupkg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
