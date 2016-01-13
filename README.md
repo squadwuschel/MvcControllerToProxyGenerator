@@ -26,7 +26,7 @@ If you want to **create TypeScript proxies** then, you **need to install manuall
 (If you use TypeScript don't forget to install the TypeDefinitions for jQuery and/or AngularJs)
 
 ## T4 Configruation Settings
-When you have installed all needed NuGet Packages, you **need to configure** the T4 Tempalte `ProxyGeneratorScript.tt` in its config Section **"SETTINGS for MANUAL adjustments"**.
+When you have installed all NuGet Packages, you **need to configure** the T4 Tempalte `ProxyGeneratorScript.tt` in its config Section **"SETTINGS for MANUAL adjustments"**.
 Here you have to set the name of your current WebPoject.
 
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
@@ -40,10 +40,10 @@ or if you use the original TypeLite Interface name without the "I" then, you nee
     settings.TypeLiteInterfacePrefix = "";
 
 ## How to tell the T4 template to create a proxy 
-The T4 Template only creates proxies for controller functions which are decorated with the right Attribute.
+The T4 template only creates proxies for controller functions which are decorated with the right Attribute.
 For each controller, framework and language a new file with the ControllerName (Classname) + Suffix is created (you can change the Suffix in the T4 Template).
 
-The ProxyGenerator DLL provides four different Attributes.
+The ProxyGenerator DLL provides four different attributes.
 
 | Attribute Name | Language | Framework | needed Params |
 |----------------|----------|-----------|-----------------|
@@ -54,10 +54,9 @@ The ProxyGenerator DLL provides four different Attributes.
 
 You can mix these attributes in any combination. It is possible to use all on the same controller function, then for this function four different proxies are create (one for each language and framework).
 
-
 To start the proxy creation right click on the T4 Template `ProxyGeneratorScript.tt` and choose **Run Custom Tool**.
 
-(**Hint:** Take a look at the GitHub code, there you find a solution with the T4 template and also a Website with examples for the attribute usage shown below)
+(**Hint:** Take a look at the GitHub code, there you find a solution with the T4 template and also a website with examples for the attribute usage shown below)
 
 ### Example: AngularJs JavaScript Proxy - CreateAngularJsProxyAttribute
 Creates a proxy for AngukarJs in JavaScript.
@@ -436,3 +435,27 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
         }
     }
 
+## Not yet Supported
+  * Fileupload Proxy Creation
+  
+
+## Known Errormessages
+#### Method/Function overload not supported
+It is not possible to use function overload in JavaScript and so its also not possible for the template to create proxy calls when you have set the attribut on both overloaded functions.
+
+        [CreateAngularJsProxy]
+        public JsonResult AddJsEntryAndParams(Person person, string name, string vorname)
+        {
+            return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngularJsProxy]
+        public JsonResult AddJsEntryAndParams(Person person, string name)
+        {
+            return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
+        }
+
+    
+Then you get the following errormessage, when you try to create the proxy 
+
+**ERROR, JavaScript doesn't supports function/method overload, please rename one of those functions/methods 'AddJsEntryAndParams'.**

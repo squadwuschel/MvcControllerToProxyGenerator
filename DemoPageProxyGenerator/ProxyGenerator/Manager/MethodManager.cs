@@ -34,7 +34,7 @@ namespace ProxyGenerator.Manager
             {
                 if (proxyMethodInfos.Any(p => p.MethodInfo.Name == methodInfo.Name))
                 {
-                    throw new Exception(string.Format("Achtung, da JavaScript keine Überladung von Methoden unterstützt, bitte eine der Methoden '{0}' umbenennen", methodInfo.Name));
+                    throw new Exception(string.Format("ERROR, JavaScript doesn't supports function/method overload, please rename one of those functions/methods '{0}'", methodInfo.Name));
                 }
 
                 ProxyMethodInfos proxyMethodInfo = new ProxyMethodInfos();
