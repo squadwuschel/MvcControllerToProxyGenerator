@@ -92,7 +92,8 @@ namespace ProxyGenerator.Builder.Helper
 
             if (type == typeof(DateTime) || type == typeof(DateTime?))
             {
-                return "Date";
+                //Da es in TypeScript keinen Date Datentyp gibt den wir hier einfach so übergeben könne, wird Any als übergabewert verwendet.
+                return "any";
             }
 
             if (type == typeof(Boolean) || type == typeof(Boolean?))

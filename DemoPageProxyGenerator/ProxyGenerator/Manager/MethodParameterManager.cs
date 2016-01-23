@@ -14,7 +14,7 @@ namespace ProxyGenerator.Manager
         {
             List<ProxyMethodParameterInfo> methodParameterInfos = new List<ProxyMethodParameterInfo>();
 
-            //Alle Parameter der Methode duirchgehen und die Typen prüfen
+            //Alle Parameter der Methode durchgehen und die Typen prüfen
             foreach (ParameterInfo parameterInfo in methodInfo.GetParameters())
             {
                 Type t = parameterInfo.ParameterType;

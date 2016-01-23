@@ -125,7 +125,7 @@
     <Compile Include="ProxyTypeAttributes\CreateJQueryJsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateJQueryTsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateProxyBaseAttribute.cs" />
-    <Compile Include="ProxyTypeAttributes\DataTypeEnum.cs" />
+    <Compile Include="Enums\DataTypeEnum.cs" />
     <Compile Include="Container\ProxyMethodInfo.cs" />
     <Compile Include="Container\TemplateTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

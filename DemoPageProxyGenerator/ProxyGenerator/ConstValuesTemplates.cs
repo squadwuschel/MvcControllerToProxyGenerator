@@ -19,6 +19,9 @@
 
         public const string ServiceFunctions = "#ServiceFunctions#";
 
+        /// <summary>
+        /// Achtung hier muss wird "{#" bzw. "#}" zum Maskieren verwendet, da wir im Template ein größer bzw. kleinerzeichen davor haben und es hier sonst Probleme mit dem T4 Template gibt.
+        /// </summary>
         public const string ControllerFunctionReturnType = "{#ControllerFunctionReturnType#}";
     }
 }

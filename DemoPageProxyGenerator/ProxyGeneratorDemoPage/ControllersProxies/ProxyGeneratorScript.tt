@@ -163,7 +163,7 @@
 //#############################################################-- Proxy Generator - Initialization --########################################################################################
 //###########################################################################################################################################################################################
 	//Create the proxy generator and set the settings in the factory.
-	Generator generator = new Generator(new ProxyGeneratorFactoryManager(settings));
+	Generator generator = new Generator(settings);
 	//You can have multiple different generated Proxies in one project, it depends on the Used ProxyAttributes in your project.
 	
 	//Add AngularJS ProxyGenerator

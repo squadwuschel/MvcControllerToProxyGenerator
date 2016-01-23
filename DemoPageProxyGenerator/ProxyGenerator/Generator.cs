@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
+using ProxyGenerator.Manager;
 using ProxyGenerator.ProxyTypeAttributes;
 
 namespace ProxyGenerator
@@ -15,9 +16,9 @@ namespace ProxyGenerator
         private List<GeneratedProxyEntry> GeneratedProxyEntries { get; }
         #endregion
 
-        public Generator(IProxyGeneratorFactoryManager proxyGeneratorFactory)
+        public Generator(ProxySettings proxySettings)
         {
-            Factory = proxyGeneratorFactory;
+            Factory = new ProxyGeneratorFactoryManager(proxySettings);
             ControllerManager = Factory.CreateControllerManager();
             GeneratedProxyEntries = new List<GeneratedProxyEntry>();
         }
@@ -32,7 +33,7 @@ namespace ProxyGenerator
         }
 
         /// <summary>
-        /// Proxy Generator für AngularJs JavaScript
+        /// Proxy Generator für AngularJs JavaScript mit Daten füllen
         /// </summary>
         public void AddAngularJsProxyGenerator()
         {
@@ -45,7 +46,7 @@ namespace ProxyGenerator
         }
 
         /// <summary>
-        /// Proxy Generator für AngularJs TypeScript
+        /// Proxy Generator für AngularJs TypeScript mit Daten füllen
         /// </summary>
         public void AddAngularTsProxyGenerator()
         {
@@ -56,7 +57,7 @@ namespace ProxyGenerator
         }
 
         /// <summary>
-        /// Proxy Generator für jQuery TypeScript
+        /// Proxy Generator für jQuery TypeScript mit Daten füllen
         /// </summary>
         public void AddjQueryTsProxyGenerator()
         {
@@ -67,7 +68,7 @@ namespace ProxyGenerator
         }
 
         /// <summary>
-        /// Proxy Generator für jQuery JavaScript
+        /// Proxy Generator für jQuery JavaScript mit Daten füllen
         /// </summary>
         public void AddjQueryJsProxyGenerator()
         {

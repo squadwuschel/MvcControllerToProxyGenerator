@@ -1,5 +1,5 @@
 ﻿
-namespace ProxyGenerator.ProxyTypeAttributes
+namespace ProxyGenerator.Enums
 {
     public enum DataTypeEnum
     {

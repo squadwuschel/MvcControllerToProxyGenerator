@@ -11,8 +11,6 @@ namespace ProxyGenerator.ProxyTypeAttributes
     {
         public Type ReturnType { get; set; }
 
-        public DataTypeEnum DataType { get; set; }
-
         public CreateProxyBaseAttribute()
         {
             ReturnType = null;
@@ -21,17 +19,6 @@ namespace ProxyGenerator.ProxyTypeAttributes
         public CreateProxyBaseAttribute(Type returnType)
         {
             this.ReturnType = returnType;
-        }
-
-        public CreateProxyBaseAttribute(Type returnType, DataTypeEnum dataType)
-        {
-            this.ReturnType = returnType;
-            this.DataType = dataType;
-        }
-
-        public CreateProxyBaseAttribute(DataTypeEnum dataType)
-        {
-            this.DataType = dataType;
         }
     }
 }
