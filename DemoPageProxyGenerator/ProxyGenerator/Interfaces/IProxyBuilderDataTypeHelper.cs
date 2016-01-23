@@ -1,15 +1,11 @@
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace ProxyGenerator.Interfaces
 {
     public interface IProxyBuilderDataTypeHelper
     {
-        /// <summary>
-        /// Für den übergebenen ParameterInfoWert den passenden "TypeScript" Typen ermitteln.
-        /// </summary>
-        string GetTsType(ParameterInfo info);
-
         /// <summary>
         /// Gibt den passenden TypeScript Datentyp zum übergebenen .NET Type Objekt zurück.
         /// </summary>
@@ -26,7 +22,7 @@ namespace ProxyGenerator.Interfaces
         /// Sucht einfach nur die Parameternamen der aktuell übergebenen Methode heraus und setzt noch den passenden Typ 
         /// für TypeScript hinter den Namen z.B.: "alter: number, name: string, ..."
         /// </summary>
-        string GetFunctionParametersWithType(MethodInfo methodInfo);
+        string GetFunctionParametersWithType(_MethodInfo methodInfo);
 
         /// <summary>
         /// Gibt zurück der übergebenen Typ einen ReturnType hat.

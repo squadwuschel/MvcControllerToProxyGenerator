@@ -8,6 +8,18 @@ Or install the NuGet package with the package manager console:
     PM > Install-Package TypeScriptAngularJsProxyGenerator
 
 ---------
+
+## Setup / Usage
+The NuGet package installs a T4 Template `ControllersProxies\ProxyGeneratorScript.tt` in your WebProject. 
+
+1. Configure the T4 template settings
+2. Configure your controllers by adding the right CreateProxy attribute to each function (AJAX call)
+3. Build the entire Solution, because the T4 Script looks up your assemblies for the added attributes
+4. Run the T4 Script with "**Run Custom Tool**"
+
+For a detailed descriptions read the complete Readme :-)
+
+
 ## The NuGet Package "TypeScriptAngularJsProxyGenerator"
 The package installs a T4 Template into your WebProject under the path
 
@@ -26,7 +38,7 @@ If you want to **create TypeScript proxies** then, you **need to install manuall
 (If you use TypeScript don't forget to install the TypeDefinitions for jQuery and/or AngularJs)
 
 ## T4 Configruation Settings
-When you have installed all NuGet Packages, you **need to configure** the T4 Tempalte `ProxyGeneratorScript.tt` in its config Section **"SETTINGS for MANUAL adjustments"**.
+When you have installed all NuGet Packages, you **need to configure** the T4 Tempalte under `ControllersProxies\ProxyGeneratorScript.tt` in its config Section **"SETTINGS for MANUAL adjustments"**.
 Here you have to set the name of your current WebPoject.
 
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
@@ -54,7 +66,9 @@ The ProxyGenerator DLL provides four different attributes.
 
 You can mix these attributes in any combination. It is possible to use all on the same controller function, then for this function four different proxies are create (one for each language and framework).
 
-To start the proxy creation right click on the T4 Template `ProxyGeneratorScript.tt` and choose **Run Custom Tool**.
+Before you can start the proxy creation, you need to **rebuild your solution**, because the T4 template looks up your compiled assemblies for the added proxy creation attributes.
+
+When the rebuild was successfull, then start the proxy creation by right clicking on the T4 Template `ProxyGeneratorScript.tt` and choose **Run Custom Tool**.
 
 (**Hint:** Take a look at the GitHub code, there you find a solution with the T4 template and also a website with examples for the attribute usage shown below)
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
@@ -20,14 +20,6 @@ namespace ProxyGenerator.Builder.Helper
             ProxySettings = proxySettings;
         }
         #endregion
-
-        /// <summary>
-        /// Für den übergebenen ParameterInfoWert den passenden "TypeScript" Typen ermitteln.
-        /// </summary>
-        public string GetTsType(ParameterInfo info)
-        {
-            return GetTsType(info.ParameterType);
-        }
 
         /// <summary>
         /// Gibt zurück der übergebenen Typ einen ReturnType hat.
@@ -69,7 +61,7 @@ namespace ProxyGenerator.Builder.Helper
 
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>))
             {
-                throw new Exception("ACHTUNG der ProxyBuilder unterstützt keine Collections als ReturnType, nur List und IEnumerable!");
+                throw new NotSupportedException("Error, the Proxybuilder does not support ICollections as ReturnType, only IList, List, Array or IEnumerable!");
             }
 
             //Man muss die Standard Systemtypen prüfen und den Wert zurückgeben der von TypScript entsprechend unterstützt wird.
@@ -127,14 +119,14 @@ namespace ProxyGenerator.Builder.Helper
         /// Sucht einfach nur die Parameternamen der aktuell übergebenen Methode heraus und setzt noch den passenden Typ 
         /// für TypeScript hinter den Namen z.B.: "alter: number, name: string, ..."
         /// </summary>
-        public string GetFunctionParametersWithType(MethodInfo methodInfo)
+        public string GetFunctionParametersWithType(_MethodInfo methodInfo)
         {
             StringBuilder builder = new StringBuilder();
             //Zusammenbauen der PrameterInfos für die übergebene Methode.
             foreach (ParameterInfo info in methodInfo.GetParameters())
             {
                 //Die Parameterliste inkl. des Typen zurückgeben
-                builder.Append(string.Format("{0}: {1}", info.Name, GetTsType(info))).Append(",");
+                builder.Append(string.Format("{0}: {1}", info.Name, GetTsType(info.ParameterType))).Append(",");
             }
 
             return builder.ToString().TrimEnd(',');
