@@ -17,7 +17,7 @@ The NuGet package installs a T4 Template `ControllersProxies\ProxyGeneratorScrip
 3. Build the entire Solution, because the T4 Script looks up your assemblies for the added attributes
 4. Run the T4 Script with "**Run Custom Tool**"
 
-For a detailed descriptions read the complete Readme :-)
+For a detailed infos, please read the complete Readme :-)
 
 
 ## The NuGet Package "TypeScriptAngularJsProxyGenerator"
