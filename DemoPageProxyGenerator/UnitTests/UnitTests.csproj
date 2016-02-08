@@ -49,6 +49,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -71,6 +73,7 @@
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetProxyFunctionName.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetServiceName.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\HasAttribute.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHttpCallTests\BuildHttpCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper\AccessPrivateProperties.cs" />
     <Compile Include="TestHelper\TestClasses\Person.cs" />

@@ -98,6 +98,7 @@ namespace ProxyGeneratorDemoPage.Controllers
             return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
         public JsonResult AddTsEntryAndParams(Person person, string name, string vorname)
