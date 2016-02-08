@@ -14,7 +14,7 @@ The NuGet package installs a T4 Template `ControllersProxies\ProxyGeneratorScrip
 
 1. Configure the T4 template settings
 2. Configure your controllers by adding the right CreateProxy attribute to each function (AJAX call)
-3. Build the entire Solution, because the T4 Script looks up your assemblies for the added attributes
+3. Build the entire Solution, because the T4 Script looks up your compiled assemblies for the added attributes
 4. Run the T4 Script with "**Run Custom Tool**"
 
 For a detailed infos, please read the complete Readme :-)
