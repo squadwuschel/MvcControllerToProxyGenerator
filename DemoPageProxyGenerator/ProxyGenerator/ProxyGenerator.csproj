@@ -97,6 +97,7 @@
     <Compile Include="Builder\AngularTsProxyBuilder.cs" />
     <Compile Include="Builder\JQueryJsProxyBuilder.cs" />
     <Compile Include="Builder\JQueryTsProxyBuilder.cs" />
+    <Compile Include="Interfaces\IFileHelper.cs" />
     <Compile Include="Interfaces\IProxyBuilder.cs" />
     <Compile Include="Interfaces\IProxyBuilderDataTypeHelper.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelper.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Container\TemplateEntry.cs" />
     <Compile Include="ConstValuesTemplates.cs" />
+    <Compile Include="FileHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

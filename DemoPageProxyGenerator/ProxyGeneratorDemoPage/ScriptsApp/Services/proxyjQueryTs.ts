@@ -1,10 +1,10 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 23.01.2016 time 19:10 from SquadWuschel.
+//Created on 08.02.2016 time 23:09 from SquadWuschel.
 
   module App.JqueryServices { 
 
-export interface IProxyjQueryTs { 
+export interface IproxyjQueryTs { 
      addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
     addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string,vorname: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
@@ -18,12 +18,12 @@ export interface IProxyjQueryTs {
     voidTsReturnType(name: string): void;
     stringTsReturnType(name: string) : JQueryPromise<string>;
     integerTsReturnType(age: number) : JQueryPromise<number>;
-    dateTsReturnType(name: string) : JQueryPromise<Date>;
+    dateTsReturnType(name: string) : JQueryPromise<any>;
     boolTsReturnType(boolValue: boolean) : JQueryPromise<boolean>;
     errorStringReturnType(boolValue: boolean) : JQueryPromise<string>;
  }
 
-export class ProxyjQueryTs implements IProxyjQueryTs {
+export class proxyjQueryTs implements IproxyjQueryTs {
 
     public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
       return jQuery.post('Proxy/AddTsEntryOnly',person).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return result; });
@@ -76,8 +76,8 @@ export class ProxyjQueryTs implements IProxyjQueryTs {
       return jQuery.get('Proxy/IntegerTsReturnType'+ '?age='+age).then((result: number) : number => { return result; });
     } 
 
-    public dateTsReturnType(name: string) : JQueryPromise<Date> { 
-      return jQuery.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).then((result: Date) : Date => { return result; });
+    public dateTsReturnType(name: string) : JQueryPromise<any> { 
+      return jQuery.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).then((result: any) : any => { return result; });
     } 
 
     public boolTsReturnType(boolValue: boolean) : JQueryPromise<boolean> { 

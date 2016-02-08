@@ -250,17 +250,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="ControllersProxies\homeAngularJsSrv.js">
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
-    </Content>
-    <Content Include="ControllersProxies\proxyAngularJsSrv.js">
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
-    </Content>
     <Content Include="ControllersProxies\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-    </Content>
-    <Content Include="ControllersProxies\proxyjQueryJs.js">
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -272,6 +263,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ScriptsApp\Services\homeAngularJsSrv.js" />
+    <Content Include="ScriptsApp\Services\proxyAngularJsSrv.js" />
+    <Content Include="ScriptsApp\Services\proxyjQueryJs.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -319,18 +313,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="ControllersProxies\homePSrv.ts">
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ControllersProxies\proxyjQueryTs.ts">
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ControllersProxies\proxyPSrv.ts">
-      <DependentUpon>ProxyGeneratorScript.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />
     <TypeScriptCompile Include="ScriptsApp\jQueryCalls.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Services\homePSrv.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Services\proxyjQueryTs.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Services\proxyPSrv.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\Proxy\proxyCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Enums.ts">

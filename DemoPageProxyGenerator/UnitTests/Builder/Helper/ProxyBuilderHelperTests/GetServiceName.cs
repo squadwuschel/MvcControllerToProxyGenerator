@@ -14,7 +14,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHelperTests
             var proxyBuilder = new ProxyBuilderHelper(new ProxySettings() {LowerFirstCharInFunctionName = true});
 
             //Act
-            var name = proxyBuilder.GetServiceName("Home", "PSrv");
+            var name = proxyBuilder.GetServiceName("Home", "PSrv", true);
 
             //Assert
             Assert.AreEqual(name, "homePSrv");
@@ -27,7 +27,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHelperTests
             var proxyBuilder = new ProxyBuilderHelper(new ProxySettings() { LowerFirstCharInFunctionName = false });
 
             //Act
-            var name = proxyBuilder.GetServiceName("Home", "PSrv");
+            var name = proxyBuilder.GetServiceName("Home", "PSrv", false);
 
             //Assert
             Assert.AreEqual(name, "HomePSrv");
@@ -40,7 +40,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHelperTests
             var proxyBuilder = new ProxyBuilderHelper(new ProxySettings() { LowerFirstCharInFunctionName = true });
 
             //Act
-            var name = proxyBuilder.GetServiceName("H", "PSrv");
+            var name = proxyBuilder.GetServiceName("H", "PSrv",true);
 
             //Assert
             Assert.AreEqual(name, "hPSrv");
@@ -53,7 +53,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHelperTests
             var proxyBuilder = new ProxyBuilderHelper(new ProxySettings() { LowerFirstCharInFunctionName = false });
 
             //Act
-            var name = proxyBuilder.GetServiceName("H", "PSrv");
+            var name = proxyBuilder.GetServiceName("H", "PSrv", false);
 
             //Assert
             Assert.AreEqual(name, "HPSrv");
@@ -66,7 +66,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHelperTests
             var proxyBuilder = new ProxyBuilderHelper(new ProxySettings() { LowerFirstCharInFunctionName = true });
 
             //Act
-            var name = proxyBuilder.GetServiceName("Ho", "PSrv");
+            var name = proxyBuilder.GetServiceName("Ho", "PSrv",true);
 
             //Assert
             Assert.AreEqual(name, "hoPSrv");
@@ -79,7 +79,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHelperTests
             var proxyBuilder = new ProxyBuilderHelper(new ProxySettings() { LowerFirstCharInFunctionName = true });
 
             //Act
-            var name = proxyBuilder.GetServiceName("Ho", null);
+            var name = proxyBuilder.GetServiceName("Ho", null, true);
 
             //Assert
             Assert.AreEqual(name, "ho");
@@ -92,7 +92,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHelperTests
             var proxyBuilder = new ProxyBuilderHelper(new ProxySettings() { LowerFirstCharInFunctionName = false });
 
             //Act
-            var name = proxyBuilder.GetServiceName("Ho", null);
+            var name = proxyBuilder.GetServiceName("Ho", null, false);
 
             //Assert
             Assert.AreEqual(name, "Ho");

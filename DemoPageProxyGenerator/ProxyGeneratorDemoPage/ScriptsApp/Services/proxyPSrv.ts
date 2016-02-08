@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 23.01.2016 time 19:10 from SquadWuschel.
+//Created on 08.02.2016 time 23:09 from SquadWuschel.
 
   module App.Services { 
 
@@ -18,7 +18,7 @@ export interface IProxyPSrv {
     voidTsReturnType(name: string): void;
     stringTsReturnType(name: string) : ng.IPromise<string>;
     integerTsReturnType(age: number) : ng.IPromise<number>;
-    dateTsReturnType(name: string) : ng.IPromise<Date>;
+    dateTsReturnType(name: string) : ng.IPromise<any>;
     boolTsReturnType(boolValue: boolean) : ng.IPromise<boolean>;
     errorStringReturnType(boolValue: boolean) : ng.IPromise<string>;
  }
@@ -79,8 +79,8 @@ public integerTsReturnType(age: number) : ng.IPromise<number> {
     return this.$http.get('Proxy/IntegerTsReturnType'+ '?age='+age).then((response: ng.IHttpPromiseCallbackArg<number>) : number => { return response.data; });
 } 
 
-public dateTsReturnType(name: string) : ng.IPromise<Date> { 
-    return this.$http.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<Date>) : Date => { return response.data; });
+public dateTsReturnType(name: string) : ng.IPromise<any> { 
+    return this.$http.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<any>) : any => { return response.data; });
 } 
 
 public boolTsReturnType(boolValue: boolean) : ng.IPromise<boolean> { 

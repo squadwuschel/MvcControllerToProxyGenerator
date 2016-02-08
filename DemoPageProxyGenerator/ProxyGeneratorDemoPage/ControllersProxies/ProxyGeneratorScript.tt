@@ -21,7 +21,7 @@
 
 <#  ProxySettings settings = new ProxySettings();
 	//The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
-	//We search the path above for the WebProjectName to get the root Directory of the Website. like: C:\MyProject\WebSite\
+	//We search the path below for the "WebProjectName" to get the root Directory of the Website. like: C:\MyProject\WebSite\
 	settings.FullPathToTheWebProject = System.IO.Path.GetFullPath(this.Host.TemplateFile);
 
 //###########################################################################################################################################################################################
@@ -29,6 +29,8 @@
 //###########################################################################################################################################################################################
 	//YOU NEED to REPLACE the name with the name of the WebProject where the T4 ProxyGenerator Template was inserted:
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
+    //The relative path in the current WebProject, where the proxy files are created, if you want to create the files directly below the T4 Template, then set empty string or null
+	settings.ProxyFileOutputPath = "ScriptsApp/Services/";
 	//Tells the proxy generator if the AJAX functionnames start not with a Capital letter or not:
 	settings.LowerFirstCharInFunctionName = true;
 	//Default TypeLiteSetting is Interfacename == Classname, but I use a modifier that adds the "I" before the Classname
@@ -183,7 +185,7 @@
 	//Create for each used ProxyAttribut and Controller the Proxy outputfiles
     foreach (GeneratedProxyEntry entry in generator.GetGeneratedProxyEntries())
     {
-       manager.StartNewFile(entry.FileName); 
+       manager.StartNewFile(generator.Factory.FileHelper().GetProxyFileOutputPath(entry.FileName)); 
  #>
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.

@@ -11,7 +11,17 @@ namespace ProxyGenerator.Manager
     /// </summary>
     public class AssemblyManager : IAssemblyManager
     {
+        #region Member
         private List<Assembly> _allAssemblies = null;
+        IProxyGeneratorFactoryManager Factory { get; set; }
+        #endregion
+
+        #region Konstruktor
+        public AssemblyManager(IProxyGeneratorFactoryManager proxyGeneratorFactory)
+        {
+            Factory = proxyGeneratorFactory;
+        }
+        #endregion
 
         /// <summary>
         /// Laden der Assemblies die überprüft werden müssen, ob diese das Attribut zum Erstellen eines Proxies enthalten.
@@ -25,7 +35,7 @@ namespace ProxyGenerator.Manager
                 _allAssemblies = new List<Assembly>();
 
                 //Den Pfad zum T4 Template ermitteln
-                var webProjectPath = GetParentDirectory(fullPathToTheWebProject, webprojectName);
+                var webProjectPath = Factory.FileHelper().GetParentDirectory(fullPathToTheWebProject, webprojectName);
                 foreach (string dll in Directory.GetFiles(webProjectPath, "*.dll", SearchOption.AllDirectories))
                 {
                     _allAssemblies.Add(Assembly.LoadFile(dll));
@@ -35,25 +45,6 @@ namespace ProxyGenerator.Manager
             return _allAssemblies;
         }
 
-        /// <summary>
-        /// Zum Ermitteln des Hauptpfades des Webprojektes
-        /// </summary>
-        private string GetParentDirectory(string path, string pathNameToFind)
-        {
-            if (!path.Contains(pathNameToFind))
-            {
-                throw new Exception("The 'WebProjectPath' was not found, because the WebProjectName was wrong.");
-            }
 
-            if (string.IsNullOrEmpty(path) || path.TrimEnd(System.IO.Path.DirectorySeparatorChar).EndsWith(pathNameToFind))
-                return path;
-
-            string parent = System.IO.Path.GetDirectoryName(path);
-
-            if (path.Contains(pathNameToFind))
-                return GetParentDirectory(parent, pathNameToFind);
-
-            return parent;
-        }
     }
 }

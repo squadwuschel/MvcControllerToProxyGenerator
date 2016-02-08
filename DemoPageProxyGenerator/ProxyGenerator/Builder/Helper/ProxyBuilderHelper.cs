@@ -38,9 +38,9 @@ namespace ProxyGenerator.Builder.Helper
         /// </summary>
         /// <param name="controllerName">Der Name des Controllers beginnt mit kleinem Buchstaben</param>
         /// <param name="controllerSuffix">Der Suffix der an den namen des Controllers angehängt wird, z.b.: PSrv</param>
-        public string GetServiceName(string controllerName, string controllerSuffix)
+        public string GetServiceName(string controllerName, string controllerSuffix, bool lowerFirstCharInFunctionName)
         {
-            if (ProxySettings.LowerFirstCharInFunctionName)
+            if (lowerFirstCharInFunctionName)
             {
                 return string.Format("{0}{1}", Char.ToLowerInvariant(controllerName[0]) + controllerName.Substring(1), controllerSuffix);
             }

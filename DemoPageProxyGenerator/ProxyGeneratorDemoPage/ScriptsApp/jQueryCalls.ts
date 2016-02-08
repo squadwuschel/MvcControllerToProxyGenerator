@@ -1,10 +1,10 @@
 ﻿module App.JQueryApp {
 
     export class jQueryApp {
-        private jQuerySrv: App.JqueryServices.ProxyjQueryTs;
+        private jQuerySrv: App.JqueryServices.proxyjQueryTs;
 
         constructor() {
-            this.jQuerySrv = new App.JqueryServices.ProxyjQueryTs();
+            this.jQuerySrv = new App.JqueryServices.proxyjQueryTs();
 
             //Damit wir in der aufgerufenen Funktion auch den passenden this Pointer haben, müssen wir diesen
             //hier entsprechend übergeben mit bind

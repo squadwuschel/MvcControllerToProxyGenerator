@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ProxyGenerator.Container
 {
@@ -18,6 +16,11 @@ namespace ProxyGenerator.Container
         /// stimmen und hierbei handelt es sich meist um den gleichen Namen wie das WebProjekt.
         /// </summary>
         public string WebProjectName { get; set; }
+
+        /// <summary>
+        /// Der Ausgabepfad relativ zum WebProjekt Rootpfad in dem die Proxies erstellt werden sollen.
+        /// </summary>
+        public string ProxyFileOutputPath { get; set; }
 
         /// <summary>
         /// Gibt an ob der Name der jeweiligen Proxy Funktion mit kleinem oder großem Buchstaben beginnt. 

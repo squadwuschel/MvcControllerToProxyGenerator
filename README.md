@@ -454,7 +454,7 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
   
 
 ## Known Errormessages
-#### Method/Function overload not supported
+### 1. Method/Function overload not supported
 It is not possible to use function overload in JavaScript and so its also not possible for the template to create proxy calls when you have set the attribut on both overloaded functions.
 
         [CreateAngularJsProxy]
@@ -473,3 +473,8 @@ It is not possible to use function overload in JavaScript and so its also not po
 Then you get the following errormessage, when you try to create the proxy 
 
 **ERROR, JavaScript doesn't supports function/method overload, please rename one of those functions/methods 'AddJsEntryAndParams'.**
+
+### 2. The "WebProjectName" was not found
+When you have set the wrong "WebProjectName" in the ProxySettings, then the following Error will appear, when you try to create the proxies.
+
+**The 'WebProjectPath' was not found, because the 'WebProjectName' was wrong.**

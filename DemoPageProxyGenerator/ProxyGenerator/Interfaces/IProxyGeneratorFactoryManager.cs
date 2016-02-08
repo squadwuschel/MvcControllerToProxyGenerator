@@ -6,6 +6,7 @@ namespace ProxyGenerator.Interfaces
     public interface IProxyGeneratorFactoryManager
     {
         IAssemblyManager CreateAssemblyManager();
+        IFileHelper FileHelper();
         IControllerManager CreateControllerManager();
         IMethodManager CreateMethodManager();
         IMethodParameterManager CreateMethodParameterManager();

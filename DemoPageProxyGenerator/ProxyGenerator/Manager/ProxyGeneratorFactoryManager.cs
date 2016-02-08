@@ -21,7 +21,12 @@ namespace ProxyGenerator.Manager
         #region Creator Functions
         public IAssemblyManager CreateAssemblyManager()
         {
-            return new AssemblyManager();
+            return new AssemblyManager(this);
+        }
+
+        public IFileHelper FileHelper()
+        {
+            return new FileHelper(this);
         }
 
         public IControllerManager CreateControllerManager()

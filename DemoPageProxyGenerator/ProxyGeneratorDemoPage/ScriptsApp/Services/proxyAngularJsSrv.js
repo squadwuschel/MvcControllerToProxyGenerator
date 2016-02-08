@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 23.01.2016 time 19:10 from SquadWuschel.
+//Created on 08.02.2016 time 23:09 from SquadWuschel.
 
   function proxyAngularJsSrv($http) { this.http = $http; } 
 
