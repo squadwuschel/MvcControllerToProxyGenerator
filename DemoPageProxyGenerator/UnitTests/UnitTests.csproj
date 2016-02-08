@@ -63,6 +63,9 @@
     <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelperTests\GetFunctionParametersWithType.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelperTests\GetTsType.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelperTests\HasReturnType.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\BuildUrlParameter.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\BuildUrlParameterId.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetClearControllerName.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetFunctionParameters.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetProxyFileName.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetProxyFunctionName.cs" />

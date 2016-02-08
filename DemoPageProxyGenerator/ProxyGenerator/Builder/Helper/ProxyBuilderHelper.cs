@@ -95,7 +95,13 @@ namespace ProxyGenerator.Builder.Helper
         public string GetClearControllerName(Type controller)
         {
             string name = controller.Name;
-            return name.Substring(0, name.LastIndexOf(ConstValues.ControllerNameSuffix));
+
+            if (name.Contains(ConstValues.ControllerNameSuffix))
+            {
+                return name.Substring(0, name.LastIndexOf(ConstValues.ControllerNameSuffix));
+            }
+
+            return name;
         }
   
         /// <summary>
