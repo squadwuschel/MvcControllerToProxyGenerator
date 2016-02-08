@@ -63,6 +63,11 @@
     <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelperTests\GetFunctionParametersWithType.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelperTests\GetTsType.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderDataTypeHelperTests\HasReturnType.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetFunctionParameters.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetProxyFileName.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetProxyFunctionName.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetServiceName.cs" />
+    <Compile Include="Builder\Helper\ProxyBuilderHelperTests\HasAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper\AccessPrivateProperties.cs" />
     <Compile Include="TestHelper\TestClasses\Person.cs" />

@@ -18,6 +18,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderDataTypeHelperTests
         public void Setup()
         {
             //Aus der Aktuellen Test DLL alle Typen ermitteln in denen der Name "GetFunctionParametersWithTypeOneParam" vorkommt, sollte nur einen Typen geben!
+            //Achtung Private "Sub" Klasse!
             TestClassTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => type.Name.Contains("GetFunctionParametersWithTypeOneParam")).ToList();
         }
 
