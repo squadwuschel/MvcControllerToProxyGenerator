@@ -5,12 +5,12 @@ Download and install the [NuGet package for "TypeScriptAngularJsProxyGenerator"]
 
 Or install the NuGet package with the package manager console:
 
-    PM > Install-Package TypeScriptAngularJsProxyGenerator
+**`PM > Install-Package TypeScriptAngularJsProxyGenerator`**
 
 ---------
 
 ## Setup / Usage
-The NuGet package installs a T4 Template `Scripts\ProxyGeneratorScript.tt` in your WebProject. 
+The NuGet package installs a T4 Template **`Scripts\ProxyGeneratorScript.tt`** in your WebProject. 
 
 1. Configure the T4 template settings
 2. Configure your controllers by adding the right CreateProxy attribute to each function (AJAX call)
@@ -38,23 +38,27 @@ If you want to **create TypeScript proxies** then, you **need to install manuall
 (If you use TypeScript don't forget to install the TypeDefinitions for jQuery and/or AngularJs)
 
 ## T4 Configruation Settings
-When you have installed all NuGet Packages, you **need to configure** the T4 Tempalte under `Scripts\ProxyGeneratorScript.tt` in its config Section **"SETTINGS for MANUAL adjustments"**.
-Here you have to set the name of your current WebPoject.
+When you have installed all NuGet Packages, you **need to configure** the T4 Template install location:
 
-	settings.WebProjectName = "ProxyGeneratorDemoPage";
+`Scripts\ProxyGeneratorScript.tt` 
+
+in the config Section **"SETTINGS for MANUAL adjustments"**, here you can find some settings you can/need to change, that the generator works right.
+
+Here you **NEED to set** the name of your current WebPoject.
+
+`settings.WebProjectName = "ProxyGeneratorDemoPage";`
 
 If you want to set the output directory for your created proxy files, then you set a path from the root of your WebProject. If you want to create the files directly below the T4 template set this setting to null or empty string.
 
-    settings.ProxyFileOutputPath = "Scripts/Proxies";
-
+`settings.ProxyFileOutputPath = "Scripts/Proxies";`
 
 If you want to create a TypeScript Proxy, don't forget to install [TypeLite](https://www.nuget.org/packages/TypeLite/) and you need to add to the TypeLite T4 template the following line:
 
-    .WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)
+`.WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)`
 
 or if you use the original TypeLite Interface name without the "I" then, you need to remove the "I" from my T4 Template.
      
-    settings.TypeLiteInterfacePrefix = "";
+`settings.TypeLiteInterfacePrefix = "";`
 
 ## How to tell the T4 template to create a proxy 
 The T4 template only creates proxies for controller functions which are decorated with the right Attribute.
