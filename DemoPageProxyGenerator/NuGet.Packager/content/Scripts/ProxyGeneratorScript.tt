@@ -1,0 +1,379 @@
+﻿<# //PLEASE HAVE A LOOK AT THE DOCUMENTATION: https://github.com/squadwuschel/MvcControllerToProxyGenerator #>
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#//We need the NuGet Package for: Microsoft.VisualStudio.TextTemplating.14.0  #>
+<# // the default Assemblies are searched in the GAC #> 
+<#@ assembly name="System.Core" #>
+<# // Own assemblies need to be referenced directly e.g. over the "bin" directory of the current project. #> 
+<#@ assembly name="$(TargetDir)ProxyGenerator.dll" #>
+
+<#@ import namespace="ProxyGenerator" #>
+<#@ import namespace="ProxyGenerator.Container" #>
+<#@ import namespace="ProxyGenerator.Manager" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ assembly name="EnvDTE" #>
+
+<# // "Hack" to prevent Default Template outputfile "ProxyGenerator.cs" - creates a warning #> 
+<#@ output extension="\\" #>
+<#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
+
+<#  ProxySettings settings = new ProxySettings();
+	//The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
+	//We search the path below for the "WebProjectName" to get the root Directory of the Website. like: C:\MyProject\WebSite\
+	settings.FullPathToTheWebProject = System.IO.Path.GetFullPath(this.Host.TemplateFile);
+
+//###########################################################################################################################################################################################
+//########################################################-- SETTINGS for MANUAL adjustments --##############################################################################################
+//###########################################################################################################################################################################################
+	//YOU NEED to REPLACE the name with the name of the WebProject where the T4 ProxyGenerator Template was inserted:
+	settings.WebProjectName = "ProxyGeneratorDemoPage";
+    //The relative path in the current WebProject, where the proxy files are created/updated, if you want to create the files directly below the T4 Template, then assing a empty string or null
+	settings.ProxyFileOutputPath = "ScriptsApp/Services/";
+	//Tells the proxy generator if the AJAX functionnames start not with a Capital letter or not:
+	settings.LowerFirstCharInFunctionName = true;
+	//Default TypeLiteSetting is Interfacename == Classname, but I use a modifier that adds the "I" before the Classname
+	//In TypeLite: .WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)
+    settings.TypeLiteInterfacePrefix = "I";
+
+
+//###########################################################################################################################################################################################
+//#############################################################-- Tempalte Definition START --###############################################################################################
+//###########################################################################################################################################################################################
+//###########################################################################################################################################################################################
+//###########################################################################################################################################################################################
+//###########################################################################################################################################################################################
+//#############################################################--AngularJs JavaScript Definitions--##########################################################################################
+//###########################################################################################################################################################################################
+//TEMPLATE STRINGS FOR: "AngularJs JavaScript Service Definition":
+// 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNameAngularJsSrv  -> accountAngularJsSrv for AccountController
+// 2. #PrototypeServiceCalls# => insert all Service Calls which are marked with the Attribut "CreateAngularJsProxyAttribute".
+    var angularJsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularJsModule, TemplateSuffix = "AngularJsSrv"};
+	angularJsModule.Template = "function #ServiceName#($http) { this.http = $http; } \r\n\r\n\r\n";
+    angularJsModule.Template += "#PrototypeServiceCalls#\r\n";
+    angularJsModule.Template += "angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#]);";
+	settings.Templates.Add(angularJsModule);
+
+//TEMPLATE STRINGS FOR: "AngularJs JavaScript prototype Service Calls":
+// 1. #ServiceName# => replace with the name of the controller to call the right prototype function
+// 2. #ServiceParamters# => the params lists for a service call with Ajax e.g.: name, id, person
+// 3. #ControllerFunctionName# => the function name from the ajax call coresponds to the controller function name which is called.
+// 4. #ServiceCallAndParameters# => replace the ajax url and params like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+    var angularJsPrototype = new TemplateEntry() {TemplateType = TemplateTypes.AngularJsPrototype};
+    angularJsPrototype.Template = "#ServiceName#.prototype.#ControllerFunctionName# = function (#ServiceParamters#) { \r\n";
+    angularJsPrototype.Template += "   return this.http.#ServiceCallAndParameters#.then(function (result) {\r\n";
+    angularJsPrototype.Template += "        return result.data;\r\n   });\r\n}\r\n\r\n";
+	settings.Templates.Add(angularJsPrototype);
+//###########################################################################################################################################################################################
+//#############################################################--AngularJs TypeScript Definitions--##########################################################################################
+//###########################################################################################################################################################################################
+//TEMPLATE STRINGS FOR: "Angular TypeScript Module Definition for a Angular Service": 
+// 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamePSrv  -> accountPSrv for AccountController
+// 2. #InterfaceDefinitions# => TypeScript Interface Definition for all Service Calls for the current ServiceName
+// 3. #ServiceFunctions# => replace with all programed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "AngularTsAjaxCallNoReturnType" or "AngularTsAjaxCallWithReturnType")
+    var angularTsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularTsModule, TemplateSuffix = "PSrv"};
+	angularTsModule.Template = "module App.Services { \r\n\r\n";
+    angularTsModule.Template += "export interface I#ServiceName# { \r\n #InterfaceDefinitions# }\r\n\r\n";
+    angularTsModule.Template += "export class #ServiceName# implements I#ServiceName# {\r\n";
+    angularTsModule.Template += "    static $inject = ['$http']; \r\n   constructor(private $http: ng.IHttpService) { } \r\n\r\n";
+    angularTsModule.Template += "#ServiceFunctions#";
+    angularTsModule.Template += "//#region Angular Module Definition \r\n" +
+								"  private static _module: ng.IModule; \r\n" +
+   								"  public static get module(): ng.IModule {\r\n " +
+   	                            "     if (this._module) { return this._module; }\r\n" +
+   	                            "      this._module = angular.module('#ServiceName#', []);\r\n " +
+   	                            "     this._module.service('#ServiceName#', #ServiceName#);\r\n" +
+   	                            "      return this._module; \r\n   }\r\n " +
+   	                            "//#endregion \r\n\r\n   } \r\n }";
+	settings.Templates.Add(angularTsModule);
+
+//TEMPLATE STRINGS FOR: "Angular TypeScript Ajax Call Function with ReturnType": 
+// 1. #ControllerFunctionName# => controller function name
+// 2. #ServiceParamters# => parameters for the service call
+// 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
+// 4. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+    var angularTsAjaxCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallWithReturnType};
+    angularTsAjaxCallWithReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : ng.IPromise<{#ControllerFunctionReturnType#}> { \r\n" +
+											   "    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; });\r\n} \r\n\r\n";
+											   //Alternative Response with Error CallBack, which only returns complete errorResponse and not only the "response.data"
+											   //"    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; }, (errorResponse : ng.IHttpPromiseCallbackArg<any>) => { return errorResponse });\r\n} \r\n\r\n";
+	settings.Templates.Add(angularTsAjaxCallWithReturnType);
+
+//TEMPLATE STRINGS FOR: "Angular TypeScript Ajax Call Function with NO ReturnType": 
+// 1. #ControllerFunctionName# => controller function name
+// 2. #ServiceParamters# => parameters for the service call
+// 3. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+    var angularTsAjaxCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallNoReturnType};
+    angularTsAjaxCallWithNoReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
+	settings.Templates.Add(angularTsAjaxCallWithNoReturnType);
+//###########################################################################################################################################################################################
+//#############################################################--jQuery TypeScript Definitions--##########################################################################################
+//###########################################################################################################################################################################################
+//TEMPLATE STRINGS FOR: "jQuery TypeScript Definition": 
+// 1. #ServiceName# => the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamejQueryTs  -> accountjQueryTs for AccountController
+// 2. #InterfaceDefinitions# => TypeScript Interface Definition for all Service Calls for the current ServiceName
+// 3. #ServiceFunctions# => Programed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "jQueryTsAjaxCallWithReturnType" or "jQueryTsAjaxCallNoReturnType")
+    var jQueryTsModule = new TemplateEntry() { TemplateType = TemplateTypes.jQueryTsModule, TemplateSuffix = "jQueryTs"};
+	jQueryTsModule.Template = "module App.JqueryServices { \r\n\r\n";
+    jQueryTsModule.Template += "export interface I#ServiceName# { \r\n #InterfaceDefinitions# }\r\n\r\n";
+    jQueryTsModule.Template += "export class #ServiceName# implements I#ServiceName# {\r\n\r\n";
+    jQueryTsModule.Template += "#ServiceFunctions# \r\n  }\r\n}";
+	settings.Templates.Add(jQueryTsModule);
+
+//TEMPLATE STRINGS FOR: "jQuery TypeScript Ajax Call Function with ReturnType"
+// 1. #ControllerFunctionName# => controller function name
+// 2. #ServiceParamters# => parameters for the service call
+// 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute "CreateJQueryTsProxyAttribute" for the Ajax Call
+// 4. #ServiceCallAndParameters# => service call like: jQuery.get("GetAutosByHerstellerId/" + value)
+    var jQueryTsAjaxCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsAjaxCallWithReturnType};
+    jQueryTsAjaxCallWithReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : JQueryPromise<{#ControllerFunctionReturnType#}> { \r\n" +
+											   "      return jQuery.#ServiceCallAndParameters#.then((result: {#ControllerFunctionReturnType#}) : {#ControllerFunctionReturnType#} => { return result; });\r\n    } \r\n\r\n";
+	settings.Templates.Add(jQueryTsAjaxCallWithReturnType);
+
+//TEMPLATE STRINGS FOR: "jQuery TypeScript Ajax Call Function NO ReturnType"
+	var jQueryTsAjaxCallNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsAjaxCallNoReturnType};
+    jQueryTsAjaxCallNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void { jQuery.#ServiceCallAndParameters# \r\n} \r\n\r\n";
+	settings.Templates.Add(jQueryTsAjaxCallNoReturnType);
+//###########################################################################################################################################################################################
+//#############################################################--jQuery JavaScript Definitions--##########################################################################################
+//###########################################################################################################################################################################################
+//TEMPLATE STRINGS FOR: "jQuery JavaScript Service Definition":
+// 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamejQueryJs  -> accountjQueryJs for AccountController
+// 2. #PrototypeServiceCalls# => insert all Service Calls which are marked with the Attribut "CreateJQueryJsProxyAttribute".
+    var jQueryJsModule = new TemplateEntry() { TemplateType = TemplateTypes.jQueryJsModule, TemplateSuffix = "jQueryJs"};
+	jQueryJsModule.Template = "window.#ServiceName# = function() { } \r\n\r\n\r\n";
+    jQueryJsModule.Template += "#PrototypeServiceCalls#\r\n";
+	settings.Templates.Add(jQueryJsModule);
+
+//TEMPLATE STRINGS FOR: "jQuery JavaScript prototype Service Calls":
+// 1. #ServiceName# => replace with the name of the controller to call the right prototype function
+// 2. #ServiceParamters# => the params lists for a service call with Ajax e.g.: name, id, person
+// 3. #ControllerFunctionName# => the function name from the ajax call coresponds to the controller function name which is called.
+// 4. #ServiceCallAndParameters# => replace the ajax url and params like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+    var jQueryJsPrototype = new TemplateEntry() {TemplateType = TemplateTypes.jQueryJsPrototype};
+    jQueryJsPrototype.Template = "#ServiceName#.prototype.#ControllerFunctionName# = function (#ServiceParamters#) { \r\n";
+    jQueryJsPrototype.Template += "   return jQuery.#ServiceCallAndParameters#.then(function (result) {\r\n";
+    jQueryJsPrototype.Template += "        return result;\r\n   });\r\n}\r\n\r\n";
+	settings.Templates.Add(jQueryJsPrototype);
+//###########################################################################################################################################################################################
+//#############################################################-- Tempalte Definition END --#################################################################################################
+//###########################################################################################################################################################################################
+//###########################################################################################################################################################################################
+//###########################################################################################################################################################################################
+//###########################################################################################################################################################################################
+//#############################################################-- Proxy Generator - Initialization --########################################################################################
+//###########################################################################################################################################################################################
+	//Create the proxy generator and set the settings in the factory.
+	Generator generator = new Generator(settings);
+	//You can have multiple different generated Proxies in one project, it depends on the Used ProxyAttributes in your project.
+	
+	//Add AngularJS ProxyGenerator
+	generator.AddAngularJsProxyGenerator();
+	//Add AngularTs ProxyGenerator. You need to install the TypeScript TypeDefinitions for your current Angular version
+	//and TypeLite to create the Interfaces for your .NET Types in TypeScript.
+	generator.AddAngularTsProxyGenerator();
+	//Add jQueryTs ProxyGenerator
+	generator.AddjQueryTsProxyGenerator();
+	//Add jQueryJs ProxyGenerator
+	generator.AddjQueryJsProxyGenerator();
+
+//###########################################################################################################################################################################################
+//#############################################################-- Outputfile Generation START --#############################################################################################
+//###########################################################################################################################################################################################	
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+	//Create for each used ProxyAttribut and Controller the Proxy outputfiles
+    foreach (GeneratedProxyEntry entry in generator.GetGeneratedProxyEntries())
+    {
+       manager.StartNewFile(generator.Factory.FileHelper().GetProxyFileOutputPath(entry.FileName)); 
+ #>
+//Warning this file was dynamicly created.
+//Please don't change any code it will be overwritten next time the template is executed.
+//Created on <#= DateTime.Now.Date.ToShortDateString() #> time <#= DateTime.Now.ToShortTimeString()  #> from <#= Environment.UserName #>.
+
+ <# //Write the Current Proxyfile Content #>
+ <#=entry.FileContent #>
+
+<#		manager.EndBlock(); 
+	//foreach Closed
+    }
+
+	//Start complete filecreation.
+	manager.Process(true);
+//###########################################################################################################################################################################################
+//#############################################################-- Outputfile Generation END --###############################################################################################
+//###########################################################################################################################################################################################
+#>
+
+<#+
+// Addional Sources, extra classes must be placed at the end of the t4 Template:
+// https://raw.github.com/damieng/DamienGKit
+// http://damieng.com/blog/2009/11/06/multiple-outputs-from-t4-made-easy-revisited
+// File Manager class to save multiple Files with Checkout for source control like TFS, ....
+class Manager {
+    private class Block {
+        public String Name;
+        public int Start, Length;
+        public bool IncludeInDefault;
+    }
+
+    private Block currentBlock;
+    private readonly List<Block> files = new List<Block>();
+    private readonly Block footer = new Block();
+    private readonly Block header = new Block();
+    private readonly ITextTemplatingEngineHost host;
+    private readonly StringBuilder template;
+    protected readonly List<String> generatedFileNames = new List<String>();
+
+    public static Manager Create(ITextTemplatingEngineHost host, StringBuilder template) {
+        return (host is IServiceProvider) ? new VSManager(host, template) : new Manager(host, template);
+    }
+
+    public void StartNewFile(String name) {
+        if (name == null)
+            throw new ArgumentNullException("name");
+        CurrentBlock = new Block { Name = name };
+    }
+
+    public void StartFooter(bool includeInDefault = true) {
+        CurrentBlock = footer;
+        footer.IncludeInDefault = includeInDefault;
+    }
+
+    public void StartHeader(bool includeInDefault = true) {
+        CurrentBlock = header;
+        header.IncludeInDefault = includeInDefault;
+    }
+
+    public void EndBlock() {
+        if (CurrentBlock == null)
+            return;
+        CurrentBlock.Length = template.Length - CurrentBlock.Start;
+        if (CurrentBlock != header && CurrentBlock != footer)
+            files.Add(CurrentBlock);
+        currentBlock = null;
+    }
+
+    public virtual void Process(bool split, bool sync = true) {
+        if (split) {
+            EndBlock();
+            String headerText = template.ToString(header.Start, header.Length);
+            String footerText = template.ToString(footer.Start, footer.Length);
+            String outputPath = Path.GetDirectoryName(host.TemplateFile);
+            files.Reverse();
+            if (!footer.IncludeInDefault)
+                template.Remove(footer.Start, footer.Length);
+            foreach(Block block in files) {
+                String fileName = Path.Combine(outputPath, block.Name);
+                String content = headerText + template.ToString(block.Start, block.Length) + footerText;
+                generatedFileNames.Add(fileName);
+                CreateFile(fileName, content);
+                template.Remove(block.Start, block.Length);
+            }
+            if (!header.IncludeInDefault)
+                template.Remove(header.Start, header.Length);
+        }
+    }
+
+    protected virtual void CreateFile(String fileName, String content) {
+        if (IsFileContentDifferent(fileName, content))
+            File.WriteAllText(fileName, content);
+    }
+
+    public virtual String GetCustomToolNamespace(String fileName) {
+        return null;
+    }
+
+    public virtual String DefaultProjectNamespace {
+        get { return null; }
+    }
+
+    protected bool IsFileContentDifferent(String fileName, String newContent) {
+        return !(File.Exists(fileName) && File.ReadAllText(fileName) == newContent);
+    }
+
+    private Manager(ITextTemplatingEngineHost host, StringBuilder template) {
+        this.host = host;
+        this.template = template;
+    }
+
+    private Block CurrentBlock {
+        get { return currentBlock; }
+        set {
+            if (CurrentBlock != null)
+                EndBlock();
+            if (value != null)
+                value.Start = template.Length;
+            currentBlock = value;
+        }
+    }
+
+    private class VSManager: Manager {
+        private readonly EnvDTE.ProjectItem templateProjectItem;
+        private readonly EnvDTE.DTE dte;
+        private readonly Action<String> checkOutAction;
+        private readonly Action<List<String>> projectSyncAction;
+
+        public override String DefaultProjectNamespace {
+            get {
+                return templateProjectItem.ContainingProject.Properties.Item("DefaultNamespace").Value.ToString();
+            }
+        }
+
+        public override String GetCustomToolNamespace(string fileName) {
+            return dte.Solution.FindProjectItem(fileName).Properties.Item("CustomToolNamespace").Value.ToString();
+        }
+
+        public override void Process(bool split, bool sync) {
+            if (templateProjectItem.ProjectItems == null)
+                return;
+            base.Process(split, sync);
+            if (sync)
+                projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(generatedFileNames, null, null));
+        }
+
+        protected override void CreateFile(String fileName, String content) {
+            if (IsFileContentDifferent(fileName, content)) {
+                CheckoutFileIfRequired(fileName);
+                File.WriteAllText(fileName, content);
+            }
+        }
+
+        internal VSManager(ITextTemplatingEngineHost host, StringBuilder template)
+            : base(host, template) {
+            var hostServiceProvider = (IServiceProvider)host;
+            if (hostServiceProvider == null)
+                throw new ArgumentNullException("Could not obtain IServiceProvider");
+            dte = (EnvDTE.DTE) hostServiceProvider.GetService(typeof(EnvDTE.DTE));
+            if (dte == null)
+                throw new ArgumentNullException("Could not obtain DTE from host");
+            templateProjectItem = dte.Solution.FindProjectItem(host.TemplateFile);
+            checkOutAction = fileName => dte.SourceControl.CheckOutItem(fileName);
+            projectSyncAction = keepFileNames => ProjectSync(templateProjectItem, keepFileNames);
+        }
+
+        private static void ProjectSync(EnvDTE.ProjectItem templateProjectItem, List<String> keepFileNames) {
+            var keepFileNameSet = new HashSet<String>(keepFileNames);
+            var projectFiles = new Dictionary<String, EnvDTE.ProjectItem>();
+            var originalFilePrefix = Path.GetFileNameWithoutExtension(templateProjectItem.FileNames[0]) + ".";
+            foreach (EnvDTE.ProjectItem projectItem in templateProjectItem.ProjectItems)
+                projectFiles.Add(projectItem.FileNames[0], projectItem);
+
+            // Remove unused items from the project
+            foreach (var pair in projectFiles)
+                if (!keepFileNames.Contains(pair.Key) && !(Path.GetFileNameWithoutExtension(pair.Key) + ".").StartsWith(originalFilePrefix))
+                    pair.Value.Delete();
+
+            // Add missing files to the project
+            foreach(String fileName in keepFileNameSet)
+                if (!projectFiles.ContainsKey(fileName))
+                    templateProjectItem.ProjectItems.AddFromFile(fileName);
+        }
+
+        private void CheckoutFileIfRequired(String fileName) {
+            var sc = dte.SourceControl;
+            if (sc != null && sc.IsItemUnderSCC(fileName) && !sc.IsItemCheckedOut(fileName))
+                checkOutAction.EndInvoke(checkOutAction.BeginInvoke(fileName, null, null));
+        }
+    }
+} #>

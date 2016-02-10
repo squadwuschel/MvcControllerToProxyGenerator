@@ -10,7 +10,7 @@ Or install the NuGet package with the package manager console:
 ---------
 
 ## Setup / Usage
-The NuGet package installs a T4 Template `ControllersProxies\ProxyGeneratorScript.tt` in your WebProject. 
+The NuGet package installs a T4 Template `Scripts\ProxyGeneratorScript.tt` in your WebProject. 
 
 1. Configure the T4 template settings
 2. Configure your controllers by adding the right CreateProxy attribute to each function (AJAX call)
@@ -23,7 +23,7 @@ For a detailed infos, please read the complete Readme :-)
 ## The NuGet Package "TypeScriptAngularJsProxyGenerator"
 The package installs a T4 Template into your WebProject under the path
 
-`ControllersProxies\ProxyGeneratorScript.tt`
+`Scripts\ProxyGeneratorScript.tt`
 
 and adds a refrence to a installed DLL named
 
@@ -38,7 +38,7 @@ If you want to **create TypeScript proxies** then, you **need to install manuall
 (If you use TypeScript don't forget to install the TypeDefinitions for jQuery and/or AngularJs)
 
 ## T4 Configruation Settings
-When you have installed all NuGet Packages, you **need to configure** the T4 Tempalte under `ControllersProxies\ProxyGeneratorScript.tt` in its config Section **"SETTINGS for MANUAL adjustments"**.
+When you have installed all NuGet Packages, you **need to configure** the T4 Tempalte under `Scripts\ProxyGeneratorScript.tt` in its config Section **"SETTINGS for MANUAL adjustments"**.
 Here you have to set the name of your current WebPoject.
 
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
