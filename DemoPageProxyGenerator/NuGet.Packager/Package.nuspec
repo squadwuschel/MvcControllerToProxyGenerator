@@ -15,8 +15,8 @@
     </description>
     <summary>TypeScript or JavaScript ProxyGenerator for ASP.NET MVC. To create AngularJs or jQuery proxies with T4 template for your .NET Controllers or WebApi Controller</summary>
     <releaseNotes>
-      Version 1.0.2: Added support for alternative proxy creation path
-      Version 1.0.3: ProxyGeneratorScript.tt Script moved to the "Scripts" Folder
+ Version 1.0.2: Added support for alternative proxy creation path
+ Version 1.0.3: ProxyGeneratorScript.tt Script moved to the "Scripts" Folder
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>
