@@ -36,13 +36,13 @@ namespace ProxyGenerator.Builder
 
             #region Template Example
             //TEMPLATE FÜR: "TemplateTypes.AngularJsModule":
-            // function #ServiceName#($http) {{ this.http = $http; }}";
-            // #PrototypeServiceCalls#";
-            // angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#]);";
+            // function #ServiceName#($http) {{ this.http = $http; }}"
+            // #PrototypeServiceCalls#"
+            // angular.module('#ServiceName#', []) .service('#ServiceName#', ['$http', #ServiceName#])
 
             //TEMPLATE FÜR: "TemplateTypes.AngularJsPrototype"
-            // #ServiceName#.prototype.#controllerFunctionName# = function (#serviceParamters#) {{ ";
-            // return this.http.#ServiceCallAndParameters#.then(function (result) {{ return result.data; }});}}";
+            // #ServiceName#.prototype.#controllerFunctionName# = function (#serviceParamters#) {{
+            // return this.http.#ServiceCallAndParameters#.then(function (result) {{ return result.data; }});}}
             #endregion
 
             //Alle controller durchgehen die übergeben wurden und für jeden dann die entsprechenden Proxy Methoden erstellen
@@ -57,7 +57,8 @@ namespace ProxyGenerator.Builder
                 {
                     var angularJsPrototypeTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularJsPrototype).Template;
                     //Den Servicenamen vor dem Prototype ersetzen.
-                    string prototypeFunction = angularJsPrototypeTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix, Factory.GetProxySettings().LowerFirstCharInFunctionName));
+                    string prototypeFunction = angularJsPrototypeTemplate.Replace(ConstValuesTemplates.ServiceName,
+                                               ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix, Factory.GetProxySettings().LowerFirstCharInFunctionName));
                     //Den Methodennamen ersetzen.
                     prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.ControllerFunctionName, ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name));
                     //Parameter des Funktionsaufrufs ersetzen.

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using ProxyGenerator.ProxyTypeAttributes;
 
 namespace ProxyGenerator.Container
 {
@@ -13,6 +12,9 @@ namespace ProxyGenerator.Container
         /// </summary>
         public string Namespace { get; set; }
 
+        /// <summary>
+        /// Der Methodenname inkl. Namespace davor.
+        /// </summary>
         public string MethodNameWithNamespace { get; set; }
 
         /// <summary>
