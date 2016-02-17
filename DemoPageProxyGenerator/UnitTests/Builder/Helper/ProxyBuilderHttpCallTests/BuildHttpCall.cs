@@ -107,7 +107,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHttpCallTests
             var methodInfos = new ProxyMethodInfos();
             //Die MethodenInfos laden - können wir nicht Mocken!
             methodInfos.MethodInfo = TestClassType.GetMethod("OneComplexParamHttpPost");
-            methodInfos.ProxyMethodParameterInfos.Add(new ProxyMethodParameterInfo() { IsComplexeType = true, ParameterName = "person" });
+            methodInfos.ProxyMethodParameterInfos.Add(new ProxyMethodParameterInfo() { IsComplexeType = false, ParameterName = "person" });
 
             //Mocken der passenden Infos
             MockBuildHelper.Setup(p => p.GetClearControllerName(It.IsAny<Type>())).Returns("Home");
