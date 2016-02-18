@@ -21,7 +21,6 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHttpCallTests
 
         private IProxyBuilderHttpCall ProxyBuilderHttpCall { get; set; }
 
-
         [SetUp]
         public void Setup()
         {

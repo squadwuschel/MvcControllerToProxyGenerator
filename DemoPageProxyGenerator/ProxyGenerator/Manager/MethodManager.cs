@@ -69,7 +69,7 @@ namespace ProxyGenerator.Manager
                 //Es ist aktuell sehr umständlich hier Interfaces zu verwenden.
                 if (attr.ReturnType != null && attr.ReturnType.IsInterface)
                 {
-                    throw new Exception(string.Format("Bitte keine Interfaces als 'ReturnType' für 'CreateProxy' verwenden: '{0}'", attr.ReturnType.Name));
+                    throw new NotSupportedException(string.Format("Please don't use Interfaces as 'ReturnType' for 'CreateProxy': '{0}' (its not supported)", attr.ReturnType.Name));
                 }
                 return attr.ReturnType;
             }

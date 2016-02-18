@@ -23,8 +23,9 @@ namespace UnitTests.Manager.ControllerManagerTests
         private ControllerManager ControllerManager { get; set; }
         #endregion
 
-        #region Konstruktor
-        public LoadProxyControllerInfos()
+        #region Setup
+        [SetUp]
+        public void Setup()
         {
             MockFactory = new Mock<IProxyGeneratorFactoryManager>(); 
             MockMethodManager = new Mock<IMethodManager>();
@@ -55,6 +56,7 @@ namespace UnitTests.Manager.ControllerManagerTests
             MockProxyBuildHelper.Verify(p => p.GetClearControllerName(It.IsAny<Type>()), () => Times.Exactly(2));
             MockFactory.Verify(p => p.CreateProxyBuilderHelper(), () => Times.Exactly(2));
         }
+        #endregion
 
         /// <summary>
         /// Die Klasse ist nur zum Testen gedacht, damit wir uns per Reflektion die passenden Methoden laden können.
@@ -90,6 +92,5 @@ namespace UnitTests.Manager.ControllerManagerTests
             [CreateJQueryJsProxy()]
             public void OneComplexParamAndOneSimple(Person person, string name) { }
         }
-        #endregion
     }
 }
