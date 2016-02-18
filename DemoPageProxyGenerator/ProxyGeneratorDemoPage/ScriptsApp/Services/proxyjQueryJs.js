@@ -1,53 +1,53 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 18.02.2016 time 22:10 from SquadWuschel.
+//Created on 18.02.2016 time 22:37 from SquadWuschel.
 
   window.proxyjQueryJs = function() { } 
 
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function (person) { 
+proxyjQueryJs.prototype.addJsEntryOnly = function (person) { 
    return jQuery.post('Proxy/AddJsEntryOnly',person).then(function (result) {
         return result;
    });
 }
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function (person,name) { 
+proxyjQueryJs.prototype.addJsEntryAndName = function (person,name) { 
    return jQuery.post('Proxy/AddJsEntryAndName'+ '?name='+encodeURIComponent(name),person).then(function (result) {
         return result;
    });
 }
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function (person,name,vorname) { 
+proxyjQueryJs.prototype.addJsEntryAndParams = function (person,name,vorname) { 
    return jQuery.post('Proxy/AddJsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname),person).then(function (result) {
         return result;
    });
 }
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function () { 
+proxyjQueryJs.prototype.clearJsCall = function () { 
    return jQuery.get('Proxy/ClearJsCall').then(function (result) {
         return result;
    });
 }
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function (id) { 
+proxyjQueryJs.prototype.loadJsCallById = function (id) { 
    return jQuery.get('Proxy/LoadJsCallById' + '/' + id).then(function (result) {
         return result;
    });
 }
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function (name,vorname,alter) { 
+proxyjQueryJs.prototype.loadJsCallByParams = function (name,vorname,alter) { 
    return jQuery.get('Proxy/LoadJsCallByParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter).then(function (result) {
         return result;
    });
 }
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function (name,vorname,alter,id) { 
+proxyjQueryJs.prototype.loadJsCallByParamsAndId = function (name,vorname,alter,id) { 
    return jQuery.get('Proxy/LoadJsCallByParamsAndId' + '/' + id+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter).then(function (result) {
         return result;
    });
 }
 
-proxyjQueryJs.prototype.#ControllProxyFileerFunctionName# = function (name,vorname,alter,access) { 
+proxyjQueryJs.prototype.loadJsCallByParamsWithEnum = function (name,vorname,alter,access) { 
    return jQuery.get('Proxy/LoadJsCallByParamsWithEnum'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter+'&access='+access).then(function (result) {
         return result;
    });

@@ -250,8 +250,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="ScriptsApp\Services\proxyjQueryJs.js" />
-    <Content Include="Scripts\ProxyGeneratorScript.tt">
+    <Content Include="ControllersProxies\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
     <Content Include="favicon.ico" />
@@ -321,6 +320,9 @@
     <TypeScriptCompile Include="ScriptsApp\Services\proxyPSrv.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\Proxy\proxyCtrl.ts" />
+    <TypeScriptCompile Include="Scripts\Enums.ts">
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Scripts\TypeLite.Net4.d.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -356,7 +358,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55846</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
