@@ -99,6 +99,9 @@
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\GetServiceName.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHelperTests\HasAttribute.cs" />
     <Compile Include="Builder\Helper\ProxyBuilderHttpCallTests\BuildHttpCall.cs" />
+    <Compile Include="FileHelperTests\GetParentDirectory.cs" />
+    <Compile Include="FileHelperTests\GetProxyFileOutputPath.cs" />
+    <Compile Include="Manager\ControllerManagerTests\LoadProxyControllerInfos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper\AccessPrivateProperties.cs" />
     <Compile Include="TestHelper\ProxyControllerInfoGenerator.cs" />

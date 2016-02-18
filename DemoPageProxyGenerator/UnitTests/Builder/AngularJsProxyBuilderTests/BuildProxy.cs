@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Web.Http;
 using Moq;
 using Moq.AutoMock;
 using NUnit.Framework;
@@ -12,7 +9,6 @@ using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.Manager;
 using UnitTests.TestHelper;
-using UnitTests.TestHelper.TestClasses;
 
 namespace UnitTests.Builder.AngularJsProxyBuilderTests
 {
@@ -89,11 +85,14 @@ angular.module('homePSrv', []) .service('homePSrv', ['$http', homePSrv])";
 
             //Assert
             Assert.AreEqual(generatedProxyEntries[0].FileContent.Trim(), CompleteTemplateForAssert.Trim());
-
-
+            //Achtung der Unit Test prüft nur ob die Funktionen entsprechend oft aufgerufen wurden, aber nicht ob das Ergebnis 
+            //"richtig" stimmt, die geschieht bereits durch andere Unit Tests
+            MockBuildHelper.Verify(p => p.GetServiceName("Home", "PSrv", true), () => Times.Exactly(3));
+            MockBuildHelper.Verify(p => p.GetProxyFunctionName("OneParam"), () => Times.Exactly(1));
+            MockBuildHelper.Verify(p => p.GetProxyFunctionName("OneComplexParam"), () => Times.Exactly(1));
+            MockBuildHelper.Verify(p => p.GetFunctionParameters(It.IsAny<MethodInfo>()), () => Times.Exactly(2));
+            MockBuildHelperHttpCall.Verify(p => p.BuildHttpCall(It.IsAny<ProxyMethodInfos>()), () => Times.Exactly(2));
         }
-
-
 
         [Test]
         [ExpectedException(typeof(Exception), ExpectedMessage = "Please add the 'AngularJsModule' Template when you want to create a AngularJs Proxy")]
