@@ -250,7 +250,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="ControllersProxies\ProxyGeneratorScript.tt">
+    <Content Include="ScriptsApp\Services\proxyjQueryJs.js" />
+    <Content Include="Scripts\ProxyGeneratorScript.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
     <Content Include="favicon.ico" />
@@ -265,7 +266,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ScriptsApp\Services\homeAngularJsSrv.js" />
     <Content Include="ScriptsApp\Services\proxyAngularJsSrv.js" />
-    <Content Include="ScriptsApp\Services\proxyjQueryJs.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -293,9 +293,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\Manager.ttinclude" />
     <Content Include="Views\Proxy\AngularCalls.cshtml" />
     <Content Include="Views\Proxy\JQueryCalls.cshtml" />
+    <Content Include="Scripts\Manager.ttinclude" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,9 +321,6 @@
     <TypeScriptCompile Include="ScriptsApp\Services\proxyPSrv.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\Proxy\proxyCtrl.ts" />
-    <TypeScriptCompile Include="Scripts\Enums.ts">
-      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Scripts\TypeLite.Net4.d.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
