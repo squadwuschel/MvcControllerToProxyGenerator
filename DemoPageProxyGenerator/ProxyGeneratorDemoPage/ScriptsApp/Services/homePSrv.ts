@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 18.02.2016 time 22:37 from SquadWuschel.
+//Created on 19.02.2016 time 22:56 from SquadWuschel.
 
   module App.Services { 
 
@@ -18,7 +18,7 @@ public getPerson(id: number) : void  {
  } 
 
 public getAllAutos() : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson[]> { 
-    return this.$http.get('Home/GetAllAutos').then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson[]>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson[] => { return response.data; });
+     return this.$http.get('Home/GetAllAutos').then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson[]>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson[] => { return response.data; });
 } 
 
 //#region Angular Module Definition 

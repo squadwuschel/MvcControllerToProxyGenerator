@@ -103,6 +103,23 @@ namespace ProxyGenerator.Builder.Helper
 
             return name;
         }
+
+        /// <summary>
+        /// Prüft ob ein FileUpload Parameter enthalten ist und wenn ja werden die passenden Formdaten erstellt
+        /// Falls nicht wird einfach ein Leerstring zurückgegeben.
+        /// </summary>
+        public string GetFileUploadFormData(ProxyMethodInfos methodInfo)
+        {
+            if (methodInfo.ProxyMethodParameterInfos.Any(p => p.IsFileUpload))
+            {
+                var fileUploadParamName = methodInfo.ProxyMethodParameterInfos.First(p => p.IsFileUpload).ParameterName;
+
+                string formData = string.Format("var formData = new FormData(); \r\n formData.append('file', {0}); \r\n", fileUploadParamName);
+                return formData;
+            }
+
+            return String.Empty;
+        }
   
         /// <summary>
         /// Zusammenbauen der passenden URL Parameter ACHTUNG der UrlParameterName entspricht 

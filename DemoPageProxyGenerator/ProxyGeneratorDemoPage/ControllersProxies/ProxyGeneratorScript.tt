@@ -90,10 +90,11 @@
 //TEMPLATE STRINGS FOR: "Angular TypeScript Ajax Call Function with ReturnType": 
 // 1. #ControllerFunctionName# => controller function name
 // 2. #ServiceParamters# => parameters for the service call
-// 3. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
-// 4. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+// 3. #FunctionContent# => Content is used for extended FileUpload information
+// 4. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
+// 5. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
     var angularTsAjaxCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallWithReturnType};
-    angularTsAjaxCallWithReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : ng.IPromise<{#ControllerFunctionReturnType#}> { \r\n" +
+    angularTsAjaxCallWithReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : ng.IPromise<{#ControllerFunctionReturnType#}> { \r\n #FunctionContent#"  +
 											   "    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; });\r\n} \r\n\r\n";
 											   //Alternative Response with Error CallBack, which only returns complete errorResponse and not only the "response.data"
 											   //"    return this.$http.#ServiceCallAndParameters#.then((response: ng.IHttpPromiseCallbackArg<{#ControllerFunctionReturnType#}>) : {#ControllerFunctionReturnType#} => { return response.data; }, (errorResponse : ng.IHttpPromiseCallbackArg<any>) => { return errorResponse });\r\n} \r\n\r\n";

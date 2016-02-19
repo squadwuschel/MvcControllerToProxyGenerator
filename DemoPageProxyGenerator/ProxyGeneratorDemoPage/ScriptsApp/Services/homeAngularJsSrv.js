@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 18.02.2016 time 22:37 from SquadWuschel.
+//Created on 19.02.2016 time 22:56 from SquadWuschel.
 
   function homeAngularJsSrv($http) { this.http = $http; } 
 

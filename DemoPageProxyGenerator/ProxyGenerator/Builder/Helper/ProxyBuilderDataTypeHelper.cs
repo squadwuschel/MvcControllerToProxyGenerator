@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Web;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 
@@ -92,6 +93,12 @@ namespace ProxyGenerator.Builder.Helper
             if (type == typeof(Boolean) || type == typeof(Boolean?))
             {
                 return "boolean";
+            }
+
+            //Für FileUpload muss hier Any als Type gesetzt werden
+            if (type == typeof (HttpPostedFileBase))
+            {
+                return "any";
             }
 
             //Bei eigenen Typen muss der Namespace noch mit angegeben werden zum Namen.

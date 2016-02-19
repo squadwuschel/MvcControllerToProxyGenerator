@@ -20,6 +20,11 @@
         public const string ServiceFunctions = "#ServiceFunctions#";
 
         /// <summary>
+        /// Hier können Zusatzinformationen untergebracht werden die für den FileUplaod wichtig sind.
+        /// </summary>
+        public const string FunctionContent = "#FunctionContent#";
+
+        /// <summary>
         /// Achtung hier muss wird "{#" bzw. "#}" zum Maskieren verwendet, da wir im Template ein größer bzw. kleinerzeichen davor haben und es hier sonst Probleme mit dem T4 Template gibt.
         /// </summary>
         public const string ControllerFunctionReturnType = "{#ControllerFunctionReturnType#}";

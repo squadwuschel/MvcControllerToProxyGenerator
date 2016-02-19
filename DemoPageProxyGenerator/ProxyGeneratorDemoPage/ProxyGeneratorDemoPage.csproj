@@ -314,6 +314,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Directives\fileUpload.ts" />
     <TypeScriptCompile Include="ScriptsApp\jQueryCalls.ts" />
     <TypeScriptCompile Include="ScriptsApp\Services\homePSrv.ts" />
     <TypeScriptCompile Include="ScriptsApp\Services\proxyjQueryTs.ts" />

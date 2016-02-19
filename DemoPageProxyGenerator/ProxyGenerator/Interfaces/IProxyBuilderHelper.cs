@@ -57,5 +57,11 @@ namespace ProxyGenerator.Interfaces
         /// Prüfen ob eine Id enthalten ist, diese wird extra an die URL angehängt.
         /// </summary>
         string BuildUrlParameterId(List<ProxyMethodParameterInfo> infos);
+
+        /// <summary>
+        /// Prüft ob ein FileUpload Parameter enthalten ist und wenn ja werden die passenden Formdaten erstellt
+        /// Falls nicht wird einfach ein Leerstring zurückgegeben.
+        /// </summary>
+        string GetFileUploadFormData(ProxyMethodInfos methodInfo);
     }
 }

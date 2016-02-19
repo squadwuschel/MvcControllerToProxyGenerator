@@ -33,7 +33,7 @@ namespace ProxyGenerator.Container
         public Type Controller { get; set; }
 
         /// <summary>
-        /// Die Parameter der MEthode die übergeben werden in der richtigen Reihenfolge.
+        /// Die Parameter der Methode die übergeben werden in der richtigen Reihenfolge.
         /// </summary>
         public List<ProxyMethodParameterInfo> ProxyMethodParameterInfos { get; set; }
         #endregion

@@ -6,6 +6,7 @@
                 //Eigene Module einbinden
                 "homeAngularJsSrv",
                 "proxyAngularJsSrv",
+                "fileUpload",
                 //Module die mit TypeScript geschrieben wurden einbinden
                 App.Views.Proxy.ProxyCtrl.module.name,
                 App.Services.ProxyPSrv.module.name,

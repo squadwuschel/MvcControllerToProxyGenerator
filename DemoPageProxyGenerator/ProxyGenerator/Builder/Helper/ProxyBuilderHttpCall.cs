@@ -71,7 +71,17 @@ namespace ProxyGenerator.Builder.Helper
             //ob ein komplexer Typ enthalten ist.
             if (infos.ProxyMethodParameterInfos.Any(p => p.IsComplexeType))
             {
-                builder.Append(string.Format(",{0})", infos.ProxyMethodParameterInfos.First(p => p.IsComplexeType).ParameterName));
+                //Da es nur einen Complexen Typ geben darf pro Methodenaufruf, hier prüfen ob ein FileUpload dabei ist.
+                if (infos.ProxyMethodParameterInfos.Any(p => p.IsFileUpload))
+                {
+                    //Achtung die FormData Variable wird bei "#FunctionContent#" eingefügt
+                    builder.Append(",formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }})");
+                }
+                else
+                {
+                    //Standard Post 
+                    builder.Append(string.Format(",{0})", infos.ProxyMethodParameterInfos.First(p => p.IsComplexeType).ParameterName));
+                }
             }
             else
             {

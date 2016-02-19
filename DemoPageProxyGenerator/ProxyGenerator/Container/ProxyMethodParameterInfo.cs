@@ -27,6 +27,11 @@ namespace ProxyGenerator.Container
         public bool IsComplexeType { get; set; }
 
         /// <summary>
+        /// Es handelt sich um FileUpload Element vom Typ "HttpPostedFileBase"
+        /// </summary>
+        public bool IsFileUpload { get; set; }
+
+        /// <summary>
         /// Gibt an ob es sich um einen String handelt, denn dieser muss
         /// auf JavaScript Seite UrlEncoded werden.
         /// </summary>
@@ -39,6 +44,7 @@ namespace ProxyGenerator.Container
             ParameterName = String.Empty;
             IsComplexeType = false;
             IsString = false;
+            IsFileUpload = false;
         }
         #endregion
     }

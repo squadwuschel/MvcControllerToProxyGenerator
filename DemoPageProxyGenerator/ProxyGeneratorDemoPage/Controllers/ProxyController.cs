@@ -24,6 +24,22 @@ namespace ProxyGeneratorDemoPage.Controllers
         }
         #endregion
 
+        #region File Upload
+        /// <summary>
+        /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
+        /// </summary>
+        [CreateAngularTsProxy(ReturnType = typeof(Person))]
+        public ActionResult AddFileToServer(HttpPostedFileBase dateiname, int detailId)
+        {
+            if (dateiname == null)
+            {   
+                throw new Exception("File Upload is Null");
+            }
+
+            return Json(new Person() { Id = detailId}, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region AngularJs Proxy Methods Examples
         [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
