@@ -76,6 +76,7 @@ namespace ProxyGenerator.Builder.Helper
                 type == typeof(Int64) || type == typeof(Int64?) ||
                 type == typeof(decimal) || type == typeof(decimal?) ||
                 type == typeof(double) || type == typeof(double?) ||
+                type == typeof(long) || type == typeof(long?) ||
                 type == typeof(byte) || type == typeof(byte?) ||
                 type == typeof(Single) || type == typeof(Single?))
             {

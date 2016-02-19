@@ -230,6 +230,25 @@ namespace UnitTests.Builder.Helper.ProxyBuilderDataTypeHelperTests
             Assert.AreEqual("number", result);
         }
 
+        [Test]
+        public void GetTsType_Nullable_long()
+        {
+            //Act
+            var result = _proxyBuilderDataTypeHelper.GetTsType(typeof(long?));
+
+            //Assert
+            Assert.AreEqual("number", result);
+        }
+
+        [Test]
+        public void GetTsType_long()
+        {
+            //Act
+            var result = _proxyBuilderDataTypeHelper.GetTsType(typeof(long));
+
+            //Assert
+            Assert.AreEqual("number", result);
+        }
 
         [Test]
         public void GetTsType_decimal()
