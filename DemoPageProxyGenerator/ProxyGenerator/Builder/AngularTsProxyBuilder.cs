@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ProxyGenerator.Container;
+using ProxyGenerator.Enums;
 using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Builder
@@ -100,7 +101,7 @@ namespace ProxyGenerator.Builder
                     //Parameter des Funktionsaufrufs ersetzen.
                     functionCall = functionCall.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
                     //Service Call und Parameter ersetzen
-                    functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos));
+                    functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.AngularTypeScript));
                     ajaxCalls += functionCall;
                 }
 

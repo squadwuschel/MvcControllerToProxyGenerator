@@ -2,6 +2,7 @@
 using System.Text;
 using System.Web.Mvc;
 using ProxyGenerator.Container;
+using ProxyGenerator.Enums;
 using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Builder.Helper
@@ -27,7 +28,7 @@ namespace ProxyGenerator.Builder.Helper
         /// Den passenden HttpCall zusammenbauen und prüfen ob Post oder Get verwendet werden soll
         /// Erstellt wird: post("/Home/LoadAll", data) oder get("/Home/LoadAll?userId=" + id)
         /// </summary>
-        public string BuildHttpCall(ProxyMethodInfos methodInfo)
+        public string BuildHttpCall(ProxyMethodInfos methodInfo, ProxyBuilder proxyBuilder)
         {
             //Wie genau das Post oder Geht aussieht, hängt von den gewünschten Parametern ab.
             //Aktuell gehen wir von einer StandardRoute aus und wenn ein "id" in den Parametern ist, dann
@@ -45,21 +46,31 @@ namespace ProxyGenerator.Builder.Helper
                 //obwohl kein komplexer Typ enthalten ist.
                 if (ProxyBuilderHelper.HasAttribute(typeof(HttpPostAttribute), methodInfo.MethodInfo))
                 {
-                    return BuildPost(methodInfo);
+                    if (proxyBuilder == ProxyBuilder.jQueryTypeScript || proxyBuilder == ProxyBuilder.jQueryJavaScript)
+                    {
+                        return BuildPostjQuery(methodInfo);
+                    }
+
+                    return BuildPostAngular(methodInfo);
                 }
 
                 //Kein Komplexer Typ also Get verwenden.
                 return BuildGet(methodInfo);
             }
 
-            return BuildPost(methodInfo);
+            if (proxyBuilder == ProxyBuilder.jQueryTypeScript || proxyBuilder == ProxyBuilder.jQueryJavaScript)
+            {
+                return BuildPostjQuery(methodInfo);
+            }
+
+            return BuildPostAngular(methodInfo);
         }
 
         /// <summary>
-        /// Rückgabe für Post erstellen
+        /// Rückgabe für Post erstellen für Angular Calls
         /// </summary>
-        /// <returns>Gibt den passenden POST Aufruf in JavaScript zurück</returns>
-        private string BuildPost(ProxyMethodInfos infos)
+        /// <returns>Gibt den passenden POST Aufruf zurück</returns>
+        private string BuildPostAngular(ProxyMethodInfos infos)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(string.Format("post('{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
@@ -74,7 +85,7 @@ namespace ProxyGenerator.Builder.Helper
                 //Da es nur einen Complexen Typ geben darf pro Methodenaufruf, hier prüfen ob ein FileUpload dabei ist.
                 if (infos.ProxyMethodParameterInfos.Any(p => p.IsFileUpload))
                 {
-                    //Achtung die FormData Variable wird bei "#FunctionContent#" eingefügt
+                    //Achtung die "formData" Variable wird bei "#FunctionContent#" eingefügt
                     builder.Append(",formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }})");
                 }
                 else
@@ -86,6 +97,42 @@ namespace ProxyGenerator.Builder.Helper
             else
             {
                 builder.Append(")");
+            }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Rückgabe für Post erstellen für jQuery Calls
+        /// </summary>
+        /// <returns>Gibt den passenden POST Aufruf zurück</returns>
+        private string BuildPostjQuery(ProxyMethodInfos infos)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(string.Format("ajax( {{ url : '{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
+
+            builder.Append(ProxyBuilderHelper.BuildUrlParameterId(infos.ProxyMethodParameterInfos));
+            builder.Append(ProxyBuilderHelper.BuildUrlParameter(infos.ProxyMethodParameterInfos));
+
+            //Da auch ein Post ohne komplexen Typ aufgerufen werden kann über das "HttpPost" Attribut hier prüfen
+            //ob ein komplexer Typ enthalten ist.
+            if (infos.ProxyMethodParameterInfos.Any(p => p.IsComplexeType))
+            {
+                //Da es nur einen Complexen Typ geben darf pro Methodenaufruf, hier prüfen ob ein FileUpload dabei ist.
+                if (infos.ProxyMethodParameterInfos.Any(p => p.IsFileUpload))
+                {
+                    //Achtung die "formData" Variable wird bei "#FunctionContent#" eingefügt
+                    builder.Append(", data : formData, processData : false, contentType: false, type : \"POST\" })");
+                }
+                else
+                {
+                    //Standard Post 
+                    builder.Append(string.Format(", data : {0} }})", infos.ProxyMethodParameterInfos.First(p => p.IsComplexeType).ParameterName));
+                }
+            }
+            else
+            {
+                builder.Append("})");
             }
 
             return builder.ToString();

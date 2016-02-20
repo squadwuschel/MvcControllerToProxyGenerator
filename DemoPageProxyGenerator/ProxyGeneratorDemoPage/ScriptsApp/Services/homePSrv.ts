@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 20.02.2016 time 12:56 from SquadWuschel.
+//Created on 20.02.2016 time 20:32 from SquadWuschel.
 
   module App.Services { 
 

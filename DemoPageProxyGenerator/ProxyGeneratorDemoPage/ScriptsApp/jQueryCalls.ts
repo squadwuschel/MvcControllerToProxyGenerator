@@ -10,6 +10,34 @@
             //hier entsprechend übergeben mit bind
             jQuery("#javaScriptCalls").click(this.callJqueryJavaScriptFunctions.bind(this));
             jQuery("#typeScriptCalls").click(this.callJQueryTypeScriptFunctions.bind(this));
+
+            jQuery("#uploadFileTypeScript").click(this.uploadJQueryTypeScriptFile.bind(this));
+            jQuery("#uploadFileJavaScript").click(this.uploadJQueryJavaScriptFile.bind(this));
+
+        }
+
+        public uploadJQueryTypeScriptFile(event: Event): void {
+            event.preventDefault();
+
+            //http://stackoverflow.com/questions/9622901/how-to-upload-a-file-using-jquery-ajax-and-formdata
+            //Die Datei ermitteln, ACHTUNG am Input muss das ID Attribute existieren und nicht der name
+            var fileData = jQuery("#fuTypeScript").prop("files")[0];
+            this.jQuerySrv.addFileToServer(fileData, 12).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'addFileToServer' Result: ");
+                console.log(result);
+            });
+        }
+
+        public uploadJQueryJavaScriptFile(event: Event): void {
+            event.preventDefault();
+
+            //Init Proxy Function
+            var calls = new window.proxyjQueryJs();
+            var fileData = jQuery("#fujavaScript").prop("files")[0];
+            calls.addFileToServer(fileData, 12).then(result => {
+                console.log("\r\nSuccess JavaScript Service Call 'addFileToServer' Result: ");
+                console.log(result);
+            });
         }
 
         public callJQueryTypeScriptFunctions(event: Event): void {

@@ -7,6 +7,7 @@ using Moq;
 using NUnit.Framework;
 using ProxyGenerator.Builder.Helper;
 using ProxyGenerator.Container;
+using ProxyGenerator.Enums;
 using ProxyGenerator.Interfaces;
 using UnitTests.TestHelper.TestClasses;
 
@@ -49,7 +50,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHttpCallTests
             MockBuildHelper.Setup(p => p.BuildUrlParameter(It.IsAny<List<ProxyMethodParameterInfo>>())).Returns(" + '?name='+encodeURIComponent(name)");
 
             //Act
-            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos);
+            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.AngularJavaScript);
 
             //Assert
             Assert.AreEqual(getParams, "get('Home/OneParam' + '?name='+encodeURIComponent(name))");
@@ -70,7 +71,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHttpCallTests
             MockBuildHelper.Setup(p => p.BuildUrlParameter(It.IsAny<List<ProxyMethodParameterInfo>>())).Returns(" + '?name='+encodeURIComponent(name)");
 
             //Act
-            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos);
+            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.AngularJavaScript);
 
             //Assert
             Assert.AreEqual(getParams, "get('Home/OneParam' + '/' + id  + '?name='+encodeURIComponent(name))");
@@ -92,7 +93,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHttpCallTests
             MockBuildHelper.Setup(p => p.BuildUrlParameter(It.IsAny<List<ProxyMethodParameterInfo>>())).Returns(" + '?name='+encodeURIComponent(name)");
 
             //Act
-            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos);
+            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.AngularTypeScript);
 
             //Assert
             Assert.AreEqual(getParams, "post('Home/OneComplexParam' + '?name='+encodeURIComponent(name),person)");
@@ -115,7 +116,7 @@ namespace UnitTests.Builder.Helper.ProxyBuilderHttpCallTests
             MockBuildHelper.Setup(p => p.HasAttribute(It.IsAny<Type>(), It.IsAny<MethodInfo>())).Returns(true);
 
             //Act
-            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos);
+            var getParams = ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.AngularTypeScript);
 
             //Assert
             Assert.AreEqual(getParams, "post('Home/OneComplexParamHttpPost' + '?name='+encodeURIComponent(name))");

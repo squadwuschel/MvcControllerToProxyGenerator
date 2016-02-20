@@ -6,6 +6,7 @@ using Moq.AutoMock;
 using NUnit.Framework;
 using ProxyGenerator.Builder;
 using ProxyGenerator.Container;
+using ProxyGenerator.Enums;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.Manager;
 using UnitTests.TestHelper;
@@ -77,7 +78,7 @@ angular.module('homePSrv', []) .service('homePSrv', ['$http', homePSrv])";
             MockBuildHelper.Setup(p => p.GetProxyFunctionName("OneComplexParam")).Returns("OneComplexParam");
 
             MockBuildHelper.Setup(p => p.GetFunctionParameters(It.IsAny<MethodInfo>())).Returns("name");
-            MockBuildHelperHttpCall.Setup(p => p.BuildHttpCall(It.IsAny<ProxyMethodInfos>())).Returns("get('Home/OneParam'+ '?name='+encodeURIComponent(name))");
+            MockBuildHelperHttpCall.Setup(p => p.BuildHttpCall(It.IsAny<ProxyMethodInfos>(), It.IsAny<ProxyBuilder>())).Returns("get('Home/OneParam'+ '?name='+encodeURIComponent(name))");
 
             //Act
             var generatedProxyEntries = AngularJsProxyBuilder.BuildProxy(controllerInfos);
@@ -91,7 +92,7 @@ angular.module('homePSrv', []) .service('homePSrv', ['$http', homePSrv])";
             MockBuildHelper.Verify(p => p.GetProxyFunctionName("OneParam"), () => Times.Exactly(1));
             MockBuildHelper.Verify(p => p.GetProxyFunctionName("OneComplexParam"), () => Times.Exactly(1));
             MockBuildHelper.Verify(p => p.GetFunctionParameters(It.IsAny<MethodInfo>()), () => Times.Exactly(2));
-            MockBuildHelperHttpCall.Verify(p => p.BuildHttpCall(It.IsAny<ProxyMethodInfos>()), () => Times.Exactly(2));
+            MockBuildHelperHttpCall.Verify(p => p.BuildHttpCall(It.IsAny<ProxyMethodInfos>(), It.IsAny<ProxyBuilder>()), () => Times.Exactly(2));
         }
 
         [Test]

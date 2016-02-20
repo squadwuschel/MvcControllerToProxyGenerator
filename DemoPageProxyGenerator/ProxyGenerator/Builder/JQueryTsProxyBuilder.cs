@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ProxyGenerator.Container;
+using ProxyGenerator.Enums;
 using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Builder
@@ -70,12 +71,15 @@ namespace ProxyGenerator.Builder
                         serviceInterfaceDefinitions += String.Format("    {0}({1}) : JQueryPromise<{2}>;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name),
                                                                                                          ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo),
                                                                                                          ProxyBuilderTypeHelper.GetTsType(methodInfos.ReturnType));
+                        //Wenn es sich um einen FileUpload handelt wird hier das passende FormData eingebaut.
+                        functionTemplate = functionTemplate.Replace(ConstValuesTemplates.FunctionContent, ProxyBuilderHelper.GetFileUploadFormData(methodInfos));
                     }
                     else
                     {
                         //Für Funktionen Ohne Rückgabewert "void" setzten
                         serviceInterfaceDefinitions += String.Format("    {0}({1}): void;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name),
                                                                                             ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
+                        functionTemplate = functionTemplate.Replace(ConstValuesTemplates.FunctionContent, ProxyBuilderHelper.GetFileUploadFormData(methodInfos));
                     }
 
                     //Den Methodennamen ersetzen - Der Servicename der aufgerufen werden soll.
@@ -83,7 +87,7 @@ namespace ProxyGenerator.Builder
                     //Parameter des Funktionsaufrufs ersetzen.
                     functionCall = functionCall.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
                     //Service Call und Parameter ersetzen
-                    functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos));
+                    functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.jQueryTypeScript));
                     ajaxCalls += functionCall;
                 }
 

@@ -97,6 +97,7 @@
     <Compile Include="Builder\AngularTsProxyBuilder.cs" />
     <Compile Include="Builder\JQueryJsProxyBuilder.cs" />
     <Compile Include="Builder\JQueryTsProxyBuilder.cs" />
+    <Compile Include="Enums\ProxyBuilder.cs" />
     <Compile Include="Interfaces\IFileHelper.cs" />
     <Compile Include="Interfaces\IProxyBuilder.cs" />
     <Compile Include="Interfaces\IProxyBuilderDataTypeHelper.cs" />

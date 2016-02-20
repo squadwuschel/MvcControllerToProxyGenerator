@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ProxyGenerator.Container;
+using ProxyGenerator.Enums;
 using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Builder
@@ -65,7 +66,7 @@ namespace ProxyGenerator.Builder
                     //Wenn es sich um einen FileUpload handelt wird hier das passende FormData eingebaut.
                     prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.FunctionContent, ProxyBuilderHelper.GetFileUploadFormData(methodInfos));
                     //Service Call und Parameter ersetzen
-                    prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos));
+                    prototypeFunction = prototypeFunction.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.AngularJavaScript));
                     //Der Variablen für Alle Prototype functions die "neue" Funktion hinzufügen.
                     prototypeFunctions += prototypeFunction;
                 }

@@ -29,7 +29,9 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        [CreateAngularJsProxy()]
+        [CreateJQueryTsProxy(ReturnType = typeof(Person))]
+        [CreateAngularJsProxy]
+        [CreateJQueryJsProxy]
         public ActionResult AddFileToServer(HttpPostedFileBase datei, int detailId)
         {
             if (datei == null)
@@ -50,7 +52,9 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(void))]
+        [CreateJQueryTsProxy(ReturnType = typeof(void))]
         [CreateAngularJsProxy()]
+        [CreateJQueryJsProxy]
         public ActionResult AddFileToServerNoReturnType(HttpPostedFileBase datei, int detailId)
         {
             if (datei == null)
