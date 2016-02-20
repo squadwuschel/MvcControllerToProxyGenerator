@@ -114,7 +114,7 @@ namespace ProxyGenerator.Builder.Helper
             {
                 var fileUploadParamName = methodInfo.ProxyMethodParameterInfos.First(p => p.IsFileUpload).ParameterName;
 
-                string formData = string.Format("var formData = new FormData(); \r\n formData.append('file', {0}); \r\n", fileUploadParamName);
+                string formData = string.Format("var formData = new FormData(); \r\n formData.append('{0}', {0}); \r\n", fileUploadParamName);
                 return formData;
             }
 

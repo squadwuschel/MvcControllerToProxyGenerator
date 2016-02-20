@@ -30,12 +30,18 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
         [CreateAngularJsProxy()]
-        public ActionResult AddFileToServer(HttpPostedFileBase dateiname, int detailId)
+        public ActionResult AddFileToServer(HttpPostedFileBase datei, int detailId)
         {
-            if (dateiname == null)
+            if (datei == null)
             {   
                 throw new Exception("File Upload is Null");
             }
+
+            //Speichern der Hochgeladenen Datei im C:\Temp\ Verzeichnis dort können wir dann prüfen ob die Datei auch "richtig" hochgeladen wurde.
+            byte[] buffer = new byte[datei.ContentLength];
+            datei.InputStream.Read(buffer, 0, datei.ContentLength);
+
+            System.IO.File.WriteAllBytes(string.Format(@"C:\Temp\{0}", System.IO.Path.GetFileName(datei.FileName)), buffer);
 
             return Json(new Person() { Id = detailId}, JsonRequestBehavior.AllowGet);
         }
@@ -45,12 +51,17 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(void))]
         [CreateAngularJsProxy()]
-        public ActionResult AddFileToServerNoReturnType(HttpPostedFileBase dateiname, int detailId)
+        public ActionResult AddFileToServerNoReturnType(HttpPostedFileBase datei, int detailId)
         {
-            if (dateiname == null)
+            if (datei == null)
             {
                 throw new Exception("File Upload is Null");
             }
+
+            //Speichern der Hochgeladenen Datei im C:\Temp\ Verzeichnis dort können wir dann prüfen ob die Datei auch "richtig" hochgeladen wurde.
+            byte[] buffer = new byte[datei.ContentLength];
+            datei.InputStream.Read(buffer, 0, datei.ContentLength);
+            System.IO.File.WriteAllBytes(string.Format(@"C:\Temp\{0}", System.IO.Path.GetFileName(datei.FileName)), buffer);
 
             return Json(string.Empty, JsonRequestBehavior.AllowGet);
         }

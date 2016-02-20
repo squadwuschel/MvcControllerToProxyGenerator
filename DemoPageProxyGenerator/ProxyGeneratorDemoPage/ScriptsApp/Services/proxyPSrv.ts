@@ -1,12 +1,12 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 20.02.2016 time 08:57 from SquadWuschel.
+//Created on 20.02.2016 time 12:56 from SquadWuschel.
 
   module App.Services { 
 
 export interface IProxyPSrv { 
-     addFileToServer(dateiname: any,detailId: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
-    addFileToServerNoReturnType(dateiname: any,detailId: number): void;
+     addFileToServer(datei: any,detailId: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
+    addFileToServerNoReturnType(datei: any,detailId: number): void;
     addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
     addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string,vorname: string) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
@@ -29,15 +29,15 @@ export class ProxyPSrv implements IProxyPSrv {
     static $inject = ['$http']; 
    constructor(private $http: ng.IHttpService) { } 
 
-public addFileToServer(dateiname: any,detailId: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+public addFileToServer(datei: any,detailId: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
  var formData = new FormData(); 
- formData.append('file', dateiname); 
+ formData.append('datei', datei); 
     return this.$http.post('Proxy/AddFileToServer'+ '?detailId='+detailId,formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }}).then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return response.data; });
 } 
 
-public addFileToServerNoReturnType(dateiname: any,detailId: number) : void  { 
+public addFileToServerNoReturnType(datei: any,detailId: number) : void  { 
   var formData = new FormData(); 
- formData.append('file', dateiname); 
+ formData.append('datei', datei); 
   this.$http.post('Proxy/AddFileToServerNoReturnType'+ '?detailId='+detailId,formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }}); 
  } 
 

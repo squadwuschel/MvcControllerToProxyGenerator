@@ -14,7 +14,7 @@ namespace ProxyGeneratorDemoPage
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/angularApp")
-                .IncludeDirectory("~/ControllersProxies/", "*.js", false)
+                .IncludeDirectory("~/ScriptsApp/Services/", "*.js", false)
                 .IncludeDirectory("~/ScriptsApp/Classes/", "*.js", false)
                 .Include(
                     "~/ScriptsApp/jQueryJsCalls.js",

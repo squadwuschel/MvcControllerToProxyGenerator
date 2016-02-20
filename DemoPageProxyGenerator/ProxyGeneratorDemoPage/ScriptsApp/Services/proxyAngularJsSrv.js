@@ -1,21 +1,21 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 20.02.2016 time 08:57 from SquadWuschel.
+//Created on 20.02.2016 time 12:56 from SquadWuschel.
 
   function proxyAngularJsSrv($http) { this.http = $http; } 
 
 
-proxyAngularJsSrv.prototype.addFileToServer = function (dateiname,detailId) { 
+proxyAngularJsSrv.prototype.addFileToServer = function (datei,detailId) { 
  var formData = new FormData(); 
- formData.append('file', dateiname); 
+ formData.append('datei', datei); 
    return this.http.post('Proxy/AddFileToServer'+ '?detailId='+detailId,formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }}).then(function (result) {
         return result.data;
    });
 }
 
-proxyAngularJsSrv.prototype.addFileToServerNoReturnType = function (dateiname,detailId) { 
+proxyAngularJsSrv.prototype.addFileToServerNoReturnType = function (datei,detailId) { 
  var formData = new FormData(); 
- formData.append('file', dateiname); 
+ formData.append('datei', datei); 
    return this.http.post('Proxy/AddFileToServerNoReturnType'+ '?detailId='+detailId,formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }}).then(function (result) {
         return result.data;
    });

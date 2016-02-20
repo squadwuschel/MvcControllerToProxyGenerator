@@ -1,6 +1,8 @@
 ﻿module App.Views.Proxy {
     
     export class ProxyCtrl {
+        public fileImportDataTypeScript  : any;
+        public fileImportDataJavaScript  : any;
         static $inject = [
             App.Services.ProxyPSrv.module.name, //Ts Service
             App.Services.HomePSrv.module.name, //Ts Service
@@ -21,7 +23,21 @@
         init(): void {
         }
 
-        public startJavaScriptServiceCalls() {
+        public startFileUploadTypeScript() {
+            this.proxyTsSrv.addFileToServer(this.fileImportDataTypeScript, 12).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'addFileToServer' Result: ");
+                console.log(result);
+            });
+        }
+
+        public startFileUploadJavaScript() {
+            this.proxyJsSrv.addFileToServer(this.fileImportDataJavaScript, 12).then(result => {
+                console.log("\r\nSuccess JavaScript Service Call 'addFileToServer' Result: ");
+                console.log(result);
+            });
+        }
+
+        public startJavaScriptServiceCalls() : void {
             var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", new Date(), "Wuschel", true);
             var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW Js", 12, person);
             console.clear();
@@ -58,7 +74,7 @@
             });
         }
 
-        public startTypeScriptServiceCalls() {
+        public startTypeScriptServiceCalls() : void {
             var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true);
             var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW", 5, person);
 
