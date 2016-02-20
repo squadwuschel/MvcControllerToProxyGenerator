@@ -241,6 +241,7 @@
     </Compile>
     <Compile Include="Helper\ClientAccess.cs" />
     <Compile Include="Helper\Auto.cs" />
+    <Compile Include="Helper\CustomErrorHandlerAttribute.cs" />
     <Compile Include="Helper\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
