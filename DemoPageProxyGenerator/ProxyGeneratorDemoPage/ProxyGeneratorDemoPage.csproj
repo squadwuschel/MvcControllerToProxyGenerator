@@ -265,6 +265,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ScriptsApp\Services\homeAngularJsSrv.js" />
     <Content Include="ScriptsApp\Services\proxyAngularJsSrv.js" />
+    <Content Include="ScriptsApp\Services\proxyjQueryJs.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />

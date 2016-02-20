@@ -1,24 +1,24 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 19.02.2016 time 22:56 from SquadWuschel.
+//Created on 20.02.2016 time 08:57 from SquadWuschel.
 
   function homeAngularJsSrv($http) { this.http = $http; } 
 
 
 homeAngularJsSrv.prototype.addOrUpdatePerson = function (person) { 
-   return this.http.post('Home/AddOrUpdatePerson',person).then(function (result) {
+    return this.http.post('Home/AddOrUpdatePerson',person).then(function (result) {
         return result.data;
    });
 }
 
 homeAngularJsSrv.prototype.getAllPersons = function () { 
-   return this.http.get('Home/GetAllPersons').then(function (result) {
+    return this.http.get('Home/GetAllPersons').then(function (result) {
         return result.data;
    });
 }
 
 homeAngularJsSrv.prototype.searchPerson = function (name) { 
-   return this.http.get('Home/SearchPerson'+ '?name='+encodeURIComponent(name)).then(function (result) {
+    return this.http.get('Home/SearchPerson'+ '?name='+encodeURIComponent(name)).then(function (result) {
         return result.data;
    });
 }

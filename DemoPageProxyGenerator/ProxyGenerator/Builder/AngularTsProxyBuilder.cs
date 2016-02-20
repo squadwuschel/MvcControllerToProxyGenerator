@@ -74,24 +74,25 @@ namespace ProxyGenerator.Builder
                 {
                     var functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularTsAjaxCallNoReturnType).Template;
                     //sollte ein ReturnType verwendet werden, dann das andere Template laden mit ReturnType
+                    
                     if (ProxyBuilderTypeHelper.HasReturnType(methodInfos.ReturnType))
                     {
                         functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularTsAjaxCallWithReturnType).Template;
                         //Für Methoden mit ReturnType muss auch der passende ReturnType ersetzt werden
                         functionTemplate = functionTemplate.Replace(ConstValuesTemplates.ControllerFunctionReturnType, ProxyBuilderTypeHelper.GetTsType(methodInfos.ReturnType));
-                        //Wenn es sich um einen FileUpload handelt wird hier das passende FormData eingebaut.
-                        functionTemplate = functionTemplate.Replace(ConstValuesTemplates.FunctionContent, ProxyBuilderHelper.GetFileUploadFormData(methodInfos));
-
                         //Die Servicedefinition für jede Methode hinzufügen
                         serviceInterfaceDefinitions += String.Format("    {0}({1}) : ng.IPromise<{2}>;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name),
                                                                                                          ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo),
                                                                                                          ProxyBuilderTypeHelper.GetTsType(methodInfos.ReturnType));
+                        //Wenn es sich um einen FileUpload handelt wird hier das passende FormData eingebaut.
+                        functionTemplate = functionTemplate.Replace(ConstValuesTemplates.FunctionContent, ProxyBuilderHelper.GetFileUploadFormData(methodInfos));
                     }
                     else
                     {
                         //Für Funktionen Ohne Rückgabewert "void" setzten
                         serviceInterfaceDefinitions += String.Format("    {0}({1}): void;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name), 
                                                                                             ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
+                        functionTemplate = functionTemplate.Replace(ConstValuesTemplates.FunctionContent, ProxyBuilderHelper.GetFileUploadFormData(methodInfos));
                     }
 
                     //Den Methodennamen ersetzen - Der Servicename der aufgerufen werden soll.

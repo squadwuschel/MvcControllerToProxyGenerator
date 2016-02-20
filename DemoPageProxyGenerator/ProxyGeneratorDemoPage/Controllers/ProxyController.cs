@@ -29,6 +29,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
+        [CreateAngularJsProxy()]
         public ActionResult AddFileToServer(HttpPostedFileBase dateiname, int detailId)
         {
             if (dateiname == null)
@@ -37,6 +38,21 @@ namespace ProxyGeneratorDemoPage.Controllers
             }
 
             return Json(new Person() { Id = detailId}, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
+        /// </summary>
+        [CreateAngularTsProxy(ReturnType = typeof(void))]
+        [CreateAngularJsProxy()]
+        public ActionResult AddFileToServerNoReturnType(HttpPostedFileBase dateiname, int detailId)
+        {
+            if (dateiname == null)
+            {
+                throw new Exception("File Upload is Null");
+            }
+
+            return Json(string.Empty, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
