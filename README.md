@@ -66,7 +66,7 @@ For each controller, framework and language a new file with the ControllerName (
 
 The ProxyGenerator DLL provides four different attributes.
 
-| Attribute Name | Language | Framework | needed Params |
+| Attribute Name | Language | Framework | needed Attribute Params |
 |----------------|----------|-----------|-----------------|
 |CreateAngularJsProxyAttribute| JavaScript | AngularJs | -|
 |CreateAngularTsProxyAttribute| TypeScript | AngularJs | ReturnType|
@@ -382,7 +382,7 @@ this will create the following function in TypeScript
         return this.$http.post('Proxy/AddFileToServer'+ '?detailId='+detailId,formData, { 
             transformRequest: angular.identity, 
             headers: { 'Content-Type': undefined }
-        }).then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => {return response.data;});
+        }).then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return response.data;});
     } 
 
 
@@ -412,31 +412,68 @@ The .NET controller functions are decorated with the attribute "**CreateJQueryJs
         {
             return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
         }
-    }
 
-    
+        [CreateJQueryJsProxy]
+        public JsonResult ClearJsCall()
+        {
+            return Json("ClearJsCall was Called", JsonRequestBehavior.AllowGet);
+        }
+    }
+        
 this will create the following jQuery JavaScript proxy directly localted in VS "below" the T4 template.
 
     window.proxyjQueryJs = function() { } 
     
     proxyjQueryJs.prototype.addJsEntryOnly = function (person) { 
-       return jQuery.post('Proxy/AddJsEntryOnly',person).then(function (result) {
+        return jQuery.ajax( { url : 'Proxy/AddJsEntryOnly', data : person }).then(function (result) {
             return result;
        });
     }
     
     proxyjQueryJs.prototype.addJsEntryAndName = function (person,name) { 
-       return jQuery.post('Proxy/AddJsEntryAndName'+ '?name='+encodeURIComponent(name),person).then(function (result) {
+        return jQuery.ajax( { url : 'Proxy/AddJsEntryAndName'+ '?name='+encodeURIComponent(name), data : person }).then(function (result) {
             return result;
        });
     }
     
     proxyjQueryJs.prototype.addJsEntryAndParams = function (person,name,vorname) { 
-       return jQuery.post('Proxy/AddJsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname),person).then(function (result) {
+        return jQuery.ajax( { url : 'Proxy/AddJsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : person }).then(function (result) {
             return result;
        });
     }
     
+    proxyjQueryJs.prototype.clearJsCall = function () { 
+        return jQuery.get('Proxy/ClearJsCall').then(function (result) {
+            return result;
+       });
+    }
+
+#### Example for jQuery JavaScript Proxy - FileUpload
+please use **HttpPostedFileBase** Type for fileupload, then the Proxy is created the right way.
+
+    [CreateJQueryJsProxy]
+    public ActionResult AddFileToServer(HttpPostedFileBase datei, int detailId)
+    {
+        //Do Something with the file            
+        return Json(new Person() { Id = detailId}, JsonRequestBehavior.AllowGet);
+    }
+
+this will create the following function in JavaScript
+
+    proxyjQueryJs.prototype.addFileToServer = function (datei,detailId) { 
+        var formData = new FormData(); 
+        formData.append('datei', datei); 
+        return jQuery.ajax( {
+                             url : 'Proxy/AddFileToServer'+ '?detailId='+detailId,
+                             data : formData, 
+                             processData : false,
+                             contentType: false, 
+                             type : "POST" })
+                    .then(function (result) {
+                        return result;
+                    });
+    }
+
 ### Example: jQuery TypeScript Proxy - CreateJQueryTsProxyAttribute
 Creates a proxy for jQuery in TypeScript.
 
@@ -483,23 +520,46 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
         }
         
         export class ProxyjQueryTs implements IProxyjQueryTs {
-            public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-              return jQuery.post('Proxy/AddTsEntryOnly',person).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return result; });
-            } 
-        
-            public addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
-              return jQuery.post('Proxy/AddTsEntryAndName'+ '?name='+encodeURIComponent(name),person).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto => { return result; });
-            } 
-        
-            public addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string,vorname: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
-              return jQuery.post('Proxy/AddTsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname),person).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto => { return result; });
-            } 
-        
-            public loadTsCallById(id: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-              return jQuery.get('Proxy/LoadTsCallById' + '/' + id).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return result; });
-            } 
+            public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> {
+                 return jQuery.ajax({ url: 'Proxy/AddTsEntryOnly', data: person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return result;});
+             }
+           
+             public addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson, name: string): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> {
+                 return jQuery.ajax({ url: 'Proxy/AddTsEntryAndName' + '?name=' + encodeURIComponent(name), data: person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto): ProxyGeneratorDemoPage.Models.Person.Models.IAuto =>{return result;});
+             }
+           
+             public addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson, name: string, vorname: string): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> {
+                 return jQuery.ajax({ url: 'Proxy/AddTsEntryAndParams' + '?name=' + encodeURIComponent(name) + '&vorname=' + encodeURIComponent(vorname), data: person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto): ProxyGeneratorDemoPage.Models.Person.Models.IAuto =>{return result;});
+             }
+           
+             public loadTsCallById(id: number): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> {
+                 return jQuery.get('Proxy/LoadTsCallById' + '/' + id).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return result;});
+             }
         }
     }
+
+#### Example for jQuery TypeScript Proxy - FileUpload
+please use **HttpPostedFileBase** Type for fileupload, then the Proxy is created the right way.
+
+    [CreateJQueryTsProxy(ReturnType = typeof(Person))]
+    public ActionResult AddFileToServer(HttpPostedFileBase datei, int detailId)
+    {
+        //Do Something with the file            
+        return Json(new Person() { Id = detailId}, JsonRequestBehavior.AllowGet);
+    }
+
+this will create the following function in TypeScript
+
+    public addFileToServer(datei: any, detailId: number): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> {
+        var formData = new FormData();
+        formData.append('datei', datei);
+        return jQuery.ajax({ 
+                              url: 'Proxy/AddFileToServer' + '?detailId=' + detailId,
+                              data: formData, processData: false, 
+                              contentType: false, 
+                              type: "POST" })
+                     .then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return result;});
+    } 
 
 ## Known Errormessages
 ### 1. Method/Function overload not supported
