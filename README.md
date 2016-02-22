@@ -31,7 +31,8 @@ and adds a refrence to a installed DLL named
 
 which is set in the T4 template as needed reference.
 
-The NuGet package also installs the depended [NuGet Package "Microsoft.VisualStudio.TextTemplating.14.0"](https://www.nuget.org/packages/Microsoft.VisualStudio.TextTemplating.14.0/).
+In a earlier version of this NuGet package I've installed also the depended [NuGet Package "Microsoft.VisualStudio.TextTemplating.14.0"](https://www.nuget.org/packages/Microsoft.VisualStudio.TextTemplating.14.0/) but then you can't use the ProxyGenerator in .NET 4.0 projects.
+So I've removed this package, if you got some excecute problems, that dependency "Microsoft.VisualStudio.TextTemplating" was not found, you need to Install this package manual.
 
 If you want to **create TypeScript proxies** then, you **need to install manually** the [NuGet Package for TypeLite](https://www.nuget.org/packages/TypeLite/)
 

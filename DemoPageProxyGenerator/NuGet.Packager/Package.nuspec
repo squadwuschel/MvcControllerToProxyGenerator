@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>TypeScriptAngularJsProxyGenerator</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <title>TypeScript/JavaScript (AngularJs or jQuery) ProxyGenerator Template for Controllers/WebApi</title>
     <authors>SquadWuschel</authors>
     <owners>SquadWuschel</owners>
@@ -20,11 +20,12 @@
 Version 1.0.2: Added support for alternative proxy creation path
 Version 1.0.3: ProxyGeneratorScript.tt Script moved to the "Scripts" Folder
 Version 1.0.4: Added FileUpload Support in all ProxyTypes with .NET Type "HttpPostedFileBase"
+Version 1.0.5: Removed the Dependency "Microsoft.VisualStudio.TextTemplating" for testing
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>
     <dependencies>
-      <dependency id="Microsoft.VisualStudio.TextTemplating.14.0" version="14.1.24720" />
+      <!--<dependency id="Microsoft.VisualStudio.TextTemplating.14.0" version="14.1.24720" />-->
     </dependencies>
   </metadata>
   <files>

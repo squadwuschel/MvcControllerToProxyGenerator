@@ -183,6 +183,7 @@
 //###########################################################################################################################################################################################	
     var proxyManager = ProxyFileManager.Create(Host, GenerationEnvironment); 
 	//Create for each used ProxyAttribut and Controller the Proxy outputfiles
+    ProxyFileManager.DifferentOutPutDirThanT4File = settings.ProxyFileOutputPath.Length > 0;
     foreach (GeneratedProxyEntry entry in generator.GetGeneratedProxyEntries())
     {
        proxyManager.StartNewFile(generator.Factory.FileHelper().GetProxyFileOutputPath(entry.FileName)); 
@@ -218,6 +219,7 @@ class ProxyFileManager {
     }
 
     private Block currentBlock;
+    public static bool DifferentOutPutDirThanT4File = false;
     private readonly List<Block> files = new List<Block>();
     private readonly Block footer = new Block();
     private readonly Block header = new Block();
@@ -354,6 +356,7 @@ class ProxyFileManager {
 
         private static void ProjectSync(EnvDTE.ProjectItem templateProjectItem, List<String> keepFileNames) {
             var keepFileNameSet = new HashSet<String>(keepFileNames);
+			//Thats not Working any More, if you set a diffrent outputDirectory
             var projectFiles = new Dictionary<String, EnvDTE.ProjectItem>();
             var originalFilePrefix = Path.GetFileNameWithoutExtension(templateProjectItem.FileNames[0]) + ".";
             foreach (EnvDTE.ProjectItem projectItem in templateProjectItem.ProjectItems)
@@ -364,10 +367,19 @@ class ProxyFileManager {
                 if (!keepFileNames.Contains(pair.Key) && !(Path.GetFileNameWithoutExtension(pair.Key) + ".").StartsWith(originalFilePrefix))
                     pair.Value.Delete();
 
-            // Add missing files to the project
-            foreach(String fileName in keepFileNameSet)
-                if (!projectFiles.ContainsKey(fileName))
-                    templateProjectItem.ProjectItems.AddFromFile(fileName);
+
+			//prevent COM Exception, when the "DifferentOutputDir" in the ProxyGenerator Settings are set.
+            if (!DifferentOutPutDirThanT4File)
+            {
+                // Add missing files to the project
+                foreach (String fileName in keepFileNameSet)
+                {
+                    if (!projectFiles.ContainsKey(fileName))
+                    {
+                        templateProjectItem.ProjectItems.AddFromFile(fileName);
+                    }
+                }
+            }
         }
 
         private void CheckoutFileIfRequired(String fileName) {
