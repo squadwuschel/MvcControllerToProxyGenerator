@@ -51,7 +51,7 @@ Here you **NEED to set** the name of your current WebPoject.
 
 If you want to set the output directory for your created proxy files, then you set a path from the root of your WebProject. If you want to create the files directly below the T4 template set this setting to null or empty string.
 
-`settings.ProxyFileOutputPath = "Scripts/Proxies";`
+`settings.ProxyFileOutputPath =  @"ScriptsApp\Services\";`
 
 If you want to create a TypeScript Proxy, don't forget to install [TypeLite](https://www.nuget.org/packages/TypeLite/) and you need to add to the TypeLite T4 template the following line:
 

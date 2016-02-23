@@ -29,7 +29,7 @@
 	//YOU NEED to REPLACE the name with the name of the WebProject where the T4 ProxyGenerator Template was inserted:
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
     //The relative path in the current WebProject, where the proxy files are created/updated, if you want to create the files directly below the T4 Template, then assing a empty string or null
-	settings.ProxyFileOutputPath = "ScriptsApp/Services/";
+	settings.ProxyFileOutputPath = @"ScriptsApp\Services\";
 	//Tells the proxy generator if the AJAX functionnames start not with a Capital letter or not:
 	settings.LowerFirstCharInFunctionName = true;
 	//Default TypeLiteSetting is Interfacename == Classname, but I use a modifier that adds the "I" before the Classname
