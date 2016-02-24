@@ -26,7 +26,7 @@
 //###########################################################################################################################################################################################
 //########################################################-- SETTINGS for MANUAL adjustments --##############################################################################################
 //###########################################################################################################################################################################################
-	//YOU NEED to REPLACE the name with the name of the WebProject where the T4 ProxyGenerator Template was inserted:
+	//YOU NEED to REPLACE the name with the name of the WebProject where the T4 ProxyGenerator Template was inserted (for more Information Read the Readme on Github):
 	settings.WebProjectName = "ProxyGeneratorDemoPage";
     //The relative path in the current WebProject, where the proxy files are created/updated, if you want to create the files directly below the T4 Template, then assing a empty string or null
 	settings.ProxyFileOutputPath = @"ScriptsApp\Services\";

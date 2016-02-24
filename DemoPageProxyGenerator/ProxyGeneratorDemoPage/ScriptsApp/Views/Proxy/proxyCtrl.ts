@@ -20,8 +20,7 @@
         /**
         * Initialisieren der wichtigsten lokalen Variablen
         */
-        init(): void {
-        }
+        init(): void { }
 
         public startFileUploadTypeScript() {
             this.proxyTsSrv.addFileToServer(this.fileImportDataTypeScript, 12).then(result => {

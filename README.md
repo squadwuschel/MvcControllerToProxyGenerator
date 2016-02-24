@@ -45,7 +45,7 @@ When you have installed all NuGet Packages, you **need to configure** the T4 Tem
 
 in the config Section **"SETTINGS for MANUAL adjustments"**, here you can find some settings you can/need to change, that the generator works right.
 
-Here you **NEED to set** the name of your current WebPoject.
+Here you **NEED to set** the name of your current WebPoject. Warning: If you have manually renamed the web directory where your website is located, then you need to insert the foldername here and NOT the WebprojectName.
 
 `settings.WebProjectName = "ProxyGeneratorDemoPage";`
 
