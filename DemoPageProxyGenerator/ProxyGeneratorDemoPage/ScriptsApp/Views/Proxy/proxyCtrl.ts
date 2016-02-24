@@ -4,14 +4,14 @@
         public fileImportDataTypeScript  : any;
         public fileImportDataJavaScript  : any;
         static $inject = [
-            App.Services.ProxyPSrv.module.name, //Ts Service
-            App.Services.HomePSrv.module.name, //Ts Service
+            App.Services.ProxyPService.module.name, //Ts Service
+            App.Services.HomePService.module.name, //Ts Service
             "homeAngularJsSrv", //Js Service
             "proxyAngularJsSrv",//Js Service
         ];
 
-        constructor(private proxyTsSrv: App.Services.IProxyPSrv,
-            private homeTsSrv: App.Services.IHomePSrv,
+        constructor(private proxyTsSrv: App.Services.IProxyPService,
+            private homeTsSrv: App.Services.IHomePService,
             private homeJsSrv: any,
             private proxyJsSrv: any) {
             this.init();

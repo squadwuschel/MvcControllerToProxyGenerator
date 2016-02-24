@@ -29,6 +29,7 @@ Version 1.0.8: Bugfix alternative filepath for proxycreation
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>
     <dependencies>
       <!--<dependency id="Microsoft.VisualStudio.TextTemplating.14.0" version="14.1.24720" />-->
+      <dependency id="Microsoft.AspNet.Mvc" version="[2.0,7.0]" />
     </dependencies>
   </metadata>
   <files>

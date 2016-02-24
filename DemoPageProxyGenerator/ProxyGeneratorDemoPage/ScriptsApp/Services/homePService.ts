@@ -1,15 +1,15 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 23.02.2016 time 21:37 from SquadWuschel.
+//Created on 24.02.2016 time 20:03 from SquadWuschel.
 
   module App.Services { 
 
-export interface IHomePSrv { 
+export interface IHomePService { 
      getPerson(id: number): void;
     getAllAutos() : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson[]>;
  }
 
-export class HomePSrv implements IHomePSrv {
+export class HomePService implements IHomePService {
     static $inject = ['$http']; 
    constructor(private $http: ng.IHttpService) { } 
 
@@ -25,8 +25,8 @@ public getAllAutos() : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.I
   private static _module: ng.IModule; 
   public static get module(): ng.IModule {
       if (this._module) { return this._module; }
-      this._module = angular.module('HomePSrv', []);
-      this._module.service('HomePSrv', HomePSrv);
+      this._module = angular.module('HomePService', []);
+      this._module.service('HomePService', HomePService);
       return this._module; 
    }
  //#endregion 

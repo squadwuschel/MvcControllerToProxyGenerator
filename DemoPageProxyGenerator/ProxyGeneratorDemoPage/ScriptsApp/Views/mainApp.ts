@@ -9,8 +9,8 @@
                 "fileUpload",
                 //Module die mit TypeScript geschrieben wurden einbinden
                 App.Views.Proxy.ProxyCtrl.module.name,
-                App.Services.ProxyPSrv.module.name,
-                App.Services.HomePSrv.module.name,
+                App.Services.HomePService.module.name,
+                App.Services.ProxyPService.module.name,
             ]);
         }
     }

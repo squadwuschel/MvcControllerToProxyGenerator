@@ -306,9 +306,9 @@
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />
     <TypeScriptCompile Include="ScriptsApp\Directives\fileUpload.ts" />
     <TypeScriptCompile Include="ScriptsApp\jQueryCalls.ts" />
-    <TypeScriptCompile Include="ScriptsApp\Services\homePSrv.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Services\homePService.ts" />
     <TypeScriptCompile Include="ScriptsApp\Services\proxyjQueryTs.ts" />
-    <TypeScriptCompile Include="ScriptsApp\Services\proxyPSrv.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Services\proxyPService.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\Proxy\proxyCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Enums.ts">

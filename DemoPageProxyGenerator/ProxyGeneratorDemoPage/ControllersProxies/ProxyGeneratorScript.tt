@@ -72,7 +72,7 @@
 // 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: controllerNamePSrv  -> accountPSrv for AccountController
 // 2. #InterfaceDefinitions# => TypeScript Interface Definition for all Service Calls for the current ServiceName
 // 3. #ServiceFunctions# => replace with all programed Service Functions (the other TypeScript Templates are used to create the Service Calls like: "AngularTsAjaxCallNoReturnType" or "AngularTsAjaxCallWithReturnType")
-    var angularTsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularTsModule, TemplateSuffix = "PSrv"};
+    var angularTsModule = new TemplateEntry() { TemplateType = TemplateTypes.AngularTsModule, TemplateSuffix = "PService"};
 	angularTsModule.Template = "module App.Services { \r\n\r\n";
     angularTsModule.Template += "export interface I#ServiceName# { \r\n #InterfaceDefinitions# }\r\n\r\n";
     angularTsModule.Template += "export class #ServiceName# implements I#ServiceName# {\r\n";

@@ -1,10 +1,10 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 23.02.2016 time 21:37 from SquadWuschel.
+//Created on 24.02.2016 time 20:03 from SquadWuschel.
 
   module App.Services { 
 
-export interface IProxyPSrv { 
+export interface IProxyPService { 
      addFileToServer(datei: any,detailId: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addFileToServerNoReturnType(datei: any,detailId: number): void;
     addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
@@ -25,7 +25,7 @@ export interface IProxyPSrv {
     errorStringReturnType(boolValue: boolean) : ng.IPromise<string>;
  }
 
-export class ProxyPSrv implements IProxyPSrv {
+export class ProxyPService implements IProxyPService {
     static $inject = ['$http']; 
    constructor(private $http: ng.IHttpService) { } 
 
@@ -109,8 +109,8 @@ public errorStringReturnType(boolValue: boolean) : ng.IPromise<string> {
   private static _module: ng.IModule; 
   public static get module(): ng.IModule {
       if (this._module) { return this._module; }
-      this._module = angular.module('ProxyPSrv', []);
-      this._module.service('ProxyPSrv', ProxyPSrv);
+      this._module = angular.module('ProxyPService', []);
+      this._module.service('ProxyPService', ProxyPService);
       return this._module; 
    }
  //#endregion 
