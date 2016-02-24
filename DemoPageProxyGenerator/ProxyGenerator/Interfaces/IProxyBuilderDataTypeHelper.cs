@@ -28,5 +28,11 @@ namespace ProxyGenerator.Interfaces
         /// Gibt zurück der übergebenen Typ einen ReturnType hat.
         /// </summary>
         bool HasReturnType(Type type);
+
+        /// <summary>
+        /// Ermitteln von einem Typ den vollen Namen inkl. Namespace und prüft ob es sich um einen Nullable Type Handelt, 
+        /// und gibt von diesem nur den zugrundeliegenden Typ zurück ohne NullAble
+        /// </summary>
+        string GetTypeFullName(Type type);
     }
 }

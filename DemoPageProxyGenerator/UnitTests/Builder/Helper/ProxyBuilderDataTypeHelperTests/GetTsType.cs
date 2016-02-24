@@ -22,6 +22,27 @@ namespace UnitTests.Builder.Helper.ProxyBuilderDataTypeHelperTests
         #endregion
 
         #region Tests
+
+        [Test]
+        public void GetTsType_Guid()
+        {
+            //Act
+            var result = _proxyBuilderDataTypeHelper.GetTsType(typeof (Guid));
+
+            //Assert
+            Assert.AreEqual("System.IGuid", result);
+        }
+
+        [Test]
+        public void GetTsType_Guid_Nullable()
+        {
+            //Act
+            var result = _proxyBuilderDataTypeHelper.GetTsType(typeof(Guid?));
+
+            //Assert
+            Assert.AreEqual("System.IGuid", result);
+        }
+
         [Test]
         public void GetTsType_Null()
         {

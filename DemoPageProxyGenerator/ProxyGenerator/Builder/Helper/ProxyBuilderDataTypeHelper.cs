@@ -103,7 +103,22 @@ namespace ProxyGenerator.Builder.Helper
 
             //Bei eigenen Typen muss der Namespace noch mit angegeben werden zum Namen.
             //Dem Returntype das Interface "I" hinzufügen und da es sich um eine Liste handelt ein JavaScript array daraus machen.
-            return this.AddInterfacePrefixToFullName(type.FullName, type.IsEnum);
+            return this.AddInterfacePrefixToFullName(GetTypeFullName(type), type.IsEnum);
+        }
+
+        /// <summary>
+        /// Ermitteln von einem Typ den vollen Namen inkl. Namespace und prüft ob es sich um einen Nullable Type Handelt, 
+        /// und gibt von diesem nur den zugrundeliegenden Typ zurück ohne NullAble
+        /// </summary>
+        public string GetTypeFullName(Type type)
+        {
+            //Prüfen ob es sich um einen Nullable Wert handelt
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>))
+            {
+                return Nullable.GetUnderlyingType(type).FullName;
+            }
+
+            return type.FullName;
         }
 
         /// <summary>
