@@ -508,12 +508,20 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
         {
             return Json(new Person() { Id = id}, JsonRequestBehavior.AllowGet);
         }
+
+        //Returns HTML Template as pure String/HTML
+        [CreateJQueryTsProxy(ReturnType = typeof(string))]
+        public ActionResult TestView()
+        {
+            return View();
+        }
     }
 
  this will create the following jQuery TypeScript proxy. With an interface and the right "ReturnTypes" for each proxy call, please install TypeLite to create the TypeScript interfaces for each type. 
 
       module App.JqueryServices { 
         export interface IProxyjQueryTs { 
+            testView() : JQueryPromise<string>;
             addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
             addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
             addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string,vorname: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
@@ -521,6 +529,10 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
         }
         
         export class ProxyjQueryTs implements IProxyjQueryTs {
+             public testView() : JQueryPromise<string> { 
+                 return jQuery.get('Proxy/TestView').then((result: string) : string => { return result; });
+            } 
+
             public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> {
                  return jQuery.ajax({ url: 'Proxy/AddTsEntryOnly', data: person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return result;});
              }
