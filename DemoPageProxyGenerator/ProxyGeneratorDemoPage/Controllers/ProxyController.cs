@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProxyGenerator.ProxyTypeAttributes;
@@ -22,6 +20,12 @@ namespace ProxyGeneratorDemoPage.Controllers
         {
             return View();
         }
+
+        [CreateJQueryTsProxy(ReturnType = typeof(string))]
+        public ActionResult TestView()
+        {
+            return View();
+        }
         #endregion
 
         #region File Upload
@@ -35,7 +39,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         public ActionResult AddFileToServer(HttpPostedFileBase datei, int detailId)
         {
             if (datei == null)
-            {   
+            {
                 throw new Exception("File Upload is Null");
             }
 
@@ -45,7 +49,7 @@ namespace ProxyGeneratorDemoPage.Controllers
 
             System.IO.File.WriteAllBytes(string.Format(@"C:\Temp\{0}", System.IO.Path.GetFileName(datei.FileName)), buffer);
 
-            return Json(new Person() { Id = detailId}, JsonRequestBehavior.AllowGet);
+            return Json(new Person() { Id = detailId }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -77,6 +81,13 @@ namespace ProxyGeneratorDemoPage.Controllers
         public JsonResult AddJsEntryOnly(Person person)
         {
             return Json(person, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngularTsProxy(ReturnType = typeof(Person))]
+        [CreateJQueryTsProxy(ReturnType = typeof(Person))]
+        public JsonResult ManySimpleParams(int page, int size, byte? sortedCol, byte? desc, string smCompany, int? smCustomerNumber, string smEmail, string smLastname, int? portal, int count)
+        {
+            return Json(new Person() { Id = count }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryJsProxy]
@@ -241,7 +252,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngularTsProxy(ReturnType = typeof(string))]
         public ActionResult ErrorStringReturnType(bool boolValue)
         {
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            //Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Json("Error 1", JsonRequestBehavior.AllowGet);
         }
         #endregion

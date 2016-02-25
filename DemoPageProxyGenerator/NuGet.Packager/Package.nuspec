@@ -24,7 +24,7 @@ Version 1.0.5: Removed the Dependency "Microsoft.VisualStudio.TextTemplating" fo
 Version 1.0.6: Bugfix for COM Exception in ProxyFileManager
 Version 1.0.7: Removed unused NuGet Packages from ProxyGenerator.dll - minimum Requirement ist .NET 4.0 Project now.
 Version 1.0.8: Bugfix alternative filepath for proxycreation
-Version 1.0.8: Added NuGet dependency for Microsoft.Asp.NET and fixes an issue with nullable types like "GUID?"
+Version 1.0.10: BugFix jQuery "POST" data attribute added for post calls
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>

@@ -285,6 +285,7 @@
     <Content Include="Views\Proxy\AngularCalls.cshtml" />
     <Content Include="Views\Proxy\JQueryCalls.cshtml" />
     <Content Include="Scripts\Manager.ttinclude" />
+    <Content Include="Views\Proxy\TestView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

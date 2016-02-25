@@ -49,6 +49,16 @@
             console.clear();
             console.log("Some TypeScript jQuery Service Calls: \r\n");
 
+            srv.testView().then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'testView' Result: ");
+                console.log(result);
+            });
+
+            srv.manySimpleParams(12, 345, 1, 1, "test", 12, "squad@web.de", "Squad", 12, 32).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'manySimpleParams' Result: ");
+                console.log(result);
+            });
+
             srv.addTsEntryAndName(person, "Johannes").then(result => {
                 console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndName' Result: ");
                 console.log(result);

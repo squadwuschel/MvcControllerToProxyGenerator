@@ -85,6 +85,11 @@
                  console.log(result);
              });
 
+             this.proxyTsSrv.manySimpleParams(12, 345, 1, 1, "test", 12, "squad@web.de", "Squad", 12, 32).then(result => {
+                 console.log("\r\nSuccess TypeScript Service Call 'manySimpleParams' Result: ");
+                 console.log(result);
+             });
+
              this.proxyTsSrv.addTsEntryAndParams(person, "Squad", "Wuschel").then(result => {
                  console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndParams' Result: ");
                  console.log(result);

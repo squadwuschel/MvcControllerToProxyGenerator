@@ -1,12 +1,14 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 24.02.2016 time 20:03 from SquadWuschel.
+//Created on 25.02.2016 time 21:28 from SquadWuschel.
 
   module App.JqueryServices { 
 
 export interface IproxyjQueryTs { 
-     addFileToServer(datei: any,detailId: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
+     testView() : JQueryPromise<string>;
+    addFileToServer(datei: any,detailId: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addFileToServerNoReturnType(datei: any,detailId: number): void;
+    manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
     addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string,vorname: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
@@ -27,6 +29,10 @@ export interface IproxyjQueryTs {
 
 export class proxyjQueryTs implements IproxyjQueryTs {
 
+    public testView() : JQueryPromise<string> { 
+       return jQuery.get('Proxy/TestView').then((result: string) : string => { return result; });
+    } 
+
     public addFileToServer(datei: any,detailId: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
  var formData = new FormData(); 
  formData.append('datei', datei); 
@@ -39,16 +45,20 @@ export class proxyjQueryTs implements IproxyjQueryTs {
  jQuery.ajax( { url : 'Proxy/AddFileToServerNoReturnType'+ '?detailId='+detailId, data : formData, processData : false, contentType: false, type : "POST" }); 
 } 
 
+    public manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+       return jQuery.get('Proxy/ManySimpleParams'+ '?page='+page+'&size='+size+'&sortedCol='+sortedCol+'&desc='+desc+'&smCompany='+encodeURIComponent(smCompany)+'&smCustomerNumber='+smCustomerNumber+'&smEmail='+encodeURIComponent(smEmail)+'&smLastname='+encodeURIComponent(smLastname)+'&portal='+portal+'&count='+count).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return result; });
+    } 
+
     public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-       return jQuery.ajax( { url : 'Proxy/AddTsEntryOnly', data : person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return result; });
+       return jQuery.ajax( { url : 'Proxy/AddTsEntryOnly', data : person, type : "POST" }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return result; });
     } 
 
     public addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
-       return jQuery.ajax( { url : 'Proxy/AddTsEntryAndName'+ '?name='+encodeURIComponent(name), data : person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto => { return result; });
+       return jQuery.ajax( { url : 'Proxy/AddTsEntryAndName'+ '?name='+encodeURIComponent(name), data : person, type : "POST" }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto => { return result; });
     } 
 
     public addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string,vorname: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
-       return jQuery.ajax( { url : 'Proxy/AddTsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto => { return result; });
+       return jQuery.ajax( { url : 'Proxy/AddTsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : person, type : "POST" }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto => { return result; });
     } 
 
     public loadTsCallById(id: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
