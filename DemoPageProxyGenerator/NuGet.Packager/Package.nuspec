@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>TypeScriptAngularJsProxyGenerator</id>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <title>TypeScript/JavaScript (AngularJs or jQuery) ProxyGenerator Template for Controllers/WebApi</title>
     <authors>SquadWuschel</authors>
     <owners>SquadWuschel</owners>

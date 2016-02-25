@@ -7,6 +7,8 @@ Or install the NuGet package with the package manager console:
 
 **`PM > Install-Package TypeScriptAngularJsProxyGenerator`**
 
+Be carefull on updating the package, save your custom settings first, because on updating this package will replace your settings for ProxyGenerator.
+
 ---------
 
 ## Setup / Usage
