@@ -428,19 +428,19 @@ this will create the following jQuery JavaScript proxy directly localted in VS "
     window.proxyjQueryJs = function() { } 
     
     proxyjQueryJs.prototype.addJsEntryOnly = function (person) { 
-        return jQuery.ajax( { url : 'Proxy/AddJsEntryOnly', data : person }).then(function (result) {
+        return jQuery.ajax( { url : 'Proxy/AddJsEntryOnly', data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then(function (result) {
             return result;
        });
     }
     
     proxyjQueryJs.prototype.addJsEntryAndName = function (person,name) { 
-        return jQuery.ajax( { url : 'Proxy/AddJsEntryAndName'+ '?name='+encodeURIComponent(name), data : person }).then(function (result) {
+        return jQuery.ajax( { url : 'Proxy/AddJsEntryAndName'+ '?name='+encodeURIComponent(name), data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then(function (result) {
             return result;
        });
     }
     
     proxyjQueryJs.prototype.addJsEntryAndParams = function (person,name,vorname) { 
-        return jQuery.ajax( { url : 'Proxy/AddJsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : person }).then(function (result) {
+        return jQuery.ajax( { url : 'Proxy/AddJsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then(function (result) {
             return result;
        });
     }
@@ -535,21 +535,21 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
                  return jQuery.get('Proxy/TestView').then((result: string) : string => { return result; });
             } 
 
-            public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> {
-                 return jQuery.ajax({ url: 'Proxy/AddTsEntryOnly', data: person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return result;});
-             }
-           
-             public addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson, name: string): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> {
-                 return jQuery.ajax({ url: 'Proxy/AddTsEntryAndName' + '?name=' + encodeURIComponent(name), data: person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto): ProxyGeneratorDemoPage.Models.Person.Models.IAuto =>{return result;});
-             }
-           
-             public addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson, name: string, vorname: string): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> {
-                 return jQuery.ajax({ url: 'Proxy/AddTsEntryAndParams' + '?name=' + encodeURIComponent(name) + '&vorname=' + encodeURIComponent(vorname), data: person }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto): ProxyGeneratorDemoPage.Models.Person.Models.IAuto =>{return result;});
-             }
-           
-             public loadTsCallById(id: number): JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> {
-                 return jQuery.get('Proxy/LoadTsCallById' + '/' + id).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return result;});
-             }
+            public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+                return jQuery.ajax( { url : 'Proxy/AddTsEntryOnly', data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson=>{return result;});
+            } 
+
+            public addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
+                return jQuery.ajax( { url : 'Proxy/AddTsEntryAndName'+ '?name='+encodeURIComponent(name), data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto=>{return result;});
+            } 
+
+            public addTsEntryAndParams(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string,vorname: string) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
+                return jQuery.ajax( { url : 'Proxy/AddTsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IAuto) : ProxyGeneratorDemoPage.Models.Person.Models.IAuto=>{return result;});
+            } 
+
+            public loadTsCallById(id: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+                return jQuery.get('Proxy/LoadTsCallById' + '/' + id).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson=>{return result;});
+            } 
         }
     }
 

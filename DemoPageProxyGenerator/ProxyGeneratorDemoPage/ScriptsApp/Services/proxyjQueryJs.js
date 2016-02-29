@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 25.02.2016 time 21:28 from SquadWuschel.
+//Created on 29.02.2016 time 20:52 from SquadWuschel.
 
   window.proxyjQueryJs = function() { } 
 
@@ -22,19 +22,19 @@ proxyjQueryJs.prototype.addFileToServerNoReturnType = function (datei,detailId) 
 }
 
 proxyjQueryJs.prototype.addJsEntryOnly = function (person) { 
-    return jQuery.ajax( { url : 'Proxy/AddJsEntryOnly', data : person, type : "POST" }).then(function (result) {
+    return jQuery.ajax( { url : 'Proxy/AddJsEntryOnly', data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then(function (result) {
         return result;
    });
 }
 
 proxyjQueryJs.prototype.addJsEntryAndName = function (person,name) { 
-    return jQuery.ajax( { url : 'Proxy/AddJsEntryAndName'+ '?name='+encodeURIComponent(name), data : person, type : "POST" }).then(function (result) {
+    return jQuery.ajax( { url : 'Proxy/AddJsEntryAndName'+ '?name='+encodeURIComponent(name), data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then(function (result) {
         return result;
    });
 }
 
 proxyjQueryJs.prototype.addJsEntryAndParams = function (person,name,vorname) { 
-    return jQuery.ajax( { url : 'Proxy/AddJsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : person, type : "POST" }).then(function (result) {
+    return jQuery.ajax( { url : 'Proxy/AddJsEntryAndParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname), data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then(function (result) {
         return result;
    });
 }

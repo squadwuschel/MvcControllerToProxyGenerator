@@ -127,7 +127,7 @@ namespace ProxyGenerator.Builder.Helper
                 else
                 {
                     //Standard Post 
-                    builder.Append(string.Format(", data : {0}, type : \"POST\" }})", infos.ProxyMethodParameterInfos.First(p => p.IsComplexeType).ParameterName));
+                    builder.Append(string.Format(", data : JSON.stringify({0}), type : \"POST\", contentType: \"application/json; charset=utf-8\" }})", infos.ProxyMethodParameterInfos.First(p => p.IsComplexeType).ParameterName));
                 }
             }
             else

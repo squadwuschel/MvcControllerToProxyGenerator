@@ -140,7 +140,16 @@ namespace ProxyGeneratorDemoPage.Controllers
         }
         #endregion
 
-        #region AngularTs Proxy Methods Examples
+        #region AngularTs and jQuery Ts Proxy Methods Examples
+
+        [CreateAngularTsProxy(ReturnType = typeof(List<int>))]
+        [CreateJQueryTsProxy(ReturnType = typeof(List<int>))]
+        public ActionResult AddAges(List<int> ages)
+        {
+            return Json(new List<int>() {1, 2, 3, 4, 5, 6, 7, 8}, JsonRequestBehavior.AllowGet);
+        }
+
+
         //You can create multiple Proxies for the same function
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]

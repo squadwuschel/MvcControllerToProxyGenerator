@@ -44,17 +44,21 @@
             event.preventDefault();
             var srv = this.jQuerySrv;
 
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true);
+            var ages: number[] = [1, 2, 3, 4, 5, 66];
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true, ages);
 
             console.clear();
             console.log("Some TypeScript jQuery Service Calls: \r\n");
 
-            srv.testView().then(result => {
-                console.log("\r\nSuccess TypeScript Service Call 'testView' Result: ");
+
+            srv.addAges(ages).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'addAges' Result: ");
                 console.log(result);
+                srv.addAges(result);
             });
 
-            srv.manySimpleParams(12, 345, 1, 1, "test", 12, "squad@web.de", "Squad", 12, 32).then(result => {
+
+          srv.manySimpleParams(12, 345, 1, 1, "test", 12, "squad@web.de", "Squad", 12, 32).then(result => {
                 console.log("\r\nSuccess TypeScript Service Call 'manySimpleParams' Result: ");
                 console.log(result);
             });
@@ -124,6 +128,11 @@
                 console.log(result);
             });
 
+            srv.testView().then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'testView' Result: ");
+                console.log(result);
+            });
+
             srv.errorStringReturnType(true).then(result => {
                 console.log("\r\nSuccess TypeScript Service Call 'errorStringReturnType' Result: ");
                 console.log(result);
@@ -137,7 +146,8 @@
 
         public callJqueryJavaScriptFunctions(event: Event): void {
             event.preventDefault();
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true);
+            var ages: number[] = [1, 2, 3, 4, 5, 66];
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true, ages);
 
             //Init Proxy Function
             var calls = new window.proxyjQueryJs();

@@ -17,6 +17,7 @@ declare module ProxyGeneratorDemoPage.Models.Person.Models {
 		Name: string;
 		Passwort: string;
 		IsAktiv: boolean;
+		CounterValues: number[];
 	}
 }
 

@@ -37,7 +37,8 @@
         }
 
         public startJavaScriptServiceCalls() : void {
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", new Date(), "Wuschel", true);
+             var ages: number[] = [1, 2, 3, 4, 5, 66];
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", new Date(), "Wuschel", true, ages);
             var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW Js", 12, person);
             console.clear();
             console.log("Some JavaScript Angular Service Calls: \r\n");
@@ -74,11 +75,18 @@
         }
 
         public startTypeScriptServiceCalls() : void {
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true);
+             var ages: number[] = [1, 2, 3, 4, 5, 66];
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true, ages);
             var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW", 5, person);
 
              console.clear();
              console.log("Some TypeScript Angular Service Calls: \r\n");
+
+            this.proxyTsSrv.addAges(ages).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'addAges' Result: ");
+                console.log(result);
+                this.proxyTsSrv.addAges(result);
+            });
 
              this.proxyTsSrv.addTsEntryAndName(person, "Johannes").then(result => {
                  console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndName' Result: ");
