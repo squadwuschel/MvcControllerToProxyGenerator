@@ -50,6 +50,44 @@ namespace ProxyGenerator.Manager
                 {
                     ProxySettings.TypeLiteInterfacePrefix = allSettings["ProxyGenerator_TypeLiteInterfacePrefix"].Value;
                 }
+
+                //SUFFIX Settings
+
+                if (allSettings.AllKeys.Contains("ProxyGenerator_TemplateSuffix_AngularJs"))
+                {
+                    var template = ProxySettings.Templates.FirstOrDefault(p => p.TemplateType == TemplateTypes.AngularJsModule);
+                    if (template != null)
+                    {
+                        template.TemplateSuffix = allSettings["ProxyGenerator_TemplateSuffix_AngularJs"].Value;
+                    }
+                }
+
+                if (allSettings.AllKeys.Contains("ProxyGenerator_TemplateSuffix_AngularTs"))
+                {
+                    var template = ProxySettings.Templates.FirstOrDefault(p => p.TemplateType == TemplateTypes.AngularTsModule);
+                    if (template != null)
+                    {
+                        template.TemplateSuffix = allSettings["ProxyGenerator_TemplateSuffix_AngularTs"].Value;
+                    }
+                }
+
+                if (allSettings.AllKeys.Contains("ProxyGenerator_TemplateSuffix_jQueryJs"))
+                {
+                    var template = ProxySettings.Templates.FirstOrDefault(p => p.TemplateType == TemplateTypes.jQueryJsModule);
+                    if (template != null)
+                    {
+                        template.TemplateSuffix = allSettings["ProxyGenerator_TemplateSuffix_jQueryJs"].Value;
+                    }
+                }
+
+                if (allSettings.AllKeys.Contains("ProxyGenerator_TemplateSuffix_jQueryTs"))
+                {
+                    var template = ProxySettings.Templates.FirstOrDefault(p => p.TemplateType == TemplateTypes.jQueryTsModule);
+                    if (template != null)
+                    {
+                        template.TemplateSuffix = allSettings["ProxyGenerator_TemplateSuffix_jQueryTs"].Value;
+                    }
+                }
             }
             catch (Exception exception)
             {

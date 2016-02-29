@@ -63,6 +63,24 @@ or if you use the original TypeLite Interface name without the "I" then, you nee
      
 `settings.TypeLiteInterfacePrefix = "";`
 
+### Alternative: Store the proxysettings in the Web.config
+You can also store the settings in the **web.config**, then its not possible that you overwrite your proxysettings, when you upgrade the ProxyGenerator via NuGet.
+You can add only the settings you need to your web.cofig, the rest will be loaded from the T4 Template, the proxysettings in the web.config will overwrite the T4 proxysettings:
+
+    <appSettings>
+       <!-- Proxy Generator Settings - START -->
+       <add key="ProxyGenerator_WebProjectName" value="ProxyGeneratorDemoPage" />
+       <add key="ProxyGenerator_ProxyFileOutputPath" value="ScriptsApp\Services\" />
+       <add key="ProxyGenerator_LowerFirstCharInFunctionName" value="true" />
+       <add key="ProxyGenerator_TypeLiteInterfacePrefix" value="I" />
+       <!-- Tell the ProxyGenerator which suffix the generated controllername will have -->
+       <add key="ProxyGenerator_TemplateSuffix_AngularJs" value="AngularJsSrv" />
+       <add key="ProxyGenerator_TemplateSuffix_AngularTs" value="PService" />
+       <add key="ProxyGenerator_TemplateSuffix_jQueryJs" value="jQueryJs" />
+       <add key="ProxyGenerator_TemplateSuffix_jQueryTs" value="jQueryTs" />
+       <!-- Proxy Generator Settings - END -->
+    </appSettings>
+
 ## How to tell the T4 template to create a proxy 
 The T4 template only creates proxies for controller functions which are decorated with the right Attribute.
 For each controller, framework and language a new file with the ControllerName (Classname) + Suffix is created (you can change the Suffix in the T4 Template).

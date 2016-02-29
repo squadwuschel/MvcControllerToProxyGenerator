@@ -22,6 +22,7 @@
 	//The full Directory to the Webproject, in this Case the Path to the T4 Template is also valide
 	//We search the path below for the "WebProjectName" to get the root Directory of the Website. like: C:\MyProject\WebSite\
 	settings.FullPathToTheWebProject = System.IO.Path.GetFullPath(this.Host.TemplateFile);
+    settings.WebConfigPath = this.Host.ResolvePath(@"..\Web.config");
 
 //###########################################################################################################################################################################################
 //########################################################-- SETTINGS for MANUAL adjustments --##############################################################################################
