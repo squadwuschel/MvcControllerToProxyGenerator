@@ -18,6 +18,13 @@ namespace ProxyGenerator
 
         public Generator(ProxySettings proxySettings)
         {
+            //Wenn man das T4 Template per NuGet akualisiert, werden immer die Einstellungen 
+            //die man im T4 Template vorgenommen hat überschrieben. Um dies zu verhindern,
+            //kann man seine Einstellungen ebenfalls in der Web.Config ablegen und dann wird versucht
+            //vorher das Property aus der Web.config auszulesen und mit dem in den ProxySettings ersetzt.
+            ISettingsManager settingsManager = new SettingsManager(proxySettings);
+            settingsManager.LoadSettingsFromWebConfig();
+            
             Factory = new ProxyGeneratorFactoryManager(proxySettings);
             ControllerManager = Factory.CreateControllerManager();
             GeneratedProxyEntries = new List<GeneratedProxyEntry>();

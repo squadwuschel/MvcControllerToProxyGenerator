@@ -149,7 +149,6 @@ namespace ProxyGeneratorDemoPage.Controllers
             return Json(new List<int>() {1, 2, 3, 4, 5, 6, 7, 8}, JsonRequestBehavior.AllowGet);
         }
 
-
         //You can create multiple Proxies for the same function
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]

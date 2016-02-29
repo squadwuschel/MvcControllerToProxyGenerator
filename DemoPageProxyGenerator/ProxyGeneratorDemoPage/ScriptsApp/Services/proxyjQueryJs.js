@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 29.02.2016 time 20:52 from SquadWuschel.
+//Created on 29.02.2016 time 22:30 from SquadWuschel.
 
   window.proxyjQueryJs = function() { } 
 

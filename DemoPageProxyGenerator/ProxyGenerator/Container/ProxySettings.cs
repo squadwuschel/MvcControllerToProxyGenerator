@@ -37,6 +37,11 @@ namespace ProxyGenerator.Container
         /// Normalerweise wird hier direkt der Klassenname verwendet, ich habe aber gern ein "I" davor.
         /// </summary>
         public string TypeLiteInterfacePrefix { get; set; }
+
+        /// <summary>
+        /// Pfad zur web.config
+        /// </summary>
+        public string WebConfigPath { get; set; }
         #endregion
 
         #region Konstruktor
@@ -46,6 +51,7 @@ namespace ProxyGenerator.Container
             WebProjectName = string.Empty;
             LowerFirstCharInFunctionName = true;
             FullPathToTheWebProject = String.Empty;
+            WebConfigPath = string.Empty;
         }
         #endregion
     }

@@ -36,6 +36,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -95,9 +96,11 @@
     <Compile Include="Interfaces\IMethodParameterManager.cs" />
     <Compile Include="Interfaces\IMethodManager.cs" />
     <Compile Include="Interfaces\IProxyGeneratorFactoryManager.cs" />
+    <Compile Include="Interfaces\ISettingsManager.cs" />
     <Compile Include="Manager\MethodManager.cs" />
     <Compile Include="Manager\MethodParameterManager.cs" />
     <Compile Include="Manager\ProxyGeneratorFactoryManager.cs" />
+    <Compile Include="Manager\SettingsManager.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularJsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateAngularTsProxyAttribute.cs" />
     <Compile Include="ProxyTypeAttributes\CreateJQueryJsProxyAttribute.cs" />
