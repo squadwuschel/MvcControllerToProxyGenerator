@@ -153,11 +153,11 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="TypeLite, Version=1.5.2.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
-      <HintPath>..\packages\TypeLite.1.5.2\lib\net4\TypeLite.dll</HintPath>
+      <HintPath>..\packages\TypeLite.1.6.0\lib\net4\TypeLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="TypeLite.Net4, Version=1.5.2.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
-      <HintPath>..\packages\TypeLite.1.5.2\lib\net4\TypeLite.Net4.dll</HintPath>
+      <HintPath>..\packages\TypeLite.1.6.0\lib\net4\TypeLite.Net4.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
@@ -230,6 +230,7 @@
     <Compile Include="Helper\ClientAccess.cs" />
     <Compile Include="Helper\Auto.cs" />
     <Compile Include="Helper\CustomErrorHandlerAttribute.cs" />
+    <Compile Include="Helper\GenericsTestklasse.cs" />
     <Compile Include="Helper\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -284,8 +285,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Proxy\AngularCalls.cshtml" />
     <Content Include="Views\Proxy\JQueryCalls.cshtml" />
-    <Content Include="Scripts\Manager.ttinclude" />
     <Content Include="Views\Proxy\TestView.cshtml" />
+    <Content Include="Scripts\Manager.ttinclude" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

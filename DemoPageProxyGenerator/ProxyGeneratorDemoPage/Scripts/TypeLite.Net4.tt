@@ -12,7 +12,7 @@
 
 <# var ts = TypeScript.Definitions()
 		.WithReference("Enums.ts")
-		.WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)
+		//.WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)
 		.ForLoadedAssemblies();
 #>
 

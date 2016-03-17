@@ -34,6 +34,36 @@ namespace UnitTests.Builder.Helper.ProxyBuilderDataTypeHelperTests
         }
 
         [Test]
+        public void GetTsType_Dictionary()
+        {
+            //Act
+            var result = _proxyBuilderDataTypeHelper.GetTsType(typeof(IDictionary<Datenklasse, Infoklasse>));
+
+            //Assert
+            Assert.AreEqual("System.Collections.Generic.KeyValuePair<UnitTests.TestHelper.TestClasses.IDatenklasse, UnitTests.TestHelper.TestClasses.IInfoklasse>[]", result);
+        }
+
+        [Test]
+        public void GetTsType_SimpleGeneric()
+        {
+            //Act
+            var result = _proxyBuilderDataTypeHelper.GetTsType(typeof (Oberklasse<Datenklasse>));
+
+            //Assert
+            Assert.AreEqual("UnitTests.TestHelper.TestClasses.IOberklasse<UnitTests.TestHelper.TestClasses.IDatenklasse>", result);
+        }
+
+        [Test]
+        public void GetTsType_ExtendedGeneric()
+        {
+            //Act
+            var result = _proxyBuilderDataTypeHelper.GetTsType(typeof(Oberklasse2<Datenklasse, Infoklasse>));
+
+            //Assert
+            Assert.AreEqual("UnitTests.TestHelper.TestClasses.IOberklasse2<UnitTests.TestHelper.TestClasses.IDatenklasse, UnitTests.TestHelper.TestClasses.IInfoklasse>", result);
+        }
+
+        [Test]
         public void GetTsType_Guid_Nullable()
         {
             //Act
@@ -154,11 +184,13 @@ namespace UnitTests.Builder.Helper.ProxyBuilderDataTypeHelperTests
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException), ExpectedMessage = "Error, the Proxybuilder does not support ICollections as ReturnType, only IList, List, Array or IEnumerable!")]
         public void GetTsType_IsGenericType_ICollection()
         {
             //Act
             var result = _proxyBuilderDataTypeHelper.GetTsType(typeof(ICollection<Person>));
+
+            //Assert
+            Assert.AreEqual("UnitTests.TestHelper.TestClasses.IPerson[]", result);
         }
 
         [Test]

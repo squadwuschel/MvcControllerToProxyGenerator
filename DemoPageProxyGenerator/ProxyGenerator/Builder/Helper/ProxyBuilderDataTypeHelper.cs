@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -46,11 +47,19 @@ namespace ProxyGenerator.Builder.Helper
                 return "void";
             }
 
-            if (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(IEnumerable<>) || type.GetGenericTypeDefinition() == typeof(IList<>) || type.GetGenericTypeDefinition() == typeof(List<>)))
+            if (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(IEnumerable<>) || type.GetGenericTypeDefinition() == typeof(IList<>) || type.GetGenericTypeDefinition() == typeof(List<>) || type.GetGenericTypeDefinition() == typeof(ICollection<>)))
             {
                 Type underlyingType = type.GetGenericArguments()[0];
                 //Wir wissen das es sich um ein "Array" handelt jetzt noch den Typen ermitteln für das Array
                 return GetTsType(underlyingType) + "[]";
+            }
+
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IDictionary<,>))
+            {
+                Type keyType = type.GetGenericArguments()[0];
+                Type valueType = type.GetGenericArguments()[1];
+                //TypeLite stellt ein Dictionary z.B. folgendermaßen dar: System.Collections.Generic.KeyValuePair<string, T>[]
+                return typeof (KeyValuePair<,>).FullName.Split('`')[0] + "<" + GetTsType(keyType) + ", " + GetTsType(valueType) + ">[]";
             }
 
             if (type.IsArray)
@@ -58,11 +67,6 @@ namespace ProxyGenerator.Builder.Helper
                 Type arrayType = type.GetElementType();
                 //Wir wissen das es sich um ein Array handelt jetzt noch den Typen ermitteln für das Array
                 return GetTsType(arrayType) + "[]";
-            }
-
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>))
-            {
-                throw new NotSupportedException("Error, the Proxybuilder does not support ICollections as ReturnType, only IList, List, Array or IEnumerable!");
             }
 
             //Man muss die Standard Systemtypen prüfen und den Wert zurückgeben der von TypScript entsprechend unterstützt wird.
@@ -101,24 +105,25 @@ namespace ProxyGenerator.Builder.Helper
                 return "any";
             }
 
-            //Bei eigenen Typen muss der Namespace noch mit angegeben werden zum Namen.
-            //Dem Returntype das Interface "I" hinzufügen und da es sich um eine Liste handelt ein JavaScript array daraus machen.
-            return this.AddInterfacePrefixToFullName(GetTypeFullName(type), type.IsEnum);
-        }
-
-        /// <summary>
-        /// Ermitteln von einem Typ den vollen Namen inkl. Namespace und prüft ob es sich um einen Nullable Type Handelt, 
-        /// und gibt von diesem nur den zugrundeliegenden Typ zurück ohne NullAble
-        /// </summary>
-        public string GetTypeFullName(Type type)
-        {
-            //Prüfen ob es sich um einen Nullable Wert handelt
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>))
+            //Achtung Nullable Generics werden "anders" behandelt
+            if (type.IsGenericType && type.GetGenericTypeDefinition() != typeof(Nullable<>))
             {
-                return Nullable.GetUnderlyingType(type).FullName;
+                //Wenn es sich um ein Generic handelt, dann sieht der FullName folgendermaßen aus:
+                //UnitTests.TestHelper.TestClasses.Oberklasse`1[[UnitTests.TestHelper.TestClasses.Datenklasse, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+                //Daher das Split an dieser Stelle und die Rekursion, wenn mehrere Parameter übergeben werden.
+                return this.AddInterfacePrefixToFullName(type.FullName.Split('`')[0], type.IsEnum) + "<" + string.Join(", ", type.GetGenericArguments().Select(GetTsType).ToArray()) + ">"; ;
             }
 
-            return type.FullName;
+            //Prüfen ob es sich um einen Nullable Wert handelt
+            //Da es in TypeScript keine NullAble Typen gibt wird hier einfach der zugrundeliegende Type zurückgegeben und NICHT die GenericDefinition mit Nullable<Type> 
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                return this.AddInterfacePrefixToFullName(Nullable.GetUnderlyingType(type).FullName, type.IsEnum);
+            }
+
+            //Bei eigenen Typen muss der Namespace noch mit angegeben werden zum Namen.
+            //Dem Returntype das Interface "I" hinzufügen und da es sich um eine Liste handelt ein JavaScript array daraus machen.
+            return this.AddInterfacePrefixToFullName(type.FullName, type.IsEnum);
         }
 
         /// <summary>
