@@ -31,7 +31,7 @@ namespace ProxyGenerator.Manager
 
         public IControllerManager CreateControllerManager()
         {
-            return new ControllerManager(this);
+            return new ControllerRoslinManager(this);
         }
 
         public IMethodManager CreateMethodManager()
