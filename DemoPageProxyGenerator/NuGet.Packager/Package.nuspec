@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>TypeScriptAngularJsProxyGenerator</id>
-    <version>1.0.11</version>
+    <version>1.1.0</version>
     <title>TypeScript/JavaScript (AngularJs or jQuery) ProxyGenerator Template for Controllers/WebApi</title>
     <authors>SquadWuschel</authors>
     <owners>SquadWuschel</owners>
@@ -26,6 +26,7 @@ Version 1.0.7: Removed unused NuGet Packages from ProxyGenerator.dll - minimum R
 Version 1.0.8: Bugfix alternative filepath for proxycreation
 Version 1.0.10: BugFix jQuery "POST" data attribute added for post calls
 Version 1.0.11: Bugfix jQuery "POST" added "JSON.stringify(data)", added support to store the proxysettings in the web.config (ReadMe Updated)
+Version 1.1.00: Added Support for Generics
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>
