@@ -6,7 +6,9 @@ using TypeLite;
 
 namespace ProxyGeneratorDemoPage.Helper
 {
-    [TsClass]
+    //Durch einen Bug im TypeLite aktuell auskommentiert!
+
+   // [TsClass]
     public class Oberklasse<T> where T : class
     {
         public List<T> DatenklassenListe { get; set; }
@@ -16,7 +18,7 @@ namespace ProxyGeneratorDemoPage.Helper
         public Infoklasse Info { get; set; }
     }
 
-    [TsClass]
+   // [TsClass]
     public class Datenklasse
     {
         public int Id { get; set; }
@@ -24,7 +26,7 @@ namespace ProxyGeneratorDemoPage.Helper
         public Infoklasse Info { get; set; }
     }
 
-    [TsClass]
+   // [TsClass]
     public class Infoklasse
     {
         public int InfoNr { get; set; }

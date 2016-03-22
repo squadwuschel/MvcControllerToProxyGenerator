@@ -36,9 +36,20 @@
             });
         }
 
+        public startFileDownloadCompanyTypeScript() {
+            var company: ProxyGeneratorDemoPage.Helper.ICompany = new Company("MyCompany", 12, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin);
+            this.proxyTsSrv.getDownloadCompany(1337, company);
+        }
+
+        public startFileDownloadPersonTypeScript() {
+            var ages: number[] = [1, 2, 3, 4, 5, 66];
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", "Wuschel", true, ages);
+            this.proxyTsSrv.getDownloadPerson(7331, person);
+        }
+
         public startJavaScriptServiceCalls() : void {
              var ages: number[] = [1, 2, 3, 4, 5, 66];
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", new Date(), "Wuschel", true, ages);
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs",  "Wuschel", true, ages);
             var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW Js", 12, person);
             console.clear();
             console.log("Some JavaScript Angular Service Calls: \r\n");
@@ -76,7 +87,7 @@
 
         public startTypeScriptServiceCalls() : void {
              var ages: number[] = [1, 2, 3, 4, 5, 66];
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true, ages);
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", "Wuschel", true, ages);
             var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW", 5, person);
 
              console.clear();

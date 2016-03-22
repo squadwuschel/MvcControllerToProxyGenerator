@@ -63,5 +63,13 @@ namespace ProxyGenerator.Interfaces
         /// Falls nicht wird einfach ein Leerstring zurückgegeben.
         /// </summary>
         string GetFileUploadFormData(ProxyMethodInfos methodInfo);
+
+        /// <summary>
+        /// Zusammenbauen der passenden URL Parameter ACHTUNG der UrlParameterName entspricht 
+        /// auch dem gleichen Namen wie der Parameter der gesetzt wird.
+        /// Außerdem werden Komplexe Parameter mit Hilfe von jQuery in Parameter "übersetzt"
+        /// </summary>
+        /// <param name="infos">List mit den Typen die als URL Parameter angelegt werden sollen.</param>
+        string BuildComplexUrlParameter(List<ProxyMethodParameterInfo> infos);
     }
 }

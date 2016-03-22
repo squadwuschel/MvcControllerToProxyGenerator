@@ -10,5 +10,10 @@ namespace ProxyGenerator.Interfaces
         /// Erstellt wird: post("/Home/LoadAll", data) oder get("/Home/LoadAll?userId=" + id)
         /// </summary>
         string BuildHttpCall(ProxyMethodInfos methodInfo, ProxyBuilder proxyBuilder);
+
+        /// <summary>
+        /// Erstellen eines einfachen HREF Links für window.location.href
+        /// </summary>
+        string BuildHrefLink(ProxyMethodInfos methodInfo, ProxyBuilder proxyBuilder);
     }
 }

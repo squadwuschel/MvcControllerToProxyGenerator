@@ -229,6 +229,7 @@
     </Compile>
     <Compile Include="Helper\ClientAccess.cs" />
     <Compile Include="Helper\Auto.cs" />
+    <Compile Include="Helper\Company.cs" />
     <Compile Include="Helper\CustomErrorHandlerAttribute.cs" />
     <Compile Include="Helper\GenericsTestklasse.cs" />
     <Compile Include="Helper\Person.cs" />
@@ -305,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
+    <TypeScriptCompile Include="ScriptsApp\Classes\Company.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />
     <TypeScriptCompile Include="ScriptsApp\Directives\fileUpload.ts" />
     <TypeScriptCompile Include="ScriptsApp\jQueryCalls.ts" />

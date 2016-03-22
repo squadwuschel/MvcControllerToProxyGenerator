@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using System.Web.Mvc;
 using Ninject;
 using ProxyGenerator.ProxyTypeAttributes;
@@ -8,6 +9,13 @@ namespace ProxyGeneratorDemoPage.Controllers
 {
     public class HomeController : Controller
     {
+        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownload(int personId, Person person)
+        {
+            var fileContent = Encoding.ASCII.GetBytes("Das ist ein Test Download");
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
+
         [CreateAngularTsProxy(ReturnType = typeof(void))]
         public ActionResult GetPerson(int id)
         {

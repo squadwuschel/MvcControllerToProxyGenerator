@@ -12,5 +12,6 @@
         AngularTsModule,
         AngularTsAjaxCallWithReturnType,
         AngularTsAjaxCallNoReturnType,
+        AngularTsWindowLocationHref,
     }
 }

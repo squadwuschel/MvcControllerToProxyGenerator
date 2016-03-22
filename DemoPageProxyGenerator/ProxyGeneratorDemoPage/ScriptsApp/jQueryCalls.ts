@@ -45,7 +45,7 @@
             var srv = this.jQuerySrv;
 
             var ages: number[] = [1, 2, 3, 4, 5, 66];
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true, ages);
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", "Wuschel", true, ages);
 
             console.clear();
             console.log("Some TypeScript jQuery Service Calls: \r\n");
@@ -147,7 +147,7 @@
         public callJqueryJavaScriptFunctions(event: Event): void {
             event.preventDefault();
             var ages: number[] = [1, 2, 3, 4, 5, 66];
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", new Date(), "Wuschel", true, ages);
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad","Wuschel", true, ages);
 
             //Init Proxy Function
             var calls = new window.proxyjQueryJs();

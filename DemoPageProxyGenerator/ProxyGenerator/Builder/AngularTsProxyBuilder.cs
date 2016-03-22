@@ -60,6 +60,9 @@ namespace ProxyGenerator.Builder
 
             //TEMPLATE FÜR: "TemplateTypes.AngularTsAjaxCallNoReturnType"
             // #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n this.$http.#ServiceCallAndParameters#;}
+
+            //TEMPLATE FÜR: Window.location.href
+            // public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  window.location.href = #ServiceCallAndParameters#; };
             #endregion
 
             //Alle controller durchgehen die übergeben wurden und für jeden dann die entsprechenden Proxy Methoden erstellen
@@ -74,10 +77,20 @@ namespace ProxyGenerator.Builder
                 foreach (ProxyMethodInfos methodInfos in controllerInfo.ProxyMethodInfos)
                 {
                     var functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularTsAjaxCallNoReturnType).Template;
-                    //sollte ein ReturnType verwendet werden, dann das andere Template laden mit ReturnType
-                    
+
+                    //Wenn es sich um eine Funktion mit HREF handelt, dann muss ein anderes Template geladen werden.
+                    if (methodInfos.CreateWindowLocationHrefLink)
+                    {
+                        ajaxCalls += this.BuildHrefTemplate(methodInfos);
+                        //Da ein HREF Link auch keinen Rückgabewert hat, diesen mit Void ersetzen.
+                        serviceInterfaceDefinitions += String.Format("    {0}({1}): void;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name),
+                                                                                            ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
+                        continue;
+                    }
+
                     if (ProxyBuilderTypeHelper.HasReturnType(methodInfos.ReturnType))
                     {
+                        //sollte ein ReturnType verwendet werden, dann das andere Template laden mit ReturnType
                         functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularTsAjaxCallWithReturnType).Template;
                         //Für Methoden mit ReturnType muss auch der passende ReturnType ersetzt werden
                         functionTemplate = functionTemplate.Replace(ConstValuesTemplates.ControllerFunctionReturnType, ProxyBuilderTypeHelper.GetTsType(methodInfos.ReturnType));
@@ -91,7 +104,7 @@ namespace ProxyGenerator.Builder
                     else
                     {
                         //Für Funktionen Ohne Rückgabewert "void" setzten
-                        serviceInterfaceDefinitions += String.Format("    {0}({1}): void;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name), 
+                        serviceInterfaceDefinitions += String.Format("    {0}({1}): void;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name),
                                                                                             ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
                         functionTemplate = functionTemplate.Replace(ConstValuesTemplates.FunctionContent, ProxyBuilderHelper.GetFileUploadFormData(methodInfos));
                     }
@@ -116,6 +129,19 @@ namespace ProxyGenerator.Builder
             }
 
             return generatedProxyEntries;
+        }
+
+        private string BuildHrefTemplate(ProxyMethodInfos methodInfos)
+        {
+            var functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularTsWindowLocationHref).Template;
+
+            //Den Methodennamen ersetzen - Der Servicename der aufgerufen werden soll.
+            string functionCall = functionTemplate.Replace(ConstValuesTemplates.ControllerFunctionName, ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name));
+            //Parameter des Funktionsaufrufs ersetzen.
+            functionCall = functionCall.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
+            //Href Call zusammenbauen und Parameter ersetzen
+            functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHrefLink(methodInfos, ProxyBuilder.AngularTypeScript));
+            return functionCall;
         }
 
         /// <summary>

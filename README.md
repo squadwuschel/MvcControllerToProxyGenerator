@@ -31,7 +31,7 @@ and adds a refrence to a installed DLL named
 
 `ProxyGenerator.dll`
 
-which is set in the T4 template as needed reference.
+which is set in the T4 template as required reference.
 
 In a earlier version of this NuGet package I've installed also the depended [NuGet Package "Microsoft.VisualStudio.TextTemplating.14.0"](https://www.nuget.org/packages/Microsoft.VisualStudio.TextTemplating.14.0/) but then you can't use the ProxyGenerator in .NET 4.0 projects.
 So I've removed this package, if you got some excecute problems, that dependency "Microsoft.VisualStudio.TextTemplating" was not found, you need to Install this package manual.
@@ -87,7 +87,7 @@ For each controller, framework and language a new file with the ControllerName (
 
 The ProxyGenerator DLL provides four different attributes.
 
-| Attribute Name | Language | Framework | needed Attribute Params |
+| Attribute Name | Language | Framework | required Attribute Params |
 |----------------|----------|-----------|-----------------|
 |CreateAngularJsProxyAttribute| JavaScript | AngularJs | -|
 |CreateAngularTsProxyAttribute| TypeScript | AngularJs | ReturnType|

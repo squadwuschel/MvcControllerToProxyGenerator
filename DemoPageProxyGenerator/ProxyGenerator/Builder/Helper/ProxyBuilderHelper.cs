@@ -158,6 +158,57 @@ namespace ProxyGenerator.Builder.Helper
         }
 
         /// <summary>
+        /// TODO Unit Testen
+        /// Zusammenbauen der passenden URL Parameter ACHTUNG der UrlParameterName entspricht 
+        /// auch dem gleichen Namen wie der Parameter der gesetzt wird.
+        /// Außerdem werden Komplexe Parameter mit Hilfe von jQuery in Parameter "übersetzt"
+        /// </summary>
+        /// <param name="infos">List mit den Typen die als URL Parameter angelegt werden sollen.</param>
+        public string BuildComplexUrlParameter(List<ProxyMethodParameterInfo> infos)
+        {
+            StringBuilder builder = new StringBuilder();
+            var allowedInfos = infos.Where(p => p.ParameterName.ToLower() != "id");
+            if (allowedInfos.Any())
+            {
+                builder.Append("+ '?");
+            }
+            bool isFirst = true;
+
+            foreach (ProxyMethodParameterInfo info in allowedInfos)
+            {
+                //Prüfen ob es sich um einen String handelt der übergeben werden soll,
+                //wenn ja wird dieser Url Encoded damit z.B. auch "+" Zeichen übermittelt werden
+                string paramValue = info.IsString ? string.Format("encodeURIComponent({0})", info.ParameterName) : info.ParameterName;
+
+                if (isFirst)
+                {
+                    if (info.IsComplexeType)
+                    {
+                        builder.Append(string.Format("'+jQuery.param({1})", info.ParameterName, paramValue));
+                    }
+                    else
+                    {
+                        builder.Append(string.Format("{0}='+{1}", info.ParameterName, paramValue));
+                        isFirst = false;
+                    }
+                }
+                else
+                {
+                    if (info.IsComplexeType)
+                    {
+                        builder.Append(string.Format("+'&'+jQuery.param({1})", info.ParameterName, paramValue));
+                    }
+                    else
+                    {
+                        builder.Append(string.Format("+'&{0}='+{1}", info.ParameterName, paramValue));
+                    }
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
         /// Prüfen ob eine Id enthalten ist, diese wird extra an die URL angehängt.
         /// </summary>
         public string BuildUrlParameterId(List<ProxyMethodParameterInfo> infos)

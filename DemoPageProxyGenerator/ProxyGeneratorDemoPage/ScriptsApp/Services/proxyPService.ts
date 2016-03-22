@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 29.02.2016 time 22:30 from SquadWuschel.
+//Created on 23.03.2016 time 00:01 from SquadWuschel.
 
   module App.Services { 
 
@@ -8,6 +8,9 @@ export interface IProxyPService {
      addFileToServer(datei: any,detailId: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addFileToServerNoReturnType(datei: any,detailId: number): void;
     manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
+    getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): void;
+    getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany): void;
+    getDownloadSimple(companyId: number,name: string): void;
     addAges(ages: number[]) : ng.IPromise<number[]>;
     addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IAuto>;
@@ -46,6 +49,18 @@ public addFileToServerNoReturnType(datei: any,detailId: number) : void  {
 public manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
      return this.$http.get('Proxy/ManySimpleParams'+ '?page='+page+'&size='+size+'&sortedCol='+sortedCol+'&desc='+desc+'&smCompany='+encodeURIComponent(smCompany)+'&smCustomerNumber='+smCustomerNumber+'&smEmail='+encodeURIComponent(smEmail)+'&smLastname='+encodeURIComponent(smLastname)+'&portal='+portal+'&count='+count).then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return response.data; });
 } 
+
+public getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : void  { 
+  window.location.href = 'Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person); 
+ } 
+
+public getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany) : void  { 
+  window.location.href = 'Proxy/GetDownloadCompany'+ '?companyId='+companyId+'&'+jQuery.param(company); 
+ } 
+
+public getDownloadSimple(companyId: number,name: string) : void  { 
+  window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name); 
+ } 
 
 public addAges(ages: number[]) : ng.IPromise<number[]> { 
      return this.$http.post('Proxy/AddAges',ages).then((response: ng.IHttpPromiseCallbackArg<number[]>) : number[] => { return response.data; });

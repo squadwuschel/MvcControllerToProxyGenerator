@@ -15,7 +15,6 @@ namespace ProxyGenerator.Builder.Helper
         #endregion
 
         #region Konstruktor
-
         public ProxyBuilderHttpCall(IProxyGeneratorFactoryManager proxyGeneratorFactory)
         {
             Factory = proxyGeneratorFactory;
@@ -24,6 +23,23 @@ namespace ProxyGenerator.Builder.Helper
         #endregion
 
         #region Build HTTP Call
+        /// <summary>
+        /// Erstellen eines einfachen HREF Links für window.location.href
+        /// </summary>
+        public string BuildHrefLink(ProxyMethodInfos methodInfo, ProxyBuilder proxyBuilder)
+        {
+            //z.B.: window.location.href = window.siteRoot + 'Auftragsabrechnung/ExportData' + '?allEntries=' + encodeURIComponent(allEntries) + '&' + jQuery.param($scope.FilterData);
+            //Wir bauen hier aber nur den Link Teil zusammen: 'Auftragsabrechnung/ExportData' + '?allEntries=' + encodeURIComponent(allEntries) + '&' + jQuery.param($scope.FilterData);
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append(string.Format("'{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(methodInfo.Controller), methodInfo.MethodInfo.Name));
+            builder.Append(ProxyBuilderHelper.BuildUrlParameterId(methodInfo.ProxyMethodParameterInfos));
+            //Da wir die Komplexen Parameter nicht als Post mit übergeben können bei einem Link, müssen wird diese entsprechend in Url Parametern abbilden.
+            builder.Append(ProxyBuilderHelper.BuildComplexUrlParameter(methodInfo.ProxyMethodParameterInfos));
+            return builder.ToString();
+        }
+
+
         /// <summary>
         /// Den passenden HttpCall zusammenbauen und prüfen ob Post oder Get verwendet werden soll
         /// Erstellt wird: post("/Home/LoadAll", data) oder get("/Home/LoadAll?userId=" + id)

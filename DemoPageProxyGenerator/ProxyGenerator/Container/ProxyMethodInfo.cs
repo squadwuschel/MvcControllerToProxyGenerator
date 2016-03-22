@@ -23,6 +23,11 @@ namespace ProxyGenerator.Container
         public Type ReturnType { get; set; }
 
         /// <summary>
+        /// Dem Proxy Attribut kann man auch sagen das nur ein Href Link erstellt werden soll.
+        /// </summary>
+        public bool CreateWindowLocationHrefLink { get; set; }
+
+        /// <summary>
         /// Reflexion Type für die Methode
         /// </summary>
         public MethodInfo MethodInfo { get; set; }
@@ -44,6 +49,7 @@ namespace ProxyGenerator.Container
             ProxyMethodParameterInfos = new List<ProxyMethodParameterInfo>();
             Namespace = String.Empty;
             MethodNameWithNamespace = String.Empty;
+            CreateWindowLocationHrefLink = false;
         }
         #endregion
 

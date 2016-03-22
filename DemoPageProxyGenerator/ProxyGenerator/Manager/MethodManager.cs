@@ -43,6 +43,13 @@ namespace ProxyGenerator.Manager
                 proxyMethodInfo.MethodInfo = methodInfo;
                 proxyMethodInfo.Controller = controller;
                 proxyMethodInfo.ReturnType = GetProxyReturnType(methodInfo);
+                proxyMethodInfo.CreateWindowLocationHrefLink = GetCreateWindowLocationHrefLink(methodInfo);
+
+                //Wenn ein Href Link erstellt werden soll, dann kann es keinen ReturnType geben!
+                if (proxyMethodInfo.CreateWindowLocationHrefLink)
+                {
+                    proxyMethodInfo.ReturnType = null;
+                }
 
                 if (methodInfo.DeclaringType != null)
                 {
@@ -75,6 +82,20 @@ namespace ProxyGenerator.Manager
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Den wert aus "CreateWindowLocationHrefLink" im Attribut ermitteln und den entsprechend gesetzten Wert zurückgeben.
+        /// </summary>
+        public bool GetCreateWindowLocationHrefLink(MethodInfo methodInfo)
+        {
+            CreateProxyBaseAttribute attr = methodInfo.GetCustomAttributes(typeof(CreateProxyBaseAttribute), false).FirstOrDefault() as CreateProxyBaseAttribute;
+            if (attr != null)
+            {
+                return attr.CreateWindowLocationHrefLink;
+            }
+
+            return false;
         }
         #endregion
     }

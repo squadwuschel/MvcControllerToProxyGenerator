@@ -7,12 +7,12 @@
 /// <reference path="Enums.ts" />
 
 declare module ProxyGeneratorDemoPage.Models.Person.Models {
-	interface Auto {
+	interface IAuto {
 		Marke: string;
 		Alter: number;
-		Eigentuemer: ProxyGeneratorDemoPage.Models.Person.Models.Person;
+		Eigentuemer: ProxyGeneratorDemoPage.Models.Person.Models.IPerson;
 	}
-	interface Person {
+	interface IPerson {
 		Id: number;
 		Name: string;
 		Passwort: string;
@@ -21,27 +21,10 @@ declare module ProxyGeneratorDemoPage.Models.Person.Models {
 	}
 }
 declare module ProxyGeneratorDemoPage.Helper {
-	interface Oberklasse<T> {
-		DatenklassenListe: T[];
-		Test: T[];
-		Dict: System.Collections.Generic.KeyValuePair<string, T>[];
-		Abc: string;
-		Info: ProxyGeneratorDemoPage.Helper.Infoklasse;
-	}
-	interface Infoklasse {
-		InfoNr: number;
-		Bemerkungen: string;
-	}
-	interface Datenklasse {
-		Id: number;
-		Textdaten: string;
-		Info: ProxyGeneratorDemoPage.Helper.Infoklasse;
-	}
-}
-declare module System.Collections.Generic {
-	interface KeyValuePair<TKey, TValue> {
-		Key: TKey;
-		Value: TValue;
+	interface ICompany {
+		Name: string;
+		Age: number;
+		ClientAccess: ProxyGeneratorDemoPage.Helper.ClientAccess;
 	}
 }
 
