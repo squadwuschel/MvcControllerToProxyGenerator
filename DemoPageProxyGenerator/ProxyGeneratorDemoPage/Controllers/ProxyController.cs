@@ -77,6 +77,32 @@ namespace ProxyGeneratorDemoPage.Controllers
         }
         #endregion
 
+        #region HrefLinks for Downloads
+        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadPerson(int personId, Person person)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Person: {0} mit dem Passwort: {1} und der ID: {2}", person.Name, person.Passwort, personId));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
+
+        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadCompany(int companyId, Company company)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Company: {0} mit dem ClientAccess: {1} und der ID: {2}", company.Name, company.ClientAccess, company));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
+
+        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadSimple(int companyId, string name)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die CompanyId: {0} mit dem Namen: {1}", companyId, name));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
+        #endregion
+
         #region AngularJs Proxy Methods Examples
         [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
@@ -141,29 +167,8 @@ namespace ProxyGeneratorDemoPage.Controllers
             return Json(new Person() { Name = name, Id = alter}, JsonRequestBehavior.AllowGet);
         }
         #endregion
-
+        
         #region AngularTs and jQuery Ts Proxy Methods Examples
-        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
-        public FileResult GetDownloadPerson(int personId, Person person)
-        {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Person: {0} mit dem Passwort: {1} und der ID: {2}", person.Name, person.Passwort, personId));
-            return File(fileContent, "text/text", "TestDL.txt");
-        }
-
-        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
-        public FileResult GetDownloadCompany(int companyId, Company company)
-        {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Company: {0} mit dem ClientAccess: {1} und der ID: {2}", company.Name, company.ClientAccess, company));
-            return File(fileContent, "text/text", "TestDL.txt");
-        }
-
-        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
-        public FileResult GetDownloadSimple(int companyId, string name)
-        {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die CompanyId: {0} mit dem Namen: {1}", companyId, name));
-            return File(fileContent, "text/text", "TestDL.txt");
-        }
-
         [CreateAngularTsProxy(ReturnType = typeof(List<int>))]
         [CreateJQueryTsProxy(ReturnType = typeof(List<int>))]
         public ActionResult AddAges(List<int> ages)

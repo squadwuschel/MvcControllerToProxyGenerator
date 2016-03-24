@@ -66,6 +66,11 @@
     angularJsPrototype.Template += "   return this.http.#ServiceCallAndParameters#.then(function (result) {\r\n";
     angularJsPrototype.Template += "        return result.data;\r\n   });\r\n}\r\n\r\n";
 	settings.Templates.Add(angularJsPrototype);
+
+//TEMPLATE STRINGS FOR: "AngularJs JavaScript prototype Call for window.location.href" for e.g. DownloadLinks (jQuery required for this feature) : 
+	var angularJsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.AngularJsWindowLocationHref};
+    angularJsWindowLocationHref.Template = "#ServiceName#.prototype.#ControllerFunctionName# = function (#ServiceParamters#) { \r\n    window.location.href = #ServiceCallAndParameters# } \r\n\r\n ";
+	settings.Templates.Add(angularJsWindowLocationHref);
 //###########################################################################################################################################################################################
 //#############################################################--AngularJs TypeScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
@@ -106,9 +111,9 @@
     var angularTsAjaxCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallNoReturnType};
     angularTsAjaxCallWithNoReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  #FunctionContent#  this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
 	settings.Templates.Add(angularTsAjaxCallWithNoReturnType);
-//TEMPLATE STRINGS FOR: "Angular TypeScript Window.location.href" for e.g. DownloadLinks (jQuery required for this Feature) : 
+//TEMPLATE STRINGS FOR: "Angular TypeScript window.location.href" for e.g. DownloadLinks (jQuery required for this feature) : 
     var angularTsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsWindowLocationHref};
-    angularTsWindowLocationHref.Template = "public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  window.location.href = #ServiceCallAndParameters#; \r\n } \r\n\r\n";
+    angularTsWindowLocationHref.Template = "public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    window.location.href = #ServiceCallAndParameters#; \r\n } \r\n\r\n";
 	settings.Templates.Add(angularTsWindowLocationHref);
 
 //###########################################################################################################################################################################################

@@ -9,6 +9,7 @@
         jQueryJsPrototype,
         AngularJsModule,
         AngularJsPrototype,
+        AngularJsWindowLocationHref,
         AngularTsModule,
         AngularTsAjaxCallWithReturnType,
         AngularTsAjaxCallNoReturnType,

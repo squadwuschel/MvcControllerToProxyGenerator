@@ -163,6 +163,11 @@ namespace ProxyGenerator.Builder
             {
                 throw new Exception("Please add the 'AngularTsAjaxCallNoReturnType' Template when you want to create a AngularTs Proxy");
             }
+
+            if (Factory.GetProxySettings().Templates.All(p => p.TemplateType != TemplateTypes.AngularTsWindowLocationHref))
+            {
+                throw new Exception("Please add the 'AngularTsWindowLocationHref' Template when you want to create a AngularTs Proxy");
+            }
         }
     }
 }

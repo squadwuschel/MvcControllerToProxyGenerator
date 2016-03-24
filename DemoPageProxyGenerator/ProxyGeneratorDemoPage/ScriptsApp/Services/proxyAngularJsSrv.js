@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 23.03.2016 time 00:01 from SquadWuschel.
+//Created on 24.03.2016 time 23:10 from SquadWuschel.
 
   function proxyAngularJsSrv($http) { this.http = $http; } 
 
@@ -21,7 +21,16 @@ proxyAngularJsSrv.prototype.addFileToServerNoReturnType = function (datei,detail
    });
 }
 
-proxyAngularJsSrv.prototype.addJsEntryOnly = function (person) { 
+proxyAngularJsSrv.prototype.getDownloadPerson = function (personId,person) { 
+    window.location.href = 'Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person) } 
+
+ proxyAngularJsSrv.prototype.getDownloadCompany = function (companyId,company) { 
+    window.location.href = 'Proxy/GetDownloadCompany'+ '?companyId='+companyId+'&'+jQuery.param(company) } 
+
+ proxyAngularJsSrv.prototype.getDownloadSimple = function (companyId,name) { 
+    window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name) } 
+
+ proxyAngularJsSrv.prototype.addJsEntryOnly = function (person) { 
     return this.http.post('Proxy/AddJsEntryOnly',person).then(function (result) {
         return result.data;
    });

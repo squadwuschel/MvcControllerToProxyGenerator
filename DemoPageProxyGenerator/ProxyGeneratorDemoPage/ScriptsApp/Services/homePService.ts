@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 23.03.2016 time 00:01 from SquadWuschel.
+//Created on 24.03.2016 time 23:10 from SquadWuschel.
 
   module App.Services { 
 
@@ -15,7 +15,7 @@ export class HomePService implements IHomePService {
    constructor(private $http: ng.IHttpService) { } 
 
 public getDownload(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : void  { 
-  window.location.href = 'Home/GetDownload'+ '?personId='+personId+'&'+jQuery.param(person); 
+    window.location.href = 'Home/GetDownload'+ '?personId='+personId+'&'+jQuery.param(person); 
  } 
 
 public getPerson(id: number) : void  { 
