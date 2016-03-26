@@ -87,14 +87,19 @@ For each controller, framework and language a new file with the ControllerName (
 
 The ProxyGenerator DLL provides four different attributes.
 
-| Attribute Name | Language | Framework | required Attribute Params |
-|----------------|----------|-----------|-----------------|
-|CreateAngularJsProxyAttribute| JavaScript | AngularJs | -|
-|CreateAngularTsProxyAttribute| TypeScript | AngularJs | ReturnType|
-|CreateJQueryJsProxyAttribute| JavaScript | jQuery | -|
-|CreateJQueryTsProxyAttribute| TypeScript | jQuery | ReturnType|
+| Attribute Name | Language | Framework | required Attribute Parameter | optional Parameter
+|----------------|----------|-----------|-----------------|---------|
+|CreateAngularJsProxyAttribute| JavaScript | AngularJs | -|CreateWindowLocationHrefLink
+|CreateAngularTsProxyAttribute| TypeScript | AngularJs | ReturnType|CreateWindowLocationHrefLink
+|CreateJQueryJsProxyAttribute| JavaScript | jQuery | -|CreateWindowLocationHrefLink
+|CreateJQueryTsProxyAttribute| TypeScript | jQuery | ReturnType|CreateWindowLocationHrefLink
 
 You can mix these attributes in any combination. It is possible to use all on the same controller function, then for this function four different proxies are create (one for each language and framework).
+
+**Attribute Parameter:**
+
+- **ReturnType** => is only used in TypeScript proxies and generates proxies with the right ReturnType of your .NET JSON Call in TypeScript (you also need TypeLite T4 Template)
+- **CreateWindowLocationHrefLink** => The controller methods with this attribute parameter set to true only generates a "window.location.href" function in the proxy. It can be used to call download links like in the examples further down.
 
 Before you can start the proxy creation, you need to **rebuild your solution**, because the T4 template looks up your compiled assemblies for the added proxy creation attributes.
 
@@ -147,6 +152,14 @@ The .NET controller functions are decorated with the attribute "**CreateAngularJ
             return Json(vorname, JsonRequestBehavior.AllowGet);
         }
 
+        [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadSimple(int companyId, string name)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("This is a download for the CompanyId: {0} with the Name: {1}", companyId, name));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
+
+
 this will create the following AngularJs JavaScript proxy directly localted in VS "below" the T4 template.
 
     //Warning this file was dynamicly created.
@@ -191,6 +204,10 @@ this will create the following AngularJs JavaScript proxy directly localted in V
             return result.data;
        });
     }
+
+    proxyAngularJsSrv.prototype.getDownloadSimple = function (companyId,name) { 
+        window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name)
+    } 
     
     angular.module('proxyAngularJsSrv', []) .service('proxyAngularJsSrv', ['$http', proxyAngularJsSrv]);
 
@@ -297,6 +314,13 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
         {
             return Json(name, JsonRequestBehavior.AllowGet);
         } 
+
+        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadSimple(int companyId, string name)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("This is a download for the CompanyId: {0} with the Name: {1}", companyId, name));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
     }
 
  this will create the following AngularJs TypeScript proxy. With an interface and the right "ReturnTypes" for each proxy call, please install TypeLite to create the TypeScript interfaces for each type. 
@@ -372,6 +396,10 @@ How to use the TypeScript module, take a look at my the GitHub code for this Pro
          public stringTsReturnType(name: string) : ng.IPromise<string> { 
              return this.$http.get('Proxy/StringTsReturnType'+ '?name='+encodeURIComponent(name)).then((response: ng.IHttpPromiseCallbackArg<string>) : string => {return response.data;});
          } 
+
+         public getDownloadSimple(companyId: number,name: string) : void  { 
+            window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name); 
+         } 
        
        //#region Angular Module Definition 
          private static _module: ng.IModule; 
@@ -439,6 +467,13 @@ The .NET controller functions are decorated with the attribute "**CreateJQueryJs
         {
             return Json("ClearJsCall was Called", JsonRequestBehavior.AllowGet);
         }
+
+        [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadSimple(int companyId, string name)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("This is a download for the CompanyId: {0} with the Name: {1}", companyId, name));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
     }
         
 this will create the following jQuery JavaScript proxy directly localted in VS "below" the T4 template.
@@ -468,6 +503,10 @@ this will create the following jQuery JavaScript proxy directly localted in VS "
             return result;
        });
     }
+
+    proxyjQueryJs.prototype.getDownloadSimple = function (companyId,name) { 
+        window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name) 
+    } 
 
 #### Example for jQuery JavaScript Proxy - FileUpload
 please use **HttpPostedFileBase** Type for fileupload, then the Proxy is created the right way.
@@ -535,6 +574,13 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
         {
             return View();
         }
+
+        [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadSimple(int companyId, string name)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("This is a download for the CompanyId: {0} with the Name: {1}", companyId, name));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
     }
 
  this will create the following jQuery TypeScript proxy. With an interface and the right "ReturnTypes" for each proxy call, please install TypeLite to create the TypeScript interfaces for each type. 
@@ -567,6 +613,10 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
 
             public loadTsCallById(id: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
                 return jQuery.get('Proxy/LoadTsCallById' + '/' + id).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson=>{return result;});
+            } 
+
+            public getDownloadSimple(companyId: number,name: string) : void  { 
+               window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name); 
             } 
         }
     }

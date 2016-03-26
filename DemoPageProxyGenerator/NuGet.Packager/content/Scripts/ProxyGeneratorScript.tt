@@ -8,6 +8,7 @@
 
 <#@ import namespace="ProxyGenerator" #>
 <#@ import namespace="ProxyGenerator.Container" #>
+<#@ import namespace="ProxyGenerator.Enums" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.IO" #>
@@ -66,6 +67,11 @@
     angularJsPrototype.Template += "   return this.http.#ServiceCallAndParameters#.then(function (result) {\r\n";
     angularJsPrototype.Template += "        return result.data;\r\n   });\r\n}\r\n\r\n";
 	settings.Templates.Add(angularJsPrototype);
+
+//TEMPLATE STRINGS FOR: "AngularJs JavaScript prototype Call for window.location.href" for e.g. DownloadLinks (jQuery required for this feature) : 
+	var angularJsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.AngularJsWindowLocationHref};
+    angularJsWindowLocationHref.Template = "#ServiceName#.prototype.#ControllerFunctionName# = function (#ServiceParamters#) { \r\n    window.location.href = #ServiceCallAndParameters# } \r\n\r\n ";
+	settings.Templates.Add(angularJsWindowLocationHref);
 //###########################################################################################################################################################################################
 //#############################################################--AngularJs TypeScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
@@ -104,8 +110,13 @@
 
 //TEMPLATE STRINGS FOR: "Angular TypeScript Ajax Call Function with NO ReturnType": 
     var angularTsAjaxCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsAjaxCallNoReturnType};
-    angularTsAjaxCallWithNoReturnType.Template = "public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  #FunctionContent#  this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
+    angularTsAjaxCallWithNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  #FunctionContent#  this.$http.#ServiceCallAndParameters#; \r\n } \r\n\r\n";
 	settings.Templates.Add(angularTsAjaxCallWithNoReturnType);
+//TEMPLATE STRINGS FOR: "Angular TypeScript window.location.href" for e.g. DownloadLinks (jQuery required for this feature) : 
+    var angularTsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsWindowLocationHref};
+    angularTsWindowLocationHref.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    window.location.href = #ServiceCallAndParameters#; \r\n } \r\n\r\n";
+	settings.Templates.Add(angularTsWindowLocationHref);
+
 //###########################################################################################################################################################################################
 //#########ProxyFile####################################################--jQuery TypeScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
@@ -135,6 +146,11 @@
 	var jQueryTsAjaxCallNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsAjaxCallNoReturnType};
     jQueryTsAjaxCallNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void { \r\n #FunctionContent# jQuery.#ServiceCallAndParameters#; \r\n} \r\n\r\n";
 	settings.Templates.Add(jQueryTsAjaxCallNoReturnType);
+
+//TEMPLATE STRINGS FOR: "jQuery TypeScript  window.location.href" for e.g. DownloadLinks:
+	var jQueryTsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.jQueryTsWindowLocationHref};
+    jQueryTsWindowLocationHref.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void { \r\n    window.location.href = #ServiceCallAndParameters#; \r\n } \r\n\r\n";
+	settings.Templates.Add(jQueryTsWindowLocationHref);
 //###########################################################################################################################################################################################
 //#############################################################--jQuery JavaScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
@@ -157,6 +173,11 @@
     jQueryJsPrototype.Template += "   return jQuery.#ServiceCallAndParameters#.then(function (result) {\r\n";
     jQueryJsPrototype.Template += "        return result;\r\n   });\r\n}\r\n\r\n";
 	settings.Templates.Add(jQueryJsPrototype);
+
+//TEMPLATE STRINGS FOR: "jQuery JavaScript  window.location.href" for e.g. DownloadLinks:
+	var jQueryJsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.jQueryJsWindowLocationHref};
+    jQueryJsWindowLocationHref.Template = "#ServiceName#.prototype.#ControllerFunctionName# = function (#ServiceParamters#) { \r\n    window.location.href = #ServiceCallAndParameters# } \r\n\r\n ";
+	settings.Templates.Add(jQueryJsWindowLocationHref);
 //#############################################################################################################################################################ProxyFile##############################
 //#############################################################-- Tempalte Definition END --#################################################################################################
 //###########################################################################################################################################################################################
