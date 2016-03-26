@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Configuration;
 using ProxyGenerator.Container;
+using ProxyGenerator.Enums;
 using ProxyGenerator.Interfaces;
 
 namespace ProxyGenerator.Manager

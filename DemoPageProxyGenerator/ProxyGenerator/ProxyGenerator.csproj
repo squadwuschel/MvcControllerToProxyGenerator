@@ -108,7 +108,7 @@
     <Compile Include="ProxyTypeAttributes\CreateProxyBaseAttribute.cs" />
     <Compile Include="Enums\DataTypeEnum.cs" />
     <Compile Include="Container\ProxyMethodInfo.cs" />
-    <Compile Include="Container\TemplateTypes.cs" />
+    <Compile Include="Enums\TemplateTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Container\TemplateEntry.cs" />
     <Compile Include="ConstValuesTemplates.cs" />

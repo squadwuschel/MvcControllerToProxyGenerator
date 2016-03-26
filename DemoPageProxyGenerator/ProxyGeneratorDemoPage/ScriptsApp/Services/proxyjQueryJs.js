@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 24.03.2016 time 23:10 from SquadWuschel.
+//Created on 26.03.2016 time 22:43 from SquadWuschel.
 
   window.proxyjQueryJs = function() { } 
 
@@ -21,7 +21,19 @@ proxyjQueryJs.prototype.addFileToServerNoReturnType = function (datei,detailId) 
    });
 }
 
-proxyjQueryJs.prototype.addJsEntryOnly = function (person) { 
+proxyjQueryJs.prototype.getDownloadPerson = function (personId,person) { 
+    window.location.href = 'Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person) } 
+
+ proxyjQueryJs.prototype.getDownloadCompany = function (companyId,company) { 
+    window.location.href = 'Proxy/GetDownloadCompany'+ '?companyId='+companyId+'&'+jQuery.param(company) } 
+
+ proxyjQueryJs.prototype.getDownloadSimple = function (companyId,name) { 
+    window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name) } 
+
+ proxyjQueryJs.prototype.getDownloadNoParams = function () { 
+    window.location.href = 'Proxy/GetDownloadNoParams' } 
+
+ proxyjQueryJs.prototype.addJsEntryOnly = function (person) { 
     return jQuery.ajax( { url : 'Proxy/AddJsEntryOnly', data : JSON.stringify(person), type : "POST", contentType: "application/json; charset=utf-8" }).then(function (result) {
         return result;
    });

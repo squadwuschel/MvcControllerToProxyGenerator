@@ -1,12 +1,14 @@
-﻿namespace ProxyGenerator.Container
+﻿namespace ProxyGenerator.Enums
 {
     public enum TemplateTypes
     {
         jQueryTsModule,
         jQueryTsAjaxCallWithReturnType,
         jQueryTsAjaxCallNoReturnType,
+        jQueryTsWindowLocationHref,
         jQueryJsModule,
         jQueryJsPrototype,
+        jQueryJsWindowLocationHref,
         AngularJsModule,
         AngularJsPrototype,
         AngularJsWindowLocationHref,

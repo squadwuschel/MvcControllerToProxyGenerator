@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 24.03.2016 time 23:10 from SquadWuschel.
+//Created on 26.03.2016 time 22:43 from SquadWuschel.
 
   module App.Services { 
 
@@ -10,6 +10,7 @@ export interface IProxyPService {
     getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): void;
     getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany): void;
     getDownloadSimple(companyId: number,name: string): void;
+    getDownloadNoParams(): void;
     manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addAges(ages: number[]) : ng.IPromise<number[]>;
     addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
@@ -40,22 +41,26 @@ public addFileToServer(datei: any,detailId: number) : ng.IPromise<ProxyGenerator
     return this.$http.post('Proxy/AddFileToServer'+ '?detailId='+detailId,formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }}).then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return response.data; });
 } 
 
-public addFileToServerNoReturnType(datei: any,detailId: number) : void  { 
+    public addFileToServerNoReturnType(datei: any,detailId: number) : void  { 
   var formData = new FormData(); 
  formData.append('datei', datei); 
   this.$http.post('Proxy/AddFileToServerNoReturnType'+ '?detailId='+detailId,formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }}); 
  } 
 
-public getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : void  { 
+    public getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : void  { 
     window.location.href = 'Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person); 
  } 
 
-public getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany) : void  { 
+    public getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany) : void  { 
     window.location.href = 'Proxy/GetDownloadCompany'+ '?companyId='+companyId+'&'+jQuery.param(company); 
  } 
 
-public getDownloadSimple(companyId: number,name: string) : void  { 
+    public getDownloadSimple(companyId: number,name: string) : void  { 
     window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name); 
+ } 
+
+    public getDownloadNoParams() : void  { 
+    window.location.href = 'Proxy/GetDownloadNoParams'; 
  } 
 
 public manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
@@ -106,7 +111,7 @@ public clearTsCall() : ng.IPromise<ProxyGeneratorDemoPage.Models.Person.Models.I
      return this.$http.get('Proxy/ClearTsCall').then((response: ng.IHttpPromiseCallbackArg<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return response.data; });
 } 
 
-public voidTsReturnType(name: string) : void  { 
+    public voidTsReturnType(name: string) : void  { 
     this.$http.get('Proxy/VoidTsReturnType'+ '?name='+encodeURIComponent(name)); 
  } 
 

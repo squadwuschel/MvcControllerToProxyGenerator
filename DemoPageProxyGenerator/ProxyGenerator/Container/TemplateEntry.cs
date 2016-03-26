@@ -1,4 +1,6 @@
-﻿namespace ProxyGenerator.Container
+﻿using ProxyGenerator.Enums;
+
+namespace ProxyGenerator.Container
 {
     public class TemplateEntry
     {

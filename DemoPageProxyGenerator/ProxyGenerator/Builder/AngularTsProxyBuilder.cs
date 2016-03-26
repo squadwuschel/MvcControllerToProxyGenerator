@@ -82,7 +82,7 @@ namespace ProxyGenerator.Builder
                     if (methodInfos.CreateWindowLocationHrefLink)
                     {
                         ajaxCalls += this.BuildHrefTemplate(methodInfos);
-                        //Da ein HREF Link auch keinen Rückgabewert hat, diesen mit Void ersetzen.
+                        //Da ein HREF Link auch keinen Rückgabewert hat, diesen mit Void ersetzen und die passende Interface Definition erstellen.
                         serviceInterfaceDefinitions += String.Format("    {0}({1}): void;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name),
                                                                                             ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
                         continue;
@@ -131,6 +131,9 @@ namespace ProxyGenerator.Builder
             return generatedProxyEntries;
         }
 
+        /// <summary>
+        /// Das passende HREF Template laden und die passenden TemplateString ersetzten.
+        /// </summary>
         private string BuildHrefTemplate(ProxyMethodInfos methodInfos)
         {
             var functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularTsWindowLocationHref).Template;

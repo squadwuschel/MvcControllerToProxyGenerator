@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 24.03.2016 time 23:10 from SquadWuschel.
+//Created on 26.03.2016 time 22:43 from SquadWuschel.
 
   module App.JqueryServices { 
 
@@ -8,6 +8,10 @@ export interface IproxyjQueryTs {
      testView() : JQueryPromise<string>;
     addFileToServer(datei: any,detailId: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addFileToServerNoReturnType(datei: any,detailId: number): void;
+    getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): void;
+    getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany): void;
+    getDownloadSimple(companyId: number,name: string): void;
+    getDownloadNoParams(): void;
     manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
     addAges(ages: number[]) : JQueryPromise<number[]>;
     addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson>;
@@ -45,6 +49,22 @@ export class proxyjQueryTs implements IproxyjQueryTs {
  formData.append('datei', datei); 
  jQuery.ajax( { url : 'Proxy/AddFileToServerNoReturnType'+ '?detailId='+detailId, data : formData, processData : false, contentType: false, type : "POST" }); 
 } 
+
+    public getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : void  { 
+    window.location.href = '~/Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person); 
+ } 
+
+    public getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany) : void  { 
+    window.location.href = 'Proxy/GetDownloadCompany'+ '?companyId='+companyId+'&'+jQuery.param(company); 
+ } 
+
+    public getDownloadSimple(companyId: number,name: string) : void  { 
+    window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name); 
+ } 
+
+    public getDownloadNoParams() : void  { 
+    window.location.href = 'Proxy/GetDownloadNoParams'; 
+ } 
 
     public manySimpleParams(page: number,size: number,sortedCol: number,desc: number,smCompany: string,smCustomerNumber: number,smEmail: string,smLastname: string,portal: number,count: number) : JQueryPromise<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
        return jQuery.get('Proxy/ManySimpleParams'+ '?page='+page+'&size='+size+'&sortedCol='+sortedCol+'&desc='+desc+'&smCompany='+encodeURIComponent(smCompany)+'&smCustomerNumber='+smCustomerNumber+'&smEmail='+encodeURIComponent(smEmail)+'&smLastname='+encodeURIComponent(smLastname)+'&portal='+portal+'&count='+count).then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : ProxyGeneratorDemoPage.Models.Person.Models.IPerson => { return result; });

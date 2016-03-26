@@ -94,6 +94,9 @@ namespace ProxyGenerator.Builder
             return generatedProxyEntries;
         }
 
+        /// <summary>
+        /// Das passende HREF Template laden und die passenden TemplateString ersetzten.
+        /// </summary>
         private string BuildHrefTemplate(ProxyMethodInfos methodInfos, ProxyControllerInfo controllerInfo, string suffix)
         {
             var functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularJsWindowLocationHref).Template;

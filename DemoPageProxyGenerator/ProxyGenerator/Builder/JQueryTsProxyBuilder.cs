@@ -46,6 +46,9 @@ namespace ProxyGenerator.Builder
 
             //TEMPLATE FÜR: "TemplateTypes.jQueryTsAjaxCallNoReturnType"
             // public #ControllerFunctionName#(#ServiceParamters#) : void { jQuery.#ServiceCallAndParameters# \r\n}
+
+            //TEMPLATE FÜR: Window.location.href
+            //public #ControllerFunctionName#(#ServiceParamters#) : void { \r\n    window.location.href = #ServiceCallAndParameters#; \r\n }
             #endregion
 
             //Alle controller durchgehen die übergeben wurden und für jeden dann die entsprechenden Proxy Methoden erstellen
@@ -60,6 +63,17 @@ namespace ProxyGenerator.Builder
                 foreach (ProxyMethodInfos methodInfos in controllerInfo.ProxyMethodInfos)
                 {
                     var functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.jQueryTsAjaxCallNoReturnType).Template;
+
+                    //Wenn es sich um eine Funktion mit HREF handelt, dann muss ein anderes Template geladen werden.
+                    if (methodInfos.CreateWindowLocationHrefLink)
+                    {
+                        ajaxCalls += this.BuildHrefTemplate(methodInfos);
+                        //Da ein HREF Link auch keinen Rückgabewert hat, diesen mit Void ersetzen und die passende Interface Definition erstellen.
+                        serviceInterfaceDefinitions += String.Format("    {0}({1}): void;\r\n", ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name),
+                                                                                            ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
+                        continue;
+                    }
+
                     //sollte ein ReturnType verwendet werden, dann das andere Template laden mit ReturnType
                     if (ProxyBuilderTypeHelper.HasReturnType(methodInfos.ReturnType))
                     {
@@ -105,30 +119,44 @@ namespace ProxyGenerator.Builder
         }
 
         /// <summary>
+        /// Das passende HREF Template laden und die passenden TemplateString ersetzten.
+        /// </summary>
+        private string BuildHrefTemplate(ProxyMethodInfos methodInfos)
+        {
+            var functionTemplate = Factory.GetProxySettings().Templates.First(p => p.TemplateType == TemplateTypes.AngularTsWindowLocationHref).Template;
+
+            //Den Methodennamen ersetzen - Der Servicename der aufgerufen werden soll.
+            string functionCall = functionTemplate.Replace(ConstValuesTemplates.ControllerFunctionName, ProxyBuilderHelper.GetProxyFunctionName(methodInfos.MethodInfo.Name));
+            //Parameter des Funktionsaufrufs ersetzen.
+            functionCall = functionCall.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
+            //Href Call zusammenbauen und Parameter ersetzen
+            functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHrefLink(methodInfos, ProxyBuilder.AngularTypeScript));
+            return functionCall;
+        }
+
+        /// <summary>
         /// Funktion die überprüft ob die Vorraussetzungen erfüllt sind um den Proxy für AngularJs zu erstellen.
         /// </summary>
         private void CheckRequirements()
         {
             if (Factory.GetProxySettings().Templates.All(p => p.TemplateType != TemplateTypes.jQueryTsModule))
             {
-                throw new Exception(
-                    "Please add the 'jQueryTsModule' Template when you want to create a jQuery Proxy");
+                throw new Exception("Please add the 'jQueryTsModule' Template when you want to create a jQuery Proxy");
             }
 
-            if (
-                Factory.GetProxySettings()
-                    .Templates.All(p => p.TemplateType != TemplateTypes.jQueryTsAjaxCallWithReturnType))
+            if (Factory.GetProxySettings().Templates.All(p => p.TemplateType != TemplateTypes.jQueryTsAjaxCallWithReturnType))
             {
-                throw new Exception(
-                    "Please add the 'jQueryTsAjaxCallWithReturnType' Template when you want to create a jQuery Proxy");
+                throw new Exception("Please add the 'jQueryTsAjaxCallWithReturnType' Template when you want to create a jQuery Proxy");
             }
 
-            if (
-                Factory.GetProxySettings()
-                    .Templates.All(p => p.TemplateType != TemplateTypes.jQueryTsAjaxCallNoReturnType))
+            if (Factory.GetProxySettings().Templates.All(p => p.TemplateType != TemplateTypes.jQueryTsAjaxCallNoReturnType))
             {
-                throw new Exception(
-                    "Please add the 'jQueryTsAjaxCallNoReturnType' Template when you want to create a jQuery Proxy");
+                throw new Exception("Please add the 'jQueryTsAjaxCallNoReturnType' Template when you want to create a jQuery Proxy");
+            }
+
+            if (Factory.GetProxySettings().Templates.All(p => p.TemplateType != TemplateTypes.jQueryTsWindowLocationHref))
+            {
+                throw new Exception("Please add the 'jQueryTsWindowLocationHref' Template when you want to create a jQuery Proxy");
             }
         }
     }

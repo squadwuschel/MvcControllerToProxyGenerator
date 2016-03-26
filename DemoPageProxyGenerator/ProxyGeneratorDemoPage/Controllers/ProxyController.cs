@@ -80,6 +80,8 @@ namespace ProxyGeneratorDemoPage.Controllers
         #region HrefLinks for Downloads
         [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
         [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
         public FileResult GetDownloadPerson(int personId, Person person)
         {
             var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Person: {0} mit dem Passwort: {1} und der ID: {2}", person.Name, person.Passwort, personId));
@@ -88,6 +90,8 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
         [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
         public FileResult GetDownloadCompany(int companyId, Company company)
         {
             var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Company: {0} mit dem ClientAccess: {1} und der ID: {2}", company.Name, company.ClientAccess, company));
@@ -96,9 +100,21 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
         [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
         public FileResult GetDownloadSimple(int companyId, string name)
         {
             var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die CompanyId: {0} mit dem Namen: {1}", companyId, name));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
+
+        [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
+        [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadNoParams()
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download Ohne Parameter"));
             return File(fileContent, "text/text", "TestDL.txt");
         }
         #endregion

@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 24.03.2016 time 23:10 from SquadWuschel.
+//Created on 26.03.2016 time 22:43 from SquadWuschel.
 
   function proxyAngularJsSrv($http) { this.http = $http; } 
 
@@ -29,6 +29,9 @@ proxyAngularJsSrv.prototype.getDownloadPerson = function (personId,person) {
 
  proxyAngularJsSrv.prototype.getDownloadSimple = function (companyId,name) { 
     window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name) } 
+
+ proxyAngularJsSrv.prototype.getDownloadNoParams = function () { 
+    window.location.href = 'Proxy/GetDownloadNoParams' } 
 
  proxyAngularJsSrv.prototype.addJsEntryOnly = function (person) { 
     return this.http.post('Proxy/AddJsEntryOnly',person).then(function (result) {

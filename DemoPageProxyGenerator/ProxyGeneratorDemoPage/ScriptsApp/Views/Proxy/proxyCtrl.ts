@@ -1,8 +1,8 @@
 ﻿module App.Views.Proxy {
-    
+
     export class ProxyCtrl {
-        public fileImportDataTypeScript  : any;
-        public fileImportDataJavaScript  : any;
+        public fileImportDataTypeScript: any;
+        public fileImportDataJavaScript: any;
         static $inject = [
             App.Services.ProxyPService.module.name, //Ts Service
             App.Services.HomePService.module.name, //Ts Service
@@ -22,6 +22,7 @@
         */
         init(): void { }
 
+        //#region Downloads und Uploads
         public startFileUploadTypeScript() {
             this.proxyTsSrv.addFileToServer(this.fileImportDataTypeScript, 12).then(result => {
                 console.log("\r\nSuccess TypeScript Service Call 'addFileToServer' Result: ");
@@ -47,9 +48,29 @@
             this.proxyTsSrv.getDownloadPerson(7331, person);
         }
 
-        public startJavaScriptServiceCalls() : void {
-             var ages: number[] = [1, 2, 3, 4, 5, 66];
-            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs",  "Wuschel", true, ages);
+        public startFileDownloadNoParamsTypeScript() {
+            this.proxyTsSrv.getDownloadNoParams();
+        }
+
+        public startFileDownloadCompanyJavaScript() {
+            var company: ProxyGeneratorDemoPage.Helper.ICompany = new Company("MyCompany", 12, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin);
+            this.proxyJsSrv.getDownloadCompany(1337, company);
+        }
+
+        public startFileDownloadPersonJavaScript() {
+            var ages: number[] = [1, 2, 3, 4, 5, 66];
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", "Wuschel", true, ages);
+            this.proxyJsSrv.getDownloadPerson(7331, person);
+        }
+
+        public startFileDownloadNoParamsJavaScript() {
+            this.proxyJsSrv.getDownloadNoParams();
+        }
+        //#endregion
+
+        public startJavaScriptServiceCalls(): void {
+            var ages: number[] = [1, 2, 3, 4, 5, 66];
+            var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", "Wuschel", true, ages);
             var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW Js", 12, person);
             console.clear();
             console.log("Some JavaScript Angular Service Calls: \r\n");
@@ -85,13 +106,12 @@
             });
         }
 
-        public startTypeScriptServiceCalls() : void {
-             var ages: number[] = [1, 2, 3, 4, 5, 66];
+        public startTypeScriptServiceCalls(): void {
+            var ages: number[] = [1, 2, 3, 4, 5, 66];
             var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", "Wuschel", true, ages);
-            var auto: ProxyGeneratorDemoPage.Models.Person.Models.IAuto = new Auto("BMW", 5, person);
 
-             console.clear();
-             console.log("Some TypeScript Angular Service Calls: \r\n");
+            console.clear();
+            console.log("Some TypeScript Angular Service Calls: \r\n");
 
             this.proxyTsSrv.addAges(ages).then(result => {
                 console.log("\r\nSuccess TypeScript Service Call 'addAges' Result: ");
@@ -99,75 +119,75 @@
                 this.proxyTsSrv.addAges(result);
             });
 
-             this.proxyTsSrv.addTsEntryAndName(person, "Johannes").then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndName' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.addTsEntryAndName(person, "Johannes").then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndName' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.manySimpleParams(12, 345, 1, 1, "test", 12, "squad@web.de", "Squad", 12, 32).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'manySimpleParams' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.manySimpleParams(12, 345, 1, 1, "test", 12, "squad@web.de", "Squad", 12, 32).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'manySimpleParams' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.addTsEntryAndParams(person, "Squad", "Wuschel").then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndParams' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.addTsEntryAndParams(person, "Squad", "Wuschel").then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndParams' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.addTsEntryOnly(person).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'addTsEntryOnly' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.addTsEntryOnly(person).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'addTsEntryOnly' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.boolTsReturnType(true).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'boolTsReturnType' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.boolTsReturnType(true).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'boolTsReturnType' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.clearTsCall().then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'clearTsCall' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.clearTsCall().then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'clearTsCall' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.dateTsReturnType("SquadWuschel").then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'dateTsReturnType' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.dateTsReturnType("SquadWuschel").then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'dateTsReturnType' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.integerTsReturnType(1337).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'integerTsReturnType' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.integerTsReturnType(1337).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'integerTsReturnType' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.loadAllAutosArray("SquadWuschel").then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'loadAllAutosArray' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.loadAllAutosArray("SquadWuschel").then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'loadAllAutosArray' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.loadAllAutosListe("SquadWuschel").then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'loadAllAutosListe' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.loadAllAutosListe("SquadWuschel").then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'loadAllAutosListe' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.loadTsCallById(16667).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'loadTsCallById' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.loadTsCallById(16667).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'loadTsCallById' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.loadTsCallByParams("Squad", "Wuschel", 33).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParams' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.loadTsCallByParams("Squad", "Wuschel", 33).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParams' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.loadTsCallByParamsAndId("Squad", "Wuschel", 33, 1337).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.loadTsCallByParamsAndId("Squad", "Wuschel", 33, 1337).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
+                console.log(result);
+            });
 
-             this.proxyTsSrv.loadTsCallByParamsWithEnum("Squad", "Wuschel", 33, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin).then(result => {
-                 console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
-                 console.log(result);
-             });
+            this.proxyTsSrv.loadTsCallByParamsWithEnum("Squad", "Wuschel", 33, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin).then(result => {
+                console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
+                console.log(result);
+            });
 
             this.proxyTsSrv.errorStringReturnType(true).then(result => {
                 console.log("\r\nSuccess TypeScript Service Call 'errorStringReturnType' Result: ");
