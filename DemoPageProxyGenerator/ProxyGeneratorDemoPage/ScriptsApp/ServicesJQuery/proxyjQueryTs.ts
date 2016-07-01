@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 26.03.2016 time 22:43 from SquadWuschel.
+//Created on 01.07.2016 time 21:44 from SquadWuschel.
 
   module App.JqueryServices { 
 
@@ -51,7 +51,7 @@ export class proxyjQueryTs implements IproxyjQueryTs {
 } 
 
     public getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : void  { 
-    window.location.href = '~/Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person); 
+    window.location.href = 'Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person); 
  } 
 
     public getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany) : void  { 

@@ -14,6 +14,7 @@ namespace ProxyGenerator.Builder
         public IProxyBuilderDataTypeHelper ProxyBuilderTypeHelper { get; set; }
         public IProxyBuilderHttpCall ProxyBuilderHttpCall { get; set; }
         public IProxyGeneratorFactoryManager Factory { get; set; }
+        public ISettingsManager SettingsManager { get; set; }
         #endregion
 
         #region Konstruktor
@@ -23,6 +24,7 @@ namespace ProxyGenerator.Builder
             ProxyBuilderHelper = Factory.CreateProxyBuilderHelper();
             ProxyBuilderHttpCall = Factory.CreateProxyBuilderHttpCall();
             ProxyBuilderTypeHelper = Factory.CreateBuilderTypeHelper();
+            SettingsManager = Factory.CreateSettingsManager();
         }
         #endregion
 
@@ -112,6 +114,7 @@ namespace ProxyGenerator.Builder
                 GeneratedProxyEntry proxyEntry = new GeneratedProxyEntry();
                 proxyEntry.FileContent = moduleTemplate;
                 proxyEntry.FileName = ProxyBuilderHelper.GetProxyFileName(controllerInfo.ControllerNameWithoutSuffix, suffix, "ts");
+                proxyEntry.FilePath = SettingsManager.GetAlternateOutputpath(TemplateTypes.jQueryTsModule);
                 generatedProxyEntries.Add(proxyEntry);
             }
 

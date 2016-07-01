@@ -58,6 +58,11 @@ namespace ProxyGenerator.Manager
         {
             return new ProxyBuilderDataTypeHelper(ProxySettings);
         }
+
+        public ISettingsManager CreateSettingsManager()
+        {
+            return new SettingsManager(ProxySettings);
+        }
         #endregion
 
         #region Public Functions

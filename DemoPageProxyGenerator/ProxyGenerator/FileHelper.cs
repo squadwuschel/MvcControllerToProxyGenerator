@@ -41,9 +41,17 @@ namespace ProxyGenerator
         /// Gibt zum übergebenen Dateinamen den Ausgabepfad zurück in dem die Proxy Dateien erstellt werden sollen.
         /// </summary>
         /// <param name="fileName">Der Dateiname der an den Pfad angehängt werden soll.</param>
-        public string GetProxyFileOutputPath(string fileName)
+        /// <param name="alternateOutputPath">Ein alternativer Ausgabepfad der übergeben werden kann</param>
+        public string GetProxyFileOutputPath(string fileName, string alternateOutputPath)
         {
             var proxySettings = Factory.GetProxySettings();
+
+            //Wenn ein alternativer Ausgabepfad übergeben wurde, dann die Datei hier ablegen und nicht bei der Standardausgabe
+            if (!string.IsNullOrEmpty(alternateOutputPath))
+            {
+                var localPath = GetParentDirectory(proxySettings.FullPathToTheWebProject, proxySettings.WebProjectName);
+                return System.IO.Path.Combine(localPath, alternateOutputPath, fileName);
+            }
 
             if (!string.IsNullOrEmpty(proxySettings.ProxyFileOutputPath))
             {

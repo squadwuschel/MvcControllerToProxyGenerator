@@ -13,6 +13,7 @@ namespace ProxyGenerator.Builder
         public IProxyBuilderHelper ProxyBuilderHelper { get; set; }
         public IProxyBuilderHttpCall ProxyBuilderHttpCall { get; set; }
         public IProxyGeneratorFactoryManager Factory { get; set; }
+        public ISettingsManager SettingsManager { get; set; }
         #endregion
 
         #region Konstruktor
@@ -21,6 +22,7 @@ namespace ProxyGenerator.Builder
             Factory = factory;
             ProxyBuilderHelper = Factory.CreateProxyBuilderHelper();
             ProxyBuilderHttpCall = Factory.CreateProxyBuilderHttpCall();
+            SettingsManager = Factory.CreateSettingsManager();
         }
         #endregion
 
@@ -88,6 +90,7 @@ namespace ProxyGenerator.Builder
                 GeneratedProxyEntry proxyEntry = new GeneratedProxyEntry();
                 proxyEntry.FileContent = moduleTemplate;
                 proxyEntry.FileName = ProxyBuilderHelper.GetProxyFileName(controllerInfo.ControllerNameWithoutSuffix, suffix, "js");
+                proxyEntry.FilePath = SettingsManager.GetAlternateOutputpath(TemplateTypes.AngularJsModule);
                 generatedProxyEntries.Add(proxyEntry);
             }
 

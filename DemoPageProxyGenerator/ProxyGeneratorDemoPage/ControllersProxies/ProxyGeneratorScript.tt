@@ -208,7 +208,7 @@
     ProxyFileManager.DifferentOutPutDirThanT4File = settings.ProxyFileOutputPath.Length > 0;
     foreach (GeneratedProxyEntry entry in generator.GetGeneratedProxyEntries())
     {
-       proxyManager.StartNewFile(generator.Factory.FileHelper().GetProxyFileOutputPath(entry.FileName)); 
+       proxyManager.StartNewFile(generator.Factory.FileHelper().GetProxyFileOutputPath(entry.FileName, entry.FilePath)); 
  #>
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.

@@ -65,7 +65,7 @@ or if you use the original TypeLite Interface name without the "I" then, you nee
 
 ### Alternative: Store the proxysettings in the Web.config
 You can also store the settings in the **web.config**, then its not possible that you overwrite your proxysettings, when you upgrade the ProxyGenerator via NuGet.
-You can add only the settings you need to your web.cofig, the rest will be loaded from the T4 Template, the proxysettings in the web.config will overwrite the T4 proxysettings:
+You can only add the settings you need to your web.cofig, the remaining settings will be loaded from the T4 Template, the proxysettings in the web.config will overwrite the T4 proxysettings:
 
     <appSettings>
        <!-- Proxy Generator Settings - START -->
@@ -78,6 +78,11 @@ You can add only the settings you need to your web.cofig, the rest will be loade
        <add key="ProxyGenerator_TemplateSuffix_AngularTs" value="PService" />
        <add key="ProxyGenerator_TemplateSuffix_jQueryJs" value="jQueryJs" />
        <add key="ProxyGenerator_TemplateSuffix_jQueryTs" value="jQueryTs" />
+	   <!-- Set Different Output Pathes for each ScriptType. If no value is the or the keys are missing in the Web.config the default outputpath "ProxyGenerator_ProxyFileOutputPath" is used. The Outpath Settings can only be set in the web.config! -->
+       <add key="ProxyGenerator_OutputPath_jQueryTsModule" value="ScriptsApp\ServicesJQuery\" />
+       <add key="ProxyGenerator_OutputPath_jQueryJsModule" value="ScriptsApp\ServicesJQuery\" />
+       <add key="ProxyGenerator_OutputPath_AngularJsModule" value="ScriptsApp\Services\" />
+       <add key="ProxyGenerator_OutputPath_AngularTsModule" value="ScriptsApp\Services\" />
        <!-- Proxy Generator Settings - END -->
     </appSettings>
 

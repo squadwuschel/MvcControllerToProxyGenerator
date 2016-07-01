@@ -254,9 +254,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ScriptsApp\ServicesJQuery\proxyjQueryJs.js" />
     <Content Include="ScriptsApp\Services\homeAngularJsSrv.js" />
     <Content Include="ScriptsApp\Services\proxyAngularJsSrv.js" />
-    <Content Include="ScriptsApp\Services\proxyjQueryJs.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -310,8 +310,8 @@
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />
     <TypeScriptCompile Include="ScriptsApp\Directives\fileUpload.ts" />
     <TypeScriptCompile Include="ScriptsApp\jQueryCalls.ts" />
+    <TypeScriptCompile Include="ScriptsApp\ServicesJQuery\proxyjQueryTs.ts" />
     <TypeScriptCompile Include="ScriptsApp\Services\homePService.ts" />
-    <TypeScriptCompile Include="ScriptsApp\Services\proxyjQueryTs.ts" />
     <TypeScriptCompile Include="ScriptsApp\Services\proxyPService.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\mainApp.ts" />
     <TypeScriptCompile Include="ScriptsApp\Views\Proxy\proxyCtrl.ts" />
