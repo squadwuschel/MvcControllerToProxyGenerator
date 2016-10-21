@@ -6,3 +6,4 @@ var Company = (function () {
     }
     return Company;
 }());
+//# sourceMappingURL=Company.js.map

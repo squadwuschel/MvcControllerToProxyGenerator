@@ -18,6 +18,11 @@ namespace ProxyGeneratorDemoPage.Controllers
             return View();
         }
 
+        public ActionResult Angular2Calls()
+        {
+            return View();
+        }
+
         public ActionResult JQueryCalls()
         {
             return View();

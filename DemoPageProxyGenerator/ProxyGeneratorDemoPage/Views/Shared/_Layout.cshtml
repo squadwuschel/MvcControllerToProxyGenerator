@@ -6,6 +6,16 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <base href="@Url.Content("~")" />
     @Styles.Render("~/Content/css")
+    
+    <script src="~/node_modules/zone.js/dist/zone.js"></script>
+    <script src="~/node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="~/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="~/Scripts/systemjs.config.js"></script>
+
+
+    <script>
+        System.import('ScriptsAppNg2').catch(console.error.bind(console));
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,6 +31,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Angular Proxy Calls", "AngularCalls", "Proxy")</li>
+                    <li>@Html.ActionLink("Angular 2 Proxy Calls", "Angular2Calls", "Proxy")</li>
                     <li>@Html.ActionLink("JQuery Proxy Calls", "JQueryCalls", "Proxy")</li>
                 </ul>
             </div>

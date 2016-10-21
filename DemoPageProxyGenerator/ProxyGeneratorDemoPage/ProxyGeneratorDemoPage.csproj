@@ -261,11 +261,13 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="package.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\systemjs.config.js" />
     <Content Include="Scripts\TypeLite.Net4.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TypeLite.Net4.d.ts</LastGenOutput>
@@ -288,10 +290,13 @@
     <Content Include="Views\Proxy\JQueryCalls.cshtml" />
     <Content Include="Views\Proxy\TestView.cshtml" />
     <Content Include="Scripts\Manager.ttinclude" />
+    <Content Include="tsconfig.json" />
+    <Content Include="Views\Proxy\Angular2Calls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="ScriptsAppNg2\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -305,6 +310,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ScriptsAppNg2\app.module.ts" />
+    <TypeScriptCompile Include="ScriptsAppNg2\main.ts" />
+    <TypeScriptCompile Include="ScriptsAppNg2\Views\Proxy\angular2Calls.component.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Company.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />

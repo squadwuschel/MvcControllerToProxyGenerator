@@ -1,1 +1,1 @@
-{"version":3,"file":"Company.js","sourceRoot":"","sources":["Company.ts"],"names":["Company","Company.constructor"],"mappings":"AAAA;IACIA,iBAAmBA,IAAYA,EAASA,GAAWA,EAASA,YAAwDA;QAAjGC,SAAIA,GAAJA,IAAIA,CAAQA;QAASA,QAAGA,GAAHA,GAAGA,CAAQA;QAASA,iBAAYA,GAAZA,YAAYA,CAA4CA;IAAIA,CAACA;IAC7HD,cAACA;AAADA,CAACA,AAFD,IAEC"}
+{"version":3,"file":"Company.js","sourceRoot":"","sources":["Company.ts"],"names":[],"mappings":"AAAA;IACI,iBAAmB,IAAY,EAAS,GAAW,EAAS,YAAwD;QAAjG,SAAI,GAAJ,IAAI,CAAQ;QAAS,QAAG,GAAH,GAAG,CAAQ;QAAS,iBAAY,GAAZ,YAAY,CAA4C;IAAI,CAAC;IAC7H,cAAC;AAAD,CAAC,AAFD,IAEC"}

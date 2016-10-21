@@ -27,3 +27,4 @@ angular.module("fileUpload", [])
             }
         };
     }]);
+//# sourceMappingURL=fileUpload.js.map

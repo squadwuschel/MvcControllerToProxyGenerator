@@ -8,3 +8,4 @@ var Person = (function () {
     }
     return Person;
 }());
+//# sourceMappingURL=Person.js.map

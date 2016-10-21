@@ -6,3 +6,4 @@ var Auto = (function () {
     }
     return Auto;
 }());
+//# sourceMappingURL=Auto.js.map

@@ -92,3 +92,4 @@ var App;
         JqueryServices.proxyjQueryTs = proxyjQueryTs;
     })(JqueryServices = App.JqueryServices || (App.JqueryServices = {}));
 })(App || (App = {}));
+//# sourceMappingURL=proxyjQueryTs.js.map
