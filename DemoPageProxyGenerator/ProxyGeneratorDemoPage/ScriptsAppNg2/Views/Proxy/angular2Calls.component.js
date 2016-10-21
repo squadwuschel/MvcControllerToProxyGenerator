@@ -16,6 +16,18 @@ var Angular2Calls = (function () {
         this.name = "TEST";
         //Im Konstruktor einfach per DI einen Service injecten, dieser muss auch in Providers bekannt gemacht werden
     }
+    Angular2Calls.prototype.startFileDownloadCompanyTypeScript = function () {
+        var company = new Company("MyCompany", 12, 2 /* Admin */);
+        this.proxyService.getDownloadCompany(1337, company);
+    };
+    Angular2Calls.prototype.startFileDownloadPersonTypeScript = function () {
+        var ages = [1, 2, 3, 4, 5, 66];
+        var person = new Person(16667, "SquadJs", "Wuschel", true, ages);
+        this.proxyService.getDownloadPerson(7331, person);
+    };
+    Angular2Calls.prototype.startFileDownloadNoParamsTypeScript = function () {
+        this.proxyService.getDownloadNoParams();
+    };
     Angular2Calls.prototype.startTypeScriptServiceCalls = function () {
         var _this = this;
         var ages = [1, 2, 3, 4, 5, 66];

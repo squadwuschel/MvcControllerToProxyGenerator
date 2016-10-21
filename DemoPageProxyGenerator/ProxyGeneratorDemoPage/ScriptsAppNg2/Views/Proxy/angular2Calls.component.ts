@@ -13,6 +13,21 @@ export class Angular2Calls {
         //Im Konstruktor einfach per DI einen Service injecten, dieser muss auch in Providers bekannt gemacht werden
     }
 
+    public startFileDownloadCompanyTypeScript() {
+        var company: ProxyGeneratorDemoPage.Helper.ICompany = new Company("MyCompany", 12, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin);
+        this.proxyService.getDownloadCompany(1337, company);
+    }
+
+    public startFileDownloadPersonTypeScript() {
+        var ages: number[] = [1, 2, 3, 4, 5, 66];
+        var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", "Wuschel", true, ages);
+        this.proxyService.getDownloadPerson(7331, person);
+    }
+
+    public startFileDownloadNoParamsTypeScript() {
+        this.proxyService.getDownloadNoParams();
+    }
+
     public startTypeScriptServiceCalls() {
         var ages: number[] = [1, 2, 3, 4, 5, 66];
         var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", "Wuschel", true, ages);

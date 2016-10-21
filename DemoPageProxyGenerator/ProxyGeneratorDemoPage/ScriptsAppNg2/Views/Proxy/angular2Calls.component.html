@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-md-offset-6">
-            <a ng-click="ctrl.startTypeScriptServiceCalls()" class="btn btn-default btn-block">Test TypeScript Service Calls</a>
+            <a (click)="startTypeScriptServiceCalls()" class="btn btn-default btn-block">Test TypeScript Service Calls</a>
         </div>
         <div class="col-md-12">
             <br />
@@ -27,7 +27,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3>Datei Upload Tests für AngularJs</h3>
+            <h3>Datei Upload Tests für Angular 2</h3>
             <p>The IIS tries to store the uploaded files in the diretory: "C:\Temp\"</p>
             <br />
             <br />
@@ -38,7 +38,7 @@
             <input type="file" class="form-control input-sm" name="fujavaScript" sq-file-model="ctrl.fileImportDataTypeScript" ng-model="ctrl.fileImportDataTypeScript" />
         </div>
         <div class="col-md-3">
-            <a ng-click="ctrl.startFileUploadTypeScript()" class="btn btn-sm btn-default btn-block">Test FileUpload TypeScript</a>
+            <a (click)="startFileUploadTypeScript()" class="btn btn-sm btn-default btn-block">Test FileUpload TypeScript</a>
         </div>
     </div>
     <div class="row">
@@ -46,13 +46,13 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <a ng-click="ctrl.startFileDownloadCompanyTypeScript()" class="btn btn-sm btn-default btn-block">Test FileDownload Company TypeScript</a>
+            <a (click)="startFileDownloadCompanyTypeScript()" class="btn btn-sm btn-default btn-block">Test FileDownload Company TypeScript</a>
         </div>
         <div class="col-md-4">
-            <a ng-click="ctrl.startFileDownloadPersonTypeScript()" class="btn btn-sm btn-default btn-block">Test FileDownload Person TypeScript</a>
+            <a (click)="startFileDownloadPersonTypeScript()" class="btn btn-sm btn-default btn-block">Test FileDownload Person TypeScript</a>
         </div>
         <div class="col-md-4">
-            <a ng-click="ctrl.startFileDownloadNoParamsTypeScript()" class="btn btn-sm btn-default btn-block">Test FileDownload NoParams TypeScript</a>
+            <a (click)="startFileDownloadNoParamsTypeScript()" class="btn btn-sm btn-default btn-block">Test FileDownload NoParams TypeScript</a>
         </div>
     </div>
 </div>
