@@ -60,6 +60,8 @@ namespace ProxyGeneratorDemoPage.Controllers
             return Json(new Person() { Id = detailId }, JsonRequestBehavior.AllowGet);
         }
 
+
+
         /// <summary>
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
@@ -150,14 +152,14 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngularJsProxy]
         public JsonResult AddJsEntryAndName(Person person, string name)
         {
-            return Json(new Auto() { Marke =  name}, JsonRequestBehavior.AllowGet);
+            return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult AddJsEntryAndParams(Person person, string name, string vorname)
         {
-            return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
+            return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryJsProxy]
@@ -185,24 +187,24 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngularJsProxy]
         public JsonResult LoadJsCallByParamsAndId(string name, string vorname, int alter, int id)
         {
-            return Json(new Person() { Name = name, Id = id}, JsonRequestBehavior.AllowGet);
+            return Json(new Person() { Name = name, Id = id }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryJsProxy]
         [CreateAngularJsProxy]
         public JsonResult LoadJsCallByParamsWithEnum(string name, string vorname, int alter, ClientAccess access)
         {
-            return Json(new Person() { Name = name, Id = alter}, JsonRequestBehavior.AllowGet);
+            return Json(new Person() { Name = name, Id = alter }, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        
+
         #region AngularTs and jQuery Ts Proxy Methods Examples
         [CreateAngular2TsProxy(ReturnType = typeof(List<int>))]
         [CreateAngularTsProxy(ReturnType = typeof(List<int>))]
         [CreateJQueryTsProxy(ReturnType = typeof(List<int>))]
         public ActionResult AddAges(List<int> ages)
         {
-            return Json(new List<int>() {1, 2, 3, 4, 5, 6, 7, 8}, JsonRequestBehavior.AllowGet);
+            return Json(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 }, JsonRequestBehavior.AllowGet);
         }
 
         //You can create multiple Proxies for the same function
@@ -219,7 +221,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult AddTsEntryAndName(Person person, string name)
         {
-            return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
+            return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -228,7 +230,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult AddTsEntryAndParams(Person person, string name, string vorname)
         {
-            return Json(new Auto() { Marke = name}, JsonRequestBehavior.AllowGet);
+            return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
@@ -236,7 +238,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         public JsonResult LoadTsCallById(int id)
         {
-            return Json(new Person() { Id = id}, JsonRequestBehavior.AllowGet);
+            return Json(new Person() { Id = id }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
@@ -244,7 +246,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         public JsonResult LoadTsCallByParams(string name, string vorname, int alter)
         {
-            return Json(new Person() { Name = name, Id = alter}, JsonRequestBehavior.AllowGet);
+            return Json(new Person() { Name = name, Id = alter }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
@@ -252,7 +254,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult LoadTsCallByParamsAndId(string name, string vorname, int alter, int id)
         {
-            return Json(new Auto() { Alter = alter, Marke = name}, JsonRequestBehavior.AllowGet);
+            return Json(new Auto() { Alter = alter, Marke = name }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
@@ -260,7 +262,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult LoadTsCallByParamsWithEnum(string name, string vorname, int alter, ClientAccess access)
         {
-            return Json(new Auto() { Marke = name, Alter = alter}, JsonRequestBehavior.AllowGet);
+            return Json(new Auto() { Marke = name, Alter = alter }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryTsProxy(ReturnType = typeof(List<Auto>))]
@@ -268,7 +270,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(List<Auto>))]
         public JsonResult LoadAllAutosListe(string name)
         {
-            return Json(new List<Auto>() { new Auto() { Marke = name}, new Auto() }, JsonRequestBehavior.AllowGet);
+            return Json(new List<Auto>() { new Auto() { Marke = name }, new Auto() }, JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryTsProxy(ReturnType = typeof(Auto[]))]
@@ -276,7 +278,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         [CreateAngular2TsProxy(ReturnType = typeof(Auto[]))]
         public JsonResult LoadAllAutosArray(string name)
         {
-            return Json(new List<Auto>() { new Auto() { Marke = name}, new Auto() }.ToArray(), JsonRequestBehavior.AllowGet);
+            return Json(new List<Auto>() { new Auto() { Marke = name }, new Auto() }.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]

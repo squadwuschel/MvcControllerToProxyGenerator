@@ -35,7 +35,7 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <input type="file" class="form-control input-sm" name="fujavaScript" sq-file-model="ctrl.fileImportDataTypeScript" ng-model="ctrl.fileImportDataTypeScript" />
+            <input #fileInput type="file" class="form-control input-sm" />
         </div>
         <div class="col-md-3">
             <a (click)="startFileUploadTypeScript()" class="btn btn-sm btn-default btn-block">Test FileUpload TypeScript</a>

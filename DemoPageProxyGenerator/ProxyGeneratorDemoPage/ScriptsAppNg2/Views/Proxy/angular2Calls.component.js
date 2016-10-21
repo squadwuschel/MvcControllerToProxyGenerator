@@ -16,6 +16,19 @@ var Angular2Calls = (function () {
         this.name = "TEST";
         //Im Konstruktor einfach per DI einen Service injecten, dieser muss auch in Providers bekannt gemacht werden
     }
+    Angular2Calls.prototype.startFileUploadTypeScript = function () {
+        //File Upload
+        //https://devblog.dymel.pl/2016/09/02/upload-file-image-angular2-aspnetcore/
+        var fi = this.fileInput.nativeElement;
+        if (fi.files && fi.files[0]) {
+            var fileToUpload = fi.files[0];
+        }
+        //    public uploadFile(fileToUpload: any): void {
+        //let input = new FormData();
+        //input.append("datei", fileToUpload);
+        //this._http.post("Proxy/AddFileToServer?detailId=1", input).subscribe(res => res.json());
+        //}
+    };
     Angular2Calls.prototype.startFileDownloadCompanyTypeScript = function () {
         var company = new Company("MyCompany", 12, 2 /* Admin */);
         this.proxyService.getDownloadCompany(1337, company);
@@ -91,6 +104,7 @@ var Angular2Calls = (function () {
             console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
             console.log(result);
         });
+        this.proxyService.voidTsReturnType("test");
         this.proxyService.loadTsCallByParamsWithEnum("Squad", "Wuschel", 33, 2 /* Admin */).subscribe(function (result) {
             console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
             console.log(result);
@@ -104,6 +118,10 @@ var Angular2Calls = (function () {
             console.log(errorResult);
         });
     };
+    __decorate([
+        core_1.ViewChild("fileInput"), 
+        __metadata('design:type', Object)
+    ], Angular2Calls.prototype, "fileInput", void 0);
     Angular2Calls = __decorate([
         core_1.Component({
             selector: 'angular-2-calls',

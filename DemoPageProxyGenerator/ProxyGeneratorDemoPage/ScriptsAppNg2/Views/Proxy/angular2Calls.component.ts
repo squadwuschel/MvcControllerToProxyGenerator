@@ -1,4 +1,4 @@
-﻿import {Component} from '@angular/core';
+﻿import {Component, ViewChild} from '@angular/core';
 import {Proxyservice} from "../../Services/proxy.service"
 
 @Component({
@@ -13,11 +13,33 @@ export class Angular2Calls {
         //Im Konstruktor einfach per DI einen Service injecten, dieser muss auch in Providers bekannt gemacht werden
     }
 
+    @ViewChild("fileInput") fileInput;
+
+    public startFileUploadTypeScript(): void {
+        //File Upload
+        //https://devblog.dymel.pl/2016/09/02/upload-file-image-angular2-aspnetcore/
+
+        let fi = this.fileInput.nativeElement;
+        if (fi.files && fi.files[0]) {
+            let fileToUpload = fi.files[0];
+         //   this.proxyService.uploadFile(fileToUpload);
+        }
+
+        //    public uploadFile(fileToUpload: any): void {
+        //let input = new FormData();
+        //input.append("datei", fileToUpload);
+
+
+        //this._http.post("Proxy/AddFileToServer?detailId=1", input).subscribe(res => res.json());
+    //}
+
+    }
+
     public startFileDownloadCompanyTypeScript() {
         var company: ProxyGeneratorDemoPage.Helper.ICompany = new Company("MyCompany", 12, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin);
         this.proxyService.getDownloadCompany(1337, company);
     }
-
+    
     public startFileDownloadPersonTypeScript() {
         var ages: number[] = [1, 2, 3, 4, 5, 66];
         var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", "Wuschel", true, ages);
@@ -105,6 +127,8 @@ export class Angular2Calls {
             console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
             console.log(result);
         });
+
+        this.proxyService.voidTsReturnType("test");
 
         this.proxyService.loadTsCallByParamsWithEnum("Squad", "Wuschel", 33, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin).subscribe(result => {
             console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");

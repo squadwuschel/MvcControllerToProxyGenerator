@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 21.10.2016 time 21:57 from squad.
+//Created on 21.10.2016 time 22:57 from squad.
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -67,7 +67,7 @@ var Proxyservice = (function () {
         return this._http.get('Proxy/ClearTsCall').map(function (response) { return response.json(); });
     };
     Proxyservice.prototype.voidTsReturnType = function (name) {
-        this._http.get('Proxy/VoidTsReturnType' + '?name=' + encodeURIComponent(name));
+        this._http.get('Proxy/VoidTsReturnType' + '?name=' + encodeURIComponent(name)).subscribe(function (res) { return res.json(); });
     };
     Proxyservice.prototype.stringTsReturnType = function (name) {
         return this._http.get('Proxy/StringTsReturnType' + '?name=' + encodeURIComponent(name)).map(function (response) { return response.json(); });
