@@ -9,5 +9,6 @@
         AngularTypeScript,
         jQueryJavaScript,
         jQueryTypeScript,
+        Angular2TypeScript
     }
 }

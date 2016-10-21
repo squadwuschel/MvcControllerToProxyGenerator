@@ -254,6 +254,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ScriptsAppNg2\Views\Proxy\angular2Calls.component.html" />
     <Content Include="ScriptsApp\ServicesJQuery\proxyjQueryJs.js" />
     <Content Include="ScriptsApp\Services\homeAngularJsSrv.js" />
     <Content Include="ScriptsApp\Services\proxyAngularJsSrv.js" />
@@ -296,7 +297,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="ScriptsAppNg2\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -312,6 +312,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ScriptsAppNg2\app.module.ts" />
     <TypeScriptCompile Include="ScriptsAppNg2\main.ts" />
+    <TypeScriptCompile Include="ScriptsAppNg2\Services\proxy.service.ts" />
     <TypeScriptCompile Include="ScriptsAppNg2\Views\Proxy\angular2Calls.component.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Company.ts" />

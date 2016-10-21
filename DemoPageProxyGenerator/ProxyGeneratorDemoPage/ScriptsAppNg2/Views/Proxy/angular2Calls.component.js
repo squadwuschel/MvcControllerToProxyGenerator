@@ -9,17 +9,96 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var proxy_service_1 = require("../../Services/proxy.service");
 var Angular2Calls = (function () {
-    function Angular2Calls() {
+    function Angular2Calls(proxyService) {
+        this.proxyService = proxyService;
         this.name = "TEST";
         //Im Konstruktor einfach per DI einen Service injecten, dieser muss auch in Providers bekannt gemacht werden
     }
+    Angular2Calls.prototype.startTypeScriptServiceCalls = function () {
+        var _this = this;
+        var ages = [1, 2, 3, 4, 5, 66];
+        var person = new Person(1337, "Squad", "Wuschel", true, ages);
+        console.clear();
+        console.log("Some TypeScript Angular Service Calls: \r\n");
+        this.proxyService.addAges(ages).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'addAges' Result: ");
+            console.log(result);
+            _this.proxyService.addAges(result);
+        });
+        this.proxyService.addTsEntryAndName(person, "Johannes").subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndName' Result: ");
+            console.log(result);
+        });
+        this.proxyService.manySimpleParams(12, 345, 1, 1, "test", 12, "squad@web.de", "Squad", 12, 32).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'manySimpleParams' Result: ");
+            console.log(result);
+        });
+        this.proxyService.addTsEntryAndParams(person, "Squad", "Wuschel").subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'addTsEntryAndParams' Result: ");
+            console.log(result);
+        });
+        this.proxyService.addTsEntryOnly(person).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'addTsEntryOnly' Result: ");
+            console.log(result);
+        });
+        this.proxyService.boolTsReturnType(true).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'boolTsReturnType' Result: ");
+            console.log(result);
+        });
+        this.proxyService.clearTsCall().subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'clearTsCall' Result: ");
+            console.log(result);
+        });
+        this.proxyService.dateTsReturnType("SquadWuschel").subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'dateTsReturnType' Result: ");
+            console.log(result);
+        });
+        this.proxyService.integerTsReturnType(1337).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'integerTsReturnType' Result: ");
+            console.log(result);
+        });
+        this.proxyService.loadAllAutosArray("SquadWuschel").subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'loadAllAutosArray' Result: ");
+            console.log(result);
+        });
+        this.proxyService.loadAllAutosListe("SquadWuschel").subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'loadAllAutosListe' Result: ");
+            console.log(result);
+        });
+        this.proxyService.loadTsCallById(16667).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'loadTsCallById' Result: ");
+            console.log(result);
+        });
+        this.proxyService.loadTsCallByParams("Squad", "Wuschel", 33).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParams' Result: ");
+            console.log(result);
+        });
+        this.proxyService.loadTsCallByParamsAndId("Squad", "Wuschel", 33, 1337).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
+            console.log(result);
+        });
+        this.proxyService.loadTsCallByParamsWithEnum("Squad", "Wuschel", 33, 2 /* Admin */).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
+            console.log(result);
+        });
+        this.proxyService.errorStringReturnType(true).subscribe(function (result) {
+            console.log("\r\nSuccess TypeScript Service Call 'errorStringReturnType' Result: ");
+            console.log(result);
+        }, function (errorResult) {
+            //Only gets Called if the ErrorResponse is active and returns only the errorResult and not only the Data.
+            console.log("\r\nError TypeScript Service Call 'errorStringReturnType' Result: ");
+            console.log(errorResult);
+        });
+    };
     Angular2Calls = __decorate([
         core_1.Component({
             selector: 'angular-2-calls',
-            template: "<div>Hallo Welt von ANGIULAR 2 mit Name: \"{{name}}\"</div>",
+            templateUrl: "ScriptsAppNg2/Views/Proxy/angular2Calls.component.html",
+            providers: [proxy_service_1.Proxyservice]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [proxy_service_1.Proxyservice])
     ], Angular2Calls);
     return Angular2Calls;
 }());

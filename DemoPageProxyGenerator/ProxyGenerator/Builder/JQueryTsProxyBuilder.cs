@@ -107,7 +107,7 @@ namespace ProxyGenerator.Builder
                     ajaxCalls += functionCall;
                 }
 
-                string moduleTemplate = jQueryTsModuleTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix, true));
+                string moduleTemplate = jQueryTsModuleTemplate.Replace(ConstValuesTemplates.ServiceName, ProxyBuilderHelper.GetServiceName(controllerInfo.ControllerNameWithoutSuffix, suffix.TrimStart('.'), true));
                 moduleTemplate = moduleTemplate.Replace(ConstValuesTemplates.ServiceFunctions, ajaxCalls);
                 moduleTemplate = moduleTemplate.Replace(ConstValuesTemplates.InterfaceDefinitions, serviceInterfaceDefinitions);
 

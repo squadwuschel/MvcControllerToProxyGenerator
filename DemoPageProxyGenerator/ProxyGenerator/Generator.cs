@@ -63,6 +63,14 @@ namespace ProxyGenerator
             GeneratedProxyEntries.AddRange(proxies);
         }
 
+        public void AddAngular2TsProxyGenerator()
+        {
+            //Alle Controller und die zugehörigen Methoden zum übergebenen ProxyAttribut ermitteln für einen Angular TypeScript Proxy
+            var proxyControllerInfos = ControllerManager.LoadProxyControllerInfos(typeof(CreateAngular2TsProxyAttribute), ControllerManager.GetAllProjectProxyController(Factory.GetProxySettings()));
+            var proxies = Factory.CreateAngular2TsProxyBuilder().BuildProxy(proxyControllerInfos);
+            GeneratedProxyEntries.AddRange(proxies);
+        }
+
         /// <summary>
         /// Proxy Generator für jQuery TypeScript mit Daten füllen
         /// </summary>
@@ -84,5 +92,6 @@ namespace ProxyGenerator
             var proxies = Factory.CreateJQueryJsProxyBuilder().BuildProxy(proxyControllerInfos);
             GetGeneratedProxyEntries().AddRange(proxies);
         }
+      
     }
 }

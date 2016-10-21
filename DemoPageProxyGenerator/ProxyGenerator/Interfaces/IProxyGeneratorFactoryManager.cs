@@ -19,5 +19,6 @@ namespace ProxyGenerator.Interfaces
         IProxyBuilder CreateJQueryTsProxyBuilder();
         IProxyBuilder CreateJQueryJsProxyBuilder();
         ISettingsManager CreateSettingsManager();
+        IProxyBuilder CreateAngular2TsProxyBuilder();
     }
 }

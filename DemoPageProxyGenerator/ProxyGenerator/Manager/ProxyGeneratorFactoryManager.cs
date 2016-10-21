@@ -83,6 +83,11 @@ namespace ProxyGenerator.Manager
             return new AngularTsProxyBuilder(this);
         }
 
+        public IProxyBuilder CreateAngular2TsProxyBuilder()
+        {
+            return new Angular2TsProxyBuilder(this);
+        }
+
         public IProxyBuilder CreateJQueryTsProxyBuilder()
         {
             return new JQueryTsProxyBuilder(this);

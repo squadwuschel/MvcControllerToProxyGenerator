@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 01.07.2016 time 21:44 from SquadWuschel.
+//Created on 21.10.2016 time 21:57 from squad.
 
   module App.JqueryServices { 
 

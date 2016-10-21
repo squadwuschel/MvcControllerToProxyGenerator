@@ -70,6 +70,15 @@ namespace ProxyGenerator.Manager
                     }
                 }
 
+                if (allSettings.AllKeys.Contains("ProxyGenerator_TemplateSuffix_Angular2Ts"))
+                {
+                    var template = ProxySettings.Templates.FirstOrDefault(p => p.TemplateType == TemplateTypes.Angular2TsModule);
+                    if (template != null)
+                    {
+                        template.TemplateSuffix = allSettings["ProxyGenerator_TemplateSuffix_Angular2Ts"].Value;
+                    }
+                }
+
                 if (allSettings.AllKeys.Contains("ProxyGenerator_TemplateSuffix_jQueryJs"))
                 {
                     var template = ProxySettings.Templates.FirstOrDefault(p => p.TemplateType == TemplateTypes.jQueryJsModule);
@@ -100,12 +109,13 @@ namespace ProxyGenerator.Manager
         /// <param name="templateType"></param>
         public string GetAlternateOutputpath(TemplateTypes templateType)
         {
-            //ACHTUNG geht nur wenn: "jQueryTsModule", "jQueryJsModule", "AngularJsModule" oder "AngularTsModule" übergeben werden!
+            //ACHTUNG geht nur wenn: "jQueryTsModule", "jQueryJsModule", "AngularJsModule",  "Angular2TsModule" oder "AngularTsModule" übergeben werden!
             //Denn nur diese Werte gibt es in der Web.config
             //ProxyGenerator_OutputPath_jQueryTsModule
             //ProxyGenerator_OutputPath_jQueryJsModule
             //ProxyGenerator_OutputPath_AngularJsModule
             //ProxyGenerator_OutputPath_AngularTsModule
+            //ProxyGenerator_OutputPath_Angular2TsModule
             var baseWebConfigStr = "ProxyGenerator_OutputPath_" + templateType.ToString();
 
             //Web.config auslesen
