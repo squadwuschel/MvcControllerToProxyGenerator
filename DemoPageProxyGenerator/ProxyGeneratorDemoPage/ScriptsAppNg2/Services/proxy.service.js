@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 21.10.2016 time 22:57 from squad.
+//Created on 21.10.2016 time 23:09 from squad.
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -18,6 +18,16 @@ var Proxyservice = (function () {
     function Proxyservice(_http) {
         this._http = _http;
     }
+    Proxyservice.prototype.addFileToServer = function (datei, detailId) {
+        var formData = new FormData();
+        formData.append('datei', datei);
+        return this._http.post('Proxy/AddFileToServer' + '?detailId=' + detailId, formData).map(function (response) { return response.json(); });
+    };
+    Proxyservice.prototype.addFileToServerNoReturnType = function (datei, detailId) {
+        var formData = new FormData();
+        formData.append('datei', datei);
+        this._http.post('Proxy/AddFileToServerNoReturnType' + '?detailId=' + detailId, formData).subscribe(function (res) { return res.json(); });
+    };
     Proxyservice.prototype.getDownloadPerson = function (personId, person) {
         window.location.href = 'Proxy/GetDownloadPerson' + '?personId=' + personId + '&' + jQuery.param(person);
     };

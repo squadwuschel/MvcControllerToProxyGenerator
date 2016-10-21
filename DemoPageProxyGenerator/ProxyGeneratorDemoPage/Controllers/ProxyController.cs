@@ -40,7 +40,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        //[CreateAngular2TsProxy(ReturnType = typeof(Person))]
+        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularJsProxy]
         [CreateJQueryJsProxy]
@@ -66,7 +66,7 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(void))]
-        //[CreateAngular2TsProxy(ReturnType = typeof(void))]
+        [CreateAngular2TsProxy(ReturnType = typeof(void))]
         [CreateJQueryTsProxy(ReturnType = typeof(void))]
         [CreateAngularJsProxy()]
         [CreateJQueryJsProxy]

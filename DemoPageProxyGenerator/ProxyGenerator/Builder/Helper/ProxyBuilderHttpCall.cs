@@ -67,7 +67,7 @@ namespace ProxyGenerator.Builder.Helper
                         return BuildPostjQuery(methodInfo);
                     }
 
-                    return BuildPostAngular(methodInfo);
+                    return BuildPostAngular(methodInfo, proxyBuilder);
                 }
 
                 //Kein Komplexer Typ also Get verwenden.
@@ -79,14 +79,14 @@ namespace ProxyGenerator.Builder.Helper
                 return BuildPostjQuery(methodInfo);
             }
 
-            return BuildPostAngular(methodInfo);
+            return BuildPostAngular(methodInfo, proxyBuilder);
         }
 
         /// <summary>
         /// Rückgabe für Post erstellen für Angular Calls
         /// </summary>
         /// <returns>Gibt den passenden POST Aufruf zurück</returns>
-        private string BuildPostAngular(ProxyMethodInfos infos)
+        private string BuildPostAngular(ProxyMethodInfos infos, ProxyBuilder proxyBuilder)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(string.Format("post('{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
@@ -101,8 +101,16 @@ namespace ProxyGenerator.Builder.Helper
                 //Da es nur einen Complexen Typ geben darf pro Methodenaufruf, hier prüfen ob ein FileUpload dabei ist.
                 if (infos.ProxyMethodParameterInfos.Any(p => p.IsFileUpload))
                 {
-                    //Achtung die "formData" Variable wird bei "#FunctionContent#" eingefügt
-                    builder.Append(",formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }})");
+                    if (proxyBuilder != ProxyBuilder.Angular2TypeScript)
+                    {
+                        //Achtung die "formData" Variable wird bei "#FunctionContent#" eingefügt
+                        builder.Append(",formData, { transformRequest: angular.identity, headers: { 'Content-Type': undefined }})");
+                    }
+                    else
+                    {
+                        //für angular 2 muss hier nur FormData übergeben werden.
+                        builder.Append(",formData)");
+                    }
                 }
                 else
                 {

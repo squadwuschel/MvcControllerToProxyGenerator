@@ -22,12 +22,10 @@ var Angular2Calls = (function () {
         var fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
             var fileToUpload = fi.files[0];
+            this.proxyService.addFileToServer(fileToUpload, 12).subscribe(function (_) {
+                console.log(_);
+            });
         }
-        //    public uploadFile(fileToUpload: any): void {
-        //let input = new FormData();
-        //input.append("datei", fileToUpload);
-        //this._http.post("Proxy/AddFileToServer?detailId=1", input).subscribe(res => res.json());
-        //}
     };
     Angular2Calls.prototype.startFileDownloadCompanyTypeScript = function () {
         var company = new Company("MyCompany", 12, 2 /* Admin */);

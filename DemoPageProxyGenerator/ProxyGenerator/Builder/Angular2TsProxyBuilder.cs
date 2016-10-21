@@ -98,7 +98,7 @@ namespace ProxyGenerator.Builder
                     //Parameter des Funktionsaufrufs ersetzen.
                     functionCall = functionCall.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
                     //Service Call und Parameter ersetzen
-                    functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.AngularTypeScript));
+                    functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHttpCall(methodInfos, ProxyBuilder.Angular2TypeScript));
                     ajaxCalls += functionCall;
                 }
 
@@ -127,7 +127,7 @@ namespace ProxyGenerator.Builder
             //Parameter des Funktionsaufrufs ersetzen.
             functionCall = functionCall.Replace(ConstValuesTemplates.ServiceParamters, ProxyBuilderTypeHelper.GetFunctionParametersWithType(methodInfos.MethodInfo));
             //Href Call zusammenbauen und Parameter ersetzen
-            functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHrefLink(methodInfos, ProxyBuilder.AngularTypeScript));
+            functionCall = functionCall.Replace(ConstValuesTemplates.ServiceCallAndParameters, ProxyBuilderHttpCall.BuildHrefLink(methodInfos, ProxyBuilder.Angular2TypeScript));
             return functionCall;
         }
 

@@ -22,17 +22,10 @@ export class Angular2Calls {
         let fi = this.fileInput.nativeElement;
         if (fi.files && fi.files[0]) {
             let fileToUpload = fi.files[0];
-         //   this.proxyService.uploadFile(fileToUpload);
+            this.proxyService.addFileToServer(fileToUpload, 12).subscribe(_ => {
+                console.log(_);
+            });
         }
-
-        //    public uploadFile(fileToUpload: any): void {
-        //let input = new FormData();
-        //input.append("datei", fileToUpload);
-
-
-        //this._http.post("Proxy/AddFileToServer?detailId=1", input).subscribe(res => res.json());
-    //}
-
     }
 
     public startFileDownloadCompanyTypeScript() {
