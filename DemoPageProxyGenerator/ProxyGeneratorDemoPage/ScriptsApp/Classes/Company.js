@@ -5,5 +5,4 @@ var Company = (function () {
         this.ClientAccess = ClientAccess;
     }
     return Company;
-})();
-//# sourceMappingURL=Company.js.map
+}());

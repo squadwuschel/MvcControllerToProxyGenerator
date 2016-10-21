@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 01.07.2016 time 21:25 from SquadWuschel.
+//Created on 01.07.2016 time 21:44 from SquadWuschel.
 var App;
 (function (App) {
     var JqueryServices;
@@ -88,8 +88,7 @@ var App;
                 return jQuery.get('Proxy/ErrorStringReturnType' + '?boolValue=' + boolValue).then(function (result) { return result; });
             };
             return proxyjQueryTs;
-        })();
+        }());
         JqueryServices.proxyjQueryTs = proxyjQueryTs;
     })(JqueryServices = App.JqueryServices || (App.JqueryServices = {}));
 })(App || (App = {}));
-//# sourceMappingURL=proxyjQueryTs.js.map

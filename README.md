@@ -1,5 +1,5 @@
 # MvcControllerToProxyGenerator
-Creates JavaScript or TypeScript AJAX proxies in jQuery or AngularJs for .NET Controller or WebApi functions.
+Creates JavaScript or TypeScript AJAX proxies in jQuery or AngularJs/Angular 2 for .NET Controller or WebApi functions.
 
 Download and install the [NuGet package for "TypeScriptAngularJsProxyGenerator"](https://www.nuget.org/packages/TypeScriptAngularJsProxyGenerator/) into your WebProject.
 

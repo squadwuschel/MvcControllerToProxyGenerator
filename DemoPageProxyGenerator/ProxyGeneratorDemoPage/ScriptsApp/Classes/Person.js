@@ -7,5 +7,4 @@ var Person = (function () {
         this.CounterValues = CounterValues;
     }
     return Person;
-})();
-//# sourceMappingURL=Person.js.map
+}());

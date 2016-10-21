@@ -185,9 +185,8 @@ var App;
                     "proxyAngularJsSrv",
                 ];
                 return ProxyCtrl;
-            })();
+            }());
             Proxy.ProxyCtrl = ProxyCtrl;
         })(Proxy = Views.Proxy || (Views.Proxy = {}));
     })(Views = App.Views || (App.Views = {}));
 })(App || (App = {}));
-//# sourceMappingURL=proxyCtrl.js.map

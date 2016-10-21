@@ -188,9 +188,8 @@ var App;
                 });
             };
             return jQueryApp;
-        })();
+        }());
         JQueryApp.jQueryApp = jQueryApp;
     })(JQueryApp = App.JQueryApp || (App.JQueryApp = {}));
 })(App || (App = {}));
 var app = new App.JQueryApp.jQueryApp();
-//# sourceMappingURL=jQueryCalls.js.map

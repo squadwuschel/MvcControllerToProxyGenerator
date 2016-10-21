@@ -5,5 +5,4 @@ var Auto = (function () {
         this.Eigentuemer = Eigentuemer;
     }
     return Auto;
-})();
-//# sourceMappingURL=Auto.js.map
+}());

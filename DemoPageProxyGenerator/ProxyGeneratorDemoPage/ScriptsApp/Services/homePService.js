@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 26.03.2016 time 22:43 from SquadWuschel.
+//Created on 01.07.2016 time 21:44 from SquadWuschel.
 var App;
 (function (App) {
     var Services;
@@ -32,8 +32,7 @@ var App;
             });
             HomePService.$inject = ['$http'];
             return HomePService;
-        })();
+        }());
         Services.HomePService = HomePService;
     })(Services = App.Services || (App.Services = {}));
 })(App || (App = {}));
-//# sourceMappingURL=homePService.js.map

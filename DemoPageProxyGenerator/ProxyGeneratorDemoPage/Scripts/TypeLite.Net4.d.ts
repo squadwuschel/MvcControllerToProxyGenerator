@@ -6,8 +6,8 @@
 
 /// <reference path="Enums.ts" />
 
-declare module ProxyGeneratorDemoPage.Models.Person.Models {
-	interface IAuto {
+declare  module ProxyGeneratorDemoPage.Models.Person.Models {
+   interface IAuto {
 		Marke: string;
 		Alter: number;
 		Eigentuemer: ProxyGeneratorDemoPage.Models.Person.Models.IPerson;
