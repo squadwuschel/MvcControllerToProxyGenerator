@@ -45,6 +45,43 @@
 //###########################################################################################################################################################################################
 //###########################################################################################################################################################################################
 //###########################################################################################################################################################################################
+//#############################################################--Angular 2 TypeScript Definitions--##########################################################################################
+//###########################################################################################################################################################################################
+//TEMPLATE STRINGS FOR: "Angular 2 TypeScript Module Definition for a Angular 2 Service with Observables": 
+// 1. #ServiceName# => as service name the name from the .NET controller (Class) is used + Templatesuffix like: ControllerService -> Account.service.ts for AccountController
+// 3. #ServiceFunctions# => replace with all implemented Service Functions (the other TypeScript Templates are used to create the Service Calls like: "angular2TsObservableCallWithReturnType" or "angular2TsObservableCallWithNoReturnType")
+    var angular2TsModule = new TemplateEntry() { TemplateType = TemplateTypes.Angular2TsModule, TemplateSuffix = ".service"};
+	angular2TsModule.Template = "import {Injectable} from '@angular/core';\r\n"
+								+ "import {Http, Response} from '@angular/http';\r\n"
+								+ "import {Observable} from 'rxjs/observable';\r\n"
+								+ "import 'rxjs/add/operator/map';\r\n\r\n"
+								+ "@Injectable()\r\n"
+                                + "export class #ServiceName# { \r\n\r\n"
+								+ "constructor(private http: Http) {  }\r\n\r\n"
+	                            + " #ServiceFunctions#"
+	                            + "\r\n }";
+	settings.Templates.Add(angular2TsModule);
+
+//TEMPLATE STRINGS FOR: "Angular 2 TypeScript Ajax Call Function with ReturnType": 
+// 1. #ControllerFunctionName# => controller function name
+// 2. #ServiceParamters# => parameters for the service call
+// 3. #FunctionContent# => Content is used to extended FileUpload information
+// 4. {#ControllerFunctionReturnType#} => the defined returntype with custom attribute for the Ajax Call
+// 5. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
+    var angular2TsObservableCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.Angular2TsModuleObservableWithReturnType};
+    angular2TsObservableCallWithReturnType.Template = "     public #ControllerFunctionName#(#ServiceParamters#) : Observable<{#ControllerFunctionReturnType#}> { \r\n     #FunctionContent#"  +
+											          "       return this.http.#ServiceCallAndParameters#.map((response: Response)  => <{#ControllerFunctionReturnType#}>response.json() as {#ControllerFunctionReturnType#});\r\n     } \r\n\r\n";
+	settings.Templates.Add(angular2TsObservableCallWithReturnType);
+
+//TEMPLATE STRINGS FOR: "Angular 2 TypeScript Ajax Call Function with NO ReturnType": 
+    var angular2TsObservableCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.Angular2TsModuleObservableNoReturnType};
+    angular2TsObservableCallWithNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  #FunctionContent#      this.http.#ServiceCallAndParameters#.subscribe(res => res.json()); \r\n     } \r\n\r\n";
+	settings.Templates.Add(angular2TsObservableCallWithNoReturnType);
+//TEMPLATE STRINGS FOR: "Angular 2 TypeScript window.location.href" for e.g. DownloadLinks (jQuery required for this feature) : 
+    var angular2TsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.Angular2TsWindowLocationHref};
+    angular2TsWindowLocationHref.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n        window.location.href = #ServiceCallAndParameters#; \r\n    } \r\n\r\n";
+	settings.Templates.Add(angular2TsWindowLocationHref);
+//###########################################################################################################################################################################################
 //#############################################################--AngularJs JavaScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
 //TEMPLATE STRINGS FOR: "AngularJs JavaScript Service Definition":
@@ -116,7 +153,6 @@
     var angularTsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.AngularTsWindowLocationHref};
     angularTsWindowLocationHref.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    window.location.href = #ServiceCallAndParameters#; \r\n } \r\n\r\n";
 	settings.Templates.Add(angularTsWindowLocationHref);
-
 //###########################################################################################################################################################################################
 //#########ProxyFile####################################################--jQuery TypeScript Definitions--##########################################################################################
 //###########################################################################################################################################################################################
@@ -195,11 +231,13 @@
 	//Add AngularTs ProxyGenerator. You need to install the TypeScript TypeDefinitions for your current Angular version
 	//and TypeLite to create the Interfaces for your .NET Types in TypeScript.
 	generator.AddAngularTsProxyGenerator();
+	//Add Angular 2 ProxyGenerator
+	generator.AddAngular2TsProxyGenerator();
 	//Add jQueryTs ProxyGenerator
 	generator.AddjQueryTsProxyGenerator();
 	//Add jQueryJs ProxyGenerator
 	generator.AddjQueryJsProxyGenerator();
-
+	
 //###########################################################################################################################################################################################
 //#############################################################-- Outputfile Generation START --#############################################################################################
 //###########################################################################################################################################################################################	
