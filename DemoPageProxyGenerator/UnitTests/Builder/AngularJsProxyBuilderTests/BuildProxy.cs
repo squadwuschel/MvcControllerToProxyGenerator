@@ -40,9 +40,13 @@ return this.http.get('Home/OneParam'+ '?name='+encodeURIComponent(name)).then(fu
 angular.module('homePSrv', []) .service('homePSrv', ['$http', homePSrv])";
 
 
+        private const string AngularJsWindowLocationHref = "public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n    window.location.href = #ServiceCallAndParameters#; \r\n } \r\n\r\n";
+
+
         private Mock<IProxyGeneratorFactoryManager> MockFactory { get; set; }
         private Mock<IProxyBuilderHelper> MockBuildHelper { get; set; }
         private Mock<IProxyBuilderHttpCall> MockBuildHelperHttpCall { get; set; }
+        private Mock<ISettingsManager> MockSettingsManager { get; set; }
 
         private AngularJsProxyBuilder AngularJsProxyBuilder { get; set; }
 
@@ -53,18 +57,20 @@ angular.module('homePSrv', []) .service('homePSrv', ['$http', homePSrv])";
             MockFactory = new Mock<IProxyGeneratorFactoryManager>();
             MockBuildHelper = new Mock<IProxyBuilderHelper>();
             MockBuildHelperHttpCall = new Mock<IProxyBuilderHttpCall>();
+            MockSettingsManager = new Mock<ISettingsManager>();
 
             //Arrange ProxySettings
             var proxySettings = new ProxySettings();
             proxySettings.Templates.Add(new TemplateEntry() { TemplateType = TemplateTypes.AngularJsModule, Template = AngularJsModuleTemplate, TemplateSuffix = "PSrv" });
             proxySettings.Templates.Add(new TemplateEntry() { TemplateType = TemplateTypes.AngularJsPrototype, Template = AngularJsPrototype });
+            proxySettings.Templates.Add(new TemplateEntry() { TemplateType = TemplateTypes.AngularJsWindowLocationHref, Template = AngularJsWindowLocationHref });
             MockFactory.Setup(p => p.GetProxySettings()).Returns(proxySettings);
 
             //Unsere Mockobjekte zuweisen
             AngularJsProxyBuilder = new AngularJsProxyBuilder(MockFactory.Object);
             AngularJsProxyBuilder.ProxyBuilderHelper = MockBuildHelper.Object;
             AngularJsProxyBuilder.ProxyBuilderHttpCall = MockBuildHelperHttpCall.Object;
-
+            AngularJsProxyBuilder.SettingsManager = MockSettingsManager.Object;
         }
 
         [Test]
