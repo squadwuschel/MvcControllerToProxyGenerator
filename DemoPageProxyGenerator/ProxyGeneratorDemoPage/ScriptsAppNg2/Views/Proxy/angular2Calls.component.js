@@ -14,7 +14,7 @@ var Angular2Calls = (function () {
     function Angular2Calls(proxyService) {
         this.proxyService = proxyService;
         this.name = "TEST";
-        //Im Konstruktor einfach per DI einen Service injecten, dieser muss auch in Providers bekannt gemacht werden
+        //Im Konstruktor einfach per DI einen Service injecten, dieser muss in Providers bekannt gemacht werden
     }
     Angular2Calls.prototype.startFileUploadTypeScript = function () {
         //File Upload

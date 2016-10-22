@@ -293,6 +293,7 @@
     <Content Include="Scripts\Manager.ttinclude" />
     <Content Include="tsconfig.json" />
     <Content Include="Views\Proxy\Angular2Calls.cshtml" />
+    <Content Include="typings.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

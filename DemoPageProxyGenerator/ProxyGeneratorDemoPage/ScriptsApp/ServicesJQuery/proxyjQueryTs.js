@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 21.10.2016 time 23:09 from squad.
+//Created on 22.10.2016 time 13:27 from squad.
 var App;
 (function (App) {
     var JqueryServices;

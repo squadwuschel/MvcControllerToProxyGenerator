@@ -1,5 +1,5 @@
 # MvcControllerToProxyGenerator
-Creates JavaScript or TypeScript AJAX proxies in jQuery or AngularJs/Angular 2 for .NET Controller or WebApi functions.
+Creates JavaScript or TypeScript AJAX proxies for Angular 2.x, AngularJs 1.x or jQuery for .NET Controller or WebApi functions.
 
 Download and install the [NuGet package for "TypeScriptAngularJsProxyGenerator"](https://www.nuget.org/packages/TypeScriptAngularJsProxyGenerator/) into your WebProject.
 
@@ -45,7 +45,7 @@ When you have installed all NuGet Packages, you **need to configure** the T4 Tem
 
 `Scripts\ProxyGeneratorScript.tt` 
 
-in the config Section **"SETTINGS for MANUAL adjustments"**, here you can find some settings you can/need to change, that the generator works right.
+in the config section **"SETTINGS for MANUAL adjustments"**, here you can find some settings you can/need to change, that the generator works right.
 
 Here you **NEED to set** the name of your current WebPoject. Warning: If you have manually renamed the web directory where your website is located, then you need to insert the foldername here and NOT the WebprojectName.
 
@@ -76,6 +76,7 @@ You can only add the settings you need to your web.cofig, the remaining settings
        <!-- Tell the ProxyGenerator which suffix the generated controllername will have -->
        <add key="ProxyGenerator_TemplateSuffix_AngularJs" value="AngularJsSrv" />
        <add key="ProxyGenerator_TemplateSuffix_AngularTs" value="PService" />
+       <add key="ProxyGenerator_TemplateSuffix_Angular2Ts" value=".service" />
        <add key="ProxyGenerator_TemplateSuffix_jQueryJs" value="jQueryJs" />
        <add key="ProxyGenerator_TemplateSuffix_jQueryTs" value="jQueryTs" />
 	   <!-- Set Different Output Pathes for each ScriptType. If no value is the or the keys are missing in the Web.config the default outputpath "ProxyGenerator_ProxyFileOutputPath" is used. The Outpath Settings can only be set in the web.config! -->
@@ -83,6 +84,7 @@ You can only add the settings you need to your web.cofig, the remaining settings
        <add key="ProxyGenerator_OutputPath_jQueryJsModule" value="ScriptsApp\ServicesJQuery\" />
        <add key="ProxyGenerator_OutputPath_AngularJsModule" value="ScriptsApp\Services\" />
        <add key="ProxyGenerator_OutputPath_AngularTsModule" value="ScriptsApp\Services\" />
+	   <add key="ProxyGenerator_OutputPath_Angular2TsModule" value="ScriptsAppNg2\Services\" />
        <!-- Proxy Generator Settings - END -->
     </appSettings>
 
@@ -96,10 +98,11 @@ The ProxyGenerator DLL provides four different attributes.
 |----------------|----------|-----------|-----------------|---------|
 |CreateAngularJsProxyAttribute| JavaScript | AngularJs | -|CreateWindowLocationHrefLink
 |CreateAngularTsProxyAttribute| TypeScript | AngularJs | ReturnType|CreateWindowLocationHrefLink
+|CreateAngular2TsProxyAttribute| TypeScript | Angular 2 | ReturnType|CreateWindowLocationHrefLink
 |CreateJQueryJsProxyAttribute| JavaScript | jQuery | -|CreateWindowLocationHrefLink
 |CreateJQueryTsProxyAttribute| TypeScript | jQuery | ReturnType|CreateWindowLocationHrefLink
 
-You can mix these attributes in any combination. It is possible to use all on the same controller function, then for this function four different proxies are create (one for each language and framework).
+You can mix these attributes in any combination. It is possible to use all on the same controller function, then for this function five different proxies are create (one for each language and framework).
 
 **Attribute Parameter:**
 
@@ -112,8 +115,191 @@ When the rebuild was successfull, then start the proxy creation by right clickin
 
 (**Hint:** Take a look at the GitHub code, there you find a solution with the T4 template and also a website with examples for the attribute usage shown below)
 
+### Example: Angular 2 TypeScript Proxy - CreateAngular2TsProxyAttribute
+Creates a proxy for Angular 2 in TypeScript.
+
+The .NET controller functions are decorated with the attribute "**CreateAngular2TsProxyAttribute**" and you also need to add the "ReturnType" to the attribute params.
+The "ReturnType" is the .NET type of the Json which is returned by the Json Function.
+
+    using ProxyGenerator.ProxyTypeAttributes;
+
+    public class ProxyController : Controller
+    {  
+        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
+        public JsonResult AddTsEntryOnly(Person person)
+        {
+            return Json(person, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
+        public JsonResult AddTsEntryAndName(Person person, string name)
+        {
+            return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
+        public JsonResult LoadTsCallById(int id)
+        {
+            return Json(new Person() { Id = id }, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
+        public JsonResult LoadTsCallByParams(string name, string vorname, int alter)
+        {
+            return Json(new Person() { Name = name, Id = alter }, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
+        public JsonResult LoadTsCallByParamsWithEnum(string name, string vorname, int alter, ClientAccess access)
+        {
+            return Json(new Auto() { Marke = name, Alter = alter }, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(List<Auto>))]
+        public JsonResult LoadAllAutosListe(string name)
+        {
+            return Json(new List<Auto>() { new Auto() { Marke = name }, new Auto() }, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
+        public JsonResult ClearTsCall()
+        {
+            return Json(new Person(), JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(void))]
+        public JsonResult VoidTsReturnType(string name)
+        {
+            return Json(string.Empty, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(string))]
+        public JsonResult StringTsReturnType(string name)
+        {
+            return Json(name, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(int))]
+        public JsonResult IntegerTsReturnType(int age)
+        {
+            return Json(age, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(DateTime))]
+        public JsonResult DateTsReturnType(string name)
+        {
+            return Json(DateTime.Now, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(ReturnType = typeof(Boolean))]
+        public JsonResult BoolTsReturnType(bool boolValue)
+        {
+            return Json(boolValue, JsonRequestBehavior.AllowGet);
+        }
+
+        [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
+        public FileResult GetDownloadSimple(int companyId, string name)
+        {
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die CompanyId: {0} mit dem Namen: {1}", companyId, name));
+            return File(fileContent, "text/text", "TestDL.txt");
+        }
+    }
+
+ this will create the following Angular 2 TypeScript proxy service. With the right "ReturnTypes" for each proxy call, please install TypeLite to create the TypeScript interfaces for each type. 
+ 
+**Hint:** Also TypeLite uses attributes to create the interfaces for your classes, you need to set the "[TsClass]" attribute on the classes which are returned by your Json Calls to create the interfaces with TypeLite T4 template.
+
+How to use the TypeScript module, take a look at my the GitHub code for this Project.
+
+    import {Injectable} from '@angular/core';
+    import {Http, Response} from '@angular/http';
+    import {Observable} from 'rxjs/observable';
+    import 'rxjs/add/operator/map';
+
+    @Injectable()
+    export class Proxyservice { 
+
+    constructor(private http: Http) {  }
+
+		 public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+				return this.http.post('Proxy/AddTsEntryOnly',person).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+		 } 
+
+		 public addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
+				return this.http.post('Proxy/AddTsEntryAndName'+ '?name='+encodeURIComponent(name),person).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IAuto>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IAuto);
+		 } 
+
+		 public loadTsCallById(id: number) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+				return this.http.get('Proxy/LoadTsCallById' + '/' + id).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+		 } 
+
+		 public loadTsCallByParams(name: string,vorname: string,alter: number) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+				return this.http.get('Proxy/LoadTsCallByParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+		 } 
+
+		 public loadTsCallByParamsWithEnum(name: string,vorname: string,alter: number,access: ProxyGeneratorDemoPage.Helper.ClientAccess) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
+				return this.http.get('Proxy/LoadTsCallByParamsWithEnum'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter+'&access='+access).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IAuto>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IAuto);
+		 } 
+
+		 public loadAllAutosListe(name: string) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IAuto[]> { 
+				return this.http.get('Proxy/LoadAllAutosListe'+ '?name='+encodeURIComponent(name)).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IAuto[]>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IAuto[]);
+		 } 
+
+		 public clearTsCall() : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+				return this.http.get('Proxy/ClearTsCall').map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+		 } 
+
+		 public voidTsReturnType(name: string) : void  { 
+			this.http.get('Proxy/VoidTsReturnType'+ '?name='+encodeURIComponent(name)).subscribe(res => res.json()); 
+		 } 
+
+		 public stringTsReturnType(name: string) : Observable<string> { 
+				return this.http.get('Proxy/StringTsReturnType'+ '?name='+encodeURIComponent(name)).map((response: Response)  => <string>response.json() as string);
+		 } 
+
+		 public integerTsReturnType(age: number) : Observable<number> { 
+				return this.http.get('Proxy/IntegerTsReturnType'+ '?age='+age).map((response: Response)  => <number>response.json() as number);
+		 } 
+
+		 public dateTsReturnType(name: string) : Observable<any> { 
+				return this.http.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).map((response: Response)  => <any>response.json() as any);
+		 } 
+
+		 public boolTsReturnType(boolValue: boolean) : Observable<boolean> { 
+				return this.http.get('Proxy/BoolTsReturnType'+ '?boolValue='+boolValue).map((response: Response)  => <boolean>response.json() as boolean);
+		 } 
+
+		 public errorStringReturnType(boolValue: boolean) : Observable<string> { 
+				return this.http.get('Proxy/ErrorStringReturnType'+ '?boolValue='+boolValue).map((response: Response)  => <string>response.json() as string);
+		 } 
+
+		 public getDownloadSimple(companyId: number,name: string) : void  { 
+			window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name); 
+		 } 
+    }
+
+
+#### Example for Angular 2 TypeScript Proxy - FileUpload
+please use **HttpPostedFileBase** Type for fileupload, then the Proxy is created the right way.
+
+    [CreateAngular2TsProxy(ReturnType = typeof(Person))]
+    public ActionResult AddFileToServer(HttpPostedFileBase datei, int detailId)
+    {
+    	//TODO Do something with the uploaded File - YOU NEED TO NAME YOUR "HttpPostedFileBase" property "datei"!!!!!!
+    	//because the Proxy generates the formData with the name "datei"!
+        return Json(new Person() { Id = detailId }, JsonRequestBehavior.AllowGet);
+    }
+
+this will create the following function in TypeScript
+
+    public addFileToServer(datei: any,detailId: number) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+         var formData = new FormData(); 
+         formData.append('datei', datei); 
+         return this.http.post('Proxy/AddFileToServer'+ '?detailId='+detailId,formData).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+    } 
+
 ### Example: AngularJs JavaScript Proxy - CreateAngularJsProxyAttribute
-Creates a proxy for AngukarJs in JavaScript.
+Creates a proxy for AngularJs in JavaScript.
 
 The .NET controller functions are decorated with the attribute "**CreateAngularJsProxyAttribute**"
 
@@ -239,7 +425,7 @@ this will create the following prototype function in JavaScript
 
 
 ### Example: AngularJs TypeScript Proxy - CreateAngularTsProxyAttribute
-Creates a proxy for AngukarJs in TypeScript.
+Creates a proxy for AngularJs in TypeScript.
 
 The .NET controller functions are decorated with the attribute "**CreateAngularTsProxyAttribute**" and you also need to add the "ReturnType" to the attribute params.
 The "ReturnType" is the .NET type of the Json which is returned by the Json Function.
@@ -674,3 +860,14 @@ Then you get the following errormessage, when you try to create the proxy
 When you have set the wrong "WebProjectName" in the ProxySettings, then the following Error will appear, when you try to create the proxies.
 
 **The 'WebProjectPath' was not found, because the 'WebProjectName' was wrong.**
+
+## How to get the DemoPageProxy Generator Running
+the above github repository contains a .NET Solution with an MVC Page. If the Project "NuGet.Packager" can't be loaded its no problem its just for building the NuGet packages.
+
+You need to restore the NuGet packages and also the npm modules for the solution and install the es6-shim Typings.
+
+I've created a german blogpost how to get Angular 2 running with VS 2015 and ASP.Net MVC 
+
+https://squadwuschel.wordpress.com/2016/04/01/angular-2-hello-world-mit-visual-studio-2015-update-2-asp-net-4-und-typescript/
+
+perhaps this post can help you if you can't get the Solution running.

@@ -10,11 +10,10 @@ export class Angular2Calls {
     public name: string = "TEST";
 
     constructor(public proxyService : Proxyservice) {
-        //Im Konstruktor einfach per DI einen Service injecten, dieser muss auch in Providers bekannt gemacht werden
+        //Im Konstruktor einfach per DI einen Service injecten, dieser muss in Providers bekannt gemacht werden
     }
 
     @ViewChild("fileInput") fileInput;
-
     public startFileUploadTypeScript(): void {
         //File Upload
         //https://devblog.dymel.pl/2016/09/02/upload-file-image-angular2-aspnetcore/
@@ -33,13 +32,13 @@ export class Angular2Calls {
         this.proxyService.getDownloadCompany(1337, company);
     }
     
-    public startFileDownloadPersonTypeScript() {
+    public startFileDownloadPersonTypeScript() : void {
         var ages: number[] = [1, 2, 3, 4, 5, 66];
         var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", "Wuschel", true, ages);
         this.proxyService.getDownloadPerson(7331, person);
     }
 
-    public startFileDownloadNoParamsTypeScript() {
+    public startFileDownloadNoParamsTypeScript()  : void {
         this.proxyService.getDownloadNoParams();
     }
 
