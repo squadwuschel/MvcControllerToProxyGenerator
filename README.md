@@ -209,8 +209,6 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
  
 **Hint:** Also TypeLite uses attributes to create the interfaces for your classes, you need to set the "[TsClass]" attribute on the classes which are returned by your Json Calls to create the interfaces with TypeLite T4 template.
 
-How to use the TypeScript module, take a look at my the GitHub code for this Project.
-
     import {Injectable} from '@angular/core';
     import {Http, Response} from '@angular/http';
     import {Observable} from 'rxjs/observable';
