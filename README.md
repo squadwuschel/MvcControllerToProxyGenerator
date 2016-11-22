@@ -9,6 +9,8 @@ Or install the NuGet package with the package manager console:
 
 Be carefull on updating the package, save your custom settings first, because updating this package will replace your settings for ProxyGenerator or use the **web.config** to store your Settings.
 
+For questions or problems please open a GitHub Issue.
+
 ---------
 
 ## Setup / Usage
@@ -200,7 +202,7 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
         [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
         public FileResult GetDownloadSimple(int companyId, string name)
         {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die CompanyId: {0} mit dem Namen: {1}", companyId, name));
+            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download fÃ¼r die CompanyId: {0} mit dem Namen: {1}", companyId, name));
             return File(fileContent, "text/text", "TestDL.txt");
         }
     }
