@@ -38,7 +38,14 @@ namespace ProxyGenerator.Manager
                 var webProjectPath = Factory.FileHelper().GetParentDirectory(fullPathToTheWebProject, webprojectName);
                 foreach (string dll in Directory.GetFiles(webProjectPath, "*.dll", SearchOption.AllDirectories))
                 {
-                    _allAssemblies.Add(Assembly.LoadFile(dll));
+                          try
+                    {
+                        _allAssemblies.Add(Assembly.LoadFile(dll));
+                    }
+                    catch (Exception exception)
+                    {   
+                        Debug.WriteLine($"Fehler beim Laden der Assembly '{dll}' \n {exception}");
+                    }
                 }
             }
 
