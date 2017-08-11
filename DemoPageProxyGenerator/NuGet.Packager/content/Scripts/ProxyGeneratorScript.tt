@@ -15,6 +15,7 @@
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ assembly name="EnvDTE" #>
 
+
 <# // "Hack" to prevent Default Template outputfile "ProxyGenerator.cs" - creates a warning #> 
 <#@ output extension="\\" #>
 <#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
@@ -252,8 +253,10 @@
 //Please don't change any code it will be overwritten next time the template is executed.
 //Created on <#= DateTime.Now.Date.ToShortDateString() #> time <#= DateTime.Now.ToShortTimeString()  #> from <#= Environment.UserName #>.
 
- <# //Write the Current Proxyfile Content #>
+ <# //Write the Current Proxyfile Content and if you need the log content, then add true to the GetCompleteLogAsString - then on each outputfile the logcontent is appended. #>
  <#=entry.FileContent #>
+
+ <#=generator.Factory.GetLogManager().GetCompleteLogAsString(false) #>
 
 <#		proxyManager.EndBlock(); 
 	//foreach Closed

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>TypeScriptAngularJsProxyGenerator</id>
-    <version>2.0.0</version>
+    <version>2.0.2</version>
     <title>TypeScript/JavaScript (Angular 2 / AngularJs or jQuery) ProxyGenerator Template for Controllers/WebApi</title>
     <authors>SquadWuschel</authors>
     <owners>SquadWuschel</owners>
@@ -17,19 +17,21 @@
     </description>
     <summary>TypeScript or JavaScript ProxyGenerator for ASP.NET MVC. To create AngularJs or jQuery proxies with T4 template for your .NET Controllers or WebApi Controller</summary>
     <releaseNotes>
-Version 1.0.2: Added support for alternative proxy creation path
-Version 1.0.3: ProxyGeneratorScript.tt Script moved to the "Scripts" Folder
-Version 1.0.4: Added FileUpload Support in all ProxyTypes with .NET Type "HttpPostedFileBase"
-Version 1.0.5: Removed the Dependency "Microsoft.VisualStudio.TextTemplating" for testing
-Version 1.0.6: Bugfix for COM Exception in ProxyFileManager
-Version 1.0.7: Removed unused NuGet Packages from ProxyGenerator.dll - minimum Requirement ist .NET 4.0 Project now.
-Version 1.0.8: Bugfix alternative filepath for proxycreation
-Version 1.0.10: BugFix jQuery "POST" data attribute added for post calls
-Version 1.0.11: Bugfix jQuery "POST" added "JSON.stringify(data)", added support to store the proxysettings in the web.config (ReadMe Updated)
-Version 1.1.0: Added Support for Generics
-Version 1.2.0: Added Support to create "window.location.href" function calls
-Version 1.2.1: Added Support to specify the outputpath for every ProxyType
-Version 2.0.0: Added Angular 2 Support with new Attribute
+      Version 1.0.2: Added support for alternative proxy creation path
+      Version 1.0.3: ProxyGeneratorScript.tt Script moved to the "Scripts" Folder
+      Version 1.0.4: Added FileUpload Support in all ProxyTypes with .NET Type "HttpPostedFileBase"
+      Version 1.0.5: Removed the Dependency "Microsoft.VisualStudio.TextTemplating" for testing
+      Version 1.0.6: Bugfix for COM Exception in ProxyFileManager
+      Version 1.0.7: Removed unused NuGet Packages from ProxyGenerator.dll - minimum Requirement ist .NET 4.0 Project now.
+      Version 1.0.8: Bugfix alternative filepath for proxycreation
+      Version 1.0.10: BugFix jQuery "POST" data attribute added for post calls
+      Version 1.0.11: Bugfix jQuery "POST" added "JSON.stringify(data)", added support to store the proxysettings in the web.config (ReadMe Updated)
+      Version 1.1.0: Added Support for Generics
+      Version 1.2.0: Added Support to create "window.location.href" function calls
+      Version 1.2.1: Added Support to specify the outputpath for every ProxyType
+      Version 2.0.0: Added Angular 2 Support with new Attribute
+      Version 2.0.1: Assembly Loading Fix
+      Version 2.0.2: Logging Possibility implemented for FileloadExceptions from the Assemblies
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>
