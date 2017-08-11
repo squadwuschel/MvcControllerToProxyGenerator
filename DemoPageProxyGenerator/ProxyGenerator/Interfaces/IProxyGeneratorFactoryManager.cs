@@ -1,5 +1,6 @@
 using ProxyGenerator.Builder;
 using ProxyGenerator.Container;
+using ProxyGenerator.Manager;
 
 namespace ProxyGenerator.Interfaces
 {
@@ -20,5 +21,6 @@ namespace ProxyGenerator.Interfaces
         IProxyBuilder CreateJQueryJsProxyBuilder();
         ISettingsManager CreateSettingsManager();
         IProxyBuilder CreateAngular2TsProxyBuilder();
+        LogManager GetLogManager();
     }
 }

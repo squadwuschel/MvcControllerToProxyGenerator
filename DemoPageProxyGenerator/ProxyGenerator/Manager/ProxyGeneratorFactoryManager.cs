@@ -8,6 +8,7 @@ namespace ProxyGenerator.Manager
     public class ProxyGeneratorFactoryManager : IProxyGeneratorFactoryManager
     {
         #region Member
+        private LogManager LogManager { get; set; }
         private ProxySettings ProxySettings { get; set; }
         #endregion
 
@@ -15,6 +16,7 @@ namespace ProxyGenerator.Manager
         public ProxyGeneratorFactoryManager(ProxySettings proxySettings)
         {
             ProxySettings = proxySettings;
+            LogManager = new LogManager();
         }
         #endregion
 
@@ -69,6 +71,11 @@ namespace ProxyGenerator.Manager
         public ProxySettings GetProxySettings()
         {
             return ProxySettings;
+        }
+
+        public LogManager GetLogManager()
+        {
+            return LogManager;
         }
         #endregion
 

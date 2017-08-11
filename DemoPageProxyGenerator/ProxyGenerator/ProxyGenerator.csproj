@@ -98,6 +98,8 @@
     <Compile Include="Interfaces\IMethodManager.cs" />
     <Compile Include="Interfaces\IProxyGeneratorFactoryManager.cs" />
     <Compile Include="Interfaces\ISettingsManager.cs" />
+    <Compile Include="Interfaces\ILogManager.cs" />
+    <Compile Include="Manager\LogManager.cs" />
     <Compile Include="Manager\MethodManager.cs" />
     <Compile Include="Manager\MethodParameterManager.cs" />
     <Compile Include="Manager\ProxyGeneratorFactoryManager.cs" />
