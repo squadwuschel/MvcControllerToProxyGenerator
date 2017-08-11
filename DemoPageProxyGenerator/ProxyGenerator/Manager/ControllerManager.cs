@@ -76,7 +76,18 @@ namespace ProxyGenerator.Manager
                 }
                 catch(Exception exception)
                 {
-                    Trace.WriteLine("Fehler beim Auslesen der Assemblies: " + exception.Message);
+                    Factory.GetLogManager().AddMessage($"Fehler beim Laden der Assemblyinformationen", exception.ToString());
+
+                    if (exception is System.Reflection.ReflectionTypeLoadException)
+                    {
+                        var typeLoadException = exception as ReflectionTypeLoadException;
+                        var loaderExceptions = typeLoadException.LoaderExceptions;
+
+                        loaderExceptions?.ToList().ForEach(p =>
+                        {
+                            Factory.GetLogManager().AddMessage(p.Message, string.Empty);
+                        });
+                    }
                 }
             }
 

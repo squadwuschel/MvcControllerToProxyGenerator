@@ -73,7 +73,7 @@ namespace ProxyGenerator.Manager
             return ProxySettings;
         }
 
-        public LogManager GetLogManager()
+        public ILogManager GetLogManager()
         {
             return LogManager;
         }

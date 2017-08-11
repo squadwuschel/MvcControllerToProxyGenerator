@@ -1,8 +1,8 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 22.10.2016 time 18:46 from squad.
+//Created on 11.08.2017 time 13:25 from jrenatus.
 
-import {Injectable} from '@angular/core';
+  import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/observable';
 import 'rxjs/add/operator/map';
@@ -114,4 +114,6 @@ constructor(private http: Http) {  }
 
 
  }
+
+ 
 

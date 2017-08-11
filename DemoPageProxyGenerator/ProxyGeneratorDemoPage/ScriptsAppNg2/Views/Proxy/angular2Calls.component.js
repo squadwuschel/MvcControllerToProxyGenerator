@@ -8,7 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
 var proxy_service_1 = require("../../Services/proxy.service");
 var Angular2Calls = (function () {
     function Angular2Calls(proxyService) {
@@ -116,19 +117,19 @@ var Angular2Calls = (function () {
             console.log(errorResult);
         });
     };
-    __decorate([
-        core_1.ViewChild("fileInput"), 
-        __metadata('design:type', Object)
-    ], Angular2Calls.prototype, "fileInput", void 0);
-    Angular2Calls = __decorate([
-        core_1.Component({
-            selector: 'angular-2-calls',
-            templateUrl: "ScriptsAppNg2/Views/Proxy/angular2Calls.component.html",
-            providers: [proxy_service_1.Proxyservice]
-        }), 
-        __metadata('design:paramtypes', [proxy_service_1.Proxyservice])
-    ], Angular2Calls);
     return Angular2Calls;
 }());
+__decorate([
+    core_1.ViewChild("fileInput"),
+    __metadata("design:type", Object)
+], Angular2Calls.prototype, "fileInput", void 0);
+Angular2Calls = __decorate([
+    core_1.Component({
+        selector: 'angular-2-calls',
+        templateUrl: "ScriptsAppNg2/Views/Proxy/angular2Calls.component.html",
+        providers: [proxy_service_1.Proxyservice]
+    }),
+    __metadata("design:paramtypes", [proxy_service_1.Proxyservice])
+], Angular2Calls);
 exports.Angular2Calls = Angular2Calls;
 //# sourceMappingURL=angular2Calls.component.js.map

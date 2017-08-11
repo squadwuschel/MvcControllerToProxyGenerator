@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using ProxyGenerator.Interfaces;
 
@@ -45,7 +46,18 @@ namespace ProxyGenerator.Manager
                     }
                     catch (Exception exception)
                     {   
-                        Debug.WriteLine($"Fehler beim Laden der Assembly '{dll}' \n {exception}");
+                        Factory.GetLogManager().AddMessage($"Fehler beim Laden der Assembly '{dll}'", exception.ToString());
+
+                        if (exception is System.Reflection.ReflectionTypeLoadException)
+                        {
+                            var typeLoadException = exception as ReflectionTypeLoadException;
+                            var loaderExceptions = typeLoadException.LoaderExceptions;
+
+                            loaderExceptions?.ToList().ForEach(p =>
+                            {
+                                Factory.GetLogManager().AddMessage(p.Message, string.Empty);
+                            });
+                        }
                     }
                 }
             }

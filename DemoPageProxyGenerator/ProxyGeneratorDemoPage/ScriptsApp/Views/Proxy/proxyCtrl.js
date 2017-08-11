@@ -178,14 +178,14 @@ var App;
                     enumerable: true,
                     configurable: true
                 });
-                ProxyCtrl.$inject = [
-                    App.Services.ProxyPService.module.name,
-                    App.Services.HomePService.module.name,
-                    "homeAngularJsSrv",
-                    "proxyAngularJsSrv",
-                ];
                 return ProxyCtrl;
             }());
+            ProxyCtrl.$inject = [
+                App.Services.ProxyPService.module.name,
+                App.Services.HomePService.module.name,
+                "homeAngularJsSrv",
+                "proxyAngularJsSrv",
+            ];
             Proxy.ProxyCtrl = ProxyCtrl;
         })(Proxy = Views.Proxy || (Views.Proxy = {}));
     })(Views = App.Views || (App.Views = {}));
