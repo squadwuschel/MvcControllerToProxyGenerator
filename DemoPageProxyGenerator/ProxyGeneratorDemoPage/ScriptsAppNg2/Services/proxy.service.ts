@@ -1,6 +1,8 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 11.08.2017 time 13:25 from jrenatus.
+//Created on 12.09.2017 time 22:24 from squad.
+
+ 
 
   import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
@@ -114,6 +116,4 @@ constructor(private http: Http) {  }
 
 
  }
-
- 
 

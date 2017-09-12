@@ -1,6 +1,6 @@
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 11.08.2017 time 13:21 from jrenatus.
+//Created on 12.09.2017 time 21:57 from squad.
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -11,10 +11,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-require("rxjs/add/operator/map");
+var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
 var Proxyservice = (function () {
     function Proxyservice(http) {
         this.http = http;
@@ -95,11 +94,11 @@ var Proxyservice = (function () {
     Proxyservice.prototype.errorStringReturnType = function (boolValue) {
         return this.http.get('Proxy/ErrorStringReturnType' + '?boolValue=' + boolValue).map(function (response) { return response.json(); });
     };
+    Proxyservice = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], Proxyservice);
     return Proxyservice;
 }());
-Proxyservice = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], Proxyservice);
 exports.Proxyservice = Proxyservice;
 //# sourceMappingURL=proxy.service.js.map

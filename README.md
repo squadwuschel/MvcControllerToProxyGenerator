@@ -75,6 +75,7 @@ You can only add the settings you need to your web.cofig, the remaining settings
        <add key="ProxyGenerator_ProxyFileOutputPath" value="ScriptsApp\Services\" />
        <add key="ProxyGenerator_LowerFirstCharInFunctionName" value="true" />
        <add key="ProxyGenerator_TypeLiteInterfacePrefix" value="I" />
+	   <add key="ProxyGenerator_ServicePrefixUrl" value="" />
        <!-- Tell the ProxyGenerator which suffix the generated controllername will have -->
        <add key="ProxyGenerator_TemplateSuffix_AngularJs" value="AngularJsSrv" />
        <add key="ProxyGenerator_TemplateSuffix_AngularTs" value="PService" />
@@ -89,6 +90,16 @@ You can only add the settings you need to your web.cofig, the remaining settings
 	   <add key="ProxyGenerator_OutputPath_Angular2TsModule" value="ScriptsAppNg2\Services\" />
        <!-- Proxy Generator Settings - END -->
     </appSettings>
+
+#### "ServicePrefixUrl" in Detail
+
+When you need to add a prefix Url before each Service Call then you need to use this Option and fill in e.g. "api" or "api/test".
+For the "api" example the T4 Proxy would create a service call with the "api" before the original address like
+
+		 public loadTsCallByParams(name: string,vorname: string,alter: number) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
+				return this.http.get('api/Proxy/LoadData').map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+		 } 
+
 
 ## How to tell the T4 template to create a proxy 
 The T4 template only creates proxies for controller functions which are decorated with the right Attribute.
@@ -834,6 +845,18 @@ this will create the following function in TypeScript
                               type: "POST" })
                      .then((result: ProxyGeneratorDemoPage.Models.Person.Models.IPerson): ProxyGeneratorDemoPage.Models.Person.Models.IPerson =>{return result;});
     } 
+
+## Debugging Output
+When you need some logoutput, then you only need to change the following line in the "ProxyGenerator.tt" from
+
+      <#=generator.Factory.GetLogManager().GetCompleteLogAsString(false) #>
+
+to
+
+      <#=generator.Factory.GetLogManager().GetCompleteLogAsString(true) #>
+
+the "true" will generate all the errors directly into each proxy file as comment at the beginning of each Proxy. When you have multiple proxies the error message is
+generated in every file and its in every proxy the SAME MESSAGE.
 
 ## Known Errormessages
 ### 1. Method/Function overload not supported

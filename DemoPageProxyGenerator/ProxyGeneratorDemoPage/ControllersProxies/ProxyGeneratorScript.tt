@@ -38,8 +38,9 @@
 	//Default TypeLiteSetting is Interfacename == Classname, but I use a modifier that adds the "I" before the Classname
 	//In TypeLite: .WithFormatter((type, f) => "I" + ((TypeLite.TsModels.TsClass)type).Name)
     settings.TypeLiteInterfacePrefix = "I";
-
-
+	//When you need to Prefix all your Service Calls with e.g. "api" before each Service Call then you need to use this Setting
+    settings.ServicePrefixUrl = "";
+	
 //###########################################################################################################################################################################################
 //#############################################################-- Tempalte Definition START --###############################################################################################
 //###########################################################################################################################################################################################
@@ -253,10 +254,11 @@
 //Please don't change any code it will be overwritten next time the template is executed.
 //Created on <#= DateTime.Now.Date.ToShortDateString() #> time <#= DateTime.Now.ToShortTimeString()  #> from <#= Environment.UserName #>.
 
+ <# //You can Enable Logoutput with "GetCompleteLogAsString(true)", then you have the complete log inside your created Proxy files. #>
+<#=generator.Factory.GetLogManager().GetCompleteLogAsString(false) #>
+
  <# //Write the Current Proxyfile Content and if you need the log content, then add true to the GetCompleteLogAsString - then on each outputfile the logcontent is appended. #>
  <#=entry.FileContent #>
-
- <#=generator.Factory.GetLogManager().GetCompleteLogAsString(false) #>
 
 <#		proxyManager.EndBlock(); 
 	//foreach Closed

@@ -32,7 +32,7 @@ namespace ProxyGenerator.Builder.Helper
             //Wir bauen hier aber nur den Link Teil zusammen: 'Auftragsabrechnung/ExportData' + '?allEntries=' + encodeURIComponent(allEntries) + '&' + jQuery.param($scope.FilterData);
 
             StringBuilder builder = new StringBuilder();
-            builder.Append(string.Format("'{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(methodInfo.Controller), methodInfo.MethodInfo.Name));
+            builder.Append(string.Format("'{0}{1}/{2}'", GetServicePrefixPath(), ProxyBuilderHelper.GetClearControllerName(methodInfo.Controller), methodInfo.MethodInfo.Name));
             builder.Append(ProxyBuilderHelper.BuildUrlParameterId(methodInfo.ProxyMethodParameterInfos));
             //Da wir die Komplexen Parameter nicht als Post mit übergeben können bei einem Link, müssen wird diese entsprechend in Url Parametern abbilden.
             builder.Append(ProxyBuilderHelper.BuildComplexUrlParameter(methodInfo.ProxyMethodParameterInfos));
@@ -89,7 +89,7 @@ namespace ProxyGenerator.Builder.Helper
         private string BuildPostAngular(ProxyMethodInfos infos, ProxyBuilder proxyBuilder)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(string.Format("post('{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
+            builder.Append(string.Format("post('{0}{1}/{2}'", GetServicePrefixPath(), ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
 
             builder.Append(ProxyBuilderHelper.BuildUrlParameterId(infos.ProxyMethodParameterInfos));
             builder.Append(ProxyBuilderHelper.BuildUrlParameter(infos.ProxyMethodParameterInfos));
@@ -133,7 +133,7 @@ namespace ProxyGenerator.Builder.Helper
         private string BuildPostjQuery(ProxyMethodInfos infos)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(string.Format("ajax( {{ url : '{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
+            builder.Append(string.Format("ajax( {{ url : '{0}{1}/{2}'", GetServicePrefixPath(), ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
 
             builder.Append(ProxyBuilderHelper.BuildUrlParameterId(infos.ProxyMethodParameterInfos));
             builder.Append(ProxyBuilderHelper.BuildUrlParameter(infos.ProxyMethodParameterInfos));
@@ -170,11 +170,29 @@ namespace ProxyGenerator.Builder.Helper
         {
             StringBuilder builder = new StringBuilder();
             //Keine Komplexen Typen, einfacher Get Aufruf.
-            builder.Append(string.Format("get('{0}/{1}'", ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
+            builder.Append(string.Format("get('{0}{1}/{2}'", GetServicePrefixPath(), ProxyBuilderHelper.GetClearControllerName(infos.Controller), infos.MethodInfo.Name));
             builder.Append(ProxyBuilderHelper.BuildUrlParameterId(infos.ProxyMethodParameterInfos));
             builder.Append(ProxyBuilderHelper.BuildUrlParameter(infos.ProxyMethodParameterInfos));
             builder.Append(")");
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Man kann in der Web.Config einen PrefixPath für die Service Calls
+        /// </summary>
+        /// <returns></returns>
+        private string GetServicePrefixPath()
+        {
+            var prefix = this.Factory.GetProxySettings().ServicePrefixUrl;
+            if (!string.IsNullOrEmpty(prefix))
+            {
+                //An der Url darf am Anfang und Ende kein "/" sein aus "/api/" => "api" aber aus "/api/test" => "api/test"
+                var normalizedPrefix = prefix.Trim('/');
+                //Da wir aber das ganze zusammenbauen als Pfad müssen wir and Ende immer einen "/" setzen, damit können wir den Prefix vor alle bekannten Adressen des Proxygenerators setzen.
+                return string.Format("{0}/", normalizedPrefix);
+            }
+
+            return string.Empty;
         }
         #endregion
     }

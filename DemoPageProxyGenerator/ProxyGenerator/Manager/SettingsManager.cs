@@ -49,6 +49,11 @@ namespace ProxyGenerator.Manager
                     ProxySettings.TypeLiteInterfacePrefix = allSettings["ProxyGenerator_TypeLiteInterfacePrefix"].Value;
                 }
 
+                if (allSettings.AllKeys.Contains("ProxyGenerator_ServicePrefixUrl"))
+                {
+                    ProxySettings.ServicePrefixUrl = allSettings["ProxyGenerator_ServicePrefixUrl"].Value;
+                }
+
                 //SUFFIX Settings
                 //Das Module Template wird als "Standard" Template verwendet.
 

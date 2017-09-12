@@ -40,12 +40,12 @@ namespace ProxyGenerator.Manager
                 var webProjectPath = Factory.FileHelper().GetParentDirectory(fullPathToTheWebProject, webprojectName);
                 foreach (string dll in Directory.GetFiles(webProjectPath, "*.dll", SearchOption.AllDirectories))
                 {
-                          try
+                    try
                     {
                         _allAssemblies.Add(Assembly.LoadFile(dll));
                     }
                     catch (Exception exception)
-                    {   
+                    {
                         Factory.GetLogManager().AddMessage($"Fehler beim Laden der Assembly '{dll}'", exception.ToString());
 
                         if (exception is System.Reflection.ReflectionTypeLoadException)

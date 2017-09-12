@@ -39,6 +39,11 @@ namespace ProxyGenerator.Container
         public string TypeLiteInterfacePrefix { get; set; }
 
         /// <summary>
+        /// Der ProxyPfad der vor jeden Service Call gestellt wird in der URL, z.B. "api"
+        /// </summary>
+        public string ServicePrefixUrl { get; set; }
+
+        /// <summary>
         /// Pfad zur web.config
         /// </summary>
         public string WebConfigPath { get; set; }
@@ -52,6 +57,7 @@ namespace ProxyGenerator.Container
             LowerFirstCharInFunctionName = true;
             FullPathToTheWebProject = String.Empty;
             WebConfigPath = string.Empty;
+            ServicePrefixUrl = string.Empty;
         }
         #endregion
     }
