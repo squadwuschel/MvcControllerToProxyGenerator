@@ -9,7 +9,7 @@ Or install the NuGet package with the package manager console:
 
 Be carefull on updating the package, save your custom settings first, because updating this package will replace your settings for ProxyGenerator or use the **web.config** to store your Settings.
 
-For questions or problems please open a GitHub Issue.
+For questions or problems please open a GitHub Issue!
 
 ---------
 
