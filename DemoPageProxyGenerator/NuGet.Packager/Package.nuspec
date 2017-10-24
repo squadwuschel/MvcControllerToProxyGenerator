@@ -32,7 +32,7 @@
       Version 2.0.0: Added Angular 2 Support with new Attribute
       Version 2.0.1: Assembly Loading Fix
       Version 2.0.2: Logging Possibility implemented for FileloadExceptions from the Assemblies
-      Version 2.1.0: Loading 64Bit Urls with T4 now Possible
+      Version 2.1.0: Loading 64Bit DLLs with T4 now Possible
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>
