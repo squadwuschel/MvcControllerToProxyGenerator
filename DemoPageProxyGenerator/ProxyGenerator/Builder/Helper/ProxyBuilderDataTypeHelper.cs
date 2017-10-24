@@ -100,7 +100,10 @@ namespace ProxyGenerator.Builder.Helper
             }
 
             //Für FileUpload muss hier Any als Type gesetzt werden
-            if (type == typeof (HttpPostedFileBase))
+            //Durch das "manuelle" Nachladen der Abhängigkeiten, kommt es zu Problemen, das der GetHashecode
+            //nicht mehr übereinstimmt, obwohl es sich um den gleichen Typen handelt, daher hier der Vergleich auf FullName
+            //Bei Systemtypen wie Int, String, Enumeration, ... scheint es die Probleme nicht zu geben.
+            if (type.FullName == typeof (HttpPostedFileBase).FullName)
             {
                 return "any";
             }

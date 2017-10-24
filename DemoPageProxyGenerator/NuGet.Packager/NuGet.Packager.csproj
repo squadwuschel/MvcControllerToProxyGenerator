@@ -64,6 +64,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
     <Content Include="lib\ProxyGenerator.dll" />
+    <Content Include="lib\ProxyGenerator.pdb" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

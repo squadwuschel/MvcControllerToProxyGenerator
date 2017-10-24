@@ -84,8 +84,8 @@ namespace ProxyGenerator.Builder.Helper
         /// <param name="method">Die Methode bei der das Attribut gesucht werden soll</param>
         public bool HasAttribute(Type attribute, MethodInfo method)
         {
-            var found = from attr in method.GetCustomAttributes(true) where attr.GetType() == attribute select attr;
-            return found.Any();
+            var found = method.GetCustomAttributesData().MyHasCustomAttributesData(attribute);
+            return found;
         }
 
         /// <summary>

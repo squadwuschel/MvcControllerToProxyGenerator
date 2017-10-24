@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using ProxyGenerator.Builder.Helper;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.ProxyTypeAttributes;
@@ -48,6 +50,8 @@ namespace ProxyGenerator.Manager
             return proxyControllerInfos;
         }
 
+   
+
         /// <summary>
         /// Alle Controller ermitteln die für das Projekt befunden werden können.
         /// </summary>
@@ -63,7 +67,10 @@ namespace ProxyGenerator.Manager
                 try
                 {
                     //Nur die Assemblies heraussuchen in denen unser BasisAttribut für die Proxy Erstellung gesetzt wurde.
-                    var types = assembly.GetTypes().Where(type  => type.GetMethods().Any(p => p.GetCustomAttributes(typeof (CreateProxyBaseAttribute), true).Any())).ToList();
+                    //Da wir kein "Assembly.Load" mehr verwenden, sondern "Assembly.ReflectionOnlyLoadFrom" können wir nicht mehr "GetCustomAttributes" verwenden,
+                    //sondern müssen "GetCustomAttributesData" verwenden um die passenden Daten zu laden.
+                    var types = assembly.GetTypes().Where(type  => type.GetMethods().Any(p => p.GetCustomAttributesData().MyHasCustomAttributesData(typeof(CreateProxyBaseAttribute)))).ToList();
+                    //var types = assembly.GetTypes().Where(type  => type.GetMethods().Any(p => p.GetCustomAttributesData().Any(atr => ReflectionHelper.GetAllBaseTypes(atr.Constructor.DeclaringType).Select(name => name.FullName).Contains(typeof(CreateProxyBaseAttribute).FullName)))).ToList();
 
                     foreach (Type type in types)
                     {
@@ -94,13 +101,19 @@ namespace ProxyGenerator.Manager
             return allController;
         }
 
+       
         /// <summary>
         /// Die Liste an Controllern ermitteln in denen das übergebene ProxyTypeAttribute gesetzt wurde.
         /// </summary>
         public List<Type> GetProxyControllerByProxyTypeAttribute(Type proxyTypeAttribute, List<Type> allController)
         {
-            return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(true).Any(attr=> attr.GetType() == proxyTypeAttribute))).ToList();
+            return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributesData().MyHasCustomAttributesData(proxyTypeAttribute))).ToList();
         }
+
+        //public List<Type> GetProxyControllerByProxyTypeAttribute(Type proxyTypeAttribute, List<Type> allController)
+        //{
+        //    return allController.Where(type => type.GetMethods().Any(p => p.GetCustomAttributes(true).Any(attr => attr.GetType() == proxyTypeAttribute))).ToList();
+        //}
         #endregion
     }
 }

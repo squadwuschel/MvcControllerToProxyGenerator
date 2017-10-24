@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ProxyGenerator.Builder.Helper;
 using ProxyGenerator.Container;
 using ProxyGenerator.Interfaces;
 using ProxyGenerator.ProxyTypeAttributes;
@@ -30,7 +31,8 @@ namespace ProxyGenerator.Manager
             List<ProxyMethodInfos> proxyMethodInfos = new List<ProxyMethodInfos>();
 
             //Alle Methoden des Controllers durchgehen und nur die Methoden ermitteln in denen auch das übergebene ProxyAttribut enthalten ist.
-            foreach (MethodInfo methodInfo in controller.GetMethods().Where(p => p.GetCustomAttributes(true).Any(attr => attr.GetType() == proxyTypeAttribute)))
+            //foreach (MethodInfo methodInfo in controller.GetMethods().Where(p => p.GetCustomAttributes(true).Any(attr => attr.GetType() == proxyTypeAttribute)))
+            foreach (MethodInfo methodInfo in controller.GetMethods().Where(p => p.GetCustomAttributesData().MyHasCustomAttributesData(proxyTypeAttribute)))
             {
                 if (proxyMethodInfos.Any(p => p.MethodInfo.Name == methodInfo.Name))
                 {
@@ -70,33 +72,63 @@ namespace ProxyGenerator.Manager
         /// </summary>
         public Type GetProxyReturnType(MethodInfo methodInfo)
         {
-            CreateProxyBaseAttribute attr = methodInfo.GetCustomAttributes(typeof(CreateProxyBaseAttribute), false).FirstOrDefault() as CreateProxyBaseAttribute;
-            if (attr != null)
+            var attr = methodInfo.GetCustomAttributesData().MyGetCustomAttributesData(typeof(CreateProxyBaseAttribute), "ReturnType");
+            if (attr != null && attr.Value.TypedValue.Value != null)
             {
                 //Es ist aktuell sehr umständlich hier Interfaces zu verwenden.
-                if (attr.ReturnType != null && attr.ReturnType.IsInterface)
+                if (attr.Value.TypedValue.Value.GetType().IsInterface)
                 {
-                    throw new NotSupportedException(string.Format("Please don't use Interfaces as 'ReturnType' for 'CreateProxy': '{0}' (its not supported)", attr.ReturnType.Name));
+                    throw new NotSupportedException(string.Format("Please don't use Interfaces as 'ReturnType' for 'CreateProxy': '{0}' (its not supported)", attr.Value.TypedValue.ArgumentType.Name));
                 }
-                return attr.ReturnType;
+
+                return (Type)attr.Value.TypedValue.Value;
             }
 
             return null;
         }
+
+        //public Type GetProxyReturnType(MethodInfo methodInfo)
+        //{
+        //    CreateProxyBaseAttribute attr = methodInfo.GetCustomAttributes(typeof(CreateProxyBaseAttribute), false).FirstOrDefault() as CreateProxyBaseAttribute;
+        //    if (attr != null)
+        //    {
+        //        //Es ist aktuell sehr umständlich hier Interfaces zu verwenden.
+        //        if (attr.ReturnType != null && attr.ReturnType.IsInterface)
+        //        {
+        //            throw new NotSupportedException(string.Format("Please don't use Interfaces as 'ReturnType' for 'CreateProxy': '{0}' (its not supported)", attr.ReturnType.Name));
+        //        }
+        //        return attr.ReturnType;
+        //    }
+
+        //    return null;
+        //}
+
 
         /// <summary>
         /// Den wert aus "CreateWindowLocationHrefLink" im Attribut ermitteln und den entsprechend gesetzten Wert zurückgeben.
         /// </summary>
         public bool GetCreateWindowLocationHrefLink(MethodInfo methodInfo)
         {
-            CreateProxyBaseAttribute attr = methodInfo.GetCustomAttributes(typeof(CreateProxyBaseAttribute), false).FirstOrDefault() as CreateProxyBaseAttribute;
-            if (attr != null)
+            var attr = methodInfo.GetCustomAttributesData().MyGetCustomAttributesData(typeof(CreateProxyBaseAttribute), "CreateWindowLocationHrefLink");
+            if (attr != null && attr.Value.TypedValue.Value != null)
             {
-                return attr.CreateWindowLocationHrefLink;
+                return (bool)attr.Value.TypedValue.Value;
             }
 
             return false;
         }
+
+
+        //public bool GetCreateWindowLocationHrefLink(MethodInfo methodInfo)
+        //{
+        //    CreateProxyBaseAttribute attr = methodInfo.GetCustomAttributes(typeof(CreateProxyBaseAttribute), false).FirstOrDefault() as CreateProxyBaseAttribute;
+        //    if (attr != null)
+        //    {
+        //        return attr.CreateWindowLocationHrefLink;
+        //    }
+
+        //    return false;
+        //}
         #endregion
     }
 }

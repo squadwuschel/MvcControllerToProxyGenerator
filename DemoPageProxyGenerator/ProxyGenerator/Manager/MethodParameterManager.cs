@@ -37,7 +37,7 @@ namespace ProxyGenerator.Manager
                         IsComplexeType = false,
                         ParameterName = parameterInfo.Name,
                         ParameterInfo = parameterInfo,
-                        IsString = type == typeof(String),
+                        IsString = type.FullName == typeof(String).FullName,
                         IsFileUpload = false
                     });
                 }
@@ -50,7 +50,7 @@ namespace ProxyGenerator.Manager
                         ParameterInfo = parameterInfo,
                         IsString = false,
                         //Prüfen ob es sich um einen FileUpload handelt - ist immer Complex Type
-                        IsFileUpload = typeof(HttpPostedFileBase) == type
+                        IsFileUpload = typeof(HttpPostedFileBase).FullName == type.FullName
                     });
                 }
             }
