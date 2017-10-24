@@ -11,6 +11,8 @@ Be carefull on updating the package, save your custom settings first, because up
 
 For questions or problems please open a GitHub Issue!
 
+Improvements: Now you can also Load 64Bit DLLs with T4.
+
 ---------
 
 ## Setup / Usage
