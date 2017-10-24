@@ -101,9 +101,11 @@ namespace ProxyGenerator.Manager
                             var existingAssembly = Assembly.ReflectionOnlyLoadFrom(pathWithDll);
                             _loadedAssemblies.Add(existingAssembly);
                         }
+                        return _loadedAssemblies.FirstOrDefault(p => p.FullName == assemblyFromTxt.FullName);
                     }
                 }
-                else if (_loadedAssemblies.All(p => p.FullName != assemblyFromTxt.FullName))
+
+                if (_loadedAssemblies.All(p => p.FullName != assemblyFromTxt.FullName))
                 {
                     //Wenn es sich um eine Assembly Handelt, die wir nicht im lokalen "bin" Verzeichnis finden konnten
                     //dann soll die Datei im GAC gesucht werden.
