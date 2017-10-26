@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>TypeScriptAngularJsProxyGenerator</id>
-    <version>2.1.1</version>
+    <version>2.1.2</version>
     <title>TypeScript/JavaScript (Angular 2 / AngularJs or jQuery) ProxyGenerator Template for Controllers/WebApi</title>
     <authors>SquadWuschel</authors>
     <owners>SquadWuschel</owners>
@@ -34,6 +34,7 @@
       Version 2.0.2: Logging Possibility implemented for FileloadExceptions from the Assemblies
       Version 2.1.0: Loading 64Bit DLLs with T4 now Possible
       Version 2.1.1: Loading 64Bit DLLs with T4 now Possible - Bugfix
+      Version 2.1.2: Fix Loading Assemblies
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>

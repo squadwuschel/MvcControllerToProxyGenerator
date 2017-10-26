@@ -96,16 +96,16 @@ namespace ProxyGenerator.Manager
                     if (File.Exists(pathWithDll))
                     {
                         //Aus Performancegründen die Dateien aus dem 
-                        if (_loadedAssemblies.All(p => p.FullName != assemblyFromTxt.FullName))
+                        if (_loadedAssemblies.All(p => p.GetName().Name != assemblyFromTxt.Name))
                         {
                             var existingAssembly = Assembly.ReflectionOnlyLoadFrom(pathWithDll);
                             _loadedAssemblies.Add(existingAssembly);
                         }
-                        return _loadedAssemblies.FirstOrDefault(p => p.FullName == assemblyFromTxt.FullName);
+                        return _loadedAssemblies.First(p => p.GetName().Name == assemblyFromTxt.Name);
                     }
                 }
 
-                if (_loadedAssemblies.All(p => p.FullName != assemblyFromTxt.FullName))
+                if (_loadedAssemblies.All(p => p.GetName().Name != assemblyFromTxt.Name))
                 {
                     //Wenn es sich um eine Assembly Handelt, die wir nicht im lokalen "bin" Verzeichnis finden konnten
                     //dann soll die Datei im GAC gesucht werden.
@@ -113,7 +113,7 @@ namespace ProxyGenerator.Manager
                     _loadedAssemblies.Add(Assembly.ReflectionOnlyLoad(name));
                 }
 
-                return _loadedAssemblies.FirstOrDefault(p => p.FullName == assemblyFromTxt.FullName);
+                return _loadedAssemblies.First(p => p.GetName().Name == assemblyFromTxt.Name);
             }
             catch (Exception exception)
             {
