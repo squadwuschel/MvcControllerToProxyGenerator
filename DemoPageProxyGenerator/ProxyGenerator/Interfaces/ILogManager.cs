@@ -4,5 +4,6 @@
     {
         void AddMessage(string name, string message);
         string GetCompleteLogAsString(bool writelog);
+        bool WriteLog { get; set; }
     }
 }

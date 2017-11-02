@@ -11,6 +11,10 @@ namespace ProxyGenerator.Manager
     {
         #region Member
         private List<LogEntry> LogEntries { get; set; } = new List<LogEntry>();
+
+        public static string LogfilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "proxyGeneratorLog.txt");
+
+        public bool WriteLog { get; set; } = false;
         #endregion
 
         #region Public functions
@@ -21,13 +25,23 @@ namespace ProxyGenerator.Manager
 
         public string GetCompleteLogAsString(bool writelog)
         {
-            if (writelog)
+            WriteLog = writelog;
+
+            if (WriteLog)
             {
                 var log = string.Join("\n\n", LogEntries.Select(p => $"{p.Name}: \n {p.Message}"));
                 return $"/** {log} **/";
             }
 
             return String.Empty;
+        }
+
+        public static void Log(bool writeLog, params string[] txt)
+        {
+            if (writeLog)
+            {
+                System.IO.File.AppendAllText(LogfilePath, string.Join(": ", txt) + Environment.NewLine);
+            }
         }
         #endregion
     }
