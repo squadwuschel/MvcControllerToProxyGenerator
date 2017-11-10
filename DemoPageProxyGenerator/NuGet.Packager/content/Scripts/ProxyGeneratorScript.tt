@@ -15,7 +15,6 @@
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ assembly name="EnvDTE" #>
 
-
 <# // "Hack" to prevent Default Template outputfile "ProxyGenerator.cs" - creates a warning #> 
 <#@ output extension="\\" #>
 <#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
@@ -53,12 +52,11 @@
 // 3. #ServiceFunctions# => replace with all implemented Service Functions (the other TypeScript Templates are used to create the Service Calls like: "angular2TsObservableCallWithReturnType" or "angular2TsObservableCallWithNoReturnType")
     var angular2TsModule = new TemplateEntry() { TemplateType = TemplateTypes.Angular2TsModule, TemplateSuffix = ".service"};
 	angular2TsModule.Template = "import {Injectable} from '@angular/core';\r\n"
-								+ "import {Http, Response} from '@angular/http';\r\n"
+								+ "import {HttpClient} from '@angular/common/http';\r\n"
 								+ "import {Observable} from 'rxjs/observable';\r\n"
-								+ "import 'rxjs/add/operator/map';\r\n\r\n"
 								+ "@Injectable()\r\n"
                                 + "export class #ServiceName# { \r\n\r\n"
-								+ "constructor(private http: Http) {  }\r\n\r\n"
+								+ "constructor(private http: HttpClient) {  }\r\n\r\n"
 	                            + " #ServiceFunctions#"
 	                            + "\r\n }";
 	settings.Templates.Add(angular2TsModule);
@@ -71,12 +69,12 @@
 // 5. #ServiceCallAndParameters# => service call like: get("GetAutosByHerstellerId/" + value) or post("GetAutosByHerstellerId/" + value, message)
     var angular2TsObservableCallWithReturnType = new TemplateEntry() {TemplateType = TemplateTypes.Angular2TsModuleObservableWithReturnType};
     angular2TsObservableCallWithReturnType.Template = "     public #ControllerFunctionName#(#ServiceParamters#) : Observable<{#ControllerFunctionReturnType#}> { \r\n     #FunctionContent#"  +
-											          "       return this.http.#ServiceCallAndParameters#.map((response: Response)  => <{#ControllerFunctionReturnType#}>response.json() as {#ControllerFunctionReturnType#});\r\n     } \r\n\r\n";
+											          "       return this.http.#ServiceCallAndParameters# as Observable<{#ControllerFunctionReturnType#}>;\r\n     } \r\n\r\n";
 	settings.Templates.Add(angular2TsObservableCallWithReturnType);
 
 //TEMPLATE STRINGS FOR: "Angular 2 TypeScript Ajax Call Function with NO ReturnType": 
     var angular2TsObservableCallWithNoReturnType = new TemplateEntry() {TemplateType = TemplateTypes.Angular2TsModuleObservableNoReturnType};
-    angular2TsObservableCallWithNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  #FunctionContent#      this.http.#ServiceCallAndParameters#.subscribe(res => res.json()); \r\n     } \r\n\r\n";
+    angular2TsObservableCallWithNoReturnType.Template = "    public #ControllerFunctionName#(#ServiceParamters#) : void  { \r\n  #FunctionContent#      this.http.#ServiceCallAndParameters#.subscribe(res => res); \r\n     } \r\n\r\n";
 	settings.Templates.Add(angular2TsObservableCallWithNoReturnType);
 //TEMPLATE STRINGS FOR: "Angular 2 TypeScript window.location.href" for e.g. DownloadLinks (jQuery required for this feature) : 
     var angular2TsWindowLocationHref = new TemplateEntry() {TemplateType = TemplateTypes.Angular2TsWindowLocationHref};
@@ -253,10 +251,8 @@
 //Please don't change any code it will be overwritten next time the template is executed.
 //Created on <#= DateTime.Now.Date.ToShortDateString() #> time <#= DateTime.Now.ToShortTimeString()  #> from <#= Environment.UserName #>.
 
- <# //Write the Current Proxyfile Content and if you need the log content, then add true to the GetCompleteLogAsString - then on each outputfile the logcontent is appended. #>
+ <# //Write the Current Proxyfile Content #>
  <#=entry.FileContent #>
-
- <#=generator.Factory.GetLogManager().GetCompleteLogAsString(false) #>
 
 <#		proxyManager.EndBlock(); 
 	//foreach Closed

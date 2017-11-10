@@ -1,5 +1,5 @@
 # MvcControllerToProxyGenerator
-Creates JavaScript or TypeScript AJAX proxies for Angular 2.x, AngularJs 1.x or jQuery for .NET Controller or WebApi functions.
+Creates JavaScript or TypeScript AJAX proxies for Angular 5.x, AngularJs 1.x or jQuery for .NET Controller or WebApi functions.
 
 Download and install the [NuGet package for "TypeScriptAngularJsProxyGenerator"](https://www.nuget.org/packages/TypeScriptAngularJsProxyGenerator/) into your WebProject.
 
@@ -12,6 +12,8 @@ Be carefull on updating the package, save your custom settings first, because up
 For questions or problems please open a GitHub Issue!
 
 Improvements: Now you can also Load 64Bit DLLs with T4.
+
+Now Supports HttpClient for Angular 5.x
 
 ---------
 
@@ -234,61 +236,61 @@ The "ReturnType" is the .NET type of the Json which is returned by the Json Func
 
     constructor(private http: Http) {  }
 
-		 public addTsEntryOnly(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-				return this.http.post('Proxy/AddTsEntryOnly',person).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+         public addTsEntryOnly(person: ProxyGeneratorNgDemoPage.Models.IPerson) : Observable<ProxyGeneratorNgDemoPage.Models.IPerson> { 
+            return this.http.post('Proxy/AddTsEntryOnly',person) as Observable<ProxyGeneratorNgDemoPage.Models.IPerson>;
+         } 
+
+         public addTsEntryAndName(person: ProxyGeneratorNgDemoPage.Models.IPerson,name: string) : Observable<ProxyGeneratorNgDemoPage.Models.IAuto> { 
+            return this.http.post('Proxy/AddTsEntryAndName'+ '?name='+encodeURIComponent(name),person) as Observable<ProxyGeneratorNgDemoPage.Models.IAuto>;
+         } 
+
+		 public loadTsCallById(id: number) : Observable<ProxyGeneratorNgDemoPage.Models.IPerson> { 
+            return this.http.get('Proxy/LoadTsCallById' + '/' + id) as Observable<ProxyGeneratorNgDemoPage.Models.IPerson>;
 		 } 
 
-		 public addTsEntryAndName(person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson,name: string) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
-				return this.http.post('Proxy/AddTsEntryAndName'+ '?name='+encodeURIComponent(name),person).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IAuto>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IAuto);
+		 public loadTsCallByParams(name: string,vorname: string,alter: number) : Observable<ProxyGeneratorNgDemoPage.Models.IPerson> { 
+            return this.http.get('Proxy/LoadTsCallByParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter) as Observable<ProxyGeneratorNgDemoPage.Models.IPerson>;
 		 } 
 
-		 public loadTsCallById(id: number) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-				return this.http.get('Proxy/LoadTsCallById' + '/' + id).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
+		 public loadTsCallByParamsWithEnum(name: string,vorname: string,alter: number,access: ProxyGeneratorNgDemoPage.Models.ClientAccess) : Observable<ProxyGeneratorNgDemoPage.Models.IAuto> { 
+		    return this.http.get('Proxy/LoadTsCallByParamsWithEnum'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter+'&access='+access) as Observable<ProxyGeneratorNgDemoPage.Models.IAuto>;
 		 } 
 
-		 public loadTsCallByParams(name: string,vorname: string,alter: number) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-				return this.http.get('Proxy/LoadTsCallByParams'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
-		 } 
+		public loadAllAutosListe(name: string) : Observable<ProxyGeneratorNgDemoPage.Models.IAuto[]> { 
+            return this.http.get('Proxy/LoadAllAutosListe'+ '?name='+encodeURIComponent(name)) as Observable<ProxyGeneratorNgDemoPage.Models.IAuto[]>;
+		} 
 
-		 public loadTsCallByParamsWithEnum(name: string,vorname: string,alter: number,access: ProxyGeneratorDemoPage.Helper.ClientAccess) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IAuto> { 
-				return this.http.get('Proxy/LoadTsCallByParamsWithEnum'+ '?name='+encodeURIComponent(name)+'&vorname='+encodeURIComponent(vorname)+'&alter='+alter+'&access='+access).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IAuto>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IAuto);
-		 } 
+		 public clearTsCall() : Observable<ProxyGeneratorNgDemoPage.Models.IPerson> { 
+            return this.http.get('Proxy/ClearTsCall') as Observable<ProxyGeneratorNgDemoPage.Models.IPerson>;
+		} 
 
-		 public loadAllAutosListe(name: string) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IAuto[]> { 
-				return this.http.get('Proxy/LoadAllAutosListe'+ '?name='+encodeURIComponent(name)).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IAuto[]>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IAuto[]);
-		 } 
+		public voidTsReturnType(name: string) : void  { 
+			this.http.get('Proxy/VoidTsReturnType'+ '?name='+encodeURIComponent(name)).subscribe(res => res); 
+	    } 
 
-		 public clearTsCall() : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-				return this.http.get('Proxy/ClearTsCall').map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
-		 } 
+		public stringTsReturnType(name: string) : Observable<string> { 
+            return this.http.get('Proxy/StringTsReturnType'+ '?name='+encodeURIComponent(name)) as Observable<string>;
+		} 
 
-		 public voidTsReturnType(name: string) : void  { 
-			this.http.get('Proxy/VoidTsReturnType'+ '?name='+encodeURIComponent(name)).subscribe(res => res.json()); 
-		 } 
+		public integerTsReturnType(age: number) : Observable<number> { 
+            return this.http.get('Proxy/IntegerTsReturnType'+ '?age='+age) as Observable<number>;
+		} 
 
-		 public stringTsReturnType(name: string) : Observable<string> { 
-				return this.http.get('Proxy/StringTsReturnType'+ '?name='+encodeURIComponent(name)).map((response: Response)  => <string>response.json() as string);
-		 } 
+		public dateTsReturnType(name: string) : Observable<any> { 
+            return this.http.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)) as Observable<any>;
+		} 
 
-		 public integerTsReturnType(age: number) : Observable<number> { 
-				return this.http.get('Proxy/IntegerTsReturnType'+ '?age='+age).map((response: Response)  => <number>response.json() as number);
-		 } 
+		public boolTsReturnType(boolValue: boolean) : Observable<boolean> { 
+            return this.http.get('Proxy/BoolTsReturnType'+ '?boolValue='+boolValue) as Observable<boolean>;
+		} 
 
-		 public dateTsReturnType(name: string) : Observable<any> { 
-				return this.http.get('Proxy/DateTsReturnType'+ '?name='+encodeURIComponent(name)).map((response: Response)  => <any>response.json() as any);
-		 } 
+		public errorStringReturnType(boolValue: boolean) : Observable<string> { 
+            return this.http.get('Proxy/ErrorStringReturnType'+ '?boolValue='+boolValue) as Observable<string>;
+		} 
 
-		 public boolTsReturnType(boolValue: boolean) : Observable<boolean> { 
-				return this.http.get('Proxy/BoolTsReturnType'+ '?boolValue='+boolValue).map((response: Response)  => <boolean>response.json() as boolean);
-		 } 
-
-		 public errorStringReturnType(boolValue: boolean) : Observable<string> { 
-				return this.http.get('Proxy/ErrorStringReturnType'+ '?boolValue='+boolValue).map((response: Response)  => <string>response.json() as string);
-		 } 
-
-		 public getDownloadSimple(companyId: number,name: string) : void  { 
+		public getDownloadSimple(companyId: number,name: string) : void  { 
 			window.location.href = 'Proxy/GetDownloadSimple'+ '?companyId='+companyId+'&name='+encodeURIComponent(name); 
-		 } 
+		} 
     }
 
 
@@ -305,11 +307,11 @@ please use **HttpPostedFileBase** Type for fileupload, then the Proxy is created
 
 this will create the following function in TypeScript
 
-    public addFileToServer(datei: any,detailId: number) : Observable<ProxyGeneratorDemoPage.Models.Person.Models.IPerson> { 
-         var formData = new FormData(); 
-         formData.append('datei', datei); 
-         return this.http.post('Proxy/AddFileToServer'+ '?detailId='+detailId,formData).map((response: Response)  => <ProxyGeneratorDemoPage.Models.Person.Models.IPerson>response.json() as ProxyGeneratorDemoPage.Models.Person.Models.IPerson);
-    } 
+     public addFileToServer(datei: any,detailId: number) : Observable<ProxyGeneratorNgDemoPage.Models.IPerson> { 
+		   var formData = new FormData(); 
+		   formData.append('datei', datei); 
+           return this.http.post('Proxy/AddFileToServer'+ '?detailId='+detailId,formData) as Observable<ProxyGeneratorNgDemoPage.Models.IPerson>;
+     } 
 
 ### Example: AngularJs JavaScript Proxy - CreateAngularJsProxyAttribute
 Creates a proxy for AngularJs in JavaScript.

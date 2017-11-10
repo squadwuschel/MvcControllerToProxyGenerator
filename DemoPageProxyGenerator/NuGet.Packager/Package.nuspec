@@ -2,8 +2,8 @@
 <package >
   <metadata>
     <id>TypeScriptAngularJsProxyGenerator</id>
-    <version>2.1.3</version>
-    <title>TypeScript/JavaScript (Angular 2 / AngularJs or jQuery) ProxyGenerator Template for Controllers/WebApi</title>
+    <version>2.2.0</version>
+    <title>TypeScript/JavaScript (Angular 5.x / AngularJs or jQuery) ProxyGenerator Template for Controllers/WebApi</title>
     <authors>SquadWuschel</authors>
     <owners>SquadWuschel</owners>
     <projectUrl>https://github.com/squadwuschel/MvcControllerToProxyGenerator</projectUrl>
@@ -35,6 +35,7 @@
       Version 2.1.0: Loading 64Bit DLLs with T4 now Possible
       Version 2.1.1: Loading 64Bit DLLs with T4 now Possible - Bugfix
       Version 2.1.3: Fix Loading Assemblies
+      Version 2.2.0: Angular 5 Support for httpClient - not working with Angular 2 any more.
     </releaseNotes>
     <language>en-GB</language>
     <tags>JavaScript TypeScript AngularJs jQuery Proxy Generator</tags>
