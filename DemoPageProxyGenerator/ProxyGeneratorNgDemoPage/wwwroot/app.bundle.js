@@ -1,7 +1,7 @@
 var ac_app =
 webpackJsonpac__name_([1],{
 
-/***/ 280:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21,9 +21,9 @@ __export(__webpack_require__(707));
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var platform_browser_dynamic_1 = __webpack_require__(180);
+var platform_browser_dynamic_1 = __webpack_require__(181);
 var environment_1 = __webpack_require__(705);
-var hmr_1 = __webpack_require__(280);
+var hmr_1 = __webpack_require__(282);
 //App
 var app_module_1 = __webpack_require__(708);
 /*
@@ -80,7 +80,7 @@ hmr_1.bootloader(main);
 Object.defineProperty(exports, "__esModule", { value: true });
 // Angular 2
 var platform_browser_1 = __webpack_require__(39);
-var core_1 = __webpack_require__(26);
+var core_1 = __webpack_require__(22);
 // Environment Providers
 var PROVIDERS = [];
 // Angular debug tools in the dev console
@@ -386,14 +386,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(26);
-var http_1 = __webpack_require__(425);
+var core_1 = __webpack_require__(22);
+var http_1 = __webpack_require__(114);
 var platform_browser_1 = __webpack_require__(39);
 //Basic App Components
 var app_component_1 = __webpack_require__(709);
 //HMR (Hot module Replacement)
-var app_service_1 = __webpack_require__(711);
-var hmr_1 = __webpack_require__(280);
+var app_service_1 = __webpack_require__(713);
+var hmr_1 = __webpack_require__(282);
 var AppModule = /** @class */ (function () {
     function AppModule(appRef, appState) {
         this.appRef = appRef;
@@ -474,9 +474,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(26);
-var proxy_service_1 = __webpack_require__(715);
-var Person_1 = __webpack_require__(716);
+var core_1 = __webpack_require__(22);
+var proxy_service_1 = __webpack_require__(710);
+var Person_1 = __webpack_require__(711);
 var AppComponent = /** @class */ (function () {
     function AppComponent(proxyService) {
         this.proxyService = proxyService;
@@ -590,7 +590,7 @@ var AppComponent = /** @class */ (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'angular-2-calls',
-            template: __webpack_require__(710),
+            template: __webpack_require__(712),
             providers: [proxy_service_1.Proxyservice]
         }),
         __metadata("design:paramtypes", [proxy_service_1.Proxyservice])
@@ -603,76 +603,13 @@ exports.AppComponent = AppComponent;
 /***/ }),
 
 /***/ 710:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container body-content\" style=\"margin-top: 25px;\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <h3>\r\n                Angular 2 Proxy Calls\r\n            </h3>\r\n        </div>\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3 col-md-offset-6\">\r\n            <a (click)=\"startTypeScriptServiceCalls()\" class=\"btn btn-primary btn-block\">Test TypeScript Service Calls</a>\r\n        </div>\r\n        <div class=\"col-md-12\">\r\n            <br />\r\n            <p class=\"text-center\">\r\n                <strong>Please open the Chrome developer Console to see the service Calls and returned Objects.</strong>\r\n            </p>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <h3>Datei Upload Tests für Angular 2</h3>\r\n            <p>The IIS tries to store the uploaded files in the diretory: \"C:\\Temp\\\"</p>\r\n            <br />\r\n            <br />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\">\r\n            <input #fileInput type=\"file\" class=\"form-control input-sm\" />\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            <a (click)=\"startFileUploadTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileUpload TypeScript</a>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\"><hr /></div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4\">\r\n            <a (click)=\"startFileDownloadCompanyTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileDownload Company TypeScript</a>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <a (click)=\"startFileDownloadPersonTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileDownload Person TypeScript</a>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <a (click)=\"startFileDownloadNoParamsTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileDownload NoParams TypeScript</a>\r\n        </div>\r\n    </div>\r\n</div>"
-
-/***/ }),
-
-/***/ 711:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(26);
-var AppState = /** @class */ (function () {
-    function AppState() {
-        this._state = {};
-    }
-    Object.defineProperty(AppState.prototype, "state", {
-        // already return a clone of the current state
-        get: function () {
-            return this._state = this._clone(this._state);
-        },
-        // never allow mutation
-        set: function (value) {
-            throw new Error('do not mutate the `.state` directly');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AppState.prototype.get = function (prop) {
-        // use our state getter for the clone
-        var state = this.state;
-        return state.hasOwnProperty(prop) ? state[prop] : state;
-    };
-    AppState.prototype.set = function (prop, value) {
-        // internally mutate our state
-        return this._state[prop] = value;
-    };
-    AppState.prototype._clone = function (object) {
-        // simple object clone
-        return JSON.parse(JSON.stringify(object));
-    };
-    AppState = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [])
-    ], AppState);
-    return AppState;
-}());
-exports.AppState = AppState;
-
-
-/***/ }),
-
-/***/ 715:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 //Warning this file was dynamicly created.
 //Please don't change any code it will be overwritten next time the template is executed.
-//Created on 24.10.2017 time 09:04 from jrenatus.
+//Created on 10.11.2017 time 19:56 from squad.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -683,9 +620,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(26);
-var http_1 = __webpack_require__(425);
-__webpack_require__(573);
+var core_1 = __webpack_require__(22);
+var http_1 = __webpack_require__(114);
+__webpack_require__(229);
 var Proxyservice = /** @class */ (function () {
     function Proxyservice(http) {
         this.http = http;
@@ -700,10 +637,10 @@ var Proxyservice = /** @class */ (function () {
         formData.append('datei', datei);
         this.http.post('Proxy/AddFileToServerNoReturnType' + '?detailId=' + detailId, formData).subscribe(function (res) { return res.json(); });
     };
-    //public getDownloadPerson(personId: number,person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) : void  { 
+    //public getDownloadPerson(personId: number,person: ProxyGeneratorNgDemoPage.Models.IPerson) : void  { 
     //    window.location.href = 'Proxy/GetDownloadPerson'+ '?personId='+personId+'&'+jQuery.param(person); 
     //} 
-    //public getDownloadCompany(companyId: number,company: ProxyGeneratorDemoPage.Helper.ICompany) : void  { 
+    //public getDownloadCompany(companyId: number,company: ProxyGeneratorNgDemoPage.Models.ICompany) : void  { 
     //    window.location.href = 'Proxy/GetDownloadCompany'+ '?companyId='+companyId+'&'+jQuery.param(company); 
     //} 
     Proxyservice.prototype.getDownloadSimple = function (companyId, name) {
@@ -777,7 +714,7 @@ exports.Proxyservice = Proxyservice;
 
 /***/ }),
 
-/***/ 716:
+/***/ 711:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -794,6 +731,69 @@ var Person = /** @class */ (function () {
     return Person;
 }());
 exports.Person = Person;
+
+
+/***/ }),
+
+/***/ 712:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container body-content\" style=\"margin-top: 25px;\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <h3>\r\n                Angular 2 Proxy Calls\r\n            </h3>\r\n        </div>\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3 col-md-offset-6\">\r\n            <a (click)=\"startTypeScriptServiceCalls()\" class=\"btn btn-primary btn-block\">Test TypeScript Service Calls</a>\r\n        </div>\r\n        <div class=\"col-md-12\">\r\n            <br />\r\n            <p class=\"text-center\">\r\n                <strong>Please open the Chrome developer Console to see the service Calls and returned Objects.</strong>\r\n            </p>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n            <h3>Datei Upload Tests für Angular 2</h3>\r\n            <p>The IIS tries to store the uploaded files in the diretory: \"C:\\Temp\\\"</p>\r\n            <br />\r\n            <br />\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\">\r\n            <input #fileInput type=\"file\" class=\"form-control input-sm\" />\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            <a (click)=\"startFileUploadTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileUpload TypeScript</a>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-12\"><hr /></div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4\">\r\n            <a (click)=\"startFileDownloadCompanyTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileDownload Company TypeScript</a>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <a (click)=\"startFileDownloadPersonTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileDownload Person TypeScript</a>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <a (click)=\"startFileDownloadNoParamsTypeScript()\" class=\"btn btn-sm btn-primary btn-block\">Test FileDownload NoParams TypeScript</a>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ 713:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(22);
+var AppState = /** @class */ (function () {
+    function AppState() {
+        this._state = {};
+    }
+    Object.defineProperty(AppState.prototype, "state", {
+        // already return a clone of the current state
+        get: function () {
+            return this._state = this._clone(this._state);
+        },
+        // never allow mutation
+        set: function (value) {
+            throw new Error('do not mutate the `.state` directly');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AppState.prototype.get = function (prop) {
+        // use our state getter for the clone
+        var state = this.state;
+        return state.hasOwnProperty(prop) ? state[prop] : state;
+    };
+    AppState.prototype.set = function (prop, value) {
+        // internally mutate our state
+        return this._state[prop] = value;
+    };
+    AppState.prototype._clone = function (object) {
+        // simple object clone
+        return JSON.parse(JSON.stringify(object));
+    };
+    AppState = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [])
+    ], AppState);
+    return AppState;
+}());
+exports.AppState = AppState;
 
 
 /***/ })

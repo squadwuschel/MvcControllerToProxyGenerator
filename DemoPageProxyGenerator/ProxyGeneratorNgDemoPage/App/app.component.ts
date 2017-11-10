@@ -47,7 +47,7 @@ export class AppComponent {
 
     public startTypeScriptServiceCalls() {
         var ages: number[] = [1, 2, 3, 4, 5, 66];
-        var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(1337, "Squad", "Wuschel", true, ages);
+        var person: ProxyGeneratorNgDemoPage.Models.IPerson = new Person(1337, "Squad", "Wuschel", true, ages);
 
         console.clear();
         console.log("Some TypeScript Angular Service Calls: \r\n");
@@ -125,7 +125,7 @@ export class AppComponent {
 
         this.proxyService.voidTsReturnType("test");
 
-        this.proxyService.loadTsCallByParamsWithEnum("Squad", "Wuschel", 33, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin).subscribe(result => {
+        this.proxyService.loadTsCallByParamsWithEnum("Squad", "Wuschel", 33, ProxyGeneratorNgDemoPage.Models.ClientAccess.Admin).subscribe(result => {
             console.log("\r\nSuccess TypeScript Service Call 'loadTsCallByParamsAndId' Result: ");
             console.log(result);
         });

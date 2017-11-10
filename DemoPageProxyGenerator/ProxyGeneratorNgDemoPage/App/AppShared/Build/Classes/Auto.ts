@@ -1,3 +1,3 @@
-﻿export class Auto implements ProxyGeneratorDemoPage.Models.Person.Models.IAuto {
-    constructor(public Marke: string, public Alter: number, public Eigentuemer: ProxyGeneratorDemoPage.Models.Person.Models.IPerson) {  }
+﻿export class Auto implements ProxyGeneratorNgDemoPage.Models.IAuto {
+    constructor(public Marke: string, public Alter: number, public Eigentuemer: ProxyGeneratorNgDemoPage.Models.IPerson) {  }
 }

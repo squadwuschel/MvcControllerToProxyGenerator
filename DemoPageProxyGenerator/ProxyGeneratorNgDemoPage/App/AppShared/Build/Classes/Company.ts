@@ -1,3 +1,3 @@
-﻿export class Company implements ProxyGeneratorDemoPage.Helper.ICompany {
-    constructor(public Name: string, public Age: number, public ClientAccess: ProxyGeneratorDemoPage.Helper.ClientAccess) { }
+﻿export class Company implements ProxyGeneratorNgDemoPage.Models.ICompany {
+    constructor(public Name: string, public Age: number, public ClientAccess: ProxyGeneratorNgDemoPage.Models.ClientAccess) { }
 }
