@@ -105,6 +105,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="TypeLite, Version=1.8.0.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.8.0\lib\net4\TypeLite.dll</HintPath>
+    </Reference>
+    <Reference Include="TypeLite.Net4, Version=1.8.0.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
+      <HintPath>..\packages\TypeLite.1.8.0\lib\net4\TypeLite.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -149,6 +155,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auto.cs" />
+    <Compile Include="Models\ClientAccess.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\GenericsTestklasse.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -203,7 +213,9 @@
     <TypeScriptCompile Include="App\AppShared\Build\Classes\Company.ts" />
     <TypeScriptCompile Include="App\AppShared\Build\Classes\Person.ts" />
     <TypeScriptCompile Include="App\AppShared\Build\environment.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\Generators\Enums.ts" />
+    <TypeScriptCompile Include="App\AppShared\Build\Generators\Enums.ts">
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="App\AppShared\Build\Generators\TypeLite.Net42.d.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -219,10 +231,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DomainModels\DomainModels.csproj">
-      <Project>{ea1a5802-9139-4bf3-b623-684c278c8088}</Project>
-      <Name>DomainModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ProxyGenerator\ProxyGenerator.csproj">
       <Project>{b88cfe60-d1f3-43ff-a1fb-b84b4714e0af}</Project>
       <Name>ProxyGenerator</Name>
@@ -243,7 +251,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52981</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

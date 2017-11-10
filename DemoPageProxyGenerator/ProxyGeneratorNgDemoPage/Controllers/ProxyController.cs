@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using DomainModels;
 using ProxyGenerator.ProxyTypeAttributes;
+using Auto = ProxyGeneratorNgDemoPage.Models.Auto;
+using ClientAccess = ProxyGeneratorNgDemoPage.Models.ClientAccess;
+using Company = ProxyGeneratorNgDemoPage.Models.Company;
+using Person = ProxyGeneratorNgDemoPage.Models.Person;
 
 namespace ProxyGeneratorNgDemoPage.Controllers
 {
