@@ -29,15 +29,12 @@ var AppComponent = /** @class */ (function () {
             });
         }
     };
-    //public startFileDownloadCompanyTypeScript() {
-    //    var company: ProxyGeneratorDemoPage.Helper.ICompany = new Company("MyCompany", 12, ProxyGeneratorDemoPage.Helper.ClientAccess.Admin);
-    //    this.proxyService.getDownloadCompany(1337, company);
-    //}
-    //public startFileDownloadPersonTypeScript(): void {
-    //    var ages: number[] = [1, 2, 3, 4, 5, 66];
-    //    var person: ProxyGeneratorDemoPage.Models.Person.Models.IPerson = new Person(16667, "SquadJs", "Wuschel", true, ages);
-    //    this.proxyService.getDownloadPerson(7331, person);
-    //}
+    AppComponent.prototype.startFileDownloadCompanyTypeScript = function () {
+        this.proxyService.getDownloadCompany(1337);
+    };
+    AppComponent.prototype.startFileDownloadPersonTypeScript = function () {
+        this.proxyService.getDownloadPerson(7331);
+    };
     AppComponent.prototype.startFileDownloadNoParamsTypeScript = function () {
         this.proxyService.getDownloadNoParams();
     };

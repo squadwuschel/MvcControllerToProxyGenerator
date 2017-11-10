@@ -56,30 +56,30 @@ namespace ProxyGeneratorNgDemoPage.Controllers
 
         #region HrefLinks for Downloads
         [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
-        public FileResult GetDownloadPerson(int personId, Person person)
+        public FileResult GetDownloadPerson(int personId)
         {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Person: {0} mit dem Passwort: {1} und der ID: {2}", person.Name, person.Passwort, personId));
+            var fileContent = Encoding.ASCII.GetBytes($"Das ist ein Test Download für die PersonId: {personId}");
             return File(fileContent, "text/text", "TestDL.txt");
         }
 
         [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
-        public FileResult GetDownloadCompany(int companyId, Company company)
+        public FileResult GetDownloadCompany(int companyId)
         {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die Company: {0} mit dem ClientAccess: {1} und der ID: {2}", company.Name, company.ClientAccess, company));
+            var fileContent = Encoding.ASCII.GetBytes($"Das ist ein Test Download für die CompanyID: {companyId}");
             return File(fileContent, "text/text", "TestDL.txt");
         }
 
         [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
         public FileResult GetDownloadSimple(int companyId, string name)
         {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download für die CompanyId: {0} mit dem Namen: {1}", companyId, name));
+            var fileContent = Encoding.ASCII.GetBytes($"Das ist ein Test Download für die CompanyId: {companyId} mit dem Namen: {name}");
             return File(fileContent, "text/text", "TestDL.txt");
         }
 
         [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
         public FileResult GetDownloadNoParams()
         {
-            var fileContent = Encoding.ASCII.GetBytes(string.Format("Das ist ein Test Download Ohne Parameter"));
+            var fileContent = Encoding.ASCII.GetBytes("Das ist ein Test Download Ohne Parameter");
             return File(fileContent, "text/text", "TestDL.txt");
         }
         #endregion

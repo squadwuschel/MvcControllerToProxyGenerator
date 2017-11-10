@@ -1,5 +1,5 @@
 ﻿import { NgModule, ApplicationRef } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,7 +19,7 @@ type StoreType = {
     imports: [
         //Ng Modules
         BrowserModule,
-        HttpModule
+        HttpClientModule
     ],
     declarations: [
         AppComponent,

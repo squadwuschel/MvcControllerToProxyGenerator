@@ -219,7 +219,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         public JsonResult LoadTsCallById(int id)
         {
             return Json(new Person() { Id = id }, JsonRequestBehavior.AllowGet);
@@ -241,7 +240,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult LoadTsCallByParamsWithEnum(string name, string vorname, int alter, ClientAccess access)
         {
             return Json(new Auto() { Marke = name, Alter = alter }, JsonRequestBehavior.AllowGet);
@@ -256,7 +254,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Auto[]))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto[]))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Auto[]))]
         public JsonResult LoadAllAutosArray(string name)
         {
             return Json(new List<Auto>() { new Auto() { Marke = name }, new Auto() }.ToArray(), JsonRequestBehavior.AllowGet);
