@@ -5,7 +5,7 @@ var App;
 (function (App) {
     var Services;
     (function (Services) {
-        var HomePService = /** @class */ (function () {
+        var HomePService = (function () {
             function HomePService($http) {
                 this.$http = $http;
             }

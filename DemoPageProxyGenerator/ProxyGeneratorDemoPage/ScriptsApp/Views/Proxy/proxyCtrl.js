@@ -4,7 +4,7 @@ var App;
     (function (Views) {
         var Proxy;
         (function (Proxy) {
-            var ProxyCtrl = /** @class */ (function () {
+            var ProxyCtrl = (function () {
                 function ProxyCtrl(proxyTsSrv, homeTsSrv, homeJsSrv, proxyJsSrv) {
                     this.proxyTsSrv = proxyTsSrv;
                     this.homeTsSrv = homeTsSrv;

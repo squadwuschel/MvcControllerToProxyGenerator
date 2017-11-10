@@ -5,7 +5,7 @@ var App;
 (function (App) {
     var Services;
     (function (Services) {
-        var ProxyPService = /** @class */ (function () {
+        var ProxyPService = (function () {
             function ProxyPService($http) {
                 this.$http = $http;
             }

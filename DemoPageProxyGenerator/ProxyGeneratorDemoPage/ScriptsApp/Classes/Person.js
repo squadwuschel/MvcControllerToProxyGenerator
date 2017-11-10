@@ -1,4 +1,4 @@
-var Person = /** @class */ (function () {
+var Person = (function () {
     function Person(Id, Name, Passwort, IsAktiv, CounterValues) {
         this.Id = Id;
         this.Name = Name;
