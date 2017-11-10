@@ -1,4 +1,4 @@
-var Auto = (function () {
+var Auto = /** @class */ (function () {
     function Auto(Marke, Alter, Eigentuemer) {
         this.Marke = Marke;
         this.Alter = Alter;

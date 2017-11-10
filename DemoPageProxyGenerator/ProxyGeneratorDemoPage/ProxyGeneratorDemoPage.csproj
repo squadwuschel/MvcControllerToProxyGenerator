@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -254,7 +255,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ScriptsAppNg2\Views\Proxy\angular2Calls.component.html" />
     <Content Include="ScriptsApp\ServicesJQuery\proxyjQueryJs.js" />
     <Content Include="ScriptsApp\Services\homeAngularJsSrv.js" />
     <Content Include="ScriptsApp\Services\proxyAngularJsSrv.js" />
@@ -262,7 +262,6 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="package.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -291,8 +290,6 @@
     <Content Include="Views\Proxy\JQueryCalls.cshtml" />
     <Content Include="Views\Proxy\TestView.cshtml" />
     <Content Include="Scripts\Manager.ttinclude" />
-    <Content Include="tsconfig.json" />
-    <Content Include="Views\Proxy\Angular2Calls.cshtml" />
     <Content Include="typings.json" />
   </ItemGroup>
   <ItemGroup>
@@ -311,10 +308,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="ScriptsAppNg2\app.module.ts" />
-    <TypeScriptCompile Include="ScriptsAppNg2\main.ts" />
-    <TypeScriptCompile Include="ScriptsAppNg2\Services\proxy.service.ts" />
-    <TypeScriptCompile Include="ScriptsAppNg2\Views\Proxy\angular2Calls.component.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Auto.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Company.ts" />
     <TypeScriptCompile Include="ScriptsApp\Classes\Person.ts" />

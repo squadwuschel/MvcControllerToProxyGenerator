@@ -4,7 +4,7 @@ var App;
     (function (Views) {
         var Proxy;
         (function (Proxy) {
-            var ProxyCtrl = (function () {
+            var ProxyCtrl = /** @class */ (function () {
                 function ProxyCtrl(proxyTsSrv, homeTsSrv, homeJsSrv, proxyJsSrv) {
                     this.proxyTsSrv = proxyTsSrv;
                     this.homeTsSrv = homeTsSrv;
@@ -178,14 +178,14 @@ var App;
                     enumerable: true,
                     configurable: true
                 });
+                ProxyCtrl.$inject = [
+                    App.Services.ProxyPService.module.name,
+                    App.Services.HomePService.module.name,
+                    "homeAngularJsSrv",
+                    "proxyAngularJsSrv",
+                ];
                 return ProxyCtrl;
             }());
-            ProxyCtrl.$inject = [
-                App.Services.ProxyPService.module.name,
-                App.Services.HomePService.module.name,
-                "homeAngularJsSrv",
-                "proxyAngularJsSrv",
-            ];
             Proxy.ProxyCtrl = ProxyCtrl;
         })(Proxy = Views.Proxy || (Views.Proxy = {}));
     })(Views = App.Views || (App.Views = {}));

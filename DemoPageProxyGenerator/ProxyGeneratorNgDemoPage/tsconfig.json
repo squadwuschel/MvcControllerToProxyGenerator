@@ -1,0 +1,27 @@
+﻿     {
+      "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        //Kümmert sich um die Typings das diese entsprechend gefunden werden, keine Reference mehr in boot.js notwendig.
+        "lib": ["es6","es5", "es2015", "dom", "es2015.promise"],
+        "types": [
+          "node", //wird für RequireJs benötigt, damit z.b. der Typ gefunden werden kann
+          "jasmine" //wird benötigt damit "describe" und alle anderen Operatoren von jasmine nicht als Fehler erkannt werden in den *.spec.ts dateien
+        ]
+      },
+      //Wird für den AwesomeTypeScriptLoad in WebPack benötigt!
+       "awesomeTypescriptLoaderOptions": {
+         "useWebpackText": true
+       },
+      "exclude": [
+           "node_modules",
+           "wwwroot"
+         ],
+         "compileOnSave": false
+       }

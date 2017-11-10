@@ -18,11 +18,6 @@ namespace ProxyGeneratorDemoPage.Controllers
             return View();
         }
 
-        public ActionResult Angular2Calls()
-        {
-            return View();
-        }
-
         public ActionResult JQueryCalls()
         {
             return View();
@@ -40,7 +35,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularJsProxy]
         [CreateJQueryJsProxy]
@@ -66,7 +60,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         /// Kein Attribut zum Erstellen des Proxies hinzufügen, hier muss der Service von Hand gebaut werden!
         /// </summary>
         [CreateAngularTsProxy(ReturnType = typeof(void))]
-        [CreateAngular2TsProxy(ReturnType = typeof(void))]
         [CreateJQueryTsProxy(ReturnType = typeof(void))]
         [CreateAngularJsProxy()]
         [CreateJQueryJsProxy]
@@ -88,7 +81,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         #region HrefLinks for Downloads
         [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
-        [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
         [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
@@ -99,7 +91,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         }
 
         [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
-        [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
         [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
@@ -110,7 +101,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         }
 
         [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
-        [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
         [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
@@ -121,7 +111,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         }
 
         [CreateAngularTsProxy(CreateWindowLocationHrefLink = true)]
-        [CreateAngular2TsProxy(CreateWindowLocationHrefLink = true)]
         [CreateAngularJsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryTsProxy(CreateWindowLocationHrefLink = true)]
         [CreateJQueryJsProxy(CreateWindowLocationHrefLink = true)]
@@ -141,7 +130,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         }
 
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         public JsonResult ManySimpleParams(int page, int size, byte? sortedCol, byte? desc, string smCompany, int? smCustomerNumber, string smEmail, string smLastname, int? portal, int count)
         {
@@ -199,7 +187,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         #endregion
 
         #region AngularTs and jQuery Ts Proxy Methods Examples
-        [CreateAngular2TsProxy(ReturnType = typeof(List<int>))]
         [CreateAngularTsProxy(ReturnType = typeof(List<int>))]
         [CreateJQueryTsProxy(ReturnType = typeof(List<int>))]
         public ActionResult AddAges(List<int> ages)
@@ -210,7 +197,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         //You can create multiple Proxies for the same function
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         public JsonResult AddTsEntryOnly(Person person)
         {
             return Json(person, JsonRequestBehavior.AllowGet);
@@ -218,7 +204,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult AddTsEntryAndName(Person person, string name)
         {
             return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
@@ -227,7 +212,6 @@ namespace ProxyGeneratorDemoPage.Controllers
         [HttpPost]
         [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult AddTsEntryAndParams(Person person, string name, string vorname)
         {
             return Json(new Auto() { Marke = name }, JsonRequestBehavior.AllowGet);
@@ -243,7 +227,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         public JsonResult LoadTsCallByParams(string name, string vorname, int alter)
         {
             return Json(new Person() { Name = name, Id = alter }, JsonRequestBehavior.AllowGet);
@@ -251,7 +234,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Auto))]
         [CreateAngularTsProxy(ReturnType = typeof(Auto))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Auto))]
         public JsonResult LoadTsCallByParamsAndId(string name, string vorname, int alter, int id)
         {
             return Json(new Auto() { Alter = alter, Marke = name }, JsonRequestBehavior.AllowGet);
@@ -267,7 +249,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(List<Auto>))]
         [CreateAngularTsProxy(ReturnType = typeof(List<Auto>))]
-        [CreateAngular2TsProxy(ReturnType = typeof(List<Auto>))]
         public JsonResult LoadAllAutosListe(string name)
         {
             return Json(new List<Auto>() { new Auto() { Marke = name }, new Auto() }, JsonRequestBehavior.AllowGet);
@@ -283,7 +264,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Person))]
         [CreateAngularTsProxy(ReturnType = typeof(Person))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Person))]
         public JsonResult ClearTsCall()
         {
             return Json(new Person(), JsonRequestBehavior.AllowGet);
@@ -291,7 +271,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(void))]
         [CreateAngularTsProxy(ReturnType = typeof(void))]
-        [CreateAngular2TsProxy(ReturnType = typeof(void))]
         public JsonResult VoidTsReturnType(string name)
         {
             return Json(string.Empty, JsonRequestBehavior.AllowGet);
@@ -299,7 +278,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(string))]
         [CreateAngularTsProxy(ReturnType = typeof(string))]
-        [CreateAngular2TsProxy(ReturnType = typeof(string))]
         public JsonResult StringTsReturnType(string name)
         {
             return Json(name, JsonRequestBehavior.AllowGet);
@@ -307,7 +285,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(int))]
         [CreateAngularTsProxy(ReturnType = typeof(int))]
-        [CreateAngular2TsProxy(ReturnType = typeof(int))]
         public JsonResult IntegerTsReturnType(int age)
         {
             return Json(age, JsonRequestBehavior.AllowGet);
@@ -315,7 +292,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(DateTime))]
         [CreateAngularTsProxy(ReturnType = typeof(DateTime))]
-        [CreateAngular2TsProxy(ReturnType = typeof(DateTime))]
         public JsonResult DateTsReturnType(string name)
         {
             return Json(DateTime.Now, JsonRequestBehavior.AllowGet);
@@ -323,7 +299,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(Boolean))]
         [CreateAngularTsProxy(ReturnType = typeof(Boolean))]
-        [CreateAngular2TsProxy(ReturnType = typeof(Boolean))]
         public JsonResult BoolTsReturnType(bool boolValue)
         {
             return Json(boolValue, JsonRequestBehavior.AllowGet);
@@ -331,7 +306,6 @@ namespace ProxyGeneratorDemoPage.Controllers
 
         [CreateJQueryTsProxy(ReturnType = typeof(string))]
         [CreateAngularTsProxy(ReturnType = typeof(string))]
-        [CreateAngular2TsProxy(ReturnType = typeof(string))]
         public ActionResult ErrorStringReturnType(bool boolValue)
         {
             //Response.StatusCode = (int)HttpStatusCode.BadRequest;

@@ -5,7 +5,7 @@ var App;
 (function (App) {
     var Services;
     (function (Services) {
-        var HomePService = (function () {
+        var HomePService = /** @class */ (function () {
             function HomePService($http) {
                 this.$http = $http;
             }
@@ -30,9 +30,9 @@ var App;
                 enumerable: true,
                 configurable: true
             });
+            HomePService.$inject = ['$http'];
             return HomePService;
         }());
-        HomePService.$inject = ['$http'];
         Services.HomePService = HomePService;
     })(Services = App.Services || (App.Services = {}));
 })(App || (App = {}));

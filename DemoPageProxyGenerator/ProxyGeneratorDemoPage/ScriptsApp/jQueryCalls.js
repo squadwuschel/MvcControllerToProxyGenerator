@@ -2,7 +2,7 @@ var App;
 (function (App) {
     var JQueryApp;
     (function (JQueryApp) {
-        var jQueryApp = (function () {
+        var jQueryApp = /** @class */ (function () {
             function jQueryApp() {
                 this.jQueryTypeScriptSrv = new App.JqueryServices.proxyjQueryTs();
                 //Damit wir in der aufgerufenen Funktion auch den passenden this Pointer haben, müssen wir diesen

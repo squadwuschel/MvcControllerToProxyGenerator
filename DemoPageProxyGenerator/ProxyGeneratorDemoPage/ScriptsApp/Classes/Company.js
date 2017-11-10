@@ -1,4 +1,4 @@
-var Company = (function () {
+var Company = /** @class */ (function () {
     function Company(Name, Age, ClientAccess) {
         this.Name = Name;
         this.Age = Age;

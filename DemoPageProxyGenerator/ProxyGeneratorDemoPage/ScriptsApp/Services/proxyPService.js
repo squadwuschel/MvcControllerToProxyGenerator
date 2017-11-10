@@ -5,7 +5,7 @@ var App;
 (function (App) {
     var Services;
     (function (Services) {
-        var ProxyPService = (function () {
+        var ProxyPService = /** @class */ (function () {
             function ProxyPService($http) {
                 this.$http = $http;
             }
@@ -97,9 +97,9 @@ var App;
                 enumerable: true,
                 configurable: true
             });
+            ProxyPService.$inject = ['$http'];
             return ProxyPService;
         }());
-        ProxyPService.$inject = ['$http'];
         Services.ProxyPService = ProxyPService;
     })(Services = App.Services || (App.Services = {}));
 })(App || (App = {}));

@@ -1,6 +1,6 @@
 var App;
 (function (App) {
-    var MainApp = (function () {
+    var MainApp = /** @class */ (function () {
         function MainApp() {
         }
         MainApp.createApp = function (angular) {

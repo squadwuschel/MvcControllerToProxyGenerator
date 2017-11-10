@@ -5,7 +5,7 @@ var App;
 (function (App) {
     var JqueryServices;
     (function (JqueryServices) {
-        var proxyjQueryTs = (function () {
+        var proxyjQueryTs = /** @class */ (function () {
             function proxyjQueryTs() {
             }
             proxyjQueryTs.prototype.testView = function () {
