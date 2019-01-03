@@ -175,6 +175,20 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Web\.gitignore" />
+    <Content Include="Web\e2e\protractor.conf.js" />
+    <Content Include="Web\src\app\app.component.html" />
+    <Content Include="Web\src\app\Build\Generators\ProxyGeneratorScript.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ProxyGeneratorScript.\</LastGenOutput>
+    </Content>
+    <Content Include="Web\src\app\Build\Generators\TypeLite.Net4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TypeLite.Net4.d.ts</LastGenOutput>
+    </Content>
+    <Content Include="Web\src\favicon.ico" />
+    <Content Include="Web\src\index.html" />
+    <Content Include="Web\src\karma.conf.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\" />
@@ -182,6 +196,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Web\e2e\tsconfig.e2e.json" />
+    <Content Include="Web\src\app\app.component.scss" />
+    <Content Include="Web\src\assets\.gitkeep" />
+    <Content Include="Web\src\browserslist" />
+    <Content Include="Web\src\styles.scss" />
+    <Content Include="Web\src\tsconfig.app.json" />
+    <Content Include="Web\src\tsconfig.spec.json" />
+    <Content Include="Web\src\tslint.json" />
+    <Content Include="Web\.editorconfig" />
+    <Content Include="Web\angular.json" />
+    <Content Include="Web\package.json" />
+    <Content Include="Web\README.md" />
+    <Content Include="Web\tsconfig.json" />
+    <Content Include="Web\tslint.json" />
+    <Content Include="Web\src\app\Build\Generators\Manager.ttinclude" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -192,6 +221,30 @@
       <Project>{b88cfe60-d1f3-43ff-a1fb-b84b4714e0af}</Project>
       <Name>ProxyGenerator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Web\e2e\src\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="Web\e2e\src\app.po.ts" />
+    <TypeScriptCompile Include="Web\src\app\app.component.ts" />
+    <TypeScriptCompile Include="Web\src\app\app.module.ts" />
+    <TypeScriptCompile Include="Web\src\app\Build\Classes\Auto.ts" />
+    <TypeScriptCompile Include="Web\src\app\Build\Classes\Company.ts" />
+    <TypeScriptCompile Include="Web\src\app\Build\Classes\Person.ts" />
+    <TypeScriptCompile Include="Web\src\app\Build\Generators\Enums.ts">
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Web\src\app\Build\Generators\TypeLite.Net4.d.ts">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Web\src\app\Build\Generators\TypeLite.Net42.d.ts" />
+    <TypeScriptCompile Include="Web\src\app\Services\proxy.service.ts" />
+    <TypeScriptCompile Include="Web\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="Web\src\environments\environment.ts" />
+    <TypeScriptCompile Include="Web\src\main.ts" />
+    <TypeScriptCompile Include="Web\src\polyfills.ts" />
+    <TypeScriptCompile Include="Web\src\test.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

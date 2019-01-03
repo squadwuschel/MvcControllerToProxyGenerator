@@ -13,7 +13,7 @@ namespace ProxyGeneratorNgDemoPage.Controllers
         {
             //die Index.html wird von WebPack in das Verzeichnis kopiert und die Standardroute 
             //lädt dann automatisch die index.html
-            return new FilePathResult("~/wwwroot/index.html", "text/html");
+            return new FilePathResult("~/Web/wwwroot/index.html", "text/html");
         }
     }
 }

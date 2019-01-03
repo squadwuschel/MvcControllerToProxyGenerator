@@ -1,0 +1,62 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container body-content" style="margin-top: 25px;">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Angular 2 Proxy Calls
+            </h3>
+        </div>
+        <div class="col-md-12">
+            <hr />
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <button (click)="startTypeScriptServiceCalls()" class="btn btn-primary btn-block">Test TypeScript Service Calls</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <br />
+      <p class="text-center">
+        <strong>Please open the Chrome developer Console to see the service Calls and returned Objects.</strong>
+      </p>
+    </div>
+  </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Datei Upload Tests für Angular 2</h3>
+            <p>The IIS tries to store the uploaded files in the diretory: "C:\Temp\"</p>
+            <br />
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <input #fileInput type="file" class="form-control input-sm" />
+        </div>
+        <div class="col-md-3">
+            <a (click)="startFileUploadTypeScript()" class="btn btn-sm btn-primary btn-block">Test FileUpload TypeScript</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><hr /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a (click)="startFileDownloadCompanyTypeScript()" class="btn btn-sm btn-primary btn-block">Test FileDownload Company TypeScript</a>
+        </div>
+        <div class="col-md-4">
+            <a (click)="startFileDownloadPersonTypeScript()" class="btn btn-sm btn-primary btn-block">Test FileDownload Person TypeScript</a>
+        </div>
+        <div class="col-md-4">
+            <a (click)="startFileDownloadNoParamsTypeScript()" class="btn btn-sm btn-primary btn-block">Test FileDownload NoParams TypeScript</a>
+        </div>
+    </div>
+</div>
+
