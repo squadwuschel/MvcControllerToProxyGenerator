@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
+var http_1 = require("@angular/common/http");
 var platform_browser_1 = require("@angular/platform-browser");
 //Basic App Components
 var app_component_1 = require("./app.component");
@@ -59,7 +59,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 //Ng Modules
                 platform_browser_1.BrowserModule,
-                http_1.HttpModule
+                http_1.HttpClientModule
             ],
             declarations: [
                 app_component_1.AppComponent,

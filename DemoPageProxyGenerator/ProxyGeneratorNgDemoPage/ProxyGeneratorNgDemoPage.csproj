@@ -27,7 +27,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -163,31 +163,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\app.component.html" />
-    <Content Include="App\AppShared\Build\Generators\ProxyGeneratorScript.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </Content>
-    <Content Include="App\AppShared\Build\Generators\TypeLite.Net4.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TypeLite.Net42.d.ts</LastGenOutput>
-    </Content>
-    <Content Include="App\AppShared\Build\_readme.txt" />
-    <Content Include="App\index.html" />
-    <Content Include="Config\helpers.js" />
-    <Content Include="Config\karma.conf.js" />
-    <Content Include="Config\karma.entry.js" />
-    <Content Include="Config\webpack.common.js" />
-    <Content Include="Config\webpack.dev.js" />
-    <Content Include="Config\webpack.prod.js" />
-    <Content Include="Config\webpack.test.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="postcss.config.js" />
-    <Content Include="App\AppShared\Build\Generators\Manager.ttinclude" />
-    <Content Include="webpack.config.js" />
-    <Content Include="package.json" />
     <Content Include="Content\sxpStyles.scss" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -196,35 +175,13 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="App\app.component.ts" />
-    <TypeScriptCompile Include="App\app.module.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\app.service.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\boot.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\Classes\Auto.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\Classes\Company.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\Classes\Person.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\environment.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\Generators\Enums.ts">
-      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="App\AppShared\Build\Generators\TypeLite.Net42.d.ts">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TypeLite.Net4.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="App\AppShared\Build\polyfills.ts" />
-    <TypeScriptCompile Include="App\AppShared\Build\vendors.ts" />
-    <TypeScriptCompile Include="App\Services\proxy.service.ts" />
-    <TypeScriptCompile Include="Config\types\json\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
